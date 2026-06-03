@@ -5,7 +5,9 @@ Renderize `roadmap.html` antes da resposta final.
 ## Checks Obrigatórios
 
 - desktop e mobile renderizam;
-- screenshots ficam em `.roadmap/playwright/`;
+- `.roadmap/pipeline/05-visual-render/visual-audit.md` registra passagem;
+- `.roadmap/pipeline/05-visual-render/render-checks.json` registra `status` como `passa`;
+- screenshots ficam em `.roadmap/pipeline/05-visual-render/playwright/`;
 - não há overflow horizontal global;
 - texto comum usa a largura útil;
 - `.lead` não fica como coluna curta perdida;

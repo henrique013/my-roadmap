@@ -127,7 +127,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--ledger", required=True, help="Caminho para concept-ledger.md.")
     parser.add_argument(
         "--visible",
-        help="Caminho para .editorial/visible-text.md. Use --html como alternativa.",
+        help="Caminho para .editorial/pipeline/01-visible-text/visible-text.md. Use --html como alternativa.",
     )
     parser.add_argument("--html", help="Caminho para node.html. Alternativa a --visible.")
     return parser.parse_args()

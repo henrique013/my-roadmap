@@ -24,13 +24,13 @@ o menor suporte concreto capaz de resolver a ambiguidade.
 - `node.html`;
 - `research-dump.md`;
 - `.editorial/concept-ledger.md`;
-- `.editorial/visible-text.md`;
-- `.editorial/concept-audit.md`.
+- `.editorial/pipeline/01-visible-text/visible-text.md`;
+- `.editorial/pipeline/02-concept-introduction/concept-audit.md`.
 
 ## Saídas
 
-- `.editorial/example-audit.md`;
-- `.editorial/revision-plan.md`, quando houver reescrita obrigatória.
+- `.editorial/pipeline/03-example-sufficiency/example-audit.md`;
+- `.editorial/pipeline/03-example-sufficiency/revision-plan.md`, quando houver reescrita obrigatória.
 
 ## Como Auditar
 
@@ -150,7 +150,7 @@ Uma tabela de fechamento no final da página não justifica falta de exemplo
 local se o bloqueio acontece muito antes. Um visual genérico não justifica
 falta de snippet para sintaxe específica.
 
-## Contrato de `.editorial/example-audit.md`
+## Contrato de `.editorial/pipeline/03-example-sufficiency/example-audit.md`
 
 Use esta estrutura:
 
@@ -204,7 +204,7 @@ Status geral: passa | falha
 ## Resultado da rodada
 
 - HTML precisa reescrita: sim/não
-- Se sim, atualizar `revision-plan.md` e reiniciar a rodada global após a reescrita.
+- Se sim, atualizar `.editorial/pipeline/03-example-sufficiency/revision-plan.md` e reiniciar a rodada global após a reescrita.
 ```
 
 Critério mecânico de passagem:
@@ -213,7 +213,7 @@ Critério mecânico de passagem:
 Status geral: passa
 ```
 
-Este arquivo é interno. Não mencione `.editorial/example-audit.md` na resposta
+Este arquivo é interno. Não mencione `.editorial/pipeline/03-example-sufficiency/example-audit.md` na resposta
 final da skill.
 
 ## Exemplo Normativo
@@ -308,8 +308,8 @@ O HTML passa quando:
 - nenhum suporte concreto virou laboratório;
 - nenhum suporte concreto introduz conceito não preparado;
 - nenhum suporte concreto invade node futuro;
-- `.editorial/example-audit.md` registra `Status geral: passa`;
-- `.editorial/revision-plan.md` registra nenhuma reescrita obrigatória.
+- `.editorial/pipeline/03-example-sufficiency/example-audit.md` registra `Status geral: passa`;
+- `.editorial/pipeline/03-example-sufficiency/revision-plan.md` registra nenhuma reescrita obrigatória.
 
 Se o HTML foi reescrito, retorne ao pipeline e reinicie a rodada global desde a
-extração de `.editorial/visible-text.md`.
+extração de `.editorial/pipeline/01-visible-text/visible-text.md`.

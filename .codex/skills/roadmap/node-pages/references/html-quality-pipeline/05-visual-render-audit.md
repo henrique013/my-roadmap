@@ -20,19 +20,20 @@ julgamento visual.
 - `node.html`;
 - `research-dump.md`;
 - `.editorial/concept-ledger.md`;
-- `.editorial/visible-text.md`;
-- `.editorial/concept-audit.md`;
-- `.editorial/example-audit.md`;
+- `.editorial/pipeline/01-visible-text/visible-text.md`;
+- `.editorial/pipeline/02-concept-introduction/concept-audit.md`;
+- `.editorial/pipeline/03-example-sufficiency/example-audit.md`;
 - resultado do guardrail `04-visual-primitive-choice.md`.
 
 ## Saídas
 
-- `.editorial/visual-audit.md`;
-- `.editorial/playwright/desktop.png`;
-- `.editorial/playwright/mobile.png`;
-- `.editorial/playwright/render-checks.json`, quando útil para depuração.
+- `.editorial/pipeline/05-visual-render/visual-audit.md`;
+- `.editorial/pipeline/05-visual-render/render-checks.json`;
+- `.editorial/pipeline/05-visual-render/revision-plan.md`;
+- `.editorial/pipeline/05-visual-render/playwright/desktop.png`;
+- `.editorial/pipeline/05-visual-render/playwright/mobile.png`.
 
-Esses arquivos são internos. Não mencione `.editorial/visual-audit.md` nem
+Esses arquivos são internos. Não mencione `.editorial/pipeline/05-visual-render/visual-audit.md` nem
 screenshots na resposta final da skill.
 
 ## Comando Preferencial
@@ -52,12 +53,12 @@ npm run roadmap:node-visual-check -- \
   --html <node-dir>/node.html
 ```
 
-## Contrato de `.editorial/playwright/`
+## Contrato de `.editorial/pipeline/05-visual-render/playwright/`
 
 Qualquer artefato auxiliar do Playwright deve ficar somente dentro de:
 
 ```text
-.editorial/playwright/
+.editorial/pipeline/05-visual-render/playwright/
 ```
 
 Regras obrigatórias:
@@ -65,7 +66,7 @@ Regras obrigatórias:
 - criar ou recriar esse diretório apenas dentro da pasta do node atual;
 - validar que o caminho resolvido está dentro de `.editorial/`;
 - não usar `test-results/`, `playwright-report/`, trace, vídeo, snapshot ou
-  screenshot fora de `.editorial/playwright/`;
+  screenshot fora de `.editorial/pipeline/05-visual-render/playwright/`;
 - abrir `node.html` por `file://` quando isso bastar;
 - bloquear ou registrar assets externos inesperados;
 - não transformar screenshots em saída final para a pessoa usuária.
@@ -91,7 +92,7 @@ O guardrail falha quando:
 Para blocos ASCII excepcionais, a ausência de highlight só pode passar se o
 bloco tiver
 `data-ascii-exception="true"`, `data-ascii-reason` não vazio, justificativa no
-`research-dump.md` e registro em `.editorial/visual-audit.md` explicando por
+`research-dump.md` e registro em `.editorial/pipeline/05-visual-render/visual-audit.md` explicando por
 que HTML/CSS seria pior.
 
 ## Highlight Semântico
@@ -113,7 +114,7 @@ Classes aceitáveis:
 
 Não dependa de CDN, JavaScript remoto ou asset externo para destacar snippets.
 
-## Contrato de `.editorial/visual-audit.md`
+## Contrato de `.editorial/pipeline/05-visual-render/visual-audit.md`
 
 Use esta estrutura:
 
@@ -135,8 +136,8 @@ Use esta estrutura:
 
 | Viewport | Screenshot | Observações |
 |---|---|---|
-| desktop | `.editorial/playwright/desktop.png` | ... |
-| mobile | `.editorial/playwright/mobile.png` | ... |
+| desktop | `.editorial/pipeline/05-visual-render/playwright/desktop.png` | ... |
+| mobile | `.editorial/pipeline/05-visual-render/playwright/mobile.png` | ... |
 
 ## Status geral
 
@@ -180,7 +181,7 @@ Status geral: passa | falha
 ## Resultado da rodada
 
 - HTML precisa reescrita: sim/não
-- Se sim, atualizar `revision-plan.md` e reiniciar a rodada global depois da reescrita.
+- Se sim, atualizar `.editorial/pipeline/05-visual-render/revision-plan.md` e reiniciar a rodada global depois da reescrita.
 ```
 
 Critério mecânico de passagem:
@@ -193,10 +194,10 @@ Status geral: passa
 
 1. Rode o guardrail Playwright e gere screenshots desktop e mobile.
 2. Abra ou inspecione as screenshots antes de marcar passagem da rodada.
-3. Leia `.editorial/playwright/render-checks.json` quando houver falha
+3. Leia `.editorial/pipeline/05-visual-render/render-checks.json` quando houver falha
    mecânica ou dúvida de contraste, overflow ou estilo computado.
-4. Atualize `.editorial/visual-audit.md` com a inspeção visual do agente.
-5. Se houver falha visual, registre a revisão em `.editorial/revision-plan.md`,
+4. Atualize `.editorial/pipeline/05-visual-render/visual-audit.md` com a inspeção visual do agente.
+5. Se houver falha visual, registre a revisão em `.editorial/pipeline/05-visual-render/revision-plan.md`,
    reescreva `node.html` ou o CSS embutido e reinicie a rodada global desde a
    extração de texto visível.
 

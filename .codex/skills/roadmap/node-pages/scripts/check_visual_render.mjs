@@ -97,11 +97,13 @@ function resolveTargets(args) {
   }
 
   const editorialDir = path.resolve(nodeDir, ".editorial");
-  const playwrightDir = path.resolve(editorialDir, "playwright");
+  const visualPipeDir = path.resolve(editorialDir, "pipeline", "05-visual-render");
+  const playwrightDir = path.resolve(visualPipeDir, "playwright");
   assertInside(editorialDir, nodeDir, ".editorial");
-  assertInside(playwrightDir, editorialDir, ".editorial/playwright");
-  if (playwrightDir === editorialDir) {
-    throw new Error(".editorial/playwright não pode ser a pasta .editorial inteira");
+  assertInside(visualPipeDir, editorialDir, ".editorial/pipeline/05-visual-render");
+  assertInside(playwrightDir, visualPipeDir, ".editorial/pipeline/05-visual-render/playwright");
+  if (visualPipeDir === editorialDir) {
+    throw new Error("pipe visual não pode ser a pasta .editorial inteira");
   }
 
   return {
@@ -110,9 +112,10 @@ function resolveTargets(args) {
     nodeDir,
     htmlPath,
     editorialDir,
+    visualPipeDir,
     playwrightDir,
-    visualAuditPath: path.resolve(editorialDir, "visual-audit.md"),
-    renderChecksPath: path.resolve(playwrightDir, "render-checks.json"),
+    visualAuditPath: path.resolve(visualPipeDir, "visual-audit.md"),
+    renderChecksPath: path.resolve(visualPipeDir, "render-checks.json"),
   };
 }
 
@@ -791,7 +794,7 @@ function writeAudit(targets, renderResults, groupedFailures) {
     "## Resultado da rodada",
     "",
     `- HTML precisa reescrita: ${status === "passa" ? "não" : "sim"}`,
-    "- Se sim, atualizar `revision-plan.md` e reiniciar a rodada global depois da reescrita.",
+    "- Se sim, atualizar `.editorial/pipeline/05-visual-render/revision-plan.md` e reiniciar a rodada global depois da reescrita.",
     "",
   ].join("\n");
 
@@ -803,7 +806,8 @@ async function run() {
   const targets = resolveTargets(args);
 
   fs.mkdirSync(targets.editorialDir, { recursive: true });
-  assertInside(targets.playwrightDir, targets.editorialDir, ".editorial/playwright");
+  fs.mkdirSync(targets.visualPipeDir, { recursive: true });
+  assertInside(targets.playwrightDir, targets.visualPipeDir, ".editorial/pipeline/05-visual-render/playwright");
   fs.rmSync(targets.playwrightDir, { recursive: true, force: true });
   fs.mkdirSync(targets.playwrightDir, { recursive: true });
 

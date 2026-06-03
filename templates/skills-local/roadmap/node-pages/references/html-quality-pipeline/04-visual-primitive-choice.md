@@ -28,9 +28,14 @@ textual, gramática ou formato literal.
 - `node.html`;
 - `research-dump.md`;
 - `.editorial/concept-ledger.md`;
-- `.editorial/visible-text.md`;
-- `.editorial/concept-audit.md`;
-- `.editorial/example-audit.md`.
+- `.editorial/pipeline/01-visible-text/visible-text.md`;
+- `.editorial/pipeline/02-concept-introduction/concept-audit.md`;
+- `.editorial/pipeline/03-example-sufficiency/example-audit.md`.
+
+## Saídas
+
+- `.editorial/pipeline/04-visual-primitive-choice/primitive-audit.md`;
+- `.editorial/pipeline/04-visual-primitive-choice/revision-plan.md`.
 
 ## Como Auditar
 
@@ -58,7 +63,8 @@ Falha quando:
   `topologia`, `state`, `estado` ou `ascii` sem exceção justificada;
 - o dump registra demanda de forma, estado, ordem, fluxo, topologia ou
   contraste, mas o HTML resolve com ASCII por conveniência;
-- o audit visual omite a justificativa quando ASCII foi usado como exceção.
+- o `primitive-audit.md` omite a justificativa quando ASCII foi usado como
+  exceção.
 
 ## Exceções
 
@@ -67,14 +73,37 @@ ASCII passa apenas quando todos os pontos forem verdadeiros:
 - existe `data-ascii-exception="true"` no `<pre>`;
 - existe `data-ascii-reason` não vazio;
 - o dump registra por que HTML/CSS seria pior;
-- o audit visual registra qual relação o ASCII revela e por que não é atalho.
+- o `primitive-audit.md` registra qual relação o ASCII revela e por que não é
+  atalho.
 
 Exceção ASCII é estreita. Ela não deve ser usada para economizar composição de
 componentes simples.
 
-## Contrato do Audit Visual
+## Contrato de `.editorial/pipeline/04-visual-primitive-choice/primitive-audit.md`
 
-Quando atualizar `.editorial/visual-audit.md`, inclua este check:
+Registre:
+
+```md
+## Status geral
+
+Status geral: passa/falha
+
+## Checks
+
+| Check | Status | Evidência |
+|---|---|---|
+| primitiva visual adequada ao conceito | passa/falha | ... |
+| exceções ASCII justificadas | passa/falha | ... |
+| nenhum `<pre>` usado como atalho visual | passa/falha | ... |
+```
+
+Se houver reescrita obrigatória, registre o plano em
+`.editorial/pipeline/04-visual-primitive-choice/revision-plan.md`. Se não houver,
+o arquivo deve registrar que nenhuma reescrita é obrigatória.
+
+## Espelho no Audit Visual
+
+Quando atualizar `.editorial/pipeline/05-visual-render/visual-audit.md`, inclua este check:
 
 ```md
 | visuais conceituais não usam `<pre>` como atalho | passa/falha | ... |

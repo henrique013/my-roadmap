@@ -143,10 +143,10 @@ Depois da primeira geração do HTML, a skill executa
 `references/html-quality-pipeline/pipeline.md`.
 
 As regras deste arquivo orientam a escrita inicial. O pipeline valida o HTML
-pronto, materializa `.editorial/visible-text.md`,
-`.editorial/concept-audit.md`, `.editorial/example-audit.md` e
-`.editorial/revision-plan.md`, reescreve problemas e repete os guardrails até
-ponto fixo.
+pronto, materializa `.editorial/pipeline/01-visible-text/visible-text.md`,
+`.editorial/pipeline/02-concept-introduction/concept-audit.md`, `.editorial/pipeline/03-example-sufficiency/example-audit.md` e
+os `revision-plan.md` dos pipes que podem exigir reescrita, reescreve problemas
+e repete os guardrails até ponto fixo.
 
 Quando disponíveis, use os scripts internos para extrair texto visível,
 procurar aliases bloqueados literais e validar a forma mecânica do HTML. Eles
@@ -161,7 +161,7 @@ diagramas, legendas, labels, `aria-label` e referências, não apenas para
 parágrafos.
 
 Antes de considerar `node.html` final, use `.editorial/concept-ledger.md` e
-`.editorial/visible-text.md` para auditar a primeira ocorrência de cada
+`.editorial/pipeline/01-visible-text/visible-text.md` para auditar a primeira ocorrência de cada
 conceito e alias. A regra vale para todo texto visível ou semivisível,
 incluindo referências e `aria-label`.
 
@@ -227,7 +227,7 @@ Componentes úteis:
 
 ASCII é exceção estreita. Quando usar, o `<pre>` deve ter
 `data-ascii-exception="true"` e `data-ascii-reason` não vazio, com justificativa
-no `research-dump.md` e em `.editorial/visual-audit.md` explicando por que
+no `research-dump.md` e em `.editorial/pipeline/05-visual-render/visual-audit.md` explicando por que
 HTML/CSS seria pior.
 
 Snippet conceitual é permitido quando:
@@ -271,7 +271,7 @@ Snippets técnicos que mostram configuração, regra, parâmetro, campo, API,
 comando ou formato devem ter highlight semântico mínimo. Use classes `syntax-*`
 no próprio HTML quando não houver biblioteca local de highlight. Um bloco
 monocromático só passa para texto literal quando a ausência de highlight estiver
-justificada em `.editorial/visual-audit.md`. Visual conceitual simples não deve
+justificada em `.editorial/pipeline/05-visual-render/visual-audit.md`. Visual conceitual simples não deve
 usar `<pre>` como atalho.
 
 Exemplo de snippet conceitual com highlight manual:
@@ -451,7 +451,7 @@ Se o título oficial de uma fonte carregar conceito não preparado:
 
 Não use uma referência final para fazer vazar conceito reservado a node futuro.
 Títulos de fonte, labels de link e comentários finais entram na auditoria de
-`.editorial/visible-text.md`.
+`.editorial/pipeline/01-visible-text/visible-text.md`.
 
 ## Proibições no Corpo Principal
 
@@ -514,9 +514,11 @@ Antes de finalizar o HTML, verifique:
 - referências finais não introduzem vocabulário técnico novo;
 - o pipeline de qualidade foi executado até ponto fixo depois da primeira
   geração ou revisão do HTML;
-- `.editorial/visible-text.md`, `.editorial/concept-audit.md`,
-  `.editorial/example-audit.md`, `.editorial/visual-audit.md` e
-  `.editorial/revision-plan.md` correspondem ao HTML final;
+- `.editorial/pipeline/01-visible-text/visible-text.md`, `.editorial/pipeline/02-concept-introduction/concept-audit.md`,
+  `.editorial/pipeline/03-example-sufficiency/example-audit.md`,
+  `.editorial/pipeline/04-visual-primitive-choice/primitive-audit.md`,
+  `.editorial/pipeline/05-visual-render/visual-audit.md` e os `revision-plan.md`
+  dos pipes `02`, `03`, `04` e `05` correspondem ao HTML final;
 - o exemplo condutor volta ao longo da explicação;
 - exemplos necessários aparecem quando forma, estado, ordem, contraste,
   fronteira ou risco ficariam abstratos demais só em prosa;

@@ -67,17 +67,20 @@ function resolveTargets(args) {
   assertInside(htmlPath, roadmapDir, "roadmap.html");
 
   const internalDir = path.resolve(roadmapDir, ".roadmap");
-  const playwrightDir = path.resolve(internalDir, "playwright");
+  const visualPipeDir = path.resolve(internalDir, "pipeline", "05-visual-render");
+  const playwrightDir = path.resolve(visualPipeDir, "playwright");
   assertInside(internalDir, roadmapDir, ".roadmap");
-  assertInside(playwrightDir, internalDir, ".roadmap/playwright");
+  assertInside(visualPipeDir, internalDir, ".roadmap/pipeline/05-visual-render");
+  assertInside(playwrightDir, visualPipeDir, ".roadmap/pipeline/05-visual-render/playwright");
 
   return {
     roadmapDir,
     htmlPath,
     internalDir,
+    visualPipeDir,
     playwrightDir,
-    visualAuditPath: path.resolve(internalDir, "visual-audit.md"),
-    renderChecksPath: path.resolve(playwrightDir, "render-checks.json"),
+    visualAuditPath: path.resolve(visualPipeDir, "visual-audit.md"),
+    renderChecksPath: path.resolve(visualPipeDir, "render-checks.json"),
   };
 }
 
@@ -483,7 +486,8 @@ async function run() {
   const args = parseArgs(process.argv.slice(2));
   const targets = resolveTargets(args);
   fs.mkdirSync(targets.internalDir, { recursive: true });
-  assertInside(targets.playwrightDir, targets.internalDir, ".roadmap/playwright");
+  fs.mkdirSync(targets.visualPipeDir, { recursive: true });
+  assertInside(targets.playwrightDir, targets.visualPipeDir, ".roadmap/pipeline/05-visual-render/playwright");
   fs.rmSync(targets.playwrightDir, { recursive: true, force: true });
   fs.mkdirSync(targets.playwrightDir, { recursive: true });
 

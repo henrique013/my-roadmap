@@ -27,21 +27,26 @@ Entrada:
 - `research-dump.md` concluído;
 - `.editorial/concept-ledger.md` concluído;
 - `node.html` já gerado;
-- `.editorial/visible-text.md`, `.editorial/concept-audit.md` e
-  `.editorial/example-audit.md` quando os guardrails visuais forem executados;
+- `.editorial/pipeline/01-visible-text/visible-text.md`, `.editorial/pipeline/02-concept-introduction/concept-audit.md` e
+  `.editorial/pipeline/03-example-sufficiency/example-audit.md` quando os guardrails visuais forem executados;
 - contrato do node extraído do roadmap;
 - matriz anti-repetição;
 - artefatos do node anterior, quando existirem.
 
 Saídas internas obrigatórias:
 
-- `.editorial/visible-text.md`;
-- `.editorial/concept-audit.md`;
-- `.editorial/example-audit.md`;
-- `.editorial/visual-audit.md`;
-- `.editorial/playwright/desktop.png`;
-- `.editorial/playwright/mobile.png`;
-- `.editorial/revision-plan.md`.
+- `.editorial/pipeline/01-visible-text/visible-text.md`;
+- `.editorial/pipeline/02-concept-introduction/concept-audit.md`;
+- `.editorial/pipeline/02-concept-introduction/revision-plan.md`;
+- `.editorial/pipeline/03-example-sufficiency/example-audit.md`;
+- `.editorial/pipeline/03-example-sufficiency/revision-plan.md`;
+- `.editorial/pipeline/04-visual-primitive-choice/primitive-audit.md`;
+- `.editorial/pipeline/04-visual-primitive-choice/revision-plan.md`;
+- `.editorial/pipeline/05-visual-render/visual-audit.md`;
+- `.editorial/pipeline/05-visual-render/render-checks.json`;
+- `.editorial/pipeline/05-visual-render/revision-plan.md`;
+- `.editorial/pipeline/05-visual-render/playwright/desktop.png`;
+- `.editorial/pipeline/05-visual-render/playwright/mobile.png`.
 
 Saída final entregue:
 
@@ -53,13 +58,13 @@ Não crie logs nem relatórios fora de `.editorial/`.
 
 Execute, nesta ordem:
 
-1. Atualizar `.editorial/visible-text.md` a partir de `node.html`, de
+1. Atualizar `.editorial/pipeline/01-visible-text/visible-text.md` a partir de `node.html`, de
    preferência com:
 
    ```text
    python3 templates/skills-local/roadmap/node-pages/scripts/extract_visible_text.py \
      --html <node-dir>/node.html \
-     --out <node-dir>/.editorial/visible-text.md
+     --out <node-dir>/.editorial/pipeline/01-visible-text/visible-text.md
    ```
 
 2. Executar `02-visible-text-audit.md` para confirmar que a extração contém todo
@@ -69,7 +74,7 @@ Execute, nesta ordem:
    ```text
    python3 templates/skills-local/roadmap/node-pages/scripts/scan_blocked_terms.py \
      --ledger <node-dir>/.editorial/concept-ledger.md \
-     --visible <node-dir>/.editorial/visible-text.md
+     --visible <node-dir>/.editorial/pipeline/01-visible-text/visible-text.md
    ```
 
    Trate a saída como lista de candidatos. Paráfrases não literais continuam
@@ -78,24 +83,28 @@ Execute, nesta ordem:
    - `node.html`;
    - `research-dump.md`;
    - `.editorial/concept-ledger.md`;
-   - `.editorial/visible-text.md`.
-5. Gravar ou atualizar `.editorial/concept-audit.md`.
+   - `.editorial/pipeline/01-visible-text/visible-text.md`.
+5. Gravar ou atualizar `.editorial/pipeline/02-concept-introduction/concept-audit.md`.
+   Grave também `.editorial/pipeline/02-concept-introduction/revision-plan.md`.
 6. Executar `03-example-sufficiency.md` usando:
    - `node.html`;
    - `research-dump.md`;
    - `.editorial/concept-ledger.md`;
-   - `.editorial/visible-text.md`;
-   - `.editorial/concept-audit.md`.
-7. Gravar ou atualizar `.editorial/example-audit.md`.
+   - `.editorial/pipeline/01-visible-text/visible-text.md`;
+   - `.editorial/pipeline/02-concept-introduction/concept-audit.md`.
+7. Gravar ou atualizar `.editorial/pipeline/03-example-sufficiency/example-audit.md`.
+   Grave também `.editorial/pipeline/03-example-sufficiency/revision-plan.md`.
 8. Executar `04-visual-primitive-choice.md` usando:
    - `node.html`;
    - `research-dump.md`;
    - `.editorial/concept-ledger.md`;
-   - `.editorial/visible-text.md`;
-   - `.editorial/concept-audit.md`;
-   - `.editorial/example-audit.md`.
+   - `.editorial/pipeline/01-visible-text/visible-text.md`;
+   - `.editorial/pipeline/02-concept-introduction/concept-audit.md`;
+   - `.editorial/pipeline/03-example-sufficiency/example-audit.md`.
 9. Falhar e revisar o HTML se visual conceitual simples estiver em `<pre>` sem
    exceção ASCII explícita e justificada.
+   Grave `.editorial/pipeline/04-visual-primitive-choice/primitive-audit.md` e
+   `.editorial/pipeline/04-visual-primitive-choice/revision-plan.md`.
 10. Executar `05-visual-render-audit.md` usando os mesmos artefatos para
    preparar a auditoria renderizada.
 11. Renderizar `node.html` com Playwright em desktop e mobile, de preferência
@@ -107,15 +116,19 @@ Execute, nesta ordem:
      --node <node-slug>
    ```
 
-   O comando deve gravar evidências somente em `.editorial/playwright/`.
+   O comando deve gravar evidências somente em
+   `.editorial/pipeline/05-visual-render/playwright/` e
+   `.editorial/pipeline/05-visual-render/render-checks.json`.
 12. Inspecionar as screenshots geradas antes de marcar a rodada como aprovada.
-13. Gravar ou atualizar `.editorial/visual-audit.md`.
-14. Se houver falha em qualquer guardrail, gravar
-   `.editorial/revision-plan.md`, revisar `node.html` e voltar ao passo 1.
-15. Se não houver falha, `.editorial/concept-audit.md`,
-   `.editorial/example-audit.md` e `.editorial/visual-audit.md` devem registrar
-   status `passa`, e `.editorial/revision-plan.md` deve registrar que não há
-   reescrita obrigatória.
+13. Gravar ou atualizar `.editorial/pipeline/05-visual-render/visual-audit.md`.
+14. Se houver falha em qualquer guardrail, gravar `revision-plan.md` no pipe
+   responsável, revisar `node.html` e voltar ao passo 1.
+15. Se não houver falha, `.editorial/pipeline/02-concept-introduction/concept-audit.md`,
+   `.editorial/pipeline/03-example-sufficiency/example-audit.md`,
+   `.editorial/pipeline/04-visual-primitive-choice/primitive-audit.md` e
+   `.editorial/pipeline/05-visual-render/visual-audit.md` devem registrar
+   status `passa`, e os `revision-plan.md` dos pipes `02`, `03`, `04` e `05`
+   devem registrar que não há reescrita obrigatória.
 
 A saída de um guardrail é a entrada do próximo. Se qualquer guardrail alterar o
 HTML, reinicie a rodada global desde a extração de texto visível.
@@ -162,8 +175,9 @@ rodada global:
   execute 05-visual-render-audit.md
   atualize concept-audit.md
   atualize example-audit.md
+  atualize primitive-audit.md
   atualize visual-audit.md
-  atualize revision-plan.md
+  atualize revision-plan.md do pipe aplicável
 
 se qualquer guardrail reescreveu o HTML:
   volte à extração de visible-text.md
@@ -174,12 +188,14 @@ pare somente quando:
 
 Ponto fixo só existe quando:
 
-- `.editorial/visible-text.md` está atualizado com o HTML final;
-- `.editorial/concept-audit.md` está atualizado com o `visible-text.md` final;
-- `.editorial/example-audit.md` está atualizado com o `visible-text.md` final;
-- `.editorial/visual-audit.md` está atualizado com o HTML final;
+- `.editorial/pipeline/01-visible-text/visible-text.md` está atualizado com o HTML final;
+- `.editorial/pipeline/02-concept-introduction/concept-audit.md` está atualizado com o `visible-text.md` final;
+- `.editorial/pipeline/03-example-sufficiency/example-audit.md` está atualizado com o `visible-text.md` final;
+- `.editorial/pipeline/04-visual-primitive-choice/primitive-audit.md` está atualizado com o HTML final;
+- `.editorial/pipeline/05-visual-render/visual-audit.md` está atualizado com o HTML final;
+- `.editorial/pipeline/05-visual-render/render-checks.json` registra `status` como `passa`;
 - screenshots desktop e mobile foram geradas dentro de
-  `.editorial/playwright/`;
+  `.editorial/pipeline/05-visual-render/playwright/`;
 - não há falha visual pendente;
 - não há coluna textual estreita sem motivo em parágrafos comuns, `.lead` ou
   `.callout`;

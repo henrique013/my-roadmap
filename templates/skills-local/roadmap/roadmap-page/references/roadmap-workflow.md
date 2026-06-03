@@ -383,12 +383,19 @@ Antes de responder, verifique:
 
 - `roadmap.html` existe;
 - `.roadmap/roadmap-contract.json` existe e e JSON valido;
+- `.roadmap/roadmap-contract.json` passa no schema versionado;
 - o arquivo nao esta vazio;
 - o HTML contem estrutura obrigatoria;
 - o HTML e o contrato JSON concordam sobre slugs e ordem dos nodes;
 - todos os nodes tem `NN-slug`;
 - cada node tem referencias;
 - matriz anti-repeticao existe;
+- `.roadmap/pipeline/01-html-shape/html-shape-audit.md` registra passagem;
+- `.roadmap/pipeline/02-contract-schema/contract-schema-audit.md` registra passagem;
+- `.roadmap/pipeline/03-contract-consistency/contract-consistency-audit.md` registra passagem;
+- `.roadmap/pipeline/04-source-coverage/source-audit.md` registra passagem;
+- `.roadmap/pipeline/05-visual-render/visual-audit.md` registra passagem;
+- `.roadmap/pipeline/05-visual-render/render-checks.json` registra passagem;
 - o pipeline de qualidade de `roadmap-page` foi executado ate ponto fixo;
 - a auditoria visual renderizada verificou largura de conteudo e mobile;
 - mapas, fluxos e sequências visuais usam HTML/CSS, não `<pre>` como atalho;

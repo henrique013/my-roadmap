@@ -203,7 +203,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--out",
         required=True,
-        help="Caminho de saída para .editorial/visible-text.md.",
+        help="Caminho de saída para .editorial/pipeline/01-visible-text/visible-text.md.",
     )
     return parser.parse_args()
 

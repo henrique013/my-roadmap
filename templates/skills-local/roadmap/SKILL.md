@@ -65,6 +65,14 @@ Saída interna obrigatória:
 
 ```text
 .tmp/roadmaps/<slug>/.roadmap/roadmap-contract.json
+.tmp/roadmaps/<slug>/.roadmap/pipeline/01-html-shape/html-shape-audit.md
+.tmp/roadmaps/<slug>/.roadmap/pipeline/02-contract-schema/contract-schema-audit.md
+.tmp/roadmaps/<slug>/.roadmap/pipeline/03-contract-consistency/contract-consistency-audit.md
+.tmp/roadmaps/<slug>/.roadmap/pipeline/04-source-coverage/source-audit.md
+.tmp/roadmaps/<slug>/.roadmap/pipeline/05-visual-render/visual-audit.md
+.tmp/roadmaps/<slug>/.roadmap/pipeline/05-visual-render/render-checks.json
+.tmp/roadmaps/<slug>/.roadmap/pipeline/05-visual-render/playwright/desktop.png
+.tmp/roadmaps/<slug>/.roadmap/pipeline/05-visual-render/playwright/mobile.png
 ```
 
 Execute o pipeline de `roadmap-page` até ponto fixo antes da resposta final.
@@ -98,9 +106,9 @@ node-pages/references/html-quality-pipeline/pipeline.md
 node-pages/assets/node-page-template.html
 ```
 
-Use `.roadmap/roadmap-contract.json` como contrato principal quando existir e
-use `roadmap.html` como verificação cruzada. Se o contrato JSON não existir, use
-`roadmap.html` como fallback legado e registre isso no dump.
+Use `.roadmap/roadmap-contract.json` como contrato obrigatório e `roadmap.html`
+como verificação cruzada. Se o contrato JSON não existir, bloqueie a geração do
+node e peça a execução de `roadmap-page` para materializar o contrato.
 
 Saídas obrigatórias:
 
@@ -113,13 +121,18 @@ Artefatos internos obrigatórios:
 
 ```text
 .tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/concept-ledger.md
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/visible-text.md
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/concept-audit.md
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/example-audit.md
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/visual-audit.md
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/revision-plan.md
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/playwright/desktop.png
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/playwright/mobile.png
+.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/pipeline/01-visible-text/visible-text.md
+.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/pipeline/02-concept-introduction/concept-audit.md
+.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/pipeline/02-concept-introduction/revision-plan.md
+.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/pipeline/03-example-sufficiency/example-audit.md
+.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/pipeline/03-example-sufficiency/revision-plan.md
+.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/pipeline/04-visual-primitive-choice/primitive-audit.md
+.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/pipeline/04-visual-primitive-choice/revision-plan.md
+.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/pipeline/05-visual-render/visual-audit.md
+.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/pipeline/05-visual-render/revision-plan.md
+.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/pipeline/05-visual-render/render-checks.json
+.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/pipeline/05-visual-render/playwright/desktop.png
+.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/pipeline/05-visual-render/playwright/mobile.png
 ```
 
 Execute o pipeline de `node-pages` até ponto fixo. A incrementalidade continua
@@ -168,5 +181,4 @@ npm run roadmap:node-visual-check -- --roadmap-dir <roadmap-dir> --node <node-sl
 ```
 
 Se qualquer validação falhar por conteúdo gerado pela própria execução, corrija
-antes da resposta final. Se a falha vier de artefato legado usado apenas para
-compatibilidade, registre o limite internamente e não enfraqueça a skill.
+antes da resposta final. Não aceite layout legado de pipeline como compatível.

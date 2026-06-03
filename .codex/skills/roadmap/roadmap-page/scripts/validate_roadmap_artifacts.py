@@ -7,6 +7,7 @@ import argparse
 import json
 import re
 from pathlib import Path
+from typing import Any
 
 from check_roadmap_html_shape import collect_failures as collect_html_failures
 
@@ -16,6 +17,72 @@ HTML_SLUG_RE = re.compile(
     r"<strong>\s*Slug:\s*</strong>\s*<code>(?P<slug>\d{2}-[a-z0-9-]+)</code>",
     re.IGNORECASE | re.DOTALL,
 )
+SCHEMA_PATH = Path(__file__).resolve().parents[1] / "schema" / "roadmap-contract.schema.json"
+
+
+def schema_type_matches(value: Any, expected_type: str) -> bool:
+    if expected_type == "object":
+        return isinstance(value, dict)
+    if expected_type == "array":
+        return isinstance(value, list)
+    if expected_type == "string":
+        return isinstance(value, str)
+    if expected_type == "integer":
+        return type(value) is int
+    if expected_type == "number":
+        return type(value) in (int, float)
+    if expected_type == "boolean":
+        return isinstance(value, bool)
+    if expected_type == "null":
+        return value is None
+    return True
+
+
+def validate_schema(value: Any, schema: dict[str, Any], path: str = "$") -> list[str]:
+    failures: list[str] = []
+
+    if "const" in schema and value != schema["const"]:
+        failures.append(f"{path} deve ser {schema['const']!r}")
+        return failures
+
+    expected_type = schema.get("type")
+    if isinstance(expected_type, str) and not schema_type_matches(value, expected_type):
+        failures.append(f"{path} deve ser {expected_type}")
+        return failures
+
+    if "enum" in schema and value not in schema["enum"]:
+        failures.append(f"{path} deve estar em {schema['enum']!r}")
+
+    if isinstance(value, str):
+        min_length = schema.get("minLength")
+        if isinstance(min_length, int) and len(value) < min_length:
+            failures.append(f"{path} deve ter ao menos {min_length} caractere(s)")
+        pattern = schema.get("pattern")
+        if isinstance(pattern, str) and not re.fullmatch(pattern, value):
+            failures.append(f"{path} não corresponde ao padrão {pattern}")
+
+    if isinstance(value, list):
+        min_items = schema.get("minItems")
+        if isinstance(min_items, int) and len(value) < min_items:
+            failures.append(f"{path} deve ter ao menos {min_items} item(ns)")
+        item_schema = schema.get("items")
+        if isinstance(item_schema, dict):
+            for index, item in enumerate(value):
+                failures.extend(validate_schema(item, item_schema, f"{path}[{index}]"))
+
+    if isinstance(value, dict):
+        required = schema.get("required", [])
+        if isinstance(required, list):
+            for field in required:
+                if field not in value:
+                    failures.append(f"{path}.{field} é obrigatório")
+        properties = schema.get("properties", {})
+        if isinstance(properties, dict):
+            for field, field_schema in properties.items():
+                if field in value and isinstance(field_schema, dict):
+                    failures.extend(validate_schema(value[field], field_schema, f"{path}.{field}"))
+
+    return failures
 
 
 def parse_args() -> argparse.Namespace:
@@ -26,6 +93,34 @@ def parse_args() -> argparse.Namespace:
 
 def is_non_empty_file(path: Path) -> bool:
     return path.is_file() and path.stat().st_size > 0
+
+
+def file_contains_any(path: Path, needles: tuple[str, ...]) -> bool:
+    if not path.exists():
+        return False
+    text = path.read_text(encoding="utf-8").lower()
+    return any(needle.lower() in text for needle in needles)
+
+
+def require_audit_pass(path: Path, label: str, failures: list[str]) -> None:
+    if not is_non_empty_file(path):
+        failures.append(f"{label} ausente ou vazio: {path}")
+        return
+    if not file_contains_any(path, ("status geral: passa", "status: passa")):
+        failures.append(f"{label} não registra status de passagem")
+
+
+def validate_render_checks(path: Path, failures: list[str]) -> None:
+    if not is_non_empty_file(path):
+        failures.append(f"render-checks.json ausente ou vazio: {path}")
+        return
+    try:
+        render_checks = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        failures.append(f"render-checks.json inválido: {exc}")
+        return
+    if render_checks.get("status") != "passa":
+        failures.append("render-checks.json não registra status passa")
 
 
 def validate(args: argparse.Namespace) -> list[str]:
@@ -50,6 +145,16 @@ def validate(args: argparse.Namespace) -> list[str]:
         contract = json.loads(contract_path.read_text(encoding="utf-8"))
     except json.JSONDecodeError as exc:
         return failures + [f"roadmap-contract.json inválido: {exc}"]
+
+    if not is_non_empty_file(SCHEMA_PATH):
+        failures.append(f"schema do roadmap-contract ausente ou vazio: {SCHEMA_PATH}")
+    else:
+        try:
+            schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            failures.append(f"schema do roadmap-contract inválido: {exc}")
+        else:
+            failures.extend(f"schema: {failure}" for failure in validate_schema(contract, schema))
 
     if contract.get("schema_version") != "1.0":
         failures.append("schema_version deve ser 1.0")
@@ -117,11 +222,27 @@ def validate(args: argparse.Namespace) -> list[str]:
     else:
         failures.append("nenhum slug de node encontrado no HTML")
 
-    visual_audit = roadmap_dir / ".roadmap" / "visual-audit.md"
-    if visual_audit.exists():
-        text = visual_audit.read_text(encoding="utf-8").lower()
-        if "status geral: passa" not in text and "status: passa" not in text:
-            failures.append("visual-audit.md existe, mas não registra passagem")
+    pipeline_dir = roadmap_dir / ".roadmap" / "pipeline"
+    expected_audits = (
+        ("01-html-shape/html-shape-audit.md", "html-shape-audit.md"),
+        ("02-contract-schema/contract-schema-audit.md", "contract-schema-audit.md"),
+        ("03-contract-consistency/contract-consistency-audit.md", "contract-consistency-audit.md"),
+        ("04-source-coverage/source-audit.md", "source-audit.md"),
+        ("05-visual-render/visual-audit.md", "visual-audit.md"),
+    )
+    for relative_path, label in expected_audits:
+        require_audit_pass(pipeline_dir / relative_path, label, failures)
+
+    visual_pipe_dir = pipeline_dir / "05-visual-render"
+    validate_render_checks(visual_pipe_dir / "render-checks.json", failures)
+    playwright_dir = visual_pipe_dir / "playwright"
+    if not playwright_dir.is_dir():
+        failures.append(f"playwright do pipe visual ausente: {playwright_dir}")
+    else:
+        for name in ("desktop.png", "mobile.png"):
+            path = playwright_dir / name
+            if not is_non_empty_file(path):
+                failures.append(f"evidência visual ausente ou vazia: {path}")
 
     return failures
 

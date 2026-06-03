@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Extrai contrato JSON de um roadmap.html legado para compatibilidade."""
+"""Extrai contrato JSON de roadmap.html para bootstrap mecânico do roadmap-page."""
 
 from __future__ import annotations
 
@@ -84,7 +84,7 @@ def extract_sources(html_text: str) -> tuple[list[dict[str, object]], dict[str, 
                 "type": "fonte extraída do HTML",
                 "reason": strip_tags(link.group("label")) or "Referência do roadmap",
                 "supports_nodes": [],
-                "limits": "Contrato extraído em modo de compatibilidade.",
+                "limits": "Contrato extraído mecanicamente; revise antes de liberar node-pages.",
             }
         )
     return sources, seen
@@ -170,7 +170,7 @@ def build_contract(html_path: Path) -> dict[str, object]:
         "background": "",
         "research_date": "",
         "assumptions": [],
-        "limits": ["Contrato extraído de roadmap.html legado para compatibilidade."],
+        "limits": ["Contrato extraído mecanicamente de roadmap.html; revise antes de liberar node-pages."],
         "expected_understanding": "",
         "sources": sources,
         "anti_repetition": extract_anti_repetition(html_text),

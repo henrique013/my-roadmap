@@ -3,7 +3,7 @@
 Este guardrail valida e corrige conceitos usados antes de serem preparados no
 `node.html`. Ele compara o texto extraído do HTML contra
 `.editorial/concept-ledger.md` e grava o resultado em
-`.editorial/concept-audit.md`.
+`.editorial/pipeline/02-concept-introduction/concept-audit.md`.
 
 ## Regra Central
 
@@ -32,7 +32,7 @@ Use como entrada:
 - `node.html`;
 - `research-dump.md`;
 - `.editorial/concept-ledger.md`;
-- `.editorial/visible-text.md`.
+- `.editorial/pipeline/01-visible-text/visible-text.md`.
 
 Quando disponível, rode o scanner literal de termos bloqueados antes da revisão
 semântica:
@@ -40,7 +40,7 @@ semântica:
 ```text
 python3 templates/skills-local/roadmap/node-pages/scripts/scan_blocked_terms.py \
   --ledger <node-dir>/.editorial/concept-ledger.md \
-  --visible <node-dir>/.editorial/visible-text.md
+  --visible <node-dir>/.editorial/pipeline/01-visible-text/visible-text.md
 ```
 
 Trate a saída como lista de candidatos, não como decisão final. Paráfrases não
@@ -48,12 +48,12 @@ literais e suficiência de preparação continuam sendo decisão do agente.
 
 Atualize como saída:
 
-- `.editorial/concept-audit.md`;
-- `.editorial/revision-plan.md`.
+- `.editorial/pipeline/02-concept-introduction/concept-audit.md`;
+- `.editorial/pipeline/02-concept-introduction/revision-plan.md`.
 
 ## O Que Verificar
 
-Leia `.editorial/visible-text.md` e confirme contra o HTML inteiro, incluindo:
+Leia `.editorial/pipeline/01-visible-text/visible-text.md` e confirme contra o HTML inteiro, incluindo:
 
 - `<title>`;
 - H1;
@@ -96,7 +96,7 @@ O HTML só passa quando não houver `falha`, `fora-do-escopo` ou `fonte-vazou` e
 quando todo `fraco` tiver sido reescrito ou justificado por pré-requisito
 herdado explícito do roadmap ou de node anterior.
 
-Registre a rodada em `.editorial/concept-audit.md` com:
+Registre a rodada em `.editorial/pipeline/02-concept-introduction/concept-audit.md` com:
 
 - status geral;
 - primeiras ocorrências;
@@ -252,7 +252,7 @@ Correções válidas:
 ## Plano de Revisão
 
 Quando houver qualquer `falha`, `fora-do-escopo`, `fonte-vazou` ou `fraco` não
-justificado, grave `.editorial/revision-plan.md` com:
+justificado, grave `.editorial/pipeline/02-concept-introduction/revision-plan.md` com:
 
 - rodada;
 - base em `concept-audit.md`;
@@ -261,7 +261,7 @@ justificado, grave `.editorial/revision-plan.md` com:
 - critério para nova rodada.
 
 Depois de revisar `node.html`, volte ao pipeline para regenerar
-`.editorial/visible-text.md` e `.editorial/concept-audit.md`.
+`.editorial/pipeline/01-visible-text/visible-text.md` e `.editorial/pipeline/02-concept-introduction/concept-audit.md`.
 
 Se não houver alteração obrigatória, `revision-plan.md` deve registrar que
 nenhuma reescrita é obrigatória nesta rodada.
@@ -277,10 +277,10 @@ O guardrail passa somente quando:
 - referências finais não introduzem termos técnicos novos ou bloqueados;
 - conceitos reservados a nodes futuros não sustentam a explicação do node
   atual;
-- `.editorial/concept-audit.md` registra status `passa`;
-- `.editorial/revision-plan.md` registra nenhuma reescrita obrigatória;
+- `.editorial/pipeline/02-concept-introduction/concept-audit.md` registra status `passa`;
+- `.editorial/pipeline/02-concept-introduction/revision-plan.md` registra nenhuma reescrita obrigatória;
 - a leitura segue de informação já dada para informação nova;
 - depois de qualquer reescrita, o HTML completo foi relido.
 
 Se o HTML foi reescrito, retorne ao pipeline para reiniciar a rodada global
-desde a extração de `.editorial/visible-text.md`.
+desde a extração de `.editorial/pipeline/01-visible-text/visible-text.md`.

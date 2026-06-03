@@ -35,26 +35,36 @@ Antes de apagar ou recriar, valide:
 
 Não crie logs fora de `.editorial/`. Não faça `node.html` depender de arquivos
 editoriais. Evidências temporárias do Playwright devem ficar somente dentro de
-`.editorial/playwright/`.
+`.editorial/pipeline/05-visual-render/playwright/`.
 
 ## Estrutura Obrigatória
 
 ```text
 .editorial/
 ├── concept-ledger.md
-├── visible-text.md
-├── concept-audit.md
-├── example-audit.md
-├── visual-audit.md
-├── playwright/
-│   ├── desktop.png
-│   ├── mobile.png
-│   └── render-checks.json
-└── revision-plan.md
+└── pipeline/
+    ├── 01-visible-text/
+    │   └── visible-text.md
+    ├── 02-concept-introduction/
+    │   ├── concept-audit.md
+    │   └── revision-plan.md
+    ├── 03-example-sufficiency/
+    │   ├── example-audit.md
+    │   └── revision-plan.md
+    ├── 04-visual-primitive-choice/
+    │   ├── primitive-audit.md
+    │   └── revision-plan.md
+    └── 05-visual-render/
+        ├── visual-audit.md
+        ├── render-checks.json
+        ├── revision-plan.md
+        └── playwright/
+            ├── desktop.png
+            └── mobile.png
 ```
 
-`render-checks.json` é auxiliar e pode existir quando o guardrail visual precisar
-registrar estilos computados, contraste, overflow ou falhas mecânicas.
+`render-checks.json` registra a validação mecânica do Playwright. O
+`concept-ledger.md` fica fora de `pipeline/` porque é insumo transversal do node.
 
 ## Sequência Obrigatória
 
@@ -63,22 +73,28 @@ Execute nesta ordem:
 1. Gere `research-dump.md`.
 2. Gere `.editorial/concept-ledger.md` a partir do dump e do contrato do node.
 3. Gere a primeira versão de `node.html`.
-4. Extraia texto visível e semivisível para `.editorial/visible-text.md`, de
+4. Extraia texto visível e semivisível para `.editorial/pipeline/01-visible-text/visible-text.md`, de
    preferência com `scripts/extract_visible_text.py`.
 5. Compare `visible-text.md` contra `concept-ledger.md`.
 6. Use `scripts/scan_blocked_terms.py` para procurar aliases bloqueados
    literais como candidatos de revisão.
-7. Grave `.editorial/concept-audit.md`.
-8. Audite suficiência qualitativa de exemplos, snippets, tabelas e visuais.
-9. Grave `.editorial/example-audit.md`.
-10. Renderize `node.html` com Playwright em desktop e mobile, usando Chromium
+7. Grave `.editorial/pipeline/02-concept-introduction/concept-audit.md`.
+8. Grave `.editorial/pipeline/02-concept-introduction/revision-plan.md`.
+9. Audite suficiência qualitativa de exemplos, snippets, tabelas e visuais.
+10. Grave `.editorial/pipeline/03-example-sufficiency/example-audit.md`.
+11. Grave `.editorial/pipeline/03-example-sufficiency/revision-plan.md`.
+12. Audite a primitiva visual e grave
+    `.editorial/pipeline/04-visual-primitive-choice/primitive-audit.md`.
+13. Grave `.editorial/pipeline/04-visual-primitive-choice/revision-plan.md`.
+14. Renderize `node.html` com Playwright em desktop e mobile, usando Chromium
     headless quando viável.
-11. Grave evidências somente em `.editorial/playwright/`.
-12. Grave `.editorial/visual-audit.md`.
-13. Inspecione as screenshots antes de marcar passagem visual.
-14. Grave `.editorial/revision-plan.md`.
-15. Revise `node.html` ou o CSS embutido quando houver falha.
-16. Repita extração, auditoria, renderização, plano e revisão até ponto fixo.
+15. Grave evidências somente em `.editorial/pipeline/05-visual-render/playwright/`.
+16. Grave `.editorial/pipeline/05-visual-render/render-checks.json`.
+17. Grave `.editorial/pipeline/05-visual-render/visual-audit.md`.
+18. Grave `.editorial/pipeline/05-visual-render/revision-plan.md`.
+19. Inspecione as screenshots antes de marcar passagem visual.
+20. Revise `node.html` ou o CSS embutido quando houver falha.
+21. Repita extração, auditoria, renderização, plano e revisão até ponto fixo.
 
 Ponto fixo significa que uma rodada completa de extração, auditoria textual,
 auditoria de exemplos, renderização visual e revisão termina sem exigência de
@@ -86,8 +102,8 @@ alteração em `node.html`.
 
 Ponto fixo visual só existe quando:
 
-- `.editorial/visual-audit.md` está atualizado com o HTML final;
-- screenshots desktop e mobile existem em `.editorial/playwright/`;
+- `.editorial/pipeline/05-visual-render/visual-audit.md` está atualizado com o HTML final;
+- screenshots desktop e mobile existem em `.editorial/pipeline/05-visual-render/playwright/`;
 - não há falha visual pendente;
 - `pre code` não herda chip de inline `code`;
 - snippets técnicos têm highlight semântico ou justificativa registrada;

@@ -1,6 +1,6 @@
 # Guardrail 02 - Auditoria de Texto Visível
 
-Este guardrail garante que `.editorial/visible-text.md` contenha todo texto que
+Este guardrail garante que `.editorial/pipeline/01-visible-text/visible-text.md` contenha todo texto que
 o leitor ou a auditoria conceitual precisa considerar.
 
 ## Regra Central
@@ -13,7 +13,7 @@ introduzir conceito cedo demais.
 Gere ou atualize:
 
 ```text
-.editorial/visible-text.md
+.editorial/pipeline/01-visible-text/visible-text.md
 ```
 
 Quando disponível, gere a extração com:
@@ -21,7 +21,7 @@ Quando disponível, gere a extração com:
 ```text
 python3 templates/skills-local/roadmap/node-pages/scripts/extract_visible_text.py \
   --html <node-dir>/node.html \
-  --out <node-dir>/.editorial/visible-text.md
+  --out <node-dir>/.editorial/pipeline/01-visible-text/visible-text.md
 ```
 
 Depois, confira se a extração contém todos os blocos relevantes. A automação

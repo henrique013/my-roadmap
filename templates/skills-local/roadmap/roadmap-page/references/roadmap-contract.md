@@ -3,6 +3,11 @@
 O contrato JSON é a fonte mecânica para o modo `node-pages`. O HTML continua
 sendo a página humana; o JSON guarda estrutura verificável.
 
+O schema versionado fica em
+`roadmap-page/schema/roadmap-contract.schema.json`. Ele valida presença, tipos,
+versão e formato mínimo; regras de coerência entre HTML, ordem, slugs e
+`source_id` continuam no validador Python.
+
 ## Esquema Lógico Mínimo
 
 ```json
@@ -79,14 +84,12 @@ sendo a página humana; o JSON guarda estrutura verificável.
 ```text
 identificar roadmap
   |
-  +-> se roadmap-contract.json existir:
-  |     usar JSON como contrato principal
-  |     conferir coerência básica com roadmap.html
+  +-> validar .roadmap/roadmap-contract.json contra o schema versionado
   |
-  +-> se JSON não existir:
-        usar roadmap.html como fallback legado
-        registrar compatibilidade no research-dump.md
+  +-> usar JSON como contrato principal
+  |
+  +-> conferir coerência básica com roadmap.html
 ```
 
-O fallback preserva compatibilidade; ele não justifica deixar `roadmap-page` sem
-contrato estruturado.
+Se `roadmap-contract.json` não existir ou estiver inválido, `node-pages` deve
+bloquear e pedir a execução de `roadmap-page`.
