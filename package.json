@@ -1,0 +1,11 @@
+{
+  "name": "my-roadmap",
+  "private": true,
+  "scripts": {
+    "roadmap:node-visual-check": "node templates/skills-local/roadmap/node-pages/scripts/check_visual_render.mjs",
+    "roadmap:roadmap-visual-check": "node templates/skills-local/roadmap/roadmap-page/scripts/check_roadmap_visual_render.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.60.0"
+  }
+}

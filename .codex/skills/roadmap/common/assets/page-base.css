@@ -1,0 +1,297 @@
+:root {
+  --text: #1f2937;
+  --muted: #5b6472;
+  --border: #d8dee7;
+  --soft: #f6f8fb;
+  --soft-2: #eef3f8;
+  --accent: #0f766e;
+  --warn: #9a6700;
+  --code: #0f172a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--text);
+  background: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+main {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 32px 28px 56px;
+}
+
+h1,
+h2,
+h3 {
+  color: #111827;
+  line-height: 1.2;
+  margin: 0 0 12px;
+}
+
+h1 {
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+
+h2 {
+  font-size: 22px;
+  border-top: 1px solid var(--border);
+  padding-top: 28px;
+  margin-top: 32px;
+}
+
+h3 {
+  font-size: 17px;
+  margin-top: 22px;
+}
+
+p,
+ul,
+ol,
+.lead,
+.callout {
+  max-width: none;
+}
+
+p {
+  margin: 0 0 12px;
+}
+
+ul,
+ol {
+  margin: 8px 0 16px 22px;
+  padding: 0;
+}
+
+li {
+  margin: 4px 0;
+}
+
+table,
+pre,
+.content-grid,
+.visual-block {
+  width: 100%;
+  max-width: 100%;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 14px 0 22px;
+  table-layout: fixed;
+}
+
+th,
+td {
+  border: 1px solid var(--border);
+  padding: 9px 10px;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+
+th {
+  background: var(--soft-2);
+  text-align: left;
+  font-weight: 700;
+}
+
+code {
+  color: var(--code);
+  background: #eef2f7;
+  border: 1px solid #d9e1ec;
+  border-radius: 4px;
+  padding: 1px 4px;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 0.92em;
+}
+
+pre {
+  margin: 12px 0 22px;
+  padding: 14px 16px;
+  color: #dbeafe;
+  background: #111827;
+  border-radius: 6px;
+  overflow: auto;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.45;
+  white-space: pre;
+}
+
+pre code {
+  color: inherit;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  font: inherit;
+}
+
+.syntax-key {
+  color: #93c5fd;
+  font-weight: 700;
+}
+
+.syntax-op {
+  color: #c4b5fd;
+}
+
+.syntax-value {
+  color: #bbf7d0;
+}
+
+.syntax-comment {
+  color: #a8b3c7;
+}
+
+.syntax-risk {
+  color: #fde68a;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.lead {
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.meta {
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.callout {
+  padding: 13px 15px;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  background: var(--soft);
+  margin: 16px 0 22px;
+  border-radius: 6px;
+}
+
+.warning {
+  border-left-color: var(--warn);
+  background: #fff8e6;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 16px 0 22px;
+}
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px;
+  background: #fff;
+}
+
+.tag {
+  display: inline-block;
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  background: #e8f5f2;
+  color: #075e54;
+  border: 1px solid #b9ded6;
+}
+
+.small {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.timeline {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0 22px;
+}
+
+.timeline-step {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 12px;
+  align-items: start;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  background: #fff;
+}
+
+.flow-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin: 16px 0 22px;
+}
+
+.flow-steps span {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 10px;
+  background: var(--soft);
+}
+
+.state-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 16px 0 22px;
+}
+
+.topology,
+.lane-map {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0 22px;
+}
+
+.topology-node,
+.lane {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  background: #fff;
+}
+
+@media (max-width: 860px) {
+  main {
+    padding: 22px 16px 40px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-step,
+  .state-grid {
+    grid-template-columns: 1fr;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    table-layout: auto;
+  }
+
+  th,
+  td {
+    min-width: 150px;
+  }
+}
