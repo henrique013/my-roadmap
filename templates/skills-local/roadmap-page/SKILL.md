@@ -14,7 +14,6 @@ Use somente quando a mesma chamada também ativar a skill `roadmap`, por exemplo
 ```text
 /roadmap /roadmap-page
 Quero aprender como fazer replicação no Postgres.
-Tenho conhecimento intermediário em SQL.
 ```
 
 Se `roadmap` não estiver na mesma chamada, não execute nenhum workflow. Peça uma
@@ -29,9 +28,10 @@ A chamada deve conter informação suficiente para a skill `roadmap` identificar
 
 - o tema do roadmap.
 
-A chamada pode conter informação para a skill `roadmap` identificar:
-
-- o background de conhecimento dela.
+Opcionalmente, a chamada pode mencionar conhecimentos prévios, objetivo,
+experiência, senioridade ou outro contexto relevante. Quando esse contexto
+existir, a skill principal `roadmap` deve usá-lo para calibrar o resultado, sem
+tratá-lo como campo esperado ou requisito.
 
 Exemplos válidos de input incluem frase curta, parágrafo, lista solta ou linhas
 separadas. Se o tema não for identificável no texto livre, a skill principal

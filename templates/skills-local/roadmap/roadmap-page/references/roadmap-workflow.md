@@ -14,11 +14,15 @@ estudo, mapa conceitual sequencial ou HTML de roadmap.
 
 Entrada minima:
 
-- `tema`: o que a pessoa quer aprender;
-- `background`: conhecimento, experiencia, senioridade, objetivo ou contexto do leitor.
+- `tema`: o que a pessoa quer aprender.
 
-Se faltar `tema` ou `background`, pergunte somente pelo dado ausente e nao crie
-arquivos.
+Contexto opcional:
+
+- conhecimentos previos, experiencia, senioridade, objetivo ou contexto
+  relevante do leitor, quando a pessoa fornecer.
+
+Se faltar `tema`, pergunte somente pelo tema e nao crie arquivos. Nao pergunte
+por contexto previo como requisito para gerar o roadmap.
 
 Saida obrigatoria:
 
@@ -48,14 +52,14 @@ Pesquisa usada; referencias estao dentro do HTML.
 ### Checklist desta secao
 
 - [ ] O tema foi identificado.
-- [ ] O background foi identificado.
+- [ ] Contexto previo, se fornecido, foi capturado.
 - [ ] Arquivos nao foram criados com entrada incompleta.
 - [ ] A saida planejada e somente `roadmap.html`.
 - [ ] O pedido pratico, se existir, foi convertido para base teorica.
 
 ## 2. Slug e Pasta de Trabalho
 
-Gere o slug principal a partir do tema, nao do background.
+Gere o slug principal a partir do tema, nao do contexto opcional.
 
 Regras de slug:
 
@@ -165,7 +169,7 @@ Modele internamente:
 ```text
 tema principal:
 recorte escolhido:
-background:
+contexto opcional fornecido:
 objetivo final:
 profundidade:
 limites explicitos:
@@ -180,15 +184,19 @@ Se uma ambiguidade puder gerar roadmaps incompativeis, pergunte antes de criar
 arquivos. Se a ambiguidade for leve, escolha a interpretacao mais provavel e
 registre a premissa no HTML.
 
-O background deve afetar decisoes reais: profundidade, vocabulario, ritmo,
-pre-requisitos, limites e exemplos conceituais.
+Quando a pessoa fornecer conhecimentos previos, experiencia, senioridade,
+objetivo ou contexto relevante, esse contexto deve afetar decisoes reais:
+profundidade, vocabulario, ritmo, pre-requisitos, limites e exemplos
+conceituais. Se ela nao fornecer esse contexto, use uma premissa neutra e nao
+finja personalizacao.
 
 ### Checklist desta secao
 
-- [ ] Tema, recorte e background foram normalizados.
+- [ ] Tema e recorte foram normalizados.
+- [ ] Contexto previo foi usado somente quando fornecido.
 - [ ] Ambiguidades fortes foram resolvidas com pergunta.
 - [ ] Premissas leves foram registradas no HTML.
-- [ ] O background influenciou decisoes concretas.
+- [ ] Contexto previo fornecido influenciou decisoes concretas.
 - [ ] O escopo nao foi ampliado por iniciativa propria.
 
 ## 6. Inventario e Curadoria de Topicos
@@ -347,7 +355,7 @@ O HTML final deve ser autocontido e conter:
 - `<!doctype html>`, `html lang="pt-BR"`, `meta charset="utf-8"` e viewport;
 - CSS embutido;
 - titulo;
-- resumo do background;
+- contexto informado ou premissa neutra;
 - compreensao final esperada;
 - data da pesquisa;
 - premissas e limites;

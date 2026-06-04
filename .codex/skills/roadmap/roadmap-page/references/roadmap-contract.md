@@ -71,6 +71,9 @@ versão e formato mínimo; regras de coerência entre HTML, ordem, slugs e
 
 - `schema_version` começa em `1.0`.
 - `roadmap_slug` deve ser igual ao slug da pasta em `.tmp/roadmaps/<slug>/`.
+- `background` é campo técnico opcional: preencha somente quando a pessoa
+  fornecer contexto relevante; se não fornecer, use string vazia e registre
+  premissas necessárias em `assumptions`.
 - Cada node deve ter `order` compatível com o prefixo numérico do slug.
 - `slug` deve seguir `NN-slug`.
 - `must_cover` precisa ser denso e útil para documentação futura.

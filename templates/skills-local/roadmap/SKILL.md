@@ -26,7 +26,7 @@ formato de resposta. Todas as regras operacionais continuam nesta skill.
 |---|---|
 | pedido explícito com `$roadmap` e `$roadmap-page` | `roadmap-page` |
 | pedido explícito com `$roadmap` e `$roadmap-node-page` | `node-pages` |
-| gerar roadmap, trilha, mapa de estudo, tema + background | `roadmap-page` |
+| gerar roadmap, trilha, mapa de estudo ou tema novo | `roadmap-page` |
 | gerar node, documentar node, slug `NN-slug`, página profunda de node | `node-pages` |
 | pedido explícito com `$roadmap` e node | `node-pages` |
 | pedido explícito com `$roadmap` e tema novo | `roadmap-page` |
@@ -34,11 +34,14 @@ formato de resposta. Todas as regras operacionais continuam nesta skill.
 Interprete texto livre e extraia os campos necessários do modo selecionado. Não
 dependa de ordem fixa, linhas separadas, marcadores ou campos nomeados.
 
-Se faltar dado para `roadmap-page`, peça somente o tema quando ele não for
-identificável. Background é opcional; se faltar, siga com premissa explícita e
-registre limites/assumptions. Se faltar dado para `node-pages`, peça
-identificação do roadmap ou do node somente quando não houver exatamente um
-candidato.
+Para `roadmap-page`, o único dado mínimo é o tema. Se ele não for
+identificável, peça somente o tema. Conhecimentos prévios, objetivo,
+experiência, senioridade ou contexto relevante podem aparecer no pedido; quando
+aparecerem, use-os para calibrar profundidade, vocabulário, recorte, ritmo,
+limites e exemplos conceituais. Se não aparecerem, siga com premissa neutra e
+registre limites ou assumptions quando isso afetar o resultado. Se faltar dado
+para `node-pages`, peça identificação do roadmap ou do node somente quando não
+houver exatamente um candidato.
 
 ## Modo `roadmap-page`
 

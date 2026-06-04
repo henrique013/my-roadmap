@@ -13,7 +13,7 @@ O HTML deve conter:
 - viewport;
 - CSS embutido;
 - `<title>` e `<h1>`;
-- resumo do background;
+- contexto informado ou premissa neutra;
 - compreensão final esperada;
 - data da pesquisa;
 - premissas e limites;
