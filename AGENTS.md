@@ -149,13 +149,6 @@ Arquivo: `docs/conventions/fluxo-openspec-com-remocao-direta.md`
 - Leia este documento ao propor, aplicar, remover ou limpar mudanças OpenSpec em repositórios consumidores que tratam changes concluídas como temporárias.
 - Use este documento para tratar OpenSpec como fluxo `Explore -> Propose -> Apply -> remover openspec/changes/<change-id>/`, preservando `openspec/config.yaml`.
 
-### Testes Mínimos e Lefthook
-
-Arquivo: `docs/conventions/testes-minimos-e-lefthook.md`
-
-- Leia este documento ao implementar ou revisar mudanças em repositórios que usam testes automatizados e Lefthook.
-- Use este documento para equilibrar testes focados durante a implementação com a suíte geral executada no `pre-push`.
-
 ### Atualização Segura e Auditável de Dependências e Plataformas
 
 Arquivo: `docs/conventions/atualizacao-segura-e-auditavel-de-dependencias-e-plataformas.md`

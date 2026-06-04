@@ -2,7 +2,7 @@ agents:
   root: false
   source:
     repository: git@github.com:henrique013/agents.git
-    ref: v2.2.0
+    ref: v2.3.0
   bootstrap:
     skill: update-docs
 
@@ -33,8 +33,6 @@ outputs:
           - origin: remote
             from: fluxo-openspec-com-remocao-direta.tpl.md
           - origin: remote
-            from: testes-minimos-e-lefthook.tpl.md
-          - origin: remote
             from: atualizacao-segura-e-auditavel-de-dependencias-e-plataformas.tpl.md
           - origin: remote
             from: arquivos-temporarios.tpl.md
@@ -57,3 +55,5 @@ outputs:
         from: roadmap-node-page
       - origin: remote
         from: decision-handoff
+      - origin: remote
+        from: enhance-prompt
