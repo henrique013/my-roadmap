@@ -32,6 +32,7 @@ class ShapeParser(HTMLParser):
         self.has_style = False
         self.has_title = False
         self.has_h1 = False
+        self.has_roadmap_backlink = False
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         tag = tag.lower()
@@ -52,6 +53,8 @@ class ShapeParser(HTMLParser):
             self.has_title = True
         elif tag == "h1":
             self.has_h1 = True
+        elif tag == "a" and attrs_map.get("href") == "../../roadmap.html":
+            self.has_roadmap_backlink = True
 
 
 def parse_args() -> argparse.Namespace:
@@ -88,6 +91,8 @@ def collect_failures(html_text: str) -> list[str]:
         failures.append("<title> ausente")
     if not parser.has_h1:
         failures.append("<h1> ausente")
+    if not parser.has_roadmap_backlink:
+        failures.append('link de retorno para ../../roadmap.html ausente')
     if "<!--" not in html_text or "refer" not in lower_text:
         failures.append("seção de referências comentadas ausente")
     if "```" in html_text:

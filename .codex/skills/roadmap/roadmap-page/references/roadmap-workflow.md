@@ -418,7 +418,8 @@ O HTML final deve ser autocontido e conter:
 - data da pesquisa;
 - premissas e limites;
 - mapa tri-level;
-- lista resumida dos nodes por nivel com label, slug e `node_id`;
+- lista resumida navegavel dos nodes por nivel com label, slug, `node_id` e
+  link interno para a secao completa do node no proprio `roadmap.html`;
 - matriz anti-repeticao global;
 - secoes completas dos nodes agrupadas por nivel;
 - checklist final de cobertura;
@@ -428,6 +429,16 @@ Use tabelas para matrizes, listas e referências. Use componentes HTML/CSS para
 mapas, fluxos e sequências visuais. Use `<pre>` apenas para texto literal,
 código, configuração ou ASCII excepcional justificado.
 Use cards apenas para resumos curtos.
+
+Cada secao completa de node deve ter `id` estavel no formato
+`<level>-<node-slug>`, alem de `data-level`, `data-node-id` e
+`data-node-slug`. A lista resumida deve apontar para esse `id` com link interno.
+Quando `<level>/<node-slug>/node.html` ja existir dentro do roadmap, o resumo
+tambem deve apontar para esse arquivo com link relativo. Quando ainda nao
+existir, deixe o node como planejado ou pendente, sem link quebrado.
+
+Nao use `flow-steps` ou componente equivalente para representar a lista de
+nodes quando ele mostrar apenas numeros sem label, slug, `node_id` e links.
 
 Nao deixe Markdown cru no HTML.
 
@@ -440,6 +451,9 @@ Nao escreva secoes chamadas `Laboratorio`, `Exercicio`, `Projeto final`,
 - [ ] O HTML e autocontido e tem CSS embutido.
 - [ ] O HTML contem secoes para `basico`, `intermediario` e `avancado`.
 - [ ] O mapa, lista de nodes por nivel e matriz global sao coerentes entre si.
+- [ ] A lista resumida dos nodes e navegavel e nao usa blocos apenas numericos.
+- [ ] Cada node tem link interno para sua secao completa.
+- [ ] Links relativos para `node.html` existem somente quando o arquivo existe.
 - [ ] Nao ha Markdown cru.
 - [ ] Nao ha secoes praticas proibidas.
 - [ ] Referencias consolidadas aparecem no final.
@@ -459,6 +473,10 @@ Antes de responder, verifique:
   local dos nodes;
 - todos os nodes tem `NN-slug`;
 - todos os nodes tem `node_id` no formato `<level>/<slug>`;
+- todos os nodes tem `id` HTML estavel no formato `<level>-<slug>`;
+- a lista resumida dos nodes contem label, slug, `node_id` e link interno para
+  cada secao completa;
+- links relativos para `node.html` existem somente para nodes ja criados;
 - cada node tem referencias;
 - matriz anti-repeticao global existe;
 - `.roadmap/pipeline/01-html-shape/html-shape-audit.md` registra passagem;

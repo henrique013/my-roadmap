@@ -217,19 +217,47 @@
       background: #fff;
     }
 
-    .flow-steps {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
+    .node-list {
+      display: grid;
+      gap: 10px;
       margin: 16px 0 22px;
     }
 
-    .flow-steps span {
+    .node-list a,
+    .node-list .node-list-item {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 12px;
+      align-items: start;
       border: 1px solid var(--border);
       border-radius: 6px;
-      padding: 8px 10px;
+      padding: 10px 12px;
       background: var(--soft);
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .node-list a:hover {
+      border-color: var(--accent);
+    }
+
+    .node-order {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .node-title {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .node-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
     }
 
     .state-grid {
@@ -264,6 +292,8 @@
       }
 
       .timeline-step,
+      .node-list a,
+      .node-list .node-list-item,
       .state-grid {
         grid-template-columns: 1fr;
       }
@@ -336,32 +366,44 @@
 
     <section data-level="basico">
       <h2>4. Basico</h2>
-      <div class="flow-steps" aria-label="Fluxo conceitual dos nodes basicos">
-        <span>01</span>
-        <span>02</span>
-        <span>03</span>
+      <div class="node-list" aria-label="Resumo navegavel dos nodes basicos">
+        <a href="#basico-01-node-exemplo">
+          <span class="node-order">01</span>
+          <span>
+            <span class="node-title">Nome do Node</span>
+            <span class="node-meta"><code>basico/01-node-exemplo</code><code>01-node-exemplo</code></span>
+          </span>
+        </a>
       </div>
     </section>
 
     <section data-level="intermediario">
       <h2>5. Intermediario</h2>
-      <div class="flow-steps" aria-label="Fluxo conceitual dos nodes intermediarios">
-        <span>01</span>
-        <span>02</span>
-        <span>03</span>
+      <div class="node-list" aria-label="Resumo navegavel dos nodes intermediarios">
+        <a href="#intermediario-01-node-exemplo">
+          <span class="node-order">01</span>
+          <span>
+            <span class="node-title">Nome do Node</span>
+            <span class="node-meta"><code>intermediario/01-node-exemplo</code><code>01-node-exemplo</code></span>
+          </span>
+        </a>
       </div>
     </section>
 
     <section data-level="avancado">
       <h2>6. Avancado</h2>
-      <div class="flow-steps" aria-label="Fluxo conceitual dos nodes avancados">
-        <span>01</span>
-        <span>02</span>
-        <span>03</span>
+      <div class="node-list" aria-label="Resumo navegavel dos nodes avancados">
+        <a href="#avancado-01-node-exemplo">
+          <span class="node-order">01</span>
+          <span>
+            <span class="node-title">Nome do Node</span>
+            <span class="node-meta"><code>avancado/01-node-exemplo</code><code>01-node-exemplo</code></span>
+          </span>
+        </a>
       </div>
     </section>
 
-    <section data-level="basico" data-node-id="basico/01-node-exemplo" data-node-slug="01-node-exemplo">
+    <section id="basico-01-node-exemplo" data-level="basico" data-node-id="basico/01-node-exemplo" data-node-slug="01-node-exemplo">
       <h2>Node 01 - Nome do Node</h2>
       <p><strong>Level:</strong> <code>basico</code></p>
       <p><strong>Node ID:</strong> <code>basico/01-node-exemplo</code></p>

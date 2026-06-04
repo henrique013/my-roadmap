@@ -42,6 +42,8 @@ class ShapeParser(HTMLParser):
         self.has_h1 = False
         self.level_sections: set[str] = set()
         self.node_ids: list[str] = []
+        self.node_sections: list[dict[str, str]] = []
+        self.hrefs: list[str] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         tag = tag.lower()
@@ -59,6 +61,10 @@ class ShapeParser(HTMLParser):
             self.has_title = True
         elif tag == "h1":
             self.has_h1 = True
+        elif tag == "a":
+            href = attrs_map.get("href")
+            if href:
+                self.hrefs.append(href)
         if tag in {"section", "article", "div"}:
             level = (attrs_map.get("data-level") or "").lower()
             node_id = attrs_map.get("data-node-id")
@@ -66,6 +72,31 @@ class ShapeParser(HTMLParser):
                 self.level_sections.add(level)
             if node_id:
                 self.node_ids.append(node_id)
+                self.node_sections.append(
+                    {
+                        "id": attrs_map.get("id") or "",
+                        "level": level,
+                        "node_id": node_id,
+                        "slug": attrs_map.get("data-node-slug") or "",
+                    }
+                )
+
+
+def strip_tags(html_fragment: str) -> str:
+    return re.sub(r"(?is)<[^>]+>", " ", html_fragment)
+
+
+def numeric_only_flow_step_failures(html_text: str) -> list[str]:
+    failures: list[str] = []
+    flow_re = re.compile(
+        r'(?is)<(?P<tag>div|section|nav)\b(?P<attrs>[^>]*)class="[^"]*\bflow-steps\b[^"]*"[^>]*>(?P<body>.*?)</(?P=tag)>'
+    )
+    for match in flow_re.finditer(html_text):
+        text = strip_tags(match.group("body"))
+        tokens = re.findall(r"\S+", text)
+        if tokens and all(re.fullmatch(r"\d{1,2}", token) for token in tokens):
+            failures.append("flow-steps numérico-only detectado na lista de nodes")
+    return failures
 
 
 def parse_args() -> argparse.Namespace:
@@ -107,6 +138,17 @@ def collect_failures(html_text: str) -> list[str]:
         failures.append(f"seções data-level ausentes: {', '.join(sorted(missing_levels))}")
     if not parser.node_ids:
         failures.append("nenhum data-node-id de node detectado")
+    for node in parser.node_sections:
+        node_id = node["node_id"]
+        level = node["level"] or (node_id.split("/", 1)[0] if "/" in node_id else "")
+        slug = node["slug"] or (node_id.split("/", 1)[1] if "/" in node_id else "")
+        expected_id = f"{level}-{slug}" if level and slug else ""
+        if not expected_id or node["id"] != expected_id:
+            failures.append(f"seção de node sem id estável esperado: {node_id}")
+        if expected_id and f"#{expected_id}" not in parser.hrefs:
+            failures.append(f"lista resumida sem link interno para node: {node_id}")
+
+    failures.extend(numeric_only_flow_step_failures(html_text))
 
     for term in PROHIBITED_TERMS:
         if term in lower_text:

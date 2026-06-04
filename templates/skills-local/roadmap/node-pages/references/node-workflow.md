@@ -306,6 +306,7 @@ O HTML deve ter:
 - `<!doctype html>`, `html lang="pt-BR"`, `meta charset="utf-8"` e viewport;
 - CSS embutido;
 - título adequado ao node;
+- link de retorno para `../../roadmap.html`;
 - referências comentadas ao fim;
 - profundidade técnica, progressão e rastreabilidade.
 
@@ -403,6 +404,12 @@ Antes de responder, verifique:
 - a incrementalidade foi respeitada;
 - `research-dump.md` existe, não está vazio e foi criado antes do HTML;
 - `node.html` existe e não está vazio;
+- `node.html` contém um link de retorno para `../../roadmap.html`;
+- depois que `node.html` passar nas validações mecânicas e qualitativas, o
+  `roadmap.html` pai contém um link relativo para
+  `<level>/<node-slug>/node.html` no item do node atual;
+- o `roadmap.html` pai não contém links para `node.html` de nodes ainda
+  inexistentes;
 - `.editorial/` existe dentro da pasta do node atual;
 - `.editorial/concept-ledger.md` existe, não está vazio e foi criado depois do
   dump;
@@ -473,3 +480,23 @@ guardrails semânticos até ponto fixo.
 
 Se algum item falhar, corrija. Se não puder corrigir sem quebrar a regra de
 incrementalidade ou identificação, aborte.
+
+## 11. Atualização do Roadmap Pai
+
+Depois que o `node.html` do node atual passar por todos os guardrails, atualize
+o `roadmap.html` localizado na raiz do roadmap.
+
+O link deve ser relativo ao `roadmap.html`:
+
+```text
+<level>/<node-slug>/node.html
+```
+
+Adicione esse link somente para o node atual e somente depois que o arquivo
+existir e estiver validado. Não crie links para nodes planejados cujo
+`node.html` ainda não exista.
+
+Ao revisar o `roadmap.html`, preserve os links internos do índice para as
+âncoras de seção, como `#basico-01-exemplo`, e acrescente o link profundo do
+node como navegação complementar do mesmo item. Não altere o contrato de nodes
+que não fazem parte do pedido atual.

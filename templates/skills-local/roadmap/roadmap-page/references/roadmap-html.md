@@ -19,17 +19,37 @@ O HTML deve conter:
 - premissas e limites;
 - mapa tri-level;
 - seções para `basico`, `intermediario` e `avancado`;
-- lista resumida dos nodes por nível;
+- lista resumida navegável dos nodes por nível;
 - matriz anti-repetição global;
 - seções completas dos nodes agrupadas por nível;
 - checklist final de cobertura;
 - referências consolidadas.
 
 Cada seção de nível deve ter `data-level` com valor `basico`,
-`intermediario` ou `avancado`. Cada seção completa de node deve ter:
+`intermediario` ou `avancado`.
+
+A lista resumida de nodes por nível deve funcionar como índice humano. Cada
+item deve expor:
+
+- ordem local;
+- label do node;
+- `node_id`;
+- slug;
+- link interno para a seção completa do node no próprio `roadmap.html`.
+
+Se o arquivo `<level>/<node-slug>/node.html` já existir, o mesmo item também
+deve expor um link relativo para essa página profunda. Se o arquivo ainda não
+existir, não crie link quebrado para ele; deixe o node claramente como planejado
+ou pendente.
+
+Não use um bloco apenas numérico, como `01`, `02`, `03`, para representar a
+lista resumida dos nodes.
+
+Cada seção completa de node deve ter `id` estável derivado de
+`<level>-<slug>` e também:
 
 ```html
-<section data-level="intermediario" data-node-id="intermediario/07-rendering-behavior">
+<section id="intermediario-07-rendering-behavior" data-level="intermediario" data-node-id="intermediario/07-rendering-behavior" data-node-slug="07-rendering-behavior">
 ```
 
 O `data-node-id` é a identidade mecânica usada por `node-pages` e deve ser
@@ -67,6 +87,9 @@ Para isso, a identidade humana (`label`, `slug`) e a identidade mecânica
 - Não crie `prompt.md`.
 - Não gere laboratório, exercício, hands-on, desafio prático ou projeto final.
 - Não transforme comandos em roteiro de execução.
+- Não use `flow-steps` ou qualquer componente equivalente como lista resumida
+  de nodes quando os itens expõem apenas números sem label, `node_id`, slug e
+  link interno.
 - Não use texto de corpo com largura menor que a largura útil sem justificativa
   visual explícita.
 - Não use `<pre>` como atalho para mapa, fluxo, sequência, linha do tempo,
@@ -89,6 +112,8 @@ O HTML e o JSON devem concordar sobre:
 - níveis presentes;
 - ordem local dos nodes em cada nível;
 - `node_id`, `level`, slug e label de cada node;
+- âncora interna estável de cada seção completa de node;
+- links relativos para `node.html` apenas quando o arquivo existir;
 - conceitos introduzidos;
 - escopo positivo e negativo;
 - referências por node;

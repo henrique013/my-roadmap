@@ -30,18 +30,25 @@ class RoadmapHTMLParser(HTMLParser):
         self.level_sections: set[str] = set()
         self.node_ids: list[str] = []
         self.node_attrs: list[dict[str, str]] = []
+        self.hrefs: list[str] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         tag = tag.lower()
+        attrs_map = {name.lower(): value or "" for name, value in attrs if name}
+        if tag == "a":
+            href = attrs_map.get("href")
+            if href:
+                self.hrefs.append(href)
+            return
         if tag not in {"section", "article", "div"}:
             return
-        attrs_map = {name.lower(): value or "" for name, value in attrs if name}
         level = attrs_map.get("data-level")
         node_id = attrs_map.get("data-node-id")
         if node_id:
             self.node_ids.append(node_id)
             self.node_attrs.append(
                 {
+                    "id": attrs_map.get("id", ""),
                     "node_id": node_id,
                     "level": level or "",
                     "slug": attrs_map.get("data-node-slug", ""),
@@ -214,6 +221,14 @@ def node_id_from(level: str, slug: str) -> str:
     return f"{level}/{slug}"
 
 
+def expected_section_id(level: str, slug: str) -> str:
+    return f"{level}-{slug}"
+
+
+def expected_node_href(level: str, slug: str) -> str:
+    return f"{level}/{slug}/node.html"
+
+
 def validate_levels_and_nodes(contract: dict[str, Any], source_ids: set[str]) -> tuple[list[str], list[str]]:
     failures: list[str] = []
     levels = level_entries(contract)
@@ -347,6 +362,58 @@ def validate_level_aware_references(contract: dict[str, Any], node_ids: set[str]
     return failures
 
 
+def validate_html_navigation(
+    roadmap_dir: Path,
+    contract: dict[str, Any],
+    html_contract: RoadmapHTMLParser,
+) -> list[str]:
+    failures: list[str] = []
+    hrefs = set(html_contract.hrefs)
+    nodes_by_id = {
+        str(node.get("node_id") or ""): node
+        for node in flatten_nodes(contract)
+        if isinstance(node.get("node_id"), str)
+    }
+
+    attrs_by_id = {attrs["node_id"]: attrs for attrs in html_contract.node_attrs}
+    for node_id, node in nodes_by_id.items():
+        level = str(node.get("level") or "")
+        slug = str(node.get("slug") or "")
+        anchor = expected_section_id(level, slug)
+        attrs = attrs_by_id.get(node_id)
+        if not attrs:
+            failures.append(f"HTML sem seção completa para node: {node_id}")
+            continue
+        if attrs.get("id") != anchor:
+            failures.append(f"seção de {node_id} sem id estável esperado: {anchor}")
+        if f"#{anchor}" not in hrefs:
+            failures.append(f"lista resumida sem link interno para node: {node_id}")
+
+        node_href = expected_node_href(level, slug)
+        node_html = roadmap_dir / node_href
+        if node_html.exists() and node_href not in hrefs:
+            failures.append(f"node.html existente sem link no roadmap: {node_href}")
+        if not node_html.exists() and node_href in hrefs:
+            failures.append(f"roadmap contém link para node.html inexistente: {node_href}")
+
+    for href in hrefs:
+        if href.endswith("/node.html"):
+            target = (roadmap_dir / href).resolve()
+            try:
+                target.relative_to(roadmap_dir.resolve())
+            except ValueError:
+                message = f"link para node.html fora do roadmap: {href}"
+                if message not in failures:
+                    failures.append(message)
+                continue
+            if not target.exists():
+                message = f"roadmap contém link para node.html inexistente: {href}"
+                if message not in failures:
+                    failures.append(message)
+
+    return failures
+
+
 def validate(args: argparse.Namespace) -> list[str]:
     failures: list[str] = []
     roadmap_dir = Path(args.roadmap_dir)
@@ -427,6 +494,7 @@ def validate(args: argparse.Namespace) -> list[str]:
                     failures.append(f"HTML tem data-level incompatível com data-node-id: {node_id}")
         else:
             failures.append("nenhum data-node-id de node encontrado no HTML")
+        failures.extend(validate_html_navigation(roadmap_dir, contract, html_contract))
 
     pipeline_dir = roadmap_dir / ".roadmap" / "pipeline"
     expected_audits = (

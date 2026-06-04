@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any
 
@@ -15,6 +16,20 @@ from extract_visible_text import extract_visible_text, render_markdown
 
 LEVELS = ("basico", "intermediario", "avancado")
 NODE_SLUG_RE = re.compile(r"^\d{2}-[a-z0-9][a-z0-9-]*$")
+
+
+class LinkParser(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.hrefs: list[str] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag.lower() != "a":
+            return
+        attrs_map = {name.lower(): value or "" for name, value in attrs if name}
+        href = attrs_map.get("href")
+        if href:
+            self.hrefs.append(href)
 
 
 def parse_args() -> argparse.Namespace:
@@ -159,6 +174,27 @@ def file_contains_any(path: Path, needles: tuple[str, ...]) -> bool:
         return False
     text = path.read_text(encoding="utf-8").lower()
     return any(needle.lower() in text for needle in needles)
+
+
+def collect_hrefs(html_text: str) -> list[str]:
+    parser = LinkParser()
+    parser.feed(html_text)
+    parser.close()
+    return parser.hrefs
+
+
+def validate_parent_roadmap_link(
+    roadmap_html: Path,
+    level: str,
+    node_slug: str,
+    failures: list[str],
+) -> None:
+    if not is_non_empty_file(roadmap_html):
+        return
+    expected_href = f"{level}/{node_slug}/node.html"
+    hrefs = collect_hrefs(roadmap_html.read_text(encoding="utf-8"))
+    if expected_href not in hrefs:
+        failures.append(f"roadmap.html não linka o node atual: {expected_href}")
 
 
 def file_indicates_required_rewrite(path: Path) -> bool:
@@ -326,6 +362,7 @@ def validate(args: argparse.Namespace) -> list[str]:
     if is_non_empty_file(node_html):
         html_failures = collect_html_shape_failures(node_html.read_text(encoding="utf-8"))
         failures.extend(f"HTML: {failure}" for failure in html_failures)
+        validate_parent_roadmap_link(roadmap_html, resolved_level, node_slug, failures)
 
     return failures
 
