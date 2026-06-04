@@ -21,7 +21,10 @@ PROHIBITED_TERMS = (
 )
 REQUIRED_TEXT_GROUPS = (
     ("visão geral", "visao geral"),
-    ("corrente de nodes",),
+    ("mapa tri-level", "mapa dos níveis", "mapa dos niveis"),
+    ("básico", "basico"),
+    ("intermediário", "intermediario"),
+    ("avançado", "avancado"),
     ("matriz anti-repetição", "matriz anti-repeticao"),
     ("checklist final",),
     ("referências consolidadas", "referencias consolidadas"),
@@ -37,6 +40,8 @@ class ShapeParser(HTMLParser):
         self.has_style = False
         self.has_title = False
         self.has_h1 = False
+        self.level_sections: set[str] = set()
+        self.node_ids: list[str] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         tag = tag.lower()
@@ -54,6 +59,13 @@ class ShapeParser(HTMLParser):
             self.has_title = True
         elif tag == "h1":
             self.has_h1 = True
+        if tag in {"section", "article", "div"}:
+            level = (attrs_map.get("data-level") or "").lower()
+            node_id = attrs_map.get("data-node-id")
+            if level in {"basico", "intermediario", "avancado"} and not node_id:
+                self.level_sections.add(level)
+            if node_id:
+                self.node_ids.append(node_id)
 
 
 def parse_args() -> argparse.Namespace:
@@ -90,6 +102,11 @@ def collect_failures(html_text: str) -> list[str]:
         failures.append("<h1> ausente")
     if "```" in html_text:
         failures.append("Markdown cru detectado: fence ```")
+    missing_levels = {"basico", "intermediario", "avancado"} - parser.level_sections
+    if missing_levels:
+        failures.append(f"seções data-level ausentes: {', '.join(sorted(missing_levels))}")
+    if not parser.node_ids:
+        failures.append("nenhum data-node-id de node detectado")
 
     for term in PROHIBITED_TERMS:
         if term in lower_text:

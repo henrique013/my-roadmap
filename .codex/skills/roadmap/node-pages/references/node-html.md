@@ -128,9 +128,10 @@ Isso vale para:
 - referências;
 - qualquer texto dentro de componente visual.
 
-O que já foi estabelecido por nodes anteriores pode ser usado como base. O que o
-roadmap diz que este node introduz pela primeira vez precisa ser preparado antes
-de ser nomeado.
+O que já foi estabelecido por nodes anteriores do mesmo nível, ou por níveis
+anteriores declarados como pré-requisito no contrato, pode ser usado como base.
+O que o roadmap diz que este node introduz pela primeira vez precisa ser
+preparado antes de ser nomeado.
 
 Use `.editorial/concept-ledger.md` para decidir se um conceito pode aparecer,
 qual explicação mínima precisa vir antes e quais aliases ou paráfrases também

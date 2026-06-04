@@ -33,7 +33,7 @@ Cada fonte usada deve registrar:
 | `url` | link real e clicável |
 | `type` | tipo da fonte |
 | `reason` | por que a fonte entrou |
-| `supports_nodes` | nodes ou tópicos sustentados |
+| `supports_nodes` | `node_id` ou tópicos sustentados; em roadmap tri-level, use `level/NN-slug` |
 | `limits` | limite, versão ou ressalva relevante |
 
 No `roadmap-page`, as fontes aparecem no HTML e em

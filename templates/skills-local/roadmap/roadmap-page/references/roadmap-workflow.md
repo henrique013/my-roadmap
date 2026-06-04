@@ -28,6 +28,16 @@ Saida obrigatoria:
 
 - `.tmp/roadmaps/<slug>/roadmap.html`.
 
+Esse arquivo deve ser um unico roadmap HTML com tres niveis coordenados:
+
+- `basico`: fundamentos, vocabulario indispensavel e modelos mentais;
+- `intermediario`: arquitetura, relacoes, decisoes e trade-offs;
+- `avancado`: limites, casos de borda, falhas, comportamento avancado e
+  criterios de especialista.
+
+Cada nivel pode ter no maximo 20 nodes. O limite e teto, nao meta; nao preencha
+nodes para chegar a 20 quando o tema pedir menos.
+
 Saida interna obrigatoria:
 
 - `.tmp/roadmaps/<slug>/.roadmap/roadmap-contract.json`.
@@ -54,7 +64,8 @@ Pesquisa usada; referencias estao dentro do HTML.
 - [ ] O tema foi identificado.
 - [ ] Contexto previo, se fornecido, foi capturado.
 - [ ] Arquivos nao foram criados com entrada incompleta.
-- [ ] A saida planejada e somente `roadmap.html`.
+- [ ] A saida planejada e somente `roadmap.html` com tres niveis coordenados.
+- [ ] Nenhum nivel foi planejado com mais de 20 nodes.
 - [ ] O pedido pratico, se existir, foi convertido para base teorica.
 
 ## 2. Slug e Pasta de Trabalho
@@ -220,11 +231,27 @@ Classifique mentalmente cada topico como:
 - unir;
 - dividir;
 - remover;
-- reservar para node futuro;
+- reservar para outro nivel;
+- reservar para node futuro do mesmo nivel;
 - fora de escopo.
 
 Um topico vira node somente se introduz camada conceitual nova, muda o modelo
 mental, e pre-requisito importante ou exige criterio de dominio proprio.
+
+Depois do inventario, distribua os topicos entre os tres niveis antes de fechar
+qualquer lista local de nodes:
+
+- `basico`: conceitos que criam a base comum, linguagem, partes essenciais,
+  modelos mentais e criterios iniciais de leitura do tema;
+- `intermediario`: relacoes entre partes, arquitetura, fluxo, composicao,
+  decisoes, trade-offs e efeitos de uma escolha sobre outra;
+- `avancado`: limites do modelo, excecoes, falhas, diagnostico conceitual,
+  comportamento interno sofisticado, criterios de especialista e fronteiras de
+  confianca.
+
+Planeje os tres niveis no mesmo contexto de pesquisa e curadoria. Nao finalize
+o `basico` isoladamente se isso puder roubar espaco ou repetir assunto que
+pertence melhor a `intermediario` ou `avancado`.
 
 ### Checklist desta secao
 
@@ -232,24 +259,35 @@ mental, e pre-requisito importante ou exige criterio de dominio proprio.
 - [ ] Topicos secundarios foram removidos ou unidos.
 - [ ] Topicos grandes demais foram divididos.
 - [ ] Cada node final tem justificativa semantica.
+- [ ] Cada topico mantido foi alocado em exatamente um nivel principal.
+- [ ] Temas pequenos nao foram inflados para ocupar todos os 60 nodes possiveis.
 - [ ] A curadoria reduziu repeticao e inflacao.
 - [ ] Topicos fora de escopo nao viraram nodes.
 
-## 7. Corrente de Nodes
+## 7. Niveis e Correntes de Nodes
 
-Ordene os nodes por dependencia de aprendizado:
+Crie tres correntes locais de nodes, uma por nivel:
 
 ```text
-Node 01 -> Node 02 -> Node 03 -> ... -> Node N
+basico:        Node 01 -> Node 02 -> ... -> Node N
+intermediario: Node 01 -> Node 02 -> ... -> Node N
+avancado:      Node 01 -> Node 02 -> ... -> Node N
 ```
 
-Cada node deve assumir que os anteriores ja foram estudados.
+Cada node deve assumir que os nodes anteriores do mesmo nivel ja foram
+estudados. `intermediario` pode assumir a base conceitual do `basico` como
+pre-requisito de nivel, e `avancado` pode assumir a base dos dois niveis
+anteriores. Isso nao autoriza repetir definicoes: use o que veio antes como
+pre-requisito herdado.
 
 Cada node precisa de:
 
+- `level`: `basico`, `intermediario` ou `avancado`;
+- `node_id`: identificador global no formato `<level>/<slug>`;
 - `label`: titulo humano;
 - `slug`: identificador estavel no formato `NN-slug`;
-- papel na corrente;
+- `order`: posicao numerica local dentro do nivel;
+- papel na corrente local e no conjunto tri-level;
 - pre-requisitos herdados;
 - conceito novo introduzido;
 - fronteira do que cobre;
@@ -260,36 +298,46 @@ Regras do slug do node:
 - dois digitos;
 - hifen;
 - slug sem acentos e em minusculas;
-- sem duplicidade;
-- ordem numerica igual a ordem da corrente.
+- sem duplicidade dentro do mesmo nivel;
+- ordem numerica igual a ordem da corrente local.
+
+O mesmo `slug` pode existir em niveis diferentes apenas quando isso for
+semantica e mecanicamente inevitavel; nesse caso, `node_id` continua distinguindo
+os nodes. Prefira slugs localmente claros para reduzir ambiguidade humana.
 
 ### Checklist desta secao
 
-- [ ] A ordem dos nodes segue dependencia real.
+- [ ] Os tres niveis existem no plano.
+- [ ] Cada nivel tem no maximo 20 nodes.
+- [ ] A ordem dos nodes segue dependencia real dentro de cada nivel.
 - [ ] Todo node tem label.
 - [ ] Todo node tem slug `NN-slug`.
-- [ ] Nao ha slug duplicado.
-- [ ] Cada transicao prepara a proxima.
+- [ ] Todo node tem `level` e `node_id`.
+- [ ] Nao ha `node_id` duplicado.
+- [ ] Cada transicao local prepara a proxima.
 - [ ] Nenhum node exige conceito ainda nao introduzido sem pre-requisito declarado.
 
 ## 8. Anti-Repeticao
 
 O roadmap deve tratar repeticao como defeito.
 
-Antes de escrever os nodes, monte uma matriz anti-repeticao com:
+Antes de finalizar as listas locais de nodes, monte uma matriz anti-repeticao
+global com:
 
 - conceito;
-- node de primeira introducao;
+- `node_id` de primeira introducao;
 - retomadas permitidas;
 - retomadas proibidas;
 - motivo da fronteira.
 
 Inclua essa matriz no HTML.
 
-Em nodes posteriores, conceitos anteriores podem aparecer somente como:
+Em nodes posteriores no mesmo nivel ou em outro nivel, conceitos anteriores
+podem aparecer somente como:
 
 - pre-requisito herdado;
 - lembrete curto;
+- contraste;
 - nova camada explicitamente justificada.
 
 Nao redefina conceitos ja ensinados.
@@ -298,10 +346,16 @@ Nao use o mesmo exemplo conceitual em varios nodes.
 
 Nao repita a mesma referencia em todos os nodes sem motivo local.
 
+Use a matriz global para decidir fronteiras antes de consolidar cada nivel. Em
+seguida, valide a anti-repeticao local de cada nivel. A matriz global evita
+sobreposicao entre `basico`, `intermediario` e `avancado`; a revisao local
+evita repeticao dentro de um nivel.
+
 ### Checklist desta secao
 
-- [ ] A matriz anti-repeticao foi criada antes da escrita final.
-- [ ] Cada conceito central tem node de introducao unico.
+- [ ] A matriz anti-repeticao global foi criada antes das listas finais.
+- [ ] Cada conceito central tem `node_id` de introducao unico.
+- [ ] As fronteiras entre niveis foram definidas antes da escrita final.
 - [ ] Retomadas posteriores sao lembretes ou novas camadas justificadas.
 - [ ] Exemplos repetidos foram removidos.
 - [ ] Referencias repetidas tem motivo local.
@@ -314,9 +368,12 @@ depois.
 
 Cada secao de node no HTML deve conter:
 
+- level;
+- node_id;
 - label;
 - slug;
-- papel do node na corrente;
+- order local;
+- papel do node na corrente local e no conjunto tri-level;
 - pre-requisitos herdados;
 - o que introduz pela primeira vez;
 - o que o proximo agente deve cobrir;
@@ -342,6 +399,7 @@ Nunca escreva sequencia de execucao.
 ### Checklist desta secao
 
 - [ ] Todo node contem todos os blocos obrigatorios.
+- [ ] Todo node declara `level`, `node_id`, `order`, label e slug.
 - [ ] O bloco "deve cobrir" e especifico e util para documentacao futura.
 - [ ] O bloco "nao deve cobrir" protege fronteira e anti-repeticao.
 - [ ] Perguntas sao concretas, nao genericas.
@@ -359,10 +417,10 @@ O HTML final deve ser autocontido e conter:
 - compreensao final esperada;
 - data da pesquisa;
 - premissas e limites;
-- mapa da corrente;
-- lista resumida dos nodes com label e slug;
-- matriz anti-repeticao;
-- secoes completas dos nodes;
+- mapa tri-level;
+- lista resumida dos nodes por nivel com label, slug e `node_id`;
+- matriz anti-repeticao global;
+- secoes completas dos nodes agrupadas por nivel;
 - checklist final de cobertura;
 - referencias consolidadas.
 
@@ -380,7 +438,8 @@ Nao escreva secoes chamadas `Laboratorio`, `Exercicio`, `Projeto final`,
 
 - [ ] O HTML contem todas as secoes obrigatorias.
 - [ ] O HTML e autocontido e tem CSS embutido.
-- [ ] O mapa, lista de nodes e matriz sao coerentes entre si.
+- [ ] O HTML contem secoes para `basico`, `intermediario` e `avancado`.
+- [ ] O mapa, lista de nodes por nivel e matriz global sao coerentes entre si.
 - [ ] Nao ha Markdown cru.
 - [ ] Nao ha secoes praticas proibidas.
 - [ ] Referencias consolidadas aparecem no final.
@@ -394,10 +453,14 @@ Antes de responder, verifique:
 - `.roadmap/roadmap-contract.json` passa no schema versionado;
 - o arquivo nao esta vazio;
 - o HTML contem estrutura obrigatoria;
-- o HTML e o contrato JSON concordam sobre slugs e ordem dos nodes;
+- o HTML contem os tres niveis;
+- nenhum nivel tem mais de 20 nodes;
+- o HTML e o contrato JSON concordam sobre niveis, `node_id`, slugs e ordem
+  local dos nodes;
 - todos os nodes tem `NN-slug`;
+- todos os nodes tem `node_id` no formato `<level>/<slug>`;
 - cada node tem referencias;
-- matriz anti-repeticao existe;
+- matriz anti-repeticao global existe;
 - `.roadmap/pipeline/01-html-shape/html-shape-audit.md` registra passagem;
 - `.roadmap/pipeline/02-contract-schema/contract-schema-audit.md` registra passagem;
 - `.roadmap/pipeline/03-contract-consistency/contract-consistency-audit.md` registra passagem;

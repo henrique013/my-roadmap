@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "roadmap-contract.schema.json",
-  "title": "Roadmap Contract",
+  "title": "Tri-Level Roadmap Contract",
   "type": "object",
   "required": [
     "schema_version",
@@ -9,11 +9,11 @@
     "theme",
     "sources",
     "anti_repetition",
-    "nodes"
+    "levels"
   ],
   "properties": {
     "schema_version": {
-      "const": "1.0"
+      "const": "2.0"
     },
     "roadmap_slug": {
       "type": "string",
@@ -48,194 +48,272 @@
       "type": "array",
       "minItems": 1,
       "items": {
-        "type": "object",
-        "required": [
-          "id",
-          "url",
-          "reason"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "pattern": "^F[0-9]+$"
-          },
-          "url": {
-            "type": "string",
-            "minLength": 1
-          },
-          "type": {
-            "type": "string"
-          },
-          "reason": {
-            "type": "string",
-            "minLength": 1
-          },
-          "supports_nodes": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "pattern": "^[0-9]{2}-[a-z0-9][a-z0-9-]*$"
-            }
-          },
-          "limits": {
-            "type": "string"
-          }
-        }
+        "$ref": "#/$defs/source"
       }
     },
     "anti_repetition": {
       "type": "array",
       "minItems": 1,
       "items": {
-        "type": "object",
-        "required": [
-          "concept",
-          "first_introduction_node",
-          "allowed_reuses",
-          "blocked_reuses",
-          "boundary_reason"
-        ],
-        "properties": {
-          "concept": {
-            "type": "string",
-            "minLength": 1
-          },
-          "first_introduction_node": {
-            "type": "string",
-            "pattern": "^[0-9]{2}-[a-z0-9][a-z0-9-]*$"
-          },
-          "allowed_reuses": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "blocked_reuses": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "boundary_reason": {
-            "type": "string",
-            "minLength": 1
+        "$ref": "#/$defs/antiRepetitionEntry"
+      }
+    },
+    "levels": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "$ref": "#/$defs/level"
+      }
+    }
+  },
+  "$defs": {
+    "levelName": {
+      "type": "string",
+      "enum": [
+        "basico",
+        "intermediario",
+        "avancado"
+      ]
+    },
+    "nodeSlug": {
+      "type": "string",
+      "pattern": "^[0-9]{2}-[a-z0-9][a-z0-9-]*$"
+    },
+    "nodeId": {
+      "type": "string",
+      "pattern": "^(basico|intermediario|avancado)/[0-9]{2}-[a-z0-9][a-z0-9-]*$"
+    },
+    "sourceId": {
+      "type": "string",
+      "pattern": "^F[0-9]+$"
+    },
+    "stringArray": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "id",
+        "url",
+        "reason"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/sourceId"
+        },
+        "url": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "supports_nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nodeId"
+          }
+        },
+        "limits": {
+          "type": "string"
+        }
+      }
+    },
+    "antiReuse": {
+      "type": "object",
+      "required": [
+        "node_id",
+        "reason"
+      ],
+      "properties": {
+        "node_id": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "reuse": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "antiRepetitionEntry": {
+      "type": "object",
+      "required": [
+        "concept",
+        "first_introduction_node",
+        "allowed_reuses",
+        "blocked_reuses",
+        "boundary_reason"
+      ],
+      "properties": {
+        "concept": {
+          "type": "string",
+          "minLength": 1
+        },
+        "first_introduction_node": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "allowed_reuses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/antiReuse"
+          }
+        },
+        "blocked_reuses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/antiReuse"
+          }
+        },
+        "boundary_reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "nodeReference": {
+      "type": "object",
+      "required": [
+        "source_id",
+        "url",
+        "reason"
+      ],
+      "properties": {
+        "source_id": {
+          "$ref": "#/$defs/sourceId"
+        },
+        "url": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "node": {
+      "type": "object",
+      "required": [
+        "node_id",
+        "level",
+        "order",
+        "slug",
+        "label",
+        "role_in_chain",
+        "must_cover",
+        "must_not_cover",
+        "questions",
+        "references"
+      ],
+      "properties": {
+        "node_id": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "level": {
+          "$ref": "#/$defs/levelName"
+        },
+        "order": {
+          "type": "integer"
+        },
+        "slug": {
+          "$ref": "#/$defs/nodeSlug"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role_in_chain": {
+          "type": "string",
+          "minLength": 1
+        },
+        "inherited_prerequisites": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "first_introduces": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "must_cover": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "must_not_cover": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "questions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "conceptual_vocabulary": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "allowed_examples_or_diagrams": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "pitfalls": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "mastery_criterion": {
+          "type": "string"
+        },
+        "handoff_to_next": {
+          "type": "string"
+        },
+        "references": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/nodeReference"
           }
         }
       }
     },
-    "nodes": {
-      "type": "array",
-      "minItems": 1,
-      "items": {
-        "type": "object",
-        "required": [
-          "order",
-          "slug",
-          "label",
-          "role_in_chain",
-          "must_cover",
-          "must_not_cover",
-          "questions",
-          "references"
-        ],
-        "properties": {
-          "order": {
-            "type": "integer"
-          },
-          "slug": {
-            "type": "string",
-            "pattern": "^[0-9]{2}-[a-z0-9][a-z0-9-]*$"
-          },
-          "label": {
-            "type": "string",
-            "minLength": 1
-          },
-          "role_in_chain": {
-            "type": "string",
-            "minLength": 1
-          },
-          "inherited_prerequisites": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "first_introduces": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "must_cover": {
-            "type": "array",
-            "minItems": 1,
-            "items": {
-              "type": "string"
-            }
-          },
-          "must_not_cover": {
-            "type": "array",
-            "minItems": 1,
-            "items": {
-              "type": "string"
-            }
-          },
-          "questions": {
-            "type": "array",
-            "minItems": 1,
-            "items": {
-              "type": "string"
-            }
-          },
-          "conceptual_vocabulary": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "allowed_examples_or_diagrams": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "pitfalls": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "mastery_criterion": {
-            "type": "string"
-          },
-          "handoff_to_next": {
-            "type": "string"
-          },
-          "references": {
-            "type": "array",
-            "minItems": 1,
-            "items": {
-              "type": "object",
-              "required": [
-                "source_id",
-                "url",
-                "reason"
-              ],
-              "properties": {
-                "source_id": {
-                  "type": "string",
-                  "pattern": "^F[0-9]+$"
-                },
-                "url": {
-                  "type": "string",
-                  "minLength": 1
-                },
-                "reason": {
-                  "type": "string",
-                  "minLength": 1
-                }
-              }
-            }
+    "level": {
+      "type": "object",
+      "required": [
+        "level",
+        "label",
+        "semantics",
+        "nodes"
+      ],
+      "properties": {
+        "level": {
+          "$ref": "#/$defs/levelName"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "semantics": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nodes": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/$defs/node"
           }
         }
       }

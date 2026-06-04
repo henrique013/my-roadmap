@@ -54,10 +54,12 @@ Inclua:
 
 - roadmap de origem;
 - caminho do `roadmap.html`;
+- nível do node;
+- `node_id`;
 - slug do node;
 - label do node;
-- posição numérica;
-- node anterior e próximo, quando existirem;
+- posição numérica local no nível;
+- node anterior e próximo do mesmo nível, quando existirem;
 - data da pesquisa;
 - observações temporais relevantes, como versões, datas de documentação ou
   mudanças recentes.
@@ -67,6 +69,7 @@ Inclua:
 Registre, com fidelidade ao roadmap:
 
 - papel do node na corrente;
+- papel do nível no roadmap tri-level;
 - pré-requisitos herdados;
 - o que o node introduz pela primeira vez;
 - o que deve cobrir;
@@ -88,6 +91,7 @@ Liste as regras do roadmap que afetam o node atual:
 
 - conteúdo já coberto;
 - conteúdo reservado a nodes futuros;
+- fronteiras entre níveis, referenciadas por `node_id` quando aplicável;
 - exemplos que não devem ser repetidos;
 - definições que podem ser tratadas como pré-requisito;
 - termos que ainda precisam ser introduzidos.
@@ -236,7 +240,7 @@ Separe:
 
 - o que este node explica;
 - o que apenas menciona como fronteira;
-- o que deve ficar para outro node;
+- o que deve ficar para outro node ou outro nível;
 - o que não pertence ao roadmap.
 
 Essa seção protege a incrementalidade. Ela não deve ser copiada como seção

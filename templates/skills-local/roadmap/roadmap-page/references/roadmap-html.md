@@ -17,20 +17,34 @@ O HTML deve conter:
 - compreensão final esperada;
 - data da pesquisa;
 - premissas e limites;
-- mapa da corrente;
-- lista resumida dos nodes;
-- matriz anti-repetição;
-- seções completas dos nodes;
+- mapa tri-level;
+- seções para `basico`, `intermediario` e `avancado`;
+- lista resumida dos nodes por nível;
+- matriz anti-repetição global;
+- seções completas dos nodes agrupadas por nível;
 - checklist final de cobertura;
 - referências consolidadas.
+
+Cada seção de nível deve ter `data-level` com valor `basico`,
+`intermediario` ou `avancado`. Cada seção completa de node deve ter:
+
+```html
+<section data-level="intermediario" data-node-id="intermediario/07-rendering-behavior">
+```
+
+O `data-node-id` é a identidade mecânica usada por `node-pages` e deve ser
+igual a `<level>/<slug>`.
 
 ## Seções de Node
 
 Cada seção de node deve expor:
 
+- level;
+- node_id;
 - label;
 - slug `NN-slug`;
-- papel na corrente;
+- order local do nível;
+- papel na corrente local e no conjunto tri-level;
 - pré-requisitos herdados;
 - o que introduz pela primeira vez;
 - o que deve cobrir;
@@ -44,6 +58,8 @@ Cada seção de node deve expor:
 - referências específicas.
 
 O HTML deve ajudar outro agente a gerar `node-pages` sem adivinhar escopo.
+Para isso, a identidade humana (`label`, `slug`) e a identidade mecânica
+(`level`, `node_id`) precisam aparecer no HTML e no JSON.
 
 ## Proibições
 
@@ -70,11 +86,12 @@ Quando ASCII for exceção, o bloco deve ter `data-ascii-exception="true"`,
 O HTML e o JSON devem concordar sobre:
 
 - slug do roadmap;
-- ordem dos nodes;
-- slug e label de cada node;
+- níveis presentes;
+- ordem local dos nodes em cada nível;
+- `node_id`, `level`, slug e label de cada node;
 - conceitos introduzidos;
 - escopo positivo e negativo;
 - referências por node;
-- matriz anti-repetição.
+- matriz anti-repetição global.
 
 Se houver divergência, corrija o HTML ou o JSON antes de responder.

@@ -20,6 +20,8 @@ qualidade visual renderizada.
 
 Parâmetro principal:
 
+- `level`: `basico`, `intermediario` ou `avancado`, obrigatório quando o slug
+  do node for ambíguo e inferível apenas quando houver um único candidato;
 - `node`: slug exato ou texto livre que identifique o node a ser criado.
 
 Use esta skill quando a pessoa pedir para criar, escrever, documentar,
@@ -32,8 +34,11 @@ Localize o `roadmap.html` a partir do contexto do pedido:
 - se houver mais de um roadmap plausível e nenhum estiver claro, aborte e diga
   que o roadmap precisa ser identificado.
 
-Identifique exatamente um node pelo slug ou por texto livre comparado com:
+Identifique exatamente um node pelo `level + node-slug`, por `node_id` ou por
+texto livre comparado com:
 
+- level;
+- node_id;
 - slug;
 - label;
 - título da seção;
@@ -42,30 +47,32 @@ Identifique exatamente um node pelo slug ou por texto livre comparado com:
 - vocabulário;
 - descrição de cobertura.
 
-Se não conseguir identificar exatamente um node, aborte. Não escolha por
-aproximação frágil.
+Se a pessoa informar apenas o slug e ele existir em um único nível, inferir o
+nível é permitido. Se o mesmo slug ou texto puder identificar nodes em mais de
+um nível, aborte e peça somente o nível ou um `node_id` inequívoco. Não escolha
+por aproximação frágil.
 
 Saídas obrigatórias, dentro da pasta do node:
 
 ```text
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/research-dump.md
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/node.html
+.tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/research-dump.md
+.tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/node.html
 ```
 
 Artefatos internos obrigatórios, dentro da pasta do node:
 
 ```text
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/concept-ledger.md
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/pipeline/01-visible-text/visible-text.md
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/pipeline/02-concept-introduction/concept-audit.md
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/pipeline/02-concept-introduction/revision-plan.md
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/pipeline/03-example-sufficiency/example-audit.md
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/pipeline/03-example-sufficiency/revision-plan.md
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/pipeline/04-visual-primitive-choice/primitive-audit.md
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/pipeline/04-visual-primitive-choice/revision-plan.md
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/pipeline/05-visual-render/visual-audit.md
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/pipeline/05-visual-render/revision-plan.md
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/pipeline/05-visual-render/render-checks.json
+.tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/.editorial/concept-ledger.md
+.tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/.editorial/pipeline/01-visible-text/visible-text.md
+.tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/.editorial/pipeline/02-concept-introduction/concept-audit.md
+.tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/.editorial/pipeline/02-concept-introduction/revision-plan.md
+.tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/.editorial/pipeline/03-example-sufficiency/example-audit.md
+.tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/.editorial/pipeline/03-example-sufficiency/revision-plan.md
+.tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/.editorial/pipeline/04-visual-primitive-choice/primitive-audit.md
+.tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/.editorial/pipeline/04-visual-primitive-choice/revision-plan.md
+.tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/.editorial/pipeline/05-visual-render/visual-audit.md
+.tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/.editorial/pipeline/05-visual-render/revision-plan.md
+.tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/.editorial/pipeline/05-visual-render/render-checks.json
 ```
 
 Esses artefatos são temporários e internos. Não cole o Markdown nem o HTML no
@@ -73,37 +80,38 @@ chat. Não gere logs fora de `.editorial/`. Evidências temporárias do
 Playwright, quando existirem, devem ficar somente em:
 
 ```text
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/pipeline/05-visual-render/playwright/
+.tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/.editorial/pipeline/05-visual-render/playwright/
 ```
 
 Resposta final curta:
 
 ```text
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/research-dump.md
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/node.html
+.tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/research-dump.md
+.tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/node.html
 Pesquisa profunda usada; referências estão no dump e no HTML.
 ```
 
 ## 2. Incrementalidade Obrigatória
 
-A documentação dos nodes deve ser criada em ordem.
+A documentação dos nodes deve ser criada em ordem dentro do nível selecionado.
 
-Se o node solicitado for o primeiro node, prossiga.
+Se o node solicitado for o primeiro node do nível, prossiga.
 
-Se o node solicitado não for o primeiro, o node imediatamente anterior deve já
-existir como documentação criada. Considere o node anterior existente somente se
-a pasta dele contiver:
+Se o node solicitado não for o primeiro do nível, o node imediatamente anterior
+daquele mesmo nível deve já existir como documentação criada. Considere o node
+anterior existente somente se a pasta dele contiver:
 
 - `research-dump.md` existente e não vazio;
 - `node.html` existente e não vazio.
 
 Se o node anterior não existir ou estiver incompleto, aborte imediatamente.
 
-Não pule nodes. Não crie o node 03 se o node 02 ainda não foi criado. Não crie
-o node 07 se o node 06 ainda não foi criado.
+Não pule nodes dentro do nível. Não crie o node 03 de `intermediario` se o node
+02 de `intermediario` ainda não foi criado. Nodes de outros níveis não
+satisfazem a incrementalidade local.
 
 Antes de escrever o node atual, leia os artefatos do node imediatamente anterior
-quando existirem. Use-os para:
+do mesmo nível quando existirem. Use-os para:
 
 - preservar continuidade;
 - tratar conteúdo anterior como pré-requisito herdado;
@@ -129,6 +137,9 @@ como autoridade acima da skill.
 
 Extraia do node solicitado:
 
+- level;
+- node_id;
+- order local;
 - slug;
 - label;
 - papel na corrente;
@@ -144,8 +155,9 @@ Extraia do node solicitado:
 - handoff;
 - referências específicas.
 
-Extraia também a matriz anti-repetição do roadmap e qualquer regra que afete o
-node atual.
+Extraia também a matriz anti-repetição global do roadmap e qualquer regra que
+afete o node atual. As fronteiras devem ser lidas por `node_id` quando
+apontarem para nodes específicos.
 
 O contrato do node é a fronteira da documentação. A pesquisa pode expandir
 profundidade, exemplos, fontes e explicações, mas não pode invadir o que o
@@ -156,12 +168,13 @@ roadmap reservou para outro node.
 Crie ou recrie somente a pasta do node atual:
 
 ```text
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/
+.tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/
 ```
 
 Antes de apagar uma pasta existente, valide que o caminho resolvido está dentro
-da pasta do roadmap, que o slug do node segue `NN-slug`, que não contém `..` e
-que o alvo não é a pasta do roadmap inteira.
+da pasta do nível, que o nível é `basico`, `intermediario` ou `avancado`, que o
+slug do node segue `NN-slug`, que não contém `..` e que o alvo não é a pasta do
+nível nem a pasta do roadmap inteira.
 
 Dentro da pasta do node, crie ou recrie também:
 
@@ -375,15 +388,18 @@ Não redefina conceitos já documentados em nodes anteriores. Não use o mesmo
 exemplo com outro nome. Não recopie seções do roadmap. Não avance para conteúdo
 reservado a nodes futuros.
 
-Se o node atual precisa aprofundar um conceito anterior, explique qual camada
-nova está sendo adicionada e por que ela pertence ao node atual.
+Se o node atual precisa aprofundar um conceito anterior do mesmo nível ou de
+outro nível, explique qual camada nova está sendo adicionada e por que ela
+pertence ao node atual.
 
 ## 10. Validação Final
 
 Antes de responder, verifique:
 
 - o roadmap foi identificado sem ambiguidade;
+- o nível foi identificado sem ambiguidade ou inferido por candidato único;
 - exatamente um node foi identificado;
+- o `node_id` corresponde a `<level>/<node-slug>`;
 - a incrementalidade foi respeitada;
 - `research-dump.md` existe, não está vazio e foi criado antes do HTML;
 - `node.html` existe e não está vazio;

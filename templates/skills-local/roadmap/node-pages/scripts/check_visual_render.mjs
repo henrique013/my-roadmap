@@ -7,6 +7,7 @@ import { pathToFileURL } from "node:url";
 import { chromium } from "playwright";
 
 const NODE_SLUG_RE = /^\d{2}-[a-z0-9][a-z0-9-]*$/;
+const LEVELS = new Set(["basico", "intermediario", "avancado"]);
 const VIEWPORTS = [
   { name: "desktop", width: 1280, height: 900, isMobile: false },
   { name: "mobile", width: 390, height: 844, isMobile: true },
@@ -15,7 +16,7 @@ const VIEWPORTS = [
 function usage() {
   return [
     "Uso:",
-    "  node check_visual_render.mjs --roadmap-dir <roadmap-dir> --node <node-slug>",
+    "  node check_visual_render.mjs --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>",
     "  node check_visual_render.mjs --html <node-dir>/node.html",
   ].join("\n");
 }
@@ -38,9 +39,9 @@ function parseArgs(argv) {
   }
 
   const hasHtml = Boolean(parsed.html);
-  const hasRoadmapNode = Boolean(parsed["roadmap-dir"] && parsed.node);
+  const hasRoadmapNode = Boolean(parsed["roadmap-dir"] && parsed.level && parsed.node);
   if (hasHtml === hasRoadmapNode) {
-    throw new Error("informe --html ou --roadmap-dir com --node");
+    throw new Error("informe --html ou --roadmap-dir com --level e --node");
   }
 
   return parsed;
@@ -59,6 +60,8 @@ function assertInside(child, parent, label) {
 
 function resolveTargets(args) {
   let roadmapDir;
+  let level;
+  let levelDir;
   let nodeSlug;
   let nodeDir;
   let htmlPath;
@@ -70,17 +73,24 @@ function resolveTargets(args) {
     }
     nodeDir = path.dirname(htmlPath);
     nodeSlug = path.basename(nodeDir);
-    roadmapDir = path.dirname(nodeDir);
+    levelDir = path.dirname(nodeDir);
+    level = path.basename(levelDir);
+    roadmapDir = path.dirname(levelDir);
   } else {
     roadmapDir = path.resolve(args["roadmap-dir"]);
+    level = args.level;
     nodeSlug = args.node;
     if (nodeSlug.includes("..") || nodeSlug.includes("/") || nodeSlug.includes("\\")) {
       throw new Error("node slug contém caminho ou travessia");
     }
-    nodeDir = path.resolve(roadmapDir, nodeSlug);
+    levelDir = path.resolve(roadmapDir, level);
+    nodeDir = path.resolve(levelDir, nodeSlug);
     htmlPath = path.resolve(nodeDir, "node.html");
   }
 
+  if (!LEVELS.has(level)) {
+    throw new Error("level deve ser basico, intermediario ou avancado");
+  }
   if (!NODE_SLUG_RE.test(nodeSlug)) {
     throw new Error("node slug deve seguir o formato NN-slug");
   }
@@ -91,9 +101,10 @@ function resolveTargets(args) {
     throw new Error(`node.html ausente: ${htmlPath}`);
   }
 
-  assertInside(nodeDir, roadmapDir, "node dir");
-  if (nodeDir === roadmapDir) {
-    throw new Error("node dir não pode ser a pasta do roadmap");
+  assertInside(levelDir, roadmapDir, "level dir");
+  assertInside(nodeDir, levelDir, "node dir");
+  if (nodeDir === levelDir || nodeDir === roadmapDir) {
+    throw new Error("node dir não pode ser a pasta do nível nem a pasta do roadmap");
   }
 
   const editorialDir = path.resolve(nodeDir, ".editorial");
@@ -108,7 +119,10 @@ function resolveTargets(args) {
 
   return {
     roadmapDir,
+    level,
+    levelDir,
     nodeSlug,
+    nodeId: `${level}/${nodeSlug}`,
     nodeDir,
     htmlPath,
     editorialDir,
@@ -747,7 +761,9 @@ function writeAudit(targets, renderResults, groupedFailures) {
     "## Metadados",
     "",
     `- Roadmap: ${path.basename(targets.roadmapDir)}`,
+    `- Level: ${targets.level}`,
     `- Node: ${targets.nodeSlug}`,
+    `- Node ID: ${targets.nodeId}`,
     "- Rodada: gerada pelo script Playwright",
     `- Data: ${new Date().toISOString()}`,
     `- HTML auditado: \`${path.relative(targets.nodeDir, targets.htmlPath)}\``,

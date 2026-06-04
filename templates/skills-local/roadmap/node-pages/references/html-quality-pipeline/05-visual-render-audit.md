@@ -43,6 +43,7 @@ Use a interface pública da skill e rode o guardrail mecânico com:
 ```text
 npm run roadmap:node-visual-check -- \
   --roadmap-dir <roadmap-dir> \
+  --level <level> \
   --node <node-slug>
 ```
 
@@ -124,7 +125,9 @@ Use esta estrutura:
 ## Metadados
 
 - Roadmap:
+- Level:
 - Node:
+- Node ID:
 - Rodada:
 - Data:
 - HTML auditado:

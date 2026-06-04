@@ -22,15 +22,17 @@ Use `.editorial/` para registrar:
 Crie ou recrie `.editorial/` somente dentro da pasta do node atual:
 
 ```text
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/.editorial/
+.tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/.editorial/
 ```
 
 Antes de apagar ou recriar, valide:
 
 - o caminho resolvido está dentro da pasta do node atual;
+- o nível é `basico`, `intermediario` ou `avancado`;
 - o slug do node segue `NN-slug`;
 - o slug não contém `..`;
 - o alvo não é a pasta do roadmap inteira;
+- o alvo não é a pasta do nível inteira;
 - o alvo não é outro node.
 
 Não crie logs fora de `.editorial/`. Não faça `node.html` depender de arquivos
@@ -119,7 +121,7 @@ nem revisão narrativa.
 Não mencione `.editorial/` na resposta final. A resposta continua curta:
 
 ```text
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/research-dump.md
-.tmp/roadmaps/<roadmap-slug>/<node-slug>/node.html
+.tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/research-dump.md
+.tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/node.html
 Pesquisa profunda usada; referências estão no dump e no HTML.
 ```

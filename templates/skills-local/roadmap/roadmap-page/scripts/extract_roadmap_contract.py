@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Extrai contrato JSON de roadmap.html para bootstrap mecânico do roadmap-page."""
+"""Extrai contrato JSON tri-level de roadmap.html para bootstrap mecânico."""
 
 from __future__ import annotations
 
@@ -17,18 +17,29 @@ sys.path.insert(0, str(COMMON_SCRIPTS))
 from normalize_slug import normalize_slug  # noqa: E402
 
 
-NODE_HEADING_RE = re.compile(
-    r"<h2[^>]*>\s*Node\s+(?P<number>\d{2})\s*-\s*(?P<label>.*?)\s*</h2>",
+LEVELS = ("basico", "intermediario", "avancado")
+LEVEL_LABELS = {
+    "basico": "Básico",
+    "intermediario": "Intermediário",
+    "avancado": "Avançado",
+}
+LEVEL_SEMANTICS = {
+    "basico": "fundamentos, vocabulário indispensável e modelos mentais",
+    "intermediario": "arquitetura, relações, decisões e trade-offs",
+    "avancado": "limites, casos de borda, falhas, comportamento avançado e critérios de especialista",
+}
+
+NODE_ID_RE = re.compile(r"(basico|intermediario|avancado)/\d{2}-[a-z0-9][a-z0-9-]*")
+NODE_SECTION_RE = re.compile(
+    r"<(?P<tag>section|article)\b(?P<attrs>[^>]*)\bdata-node-id=\"(?P<node_id>[^\"]+)\"[^>]*>"
+    r"(?P<body>.*?)(?=</(?P=tag)>)",
     re.IGNORECASE | re.DOTALL,
 )
+H2_RE = re.compile(r"<h2[^>]*>(?P<text>.*?)</h2>", re.IGNORECASE | re.DOTALL)
 H1_RE = re.compile(r"<h1[^>]*>(?P<text>.*?)</h1>", re.IGNORECASE | re.DOTALL)
 LINK_RE = re.compile(r'<a\b[^>]*href="(?P<url>[^"]+)"[^>]*>(?P<label>.*?)</a>', re.IGNORECASE | re.DOTALL)
-SLUG_RE = re.compile(
-    r"<strong>\s*Slug:\s*</strong>\s*<code>(?P<slug>\d{2}-[a-z0-9-]+)</code>",
-    re.IGNORECASE | re.DOTALL,
-)
 H3_BLOCK_RE = re.compile(
-    r"<h3[^>]*>(?P<title>.*?)</h3>(?P<body>.*?)(?=<h3\b|<h2\b|</section>|$)",
+    r"<h3[^>]*>(?P<title>.*?)</h3>(?P<body>.*?)(?=<h3\b|<h2\b|</section>|</article>|$)",
     re.IGNORECASE | re.DOTALL,
 )
 LI_RE = re.compile(r"<li[^>]*>(?P<text>.*?)</li>", re.IGNORECASE | re.DOTALL)
@@ -39,16 +50,6 @@ CELL_RE = re.compile(r"<t[dh][^>]*>(?P<cell>.*?)</t[dh]>", re.IGNORECASE | re.DO
 def strip_tags(value: str) -> str:
     without_tags = re.sub(r"<[^>]+>", " ", value)
     return re.sub(r"\s+", " ", html.unescape(without_tags)).strip()
-
-
-def section_blocks(html_text: str) -> list[tuple[re.Match[str], str]]:
-    matches = list(NODE_HEADING_RE.finditer(html_text))
-    blocks: list[tuple[re.Match[str], str]] = []
-    for index, match in enumerate(matches):
-        start = match.end()
-        end = matches[index + 1].start() if index + 1 < len(matches) else len(html_text)
-        blocks.append((match, html_text[start:end]))
-    return blocks
 
 
 def list_after_heading(block: str, heading_keywords: tuple[str, ...]) -> list[str]:
@@ -66,6 +67,10 @@ def list_after_heading(block: str, heading_keywords: tuple[str, ...]) -> list[st
 def paragraph_after_heading(block: str, heading_keywords: tuple[str, ...]) -> str:
     values = list_after_heading(block, heading_keywords)
     return " ".join(values)
+
+
+def node_ids_from_text(value: str) -> list[str]:
+    return [match.group(0) for match in NODE_ID_RE.finditer(value)]
 
 
 def extract_sources(html_text: str) -> tuple[list[dict[str, object]], dict[str, str]]:
@@ -90,6 +95,14 @@ def extract_sources(html_text: str) -> tuple[list[dict[str, object]], dict[str, 
     return sources, seen
 
 
+def reuse_entries(cell_text: str, field: str) -> list[dict[str, str]]:
+    entries: list[dict[str, str]] = []
+    for node_id in node_ids_from_text(cell_text):
+        key = "reuse" if field == "allowed_reuses" else "reason"
+        entries.append({"node_id": node_id, key: cell_text, "reason": cell_text})
+    return entries
+
+
 def extract_anti_repetition(html_text: str) -> list[dict[str, object]]:
     matrix_match = re.search(
         r"<h2[^>]*>[^<]*(Matriz Anti-Repeti(?:ç|c)[aã]o)[^<]*</h2>(?P<body>.*?)(?=<h2\b)",
@@ -104,25 +117,39 @@ def extract_anti_repetition(html_text: str) -> list[dict[str, object]]:
         cells = [strip_tags(cell.group("cell")) for cell in CELL_RE.finditer(row.group("row"))]
         if len(cells) < 3 or cells[0].lower() == "conceito":
             continue
+        first_ids = node_ids_from_text(cells[1])
         entries.append(
             {
                 "concept": cells[0],
-                "first_introduction_node": cells[1],
-                "allowed_reuses": [cells[2]],
-                "blocked_reuses": [cells[3]] if len(cells) > 3 else [],
+                "first_introduction_node": first_ids[0] if first_ids else cells[1],
+                "allowed_reuses": reuse_entries(cells[2], "allowed_reuses"),
+                "blocked_reuses": reuse_entries(cells[3], "blocked_reuses") if len(cells) > 3 else [],
                 "boundary_reason": cells[4] if len(cells) > 4 else "",
             }
         )
     return entries
 
 
-def extract_nodes(html_text: str, source_ids_by_url: dict[str, str]) -> list[dict[str, object]]:
-    nodes: list[dict[str, object]] = []
-    for match, block in section_blocks(html_text):
-        order = int(match.group("number"))
-        label = strip_tags(match.group("label"))
-        slug_match = SLUG_RE.search(block)
-        slug = slug_match.group("slug") if slug_match else f"{order:02d}-{normalize_slug(label, 'node')}"
+def node_blocks(html_text: str) -> list[tuple[str, str]]:
+    return [(match.group("node_id"), match.group("body")) for match in NODE_SECTION_RE.finditer(html_text)]
+
+
+def extract_nodes_by_level(html_text: str, source_ids_by_url: dict[str, str]) -> dict[str, list[dict[str, object]]]:
+    nodes_by_level: dict[str, list[dict[str, object]]] = {level: [] for level in LEVELS}
+    for node_id, block in node_blocks(html_text):
+        if "/" not in node_id:
+            continue
+        level, slug = node_id.split("/", 1)
+        if level not in LEVELS:
+            continue
+        heading = H2_RE.search(block)
+        label = strip_tags(heading.group("text")) if heading else slug
+        label = re.sub(r"^\s*Node\s+\d{2}\s*-\s*", "", label, flags=re.IGNORECASE).strip()
+        if not slug:
+            slug = normalize_slug(label, "node")
+        order_match = re.match(r"^(\d{2})-", slug)
+        order = int(order_match.group(1)) if order_match else len(nodes_by_level[level]) + 1
+
         references = []
         for link in LINK_RE.finditer(block):
             url = html.unescape(link.group("url"))
@@ -135,12 +162,14 @@ def extract_nodes(html_text: str, source_ids_by_url: dict[str, str]) -> list[dic
                         "reason": strip_tags(link.group("label")) or "Referência específica",
                     }
                 )
-        nodes.append(
+        nodes_by_level[level].append(
             {
+                "node_id": node_id,
+                "level": level,
                 "order": order,
                 "slug": slug,
                 "label": label,
-                "role_in_chain": strip_tags(block.split("</div>", 1)[0]),
+                "role_in_chain": paragraph_after_heading(block, ("papel", "corrente")),
                 "inherited_prerequisites": list_after_heading(block, ("pré-requisitos", "pre-requisitos")),
                 "first_introduces": list_after_heading(block, ("introduz",)),
                 "must_cover": list_after_heading(block, ("deve cobrir", "cobrir")),
@@ -154,7 +183,7 @@ def extract_nodes(html_text: str, source_ids_by_url: dict[str, str]) -> list[dic
                 "references": references,
             }
         )
-    return nodes
+    return nodes_by_level
 
 
 def build_contract(html_path: Path) -> dict[str, object]:
@@ -163,8 +192,9 @@ def build_contract(html_path: Path) -> dict[str, object]:
     title = strip_tags(h1_match.group("text")) if h1_match else html_path.parent.name
     theme = re.sub(r"^\s*Roadmap\s*-\s*", "", title, flags=re.IGNORECASE).strip()
     sources, source_ids_by_url = extract_sources(html_text)
+    nodes_by_level = extract_nodes_by_level(html_text, source_ids_by_url)
     return {
-        "schema_version": "1.0",
+        "schema_version": "2.0",
         "roadmap_slug": html_path.parent.name,
         "theme": theme,
         "background": "",
@@ -174,12 +204,20 @@ def build_contract(html_path: Path) -> dict[str, object]:
         "expected_understanding": "",
         "sources": sources,
         "anti_repetition": extract_anti_repetition(html_text),
-        "nodes": extract_nodes(html_text, source_ids_by_url),
+        "levels": [
+            {
+                "level": level,
+                "label": LEVEL_LABELS[level],
+                "semantics": LEVEL_SEMANTICS[level],
+                "nodes": nodes_by_level[level],
+            }
+            for level in LEVELS
+        ],
     }
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Extrai roadmap-contract.json de roadmap.html.")
+    parser = argparse.ArgumentParser(description="Extrai roadmap-contract.json tri-level de roadmap.html.")
     parser.add_argument("--html", required=True, help="Caminho para roadmap.html.")
     parser.add_argument("--out", required=True, help="Caminho de saída para roadmap-contract.json.")
     return parser.parse_args()
@@ -195,7 +233,7 @@ def main() -> int:
     contract = build_contract(html_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(contract, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"passa: contrato extraído em {out_path}")
+    print(f"passa: contrato tri-level extraído em {out_path}")
     return 0
 
 

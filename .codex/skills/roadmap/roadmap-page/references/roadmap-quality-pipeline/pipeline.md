@@ -13,7 +13,7 @@ gerar .roadmap/roadmap-contract.json
   |
   +-> 01-html-shape: validar estrutura do HTML
   +-> 02-contract-schema: validar JSON contra schema versionado
-  +-> 03-contract-consistency: validar coerência HTML <-> JSON, nodes e anti-repetição
+  +-> 03-contract-consistency: validar coerência HTML <-> JSON, níveis, nodes e anti-repetição global
   +-> 04-source-coverage: validar fontes e referências
   +-> 05-visual-render: renderizar desktop/mobile
   +-> corrigir e repetir até ponto fixo
@@ -35,8 +35,8 @@ gerar .roadmap/roadmap-contract.json
 
 O schema versionado fica em
 `roadmap-page/schema/roadmap-contract.schema.json`. Ele valida a forma mínima do
-contrato; a coerência semântica entre HTML, slugs, ordem, fontes e
-anti-repetição continua no validador Python.
+contrato; a coerência semântica entre HTML, níveis, `node_id`, slugs, ordem
+local, fontes e anti-repetição global continua no validador Python.
 
 ## Guardrails
 
@@ -67,8 +67,10 @@ Ponto fixo só existe quando:
 
 - `roadmap.html` e `roadmap-contract.json` correspondem à última versão;
 - `roadmap-contract.json` passa no schema versionado;
-- os nodes do HTML e do JSON têm mesma ordem e mesmos slugs;
-- fontes e anti-repetição estão rastreáveis;
+- os nodes do HTML e do JSON têm os mesmos níveis, `node_id`, slugs e ordem
+  local;
+- nenhum nível tem mais de 20 nodes;
+- fontes e anti-repetição global estão rastreáveis por `node_id`;
 - as auditorias dos pipes `01`, `02`, `03`, `04` e `05` registram passagem;
 - mapas, fluxos e sequências visuais não usam `<pre>` como atalho;
 - a auditoria visual renderizada registra `Status geral: passa`;

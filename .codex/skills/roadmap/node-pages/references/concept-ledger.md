@@ -17,7 +17,9 @@ Use esta estrutura como contrato mínimo:
 ## Metadados
 
 - Roadmap:
+- Level:
 - Node:
+- Node ID:
 - Data:
 - Fonte principal:
 
@@ -64,6 +66,7 @@ Use esta estrutura como contrato mínimo:
 ### <conceito>
 
 - Node responsável:
+- Node ID responsável, quando existir:
 - Menção permitida no HTML atual: nenhuma | curta como fronteira | handoff final
 - Aliases bloqueados:
   - ...

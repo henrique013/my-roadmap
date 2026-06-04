@@ -11,7 +11,9 @@ JSON, dump e HTML.
   "url": "",
   "type": "",
   "reason": "",
-  "supports_nodes": [],
+  "supports_nodes": [
+    "basico/01-exemplo"
+  ],
   "limits": ""
 }
 ```
@@ -21,6 +23,8 @@ JSON, dump e HTML.
 - `id` deve ser único dentro do artefato.
 - `url` deve ser real, absoluta e clicável.
 - `reason` deve dizer qual decisão, conceito ou fronteira a fonte sustenta.
+- `supports_nodes`, quando usado em roadmap tri-level, deve apontar para
+  `node_id` no formato `<level>/<slug>`, como `avancado/03-limites`.
 - `limits` deve registrar versão, data, recorte ou insuficiência quando isso
   afetar a interpretação.
 - Referências por node devem apontar para fontes que sustentam aquele node, não

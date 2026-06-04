@@ -2,7 +2,7 @@
 name: roadmap-page
 description: >
   Flag auxiliar para usar somente junto da skill `roadmap` quando a pessoa
-  quiser gerar a página inicial de um roadmap.
+  quiser gerar a página inicial tri-level de um roadmap.
 ---
 
 # Roadmap Page
@@ -32,6 +32,18 @@ Opcionalmente, a chamada pode mencionar conhecimentos prévios, objetivo,
 experiência, senioridade ou outro contexto relevante. Quando esse contexto
 existir, a skill principal `roadmap` deve usá-lo para calibrar o resultado, sem
 tratá-lo como campo esperado ou requisito.
+
+Quando esta flag seleciona `roadmap-page`, a skill principal `roadmap` gera uma
+única saída visível em `.tmp/roadmaps/<slug>/roadmap.html` com três seções
+coordenadas:
+
+- `basico`;
+- `intermediario`;
+- `avancado`.
+
+Cada nível pode ter até 20 nodes, mas esse número é teto, não meta. A skill
+principal deve planejar os três níveis no mesmo contexto para reduzir
+sobreposição e manter a anti-repetição global.
 
 Exemplos válidos de input incluem frase curta, parágrafo, lista solta ou linhas
 separadas. Se o tema não for identificável no texto livre, a skill principal

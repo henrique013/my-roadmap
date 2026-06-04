@@ -6,18 +6,49 @@ from __future__ import annotations
 import argparse
 import json
 import re
+from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any
 
 from check_roadmap_html_shape import collect_failures as collect_html_failures
 
 
+LEVELS = ("basico", "intermediario", "avancado")
+LEVEL_LABELS = {
+    "basico": "Básico",
+    "intermediario": "Intermediário",
+    "avancado": "Avançado",
+}
 NODE_SLUG_RE = re.compile(r"^\d{2}-[a-z0-9][a-z0-9-]*$")
-HTML_SLUG_RE = re.compile(
-    r"<strong>\s*Slug:\s*</strong>\s*<code>(?P<slug>\d{2}-[a-z0-9-]+)</code>",
-    re.IGNORECASE | re.DOTALL,
-)
+NODE_ID_RE = re.compile(r"^(basico|intermediario|avancado)/\d{2}-[a-z0-9][a-z0-9-]*$")
 SCHEMA_PATH = Path(__file__).resolve().parents[1] / "schema" / "roadmap-contract.schema.json"
+
+
+class RoadmapHTMLParser(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.level_sections: set[str] = set()
+        self.node_ids: list[str] = []
+        self.node_attrs: list[dict[str, str]] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        tag = tag.lower()
+        if tag not in {"section", "article", "div"}:
+            return
+        attrs_map = {name.lower(): value or "" for name, value in attrs if name}
+        level = attrs_map.get("data-level")
+        node_id = attrs_map.get("data-node-id")
+        if node_id:
+            self.node_ids.append(node_id)
+            self.node_attrs.append(
+                {
+                    "node_id": node_id,
+                    "level": level or "",
+                    "slug": attrs_map.get("data-node-slug", ""),
+                }
+            )
+        elif level in LEVELS:
+            self.level_sections.add(level)
 
 
 def schema_type_matches(value: Any, expected_type: str) -> bool:
@@ -38,8 +69,32 @@ def schema_type_matches(value: Any, expected_type: str) -> bool:
     return True
 
 
-def validate_schema(value: Any, schema: dict[str, Any], path: str = "$") -> list[str]:
+def resolve_ref(root_schema: dict[str, Any], ref: str) -> dict[str, Any] | None:
+    if not ref.startswith("#/"):
+        return None
+    current: Any = root_schema
+    for part in ref[2:].split("/"):
+        if not isinstance(current, dict):
+            return None
+        current = current.get(part)
+    return current if isinstance(current, dict) else None
+
+
+def validate_schema(
+    value: Any,
+    schema: dict[str, Any],
+    path: str = "$",
+    root_schema: dict[str, Any] | None = None,
+) -> list[str]:
+    root = root_schema or schema
     failures: list[str] = []
+
+    ref = schema.get("$ref")
+    if isinstance(ref, str):
+        resolved = resolve_ref(root, ref)
+        if resolved is None:
+            return [f"{path} usa $ref não resolvido: {ref}"]
+        return validate_schema(value, resolved, path, root)
 
     if "const" in schema and value != schema["const"]:
         failures.append(f"{path} deve ser {schema['const']!r}")
@@ -65,10 +120,13 @@ def validate_schema(value: Any, schema: dict[str, Any], path: str = "$") -> list
         min_items = schema.get("minItems")
         if isinstance(min_items, int) and len(value) < min_items:
             failures.append(f"{path} deve ter ao menos {min_items} item(ns)")
+        max_items = schema.get("maxItems")
+        if isinstance(max_items, int) and len(value) > max_items:
+            failures.append(f"{path} deve ter no máximo {max_items} item(ns)")
         item_schema = schema.get("items")
         if isinstance(item_schema, dict):
             for index, item in enumerate(value):
-                failures.extend(validate_schema(item, item_schema, f"{path}[{index}]"))
+                failures.extend(validate_schema(item, item_schema, f"{path}[{index}]", root))
 
     if isinstance(value, dict):
         required = schema.get("required", [])
@@ -80,7 +138,7 @@ def validate_schema(value: Any, schema: dict[str, Any], path: str = "$") -> list
         if isinstance(properties, dict):
             for field, field_schema in properties.items():
                 if field in value and isinstance(field_schema, dict):
-                    failures.extend(validate_schema(value[field], field_schema, f"{path}.{field}"))
+                    failures.extend(validate_schema(value[field], field_schema, f"{path}.{field}", root))
 
     return failures
 
@@ -123,6 +181,172 @@ def validate_render_checks(path: Path, failures: list[str]) -> None:
         failures.append("render-checks.json não registra status passa")
 
 
+def parse_html_contract(html_text: str) -> RoadmapHTMLParser:
+    parser = RoadmapHTMLParser()
+    parser.feed(html_text)
+    parser.close()
+    return parser
+
+
+def level_entries(contract: dict[str, Any]) -> list[dict[str, Any]]:
+    levels = contract.get("levels")
+    return levels if isinstance(levels, list) else []
+
+
+def flatten_nodes(contract: dict[str, Any]) -> list[dict[str, Any]]:
+    nodes: list[dict[str, Any]] = []
+    levels_by_name = {
+        level.get("level"): level
+        for level in level_entries(contract)
+        if isinstance(level, dict)
+    }
+    for level_name in LEVELS:
+        level = levels_by_name.get(level_name)
+        if not isinstance(level, dict):
+            continue
+        level_nodes = level.get("nodes")
+        if isinstance(level_nodes, list):
+            nodes.extend(node for node in level_nodes if isinstance(node, dict))
+    return nodes
+
+
+def node_id_from(level: str, slug: str) -> str:
+    return f"{level}/{slug}"
+
+
+def validate_levels_and_nodes(contract: dict[str, Any], source_ids: set[str]) -> tuple[list[str], list[str]]:
+    failures: list[str] = []
+    levels = level_entries(contract)
+    if not levels:
+        return ["levels ausente ou vazio"], []
+
+    seen_levels: set[str] = set()
+    seen_node_ids: set[str] = set()
+    ordered_node_ids: list[str] = []
+
+    for level in levels:
+        if not isinstance(level, dict):
+            failures.append("level deve ser objeto")
+            continue
+        level_name = str(level.get("level") or "")
+        if level_name not in LEVELS:
+            failures.append(f"level inválido: {level_name}")
+            continue
+        if level_name in seen_levels:
+            failures.append(f"level duplicado: {level_name}")
+        seen_levels.add(level_name)
+
+        nodes = level.get("nodes")
+        if not isinstance(nodes, list) or not nodes:
+            failures.append(f"level {level_name} sem nodes")
+            continue
+        if len(nodes) > 20:
+            failures.append(f"level {level_name} tem {len(nodes)} nodes; máximo permitido é 20")
+
+        seen_slugs: set[str] = set()
+        for index, node in enumerate(nodes, start=1):
+            if not isinstance(node, dict):
+                failures.append(f"node em {level_name} deve ser objeto")
+                continue
+            slug = str(node.get("slug") or "")
+            node_level = str(node.get("level") or "")
+            node_id = str(node.get("node_id") or "")
+            ordered_node_ids.append(node_id)
+
+            if node_level != level_name:
+                failures.append(f"node {node_id or slug} tem level {node_level!r}, esperado {level_name!r}")
+            if not NODE_SLUG_RE.fullmatch(slug):
+                failures.append(f"slug inválido em {level_name}: {slug}")
+            if slug in seen_slugs:
+                failures.append(f"slug duplicado em {level_name}: {slug}")
+            seen_slugs.add(slug)
+            if node_id != node_id_from(level_name, slug):
+                failures.append(f"node_id inválido para {level_name}/{slug}: {node_id}")
+            if not NODE_ID_RE.fullmatch(node_id):
+                failures.append(f"node_id fora do formato esperado: {node_id}")
+            if node_id in seen_node_ids:
+                failures.append(f"node_id duplicado: {node_id}")
+            seen_node_ids.add(node_id)
+            if node.get("order") != index:
+                failures.append(f"ordem inválida para {node_id}: esperado {index}")
+            if slug and not slug.startswith(f"{index:02d}-"):
+                failures.append(f"slug fora da ordem numérica local: {node_id}")
+
+            for field in ("label", "role_in_chain", "must_cover", "must_not_cover", "questions"):
+                value = node.get(field)
+                if value in ("", [], None):
+                    failures.append(f"node {node_id} sem campo obrigatório útil: {field}")
+
+            references = node.get("references")
+            if not isinstance(references, list) or not references:
+                failures.append(f"node {node_id} sem referências")
+            else:
+                for reference in references:
+                    if not isinstance(reference, dict):
+                        failures.append(f"referência inválida em {node_id}")
+                        continue
+                    source_id = reference.get("source_id")
+                    if source_id and source_ids and source_id not in source_ids:
+                        failures.append(f"referência de {node_id} aponta para source_id não declarado: {source_id}")
+
+    missing_levels = set(LEVELS) - seen_levels
+    extra_levels = seen_levels - set(LEVELS)
+    if missing_levels:
+        failures.append(f"levels ausentes: {', '.join(sorted(missing_levels))}")
+    if extra_levels:
+        failures.append(f"levels não permitidos: {', '.join(sorted(extra_levels))}")
+
+    return failures, ordered_node_ids
+
+
+def validate_level_aware_references(contract: dict[str, Any], node_ids: set[str]) -> list[str]:
+    failures: list[str] = []
+
+    sources = contract.get("sources")
+    if isinstance(sources, list):
+        for source in sources:
+            if not isinstance(source, dict):
+                continue
+            source_id = source.get("id", "<sem id>")
+            supports_nodes = source.get("supports_nodes", [])
+            if supports_nodes in ("", None):
+                continue
+            if not isinstance(supports_nodes, list):
+                failures.append(f"source {source_id} tem supports_nodes não-lista")
+                continue
+            for node_id in supports_nodes:
+                if node_id not in node_ids:
+                    failures.append(f"source {source_id} aponta para node_id inexistente: {node_id}")
+
+    anti_repetition = contract.get("anti_repetition")
+    if not isinstance(anti_repetition, list) or not anti_repetition:
+        failures.append("anti_repetition ausente ou vazio")
+        return failures
+
+    for entry in anti_repetition:
+        if not isinstance(entry, dict):
+            failures.append("anti_repetition deve conter objetos")
+            continue
+        concept = entry.get("concept", "<sem conceito>")
+        first_node = entry.get("first_introduction_node")
+        if first_node not in node_ids:
+            failures.append(f"anti_repetition {concept!r} aponta primeira introdução inexistente: {first_node}")
+        for field in ("allowed_reuses", "blocked_reuses"):
+            values = entry.get(field, [])
+            if not isinstance(values, list):
+                failures.append(f"anti_repetition {concept!r}.{field} deve ser lista")
+                continue
+            for value in values:
+                if not isinstance(value, dict):
+                    failures.append(f"anti_repetition {concept!r}.{field} deve usar objetos com node_id")
+                    continue
+                node_id = value.get("node_id")
+                if node_id not in node_ids:
+                    failures.append(f"anti_repetition {concept!r}.{field} aponta node_id inexistente: {node_id}")
+
+    return failures
+
+
 def validate(args: argparse.Namespace) -> list[str]:
     failures: list[str] = []
     roadmap_dir = Path(args.roadmap_dir)
@@ -138,6 +362,7 @@ def validate(args: argparse.Namespace) -> list[str]:
         return failures
 
     html_text = html_path.read_text(encoding="utf-8") if html_path.exists() else ""
+    html_contract = parse_html_contract(html_text) if html_text else RoadmapHTMLParser()
     if html_text:
         failures.extend(f"HTML: {failure}" for failure in collect_html_failures(html_text))
 
@@ -145,6 +370,9 @@ def validate(args: argparse.Namespace) -> list[str]:
         contract = json.loads(contract_path.read_text(encoding="utf-8"))
     except json.JSONDecodeError as exc:
         return failures + [f"roadmap-contract.json inválido: {exc}"]
+
+    if not isinstance(contract, dict):
+        return failures + ["roadmap-contract.json deve ser objeto"]
 
     if not is_non_empty_file(SCHEMA_PATH):
         failures.append(f"schema do roadmap-contract ausente ou vazio: {SCHEMA_PATH}")
@@ -156,8 +384,8 @@ def validate(args: argparse.Namespace) -> list[str]:
         else:
             failures.extend(f"schema: {failure}" for failure in validate_schema(contract, schema))
 
-    if contract.get("schema_version") != "1.0":
-        failures.append("schema_version deve ser 1.0")
+    if contract.get("schema_version") != "2.0":
+        failures.append("schema_version deve ser 2.0")
     if contract.get("roadmap_slug") != roadmap_dir.name:
         failures.append("roadmap_slug não corresponde ao nome da pasta")
 
@@ -166,61 +394,39 @@ def validate(args: argparse.Namespace) -> list[str]:
         failures.append("sources ausente ou vazio")
         source_ids: set[str] = set()
     else:
-        source_ids = {source.get("id") for source in sources if isinstance(source, dict)}
+        source_ids = set()
         for source in sources:
             if not isinstance(source, dict):
                 failures.append("source deve ser objeto")
                 continue
+            source_id = source.get("id")
+            if isinstance(source_id, str):
+                if source_id in source_ids:
+                    failures.append(f"source_id duplicado: {source_id}")
+                source_ids.add(source_id)
             if not source.get("id") or not source.get("url") or not source.get("reason"):
                 failures.append(f"source incompleta: {source}")
 
-    anti_repetition = contract.get("anti_repetition")
-    if not isinstance(anti_repetition, list) or not anti_repetition:
-        failures.append("anti_repetition ausente ou vazio")
+    node_failures, ordered_node_ids = validate_levels_and_nodes(contract, source_ids)
+    failures.extend(node_failures)
+    node_ids = set(ordered_node_ids)
+    failures.extend(validate_level_aware_references(contract, node_ids))
 
-    nodes = contract.get("nodes")
-    if not isinstance(nodes, list) or not nodes:
-        failures.append("nodes ausente ou vazio")
-        return failures
-
-    json_slugs: list[str] = []
-    for index, node in enumerate(nodes, start=1):
-        if not isinstance(node, dict):
-            failures.append("node deve ser objeto")
-            continue
-        slug = str(node.get("slug") or "")
-        json_slugs.append(slug)
-        if not NODE_SLUG_RE.fullmatch(slug):
-            failures.append(f"slug inválido: {slug}")
-        if node.get("order") != index:
-            failures.append(f"ordem inválida para {slug}: esperado {index}")
-        if slug and not slug.startswith(f"{index:02d}-"):
-            failures.append(f"slug fora da ordem numérica: {slug}")
-        for field in ("label", "role_in_chain", "must_cover", "must_not_cover", "questions"):
-            value = node.get(field)
-            if value in ("", [], None):
-                failures.append(f"node {slug} sem campo obrigatório útil: {field}")
-        references = node.get("references")
-        if not isinstance(references, list) or not references:
-            failures.append(f"node {slug} sem referências")
+    if html_text:
+        if set(html_contract.level_sections) != set(LEVELS):
+            missing = set(LEVELS) - html_contract.level_sections
+            if missing:
+                failures.append(f"HTML sem seção data-level para: {', '.join(sorted(missing))}")
+        if html_contract.node_ids:
+            if html_contract.node_ids != ordered_node_ids:
+                failures.append("node_id do HTML e do JSON não têm a mesma ordem tri-level")
+            for attrs in html_contract.node_attrs:
+                node_id = attrs["node_id"]
+                level = attrs["level"]
+                if node_id in node_ids and "/" in node_id and level and level != node_id.split("/", 1)[0]:
+                    failures.append(f"HTML tem data-level incompatível com data-node-id: {node_id}")
         else:
-            for reference in references:
-                if not isinstance(reference, dict):
-                    failures.append(f"referência inválida em {slug}")
-                    continue
-                source_id = reference.get("source_id")
-                if source_id and source_ids and source_id not in source_ids:
-                    failures.append(f"referência de {slug} aponta para source_id não declarado: {source_id}")
-
-    if len(json_slugs) != len(set(json_slugs)):
-        failures.append("slugs duplicados no contrato JSON")
-
-    html_slugs = HTML_SLUG_RE.findall(html_text)
-    if html_slugs:
-        if html_slugs != json_slugs:
-            failures.append("slugs do HTML e do JSON não têm a mesma ordem")
-    else:
-        failures.append("nenhum slug de node encontrado no HTML")
+            failures.append("nenhum data-node-id de node encontrado no HTML")
 
     pipeline_dir = roadmap_dir / ".roadmap" / "pipeline"
     expected_audits = (

@@ -301,17 +301,25 @@
     </section>
 
     <section>
-      <h2>2. Corrente de Nodes</h2>
-      <div class="flow-steps" aria-label="Fluxo conceitual dos nodes">
-        <span>Node 01</span>
-        <span>Node 02</span>
-        <span>Node 03</span>
-        <span>Node 04</span>
+      <h2>2. Mapa Tri-level</h2>
+      <div class="grid">
+        <div class="card">
+          <span class="tag">basico</span>
+          <p>Fundamentos, vocabulario indispensavel e modelos mentais.</p>
+        </div>
+        <div class="card">
+          <span class="tag">intermediario</span>
+          <p>Arquitetura, relacoes, decisoes e trade-offs.</p>
+        </div>
+        <div class="card">
+          <span class="tag">avancado</span>
+          <p>Limites, falhas, casos de borda e criterios de especialista.</p>
+        </div>
       </div>
     </section>
 
     <section>
-      <h2>3. Matriz Anti-Repeticao</h2>
+      <h2>3. Matriz Anti-Repeticao Global</h2>
       <table>
         <tr>
           <th>Conceito</th>
@@ -320,16 +328,46 @@
         </tr>
         <tr>
           <td>Conceito central</td>
-          <td>Node 01</td>
-          <td>Node 03 apenas como pre-requisito herdado.</td>
+          <td><code>basico/01-node-exemplo</code></td>
+          <td><code>intermediario/01-node-exemplo</code> apenas como nova camada justificada.</td>
         </tr>
       </table>
     </section>
 
-    <section>
+    <section data-level="basico">
+      <h2>4. Basico</h2>
+      <div class="flow-steps" aria-label="Fluxo conceitual dos nodes basicos">
+        <span>01</span>
+        <span>02</span>
+        <span>03</span>
+      </div>
+    </section>
+
+    <section data-level="intermediario">
+      <h2>5. Intermediario</h2>
+      <div class="flow-steps" aria-label="Fluxo conceitual dos nodes intermediarios">
+        <span>01</span>
+        <span>02</span>
+        <span>03</span>
+      </div>
+    </section>
+
+    <section data-level="avancado">
+      <h2>6. Avancado</h2>
+      <div class="flow-steps" aria-label="Fluxo conceitual dos nodes avancados">
+        <span>01</span>
+        <span>02</span>
+        <span>03</span>
+      </div>
+    </section>
+
+    <section data-level="basico" data-node-id="basico/01-node-exemplo" data-node-slug="01-node-exemplo">
       <h2>Node 01 - Nome do Node</h2>
+      <p><strong>Level:</strong> <code>basico</code></p>
+      <p><strong>Node ID:</strong> <code>basico/01-node-exemplo</code></p>
+      <p><strong>Slug:</strong> <code>01-node-exemplo</code></p>
       <div class="callout">
-        <strong>Papel na corrente:</strong> explique a funcao do node e como ele prepara o proximo.
+        <strong>Papel na corrente local:</strong> explique a funcao do node e como ele prepara o proximo.
       </div>
       <h3>O que cobre</h3>
       <ul>
@@ -341,7 +379,7 @@
       </ul>
       <h3>Exemplos conceituais permitidos</h3>
       <ul>
-        <li>Exemplo curto, analogia adulta ou diagrama explicativo; sem exercicio, laboratorio ou projeto.</li>
+        <li>Exemplo curto, analogia adulta ou diagrama explicativo, mantendo o foco conceitual.</li>
       </ul>
       <h3>Referencias</h3>
       <table>
