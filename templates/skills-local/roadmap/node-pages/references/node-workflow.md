@@ -195,10 +195,12 @@ Crie ou recrie somente a pasta do node atual:
 .tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/
 ```
 
-Antes de apagar uma pasta existente, valide que o caminho resolvido está dentro
-da pasta do nível, que o nível é `basico`, `intermediario` ou `avancado`, que o
-slug do node segue `NN-slug`, que não contém `..` e que o alvo não é a pasta do
-nível nem a pasta do roadmap inteira.
+Antes de apagar uma pasta existente, faça um checkpoint explícito: informe o
+caminho resolvido e peça confirmação para recriar somente a pasta do node atual.
+Depois valide que o caminho resolvido está dentro da pasta do nível, que o nível
+é `basico`, `intermediario` ou `avancado`, que o slug do node segue `NN-slug`,
+que não contém `..` e que o alvo não é a pasta do nível nem a pasta do roadmap
+inteira. A confirmação vale apenas para esse caminho resolvido.
 
 Dentro da pasta do node, crie ou recrie também:
 

@@ -21,7 +21,7 @@ Renderize `roadmap.html` antes da resposta final.
 Use:
 
 ```text
-npm run roadmap:roadmap-visual-check -- \
+node <skill-dir>/roadmap-page/scripts/check_roadmap_visual_render.mjs \
   --html <roadmap-dir>/roadmap.html
 ```
 

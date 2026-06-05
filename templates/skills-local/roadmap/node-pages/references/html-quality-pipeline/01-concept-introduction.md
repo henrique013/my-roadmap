@@ -38,7 +38,7 @@ Quando disponível, rode o scanner literal de termos bloqueados antes da revisã
 semântica:
 
 ```text
-python3 templates/skills-local/roadmap/node-pages/scripts/scan_blocked_terms.py \
+python3 <skill-dir>/node-pages/scripts/scan_blocked_terms.py \
   --ledger <node-dir>/.editorial/concept-ledger.md \
   --visible <node-dir>/.editorial/pipeline/01-visible-text/visible-text.md
 ```

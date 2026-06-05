@@ -62,7 +62,7 @@ Execute, nesta ordem:
    preferência com:
 
    ```text
-   python3 templates/skills-local/roadmap/node-pages/scripts/extract_visible_text.py \
+   python3 <skill-dir>/node-pages/scripts/extract_visible_text.py \
      --html <node-dir>/node.html \
      --out <node-dir>/.editorial/pipeline/01-visible-text/visible-text.md
    ```
@@ -72,7 +72,7 @@ Execute, nesta ordem:
 3. Executar a busca literal de termos bloqueados, quando disponível:
 
    ```text
-   python3 templates/skills-local/roadmap/node-pages/scripts/scan_blocked_terms.py \
+   python3 <skill-dir>/node-pages/scripts/scan_blocked_terms.py \
      --ledger <node-dir>/.editorial/concept-ledger.md \
      --visible <node-dir>/.editorial/pipeline/01-visible-text/visible-text.md
    ```
@@ -111,7 +111,7 @@ Execute, nesta ordem:
    com:
 
    ```text
-   npm run roadmap:node-visual-check -- \
+   node <skill-dir>/node-pages/scripts/check_visual_render.mjs \
      --roadmap-dir <roadmap-dir> \
      --level <level> \
      --node <node-slug>

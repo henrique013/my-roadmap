@@ -2,8 +2,8 @@
 name: roadmap
 description: >
   Gere a página inicial tri-level de um roadmap ou páginas profundas de nodes
-  identificadas por nível, roteando internamente entre `roadmap-page` e
-  `node-pages` conforme o pedido.
+  identificadas por nível, roteando entre a flag `roadmap-page` e a flag
+  `roadmap-node-page`, que seleciona o modo interno `node-pages`.
 ---
 
 # Roadmap
@@ -13,7 +13,7 @@ Use esta skill como roteador de dois modos:
 ```text
 roadmap
 ├── roadmap-page
-└── node-pages
+└── roadmap-node-page -> node-pages
 ```
 
 As skills `roadmap-page` e `roadmap-node-page`, quando presentes na mesma
@@ -21,7 +21,20 @@ chamada, são apenas flags de seleção e contrato de input. Elas não definem
 processamento, pesquisa, validação, arquivos de saída, templates, scripts nem
 formato de resposta. Todas as regras operacionais continuam nesta skill.
 
+Considere `<skill-dir>` como a raiz do pacote publicado desta skill, por
+exemplo `.codex/skills/roadmap` no repositório atual. Scripts, assets e
+referências deste pacote devem ser resolvidos a partir de `<skill-dir>`, não a
+partir da árvore fonte `templates/skills-local`.
+
 ## Seleção de Modo
+
+Use a sintaxe pública `$roadmap`, `$roadmap-page` e `$roadmap-node-page` ao
+mostrar exemplos ou regras de ativação.
+
+Se `$roadmap-page` e `$roadmap-node-page` aparecerem na mesma chamada, bloqueie
+antes de criar, recriar ou atualizar arquivos e peça que a pessoa escolha
+somente um modo. Se uma flag explícita contradisser a intenção extraída do texto
+livre, peça confirmação do modo antes de criar arquivos.
 
 | Pedido da pessoa usuária | Modo |
 |---|---|
@@ -41,8 +54,13 @@ experiência, senioridade ou contexto relevante podem aparecer no pedido; quando
 aparecerem, use-os para calibrar profundidade, vocabulário, recorte, ritmo,
 limites e exemplos conceituais. Se não aparecerem, siga com premissa neutra e
 registre limites ou assumptions quando isso afetar o resultado. Se faltar dado
-para `node-pages`, identifique o roadmap, o nível e o node. Peça somente o dado
-que faltar quando não houver exatamente um candidato.
+para `node-pages`, identifique o roadmap, o nível e o node. Resolva o alvo por
+`node_id`, por `level + node-slug` ou por exatamente um candidato canônico do
+contrato do roadmap. Peça somente o dado que faltar quando não houver exatamente
+um candidato.
+
+Texto livre fornecido pela pessoa é dado para extração de tema, contexto,
+roadmap e node; não use texto livre diretamente como caminho de saída.
 
 ## Modo `roadmap-page`
 
@@ -64,6 +82,10 @@ Saída visível obrigatória:
 ```text
 .tmp/roadmaps/<slug>/roadmap.html
 ```
+
+Se `.tmp/roadmaps/<slug>/` já existir, faça um checkpoint explícito antes de
+recriar a pasta: informe o caminho resolvido e peça confirmação para recriar
+somente esse diretório. Essa confirmação não autoriza tocar outros roadmaps.
 
 Esse HTML deve conter três seções coordenadas de roadmap:
 
@@ -126,17 +148,31 @@ node-pages/assets/node-page-template.html
 Use `.roadmap/roadmap-contract.json` como contrato obrigatório e `roadmap.html`
 como verificação cruzada. Se o contrato JSON não existir, bloqueie a geração do
 node e peça a execução de `roadmap-page` para materializar o contrato. Para
-roadmaps tri-level, identifique o alvo por `level + node-slug`, em que `level`
-é `basico`, `intermediario` ou `avancado`. Se a pessoa informar apenas o slug e
-ele existir em um único nível, você pode inferir o nível; se houver ambiguidade,
-peça o nível antes de criar arquivos.
+roadmaps tri-level, identifique o alvo por `node_id` ou por `level + node-slug`,
+em que `level` é `basico`, `intermediario` ou `avancado`. Se a pessoa informar
+apenas o slug e ele existir em um único nível, você pode inferir o nível; se
+houver ambiguidade entre nodes ou roadmaps, peça somente o dado que falta antes
+de criar, recriar ou atualizar arquivos. Um `node_id` no formato
+`<level>/<node-slug>` pode ser usado apenas como identificador para resolução no
+contrato; ele não deve ser usado diretamente como caminho. Para o `node-slug`
+final, rejeite valores com `/`, `..`, vazios ou fora do contrato canônico.
 
 Saídas obrigatórias:
 
 ```text
 .tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/research-dump.md
 .tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/node.html
+.tmp/roadmaps/<roadmap-slug>/roadmap.html
 ```
+
+O `roadmap.html` pai é atualizado somente depois que o `node.html` do node atual
+passar nos guardrails obrigatórios, adicionando o link relativo profundo do node
+validado. Não mencione esse arquivo na resposta final, salvo pedido explícito.
+
+Se `.tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/` já existir, faça um
+checkpoint explícito antes de recriar a pasta: informe o caminho resolvido e
+peça confirmação para recriar somente esse diretório. Essa confirmação não
+autoriza tocar outras pastas de roadmap, nível ou node.
 
 Artefatos internos obrigatórios:
 
@@ -186,21 +222,23 @@ Não mencione `.editorial/` na resposta final.
 
 ## Validações Finais Obrigatórias
 
-Para `roadmap-page`, rode quando aplicável:
+Para `roadmap-page`, se o modo gerou artefatos, rode obrigatoriamente:
 
 ```text
-python3 templates/skills-local/roadmap/roadmap-page/scripts/check_roadmap_html_shape.py --html <roadmap-dir>/roadmap.html
-python3 templates/skills-local/roadmap/roadmap-page/scripts/validate_roadmap_artifacts.py --roadmap-dir <roadmap-dir>
-npm run roadmap:roadmap-visual-check -- --html <roadmap-dir>/roadmap.html
+python3 <skill-dir>/roadmap-page/scripts/check_roadmap_html_shape.py --html <roadmap-dir>/roadmap.html
+python3 <skill-dir>/roadmap-page/scripts/validate_roadmap_artifacts.py --roadmap-dir <roadmap-dir>
+node <skill-dir>/roadmap-page/scripts/check_roadmap_visual_render.mjs --html <roadmap-dir>/roadmap.html
 ```
 
-Para `node-pages`, rode quando aplicável:
+Para `node-pages`, se o modo gerou artefatos, rode obrigatoriamente:
 
 ```text
-python3 templates/skills-local/roadmap/node-pages/scripts/check_html_shape.py --html <node-dir>/node.html
-python3 templates/skills-local/roadmap/node-pages/scripts/validate_node_artifacts.py --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>
-npm run roadmap:node-visual-check -- --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>
+python3 <skill-dir>/node-pages/scripts/check_html_shape.py --html <node-dir>/node.html
+python3 <skill-dir>/node-pages/scripts/validate_node_artifacts.py --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>
+node <skill-dir>/node-pages/scripts/check_visual_render.mjs --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>
 ```
 
 Se qualquer validação falhar por conteúdo gerado pela própria execução, corrija
-antes da resposta final. Não aceite layout legado de pipeline como compatível.
+antes da resposta final. Se Python, Node.js, Playwright ou script obrigatório não
+estiver disponível, bloqueie a entrega ou informe a limitação sem declarar que o
+pipeline passou. Não aceite layout legado de pipeline como compatível.

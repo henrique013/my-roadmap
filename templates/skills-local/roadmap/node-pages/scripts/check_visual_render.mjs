@@ -16,8 +16,8 @@ const VIEWPORTS = [
 function usage() {
   return [
     "Uso:",
-    "  node check_visual_render.mjs --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>",
-    "  node check_visual_render.mjs --html <node-dir>/node.html",
+    "  node <skill-dir>/node-pages/scripts/check_visual_render.mjs --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>",
+    "  node <skill-dir>/node-pages/scripts/check_visual_render.mjs --html <node-dir>/node.html",
   ].join("\n");
 }
 

@@ -41,7 +41,7 @@ screenshots na resposta final da skill.
 Use a interface pública da skill e rode o guardrail mecânico com:
 
 ```text
-npm run roadmap:node-visual-check -- \
+node <skill-dir>/node-pages/scripts/check_visual_render.mjs \
   --roadmap-dir <roadmap-dir> \
   --level <level> \
   --node <node-slug>
@@ -50,7 +50,7 @@ npm run roadmap:node-visual-check -- \
 Também é aceita a forma direta quando o HTML já estiver identificado:
 
 ```text
-npm run roadmap:node-visual-check -- \
+node <skill-dir>/node-pages/scripts/check_visual_render.mjs \
   --html <node-dir>/node.html
 ```
 

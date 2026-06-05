@@ -49,13 +49,13 @@ local, fontes e anti-repetição global continua no validador Python.
 Use os scripts quando disponíveis:
 
 ```text
-python3 templates/skills-local/roadmap/roadmap-page/scripts/check_roadmap_html_shape.py \
+python3 <skill-dir>/roadmap-page/scripts/check_roadmap_html_shape.py \
   --html <roadmap-dir>/roadmap.html
 
-python3 templates/skills-local/roadmap/roadmap-page/scripts/validate_roadmap_artifacts.py \
+python3 <skill-dir>/roadmap-page/scripts/validate_roadmap_artifacts.py \
   --roadmap-dir <roadmap-dir>
 
-npm run roadmap:roadmap-visual-check -- \
+node <skill-dir>/roadmap-page/scripts/check_roadmap_visual_render.mjs \
   --html <roadmap-dir>/roadmap.html
 ```
 

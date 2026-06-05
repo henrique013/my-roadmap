@@ -89,15 +89,20 @@ Use sempre:
 .tmp/roadmaps/<slug>/
 ```
 
-Se a pasta existir, recrie somente a pasta do slug. Antes de apagar, valide que
-o caminho resolvido esta dentro de `.tmp/roadmaps/`, nao contem `..`, nao e
-`.tmp/`, nao e `.tmp/roadmaps/` e nao aponta para fora do workspace.
+Se a pasta existir, faca um checkpoint explicito antes de apagar ou recriar:
+informe o caminho resolvido e peca confirmacao para recriar somente a pasta do
+slug. Antes de apagar, valide que o caminho resolvido esta dentro de
+`.tmp/roadmaps/`, nao contem `..`, nao e `.tmp/`, nao e `.tmp/roadmaps/` e nao
+aponta para fora do workspace. A confirmacao vale apenas para esse caminho
+resolvido.
 
 ### Checklist desta secao
 
 - [ ] O slug foi derivado do tema.
 - [ ] O slug segue o formato permitido.
 - [ ] A pasta resolvida ficou dentro de `.tmp/roadmaps/`.
+- [ ] Se a pasta ja existia, houve checkpoint explicito para recriar somente o
+      caminho resolvido.
 - [ ] Somente `.tmp/roadmaps/<slug>/` foi recriada.
 - [ ] O HTML final foi salvo dentro da pasta do slug.
 
