@@ -69,7 +69,7 @@ Ponto fixo só existe quando:
 - `roadmap-contract.json` passa no schema versionado;
 - os nodes do HTML e do JSON têm os mesmos níveis, `node_id`, slugs e ordem
   local;
-- nenhum nível tem mais de 20 nodes;
+- nenhum nível tem mais de 10 nodes;
 - fontes e anti-repetição global estão rastreáveis por `node_id`;
 - as auditorias dos pipes `01`, `02`, `03`, `04` e `05` registram passagem;
 - mapas, fluxos e sequências visuais não usam `<pre>` como atalho;

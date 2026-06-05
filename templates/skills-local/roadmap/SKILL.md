@@ -95,10 +95,13 @@ intermediario
 avancado
 ```
 
-Cada nível tem no máximo 20 nodes. Esse limite é teto, não meta; temas menores
-devem gerar menos nodes quando isso for suficiente. Os três níveis devem ser
-planejados no mesmo contexto de pesquisa e curadoria para que a matriz
-anti-repetição seja global e evite sobreposição desnecessária entre níveis.
+Cada nível tem no máximo 10 nodes. Esse limite é teto, não meta. Os níveis
+podem ter quantidades diferentes; a quantidade de nodes deve ser consequência
+da densidade, da curadoria semântica e da necessidade real de decomposição do
+conteúdo de cada nível, sem simetria artificial nem preenchimento para
+balancear níveis. Os três níveis devem ser planejados no mesmo contexto de
+pesquisa e curadoria para que a matriz anti-repetição seja global e evite
+sobreposição desnecessária entre níveis.
 
 Saída interna obrigatória:
 

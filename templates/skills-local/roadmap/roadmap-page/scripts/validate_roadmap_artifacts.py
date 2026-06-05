@@ -19,6 +19,7 @@ LEVEL_LABELS = {
     "intermediario": "Intermediário",
     "avancado": "Avançado",
 }
+MAX_NODES_PER_LEVEL = 10
 NODE_SLUG_RE = re.compile(r"^\d{2}-[a-z0-9][a-z0-9-]*$")
 NODE_ID_RE = re.compile(r"^(basico|intermediario|avancado)/\d{2}-[a-z0-9][a-z0-9-]*$")
 SCHEMA_PATH = Path(__file__).resolve().parents[1] / "schema" / "roadmap-contract.schema.json"
@@ -255,8 +256,11 @@ def validate_levels_and_nodes(contract: dict[str, Any], source_ids: set[str]) ->
         if not isinstance(nodes, list) or not nodes:
             failures.append(f"level {level_name} sem nodes")
             continue
-        if len(nodes) > 20:
-            failures.append(f"level {level_name} tem {len(nodes)} nodes; máximo permitido é 20")
+        if len(nodes) > MAX_NODES_PER_LEVEL:
+            failures.append(
+                f"level {level_name} tem {len(nodes)} nodes; "
+                f"máximo permitido é {MAX_NODES_PER_LEVEL}"
+            )
 
         seen_slugs: set[str] = set()
         for index, node in enumerate(nodes, start=1):

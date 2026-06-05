@@ -35,8 +35,12 @@ Esse arquivo deve ser um unico roadmap HTML com tres niveis coordenados:
 - `avancado`: limites, casos de borda, falhas, comportamento avancado e
   criterios de especialista.
 
-Cada nivel pode ter no maximo 20 nodes. O limite e teto, nao meta; nao preencha
-nodes para chegar a 20 quando o tema pedir menos.
+Cada nivel pode ter no maximo 10 nodes. O limite e teto, nao meta. Os niveis
+podem ter quantidades diferentes; a quantidade de nodes deve ser consequencia da
+densidade, da curadoria semantica e da necessidade real de decomposicao do
+conteudo de cada nivel. Nao preencha nodes para chegar a 10 quando o tema pedir
+menos, nem use simetria artificial, arbitragem estetica ou tentativa de
+balancear niveis como criterio.
 
 Saida interna obrigatoria:
 
@@ -65,7 +69,9 @@ Pesquisa usada; referencias estao dentro do HTML.
 - [ ] Contexto previo, se fornecido, foi capturado.
 - [ ] Arquivos nao foram criados com entrada incompleta.
 - [ ] A saida planejada e somente `roadmap.html` com tres niveis coordenados.
-- [ ] Nenhum nivel foi planejado com mais de 20 nodes.
+- [ ] Nenhum nivel foi planejado com mais de 10 nodes.
+- [ ] A quantidade de nodes de cada nivel foi definida pelo conteudo, nao por
+  simetria artificial.
 - [ ] O pedido pratico, se existir, foi convertido para base teorica.
 
 ## 2. Slug e Pasta de Trabalho
@@ -265,7 +271,8 @@ pertence melhor a `intermediario` ou `avancado`.
 - [ ] Topicos grandes demais foram divididos.
 - [ ] Cada node final tem justificativa semantica.
 - [ ] Cada topico mantido foi alocado em exatamente um nivel principal.
-- [ ] Temas pequenos nao foram inflados para ocupar todos os 60 nodes possiveis.
+- [ ] Temas pequenos nao foram inflados para ocupar teto numerico, simetria
+  artificial ou balanceamento entre niveis.
 - [ ] A curadoria reduziu repeticao e inflacao.
 - [ ] Topicos fora de escopo nao viraram nodes.
 
@@ -278,6 +285,11 @@ basico:        Node 01 -> Node 02 -> ... -> Node N
 intermediario: Node 01 -> Node 02 -> ... -> Node N
 avancado:      Node 01 -> Node 02 -> ... -> Node N
 ```
+
+O `N` e local de cada nivel; os niveis podem ter quantidades diferentes de
+nodes. Defina a quantidade pela densidade do conteudo, pela curadoria semantica
+e pela necessidade real de decomposicao de cada nivel, nao por tentativa de
+deixar as correntes simetricas.
 
 Cada node deve assumir que os nodes anteriores do mesmo nivel ja foram
 estudados. `intermediario` pode assumir a base conceitual do `basico` como
@@ -313,7 +325,8 @@ os nodes. Prefira slugs localmente claros para reduzir ambiguidade humana.
 ### Checklist desta secao
 
 - [ ] Os tres niveis existem no plano.
-- [ ] Cada nivel tem no maximo 20 nodes.
+- [ ] Cada nivel tem no maximo 10 nodes.
+- [ ] Os niveis podem ter quantidades diferentes quando o conteudo pedir.
 - [ ] A ordem dos nodes segue dependencia real dentro de cada nivel.
 - [ ] Todo node tem label.
 - [ ] Todo node tem slug `NN-slug`.
@@ -473,7 +486,7 @@ Antes de responder, verifique:
 - o arquivo nao esta vazio;
 - o HTML contem estrutura obrigatoria;
 - o HTML contem os tres niveis;
-- nenhum nivel tem mais de 20 nodes;
+- nenhum nivel tem mais de 10 nodes;
 - o HTML e o contrato JSON concordam sobre niveis, `node_id`, slugs e ordem
   local dos nodes;
 - todos os nodes tem `NN-slug`;

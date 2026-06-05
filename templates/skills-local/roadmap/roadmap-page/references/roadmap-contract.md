@@ -97,7 +97,11 @@ versão e formato mínimo; regras de coerência entre HTML, ordem, slugs e
   fornecer contexto relevante; se não fornecer, use string vazia e registre
   premissas necessárias em `assumptions`.
 - `levels` deve conter exatamente `basico`, `intermediario` e `avancado`.
-- Cada nível pode ter no máximo 20 nodes; 20 é teto, não meta.
+- Cada nível pode ter no máximo 10 nodes; 10 é teto, não meta.
+- Os níveis podem ter quantidades diferentes; a quantidade de nodes deve ser
+  consequência da densidade do conteúdo, da curadoria semântica e da necessidade
+  real de decomposição de cada nível, não de arbitragem estética, simetria
+  artificial ou tentativa de balanceamento.
 - Cada node deve ter `level`, `node_id`, `order`, `slug` e `label`.
 - `node_id` deve seguir `<level>/<slug>` e ser único no contrato inteiro.
 - `order` deve ser local ao nível e compatível com o prefixo numérico do slug.

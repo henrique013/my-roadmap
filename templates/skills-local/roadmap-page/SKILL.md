@@ -44,9 +44,12 @@ coordenadas:
 - `intermediario`;
 - `avancado`.
 
-Cada nível pode ter até 20 nodes, mas esse número é teto, não meta. A skill
-principal deve planejar os três níveis no mesmo contexto para reduzir
-sobreposição e manter a anti-repetição global.
+Cada nível pode ter até 10 nodes, mas esse número é teto, não meta. Os níveis
+podem ter quantidades diferentes; a quantidade de nodes deve ser consequência
+da densidade, da curadoria semântica e da necessidade real de decomposição do
+conteúdo de cada nível. A skill principal deve planejar os três níveis no mesmo
+contexto para reduzir sobreposição e manter a anti-repetição global, sem
+simetria artificial nem preenchimento para balancear níveis.
 
 Exemplos válidos de input incluem frase curta, parágrafo, lista solta ou linhas
 separadas. Se o tema não for identificável no texto livre, a skill principal
