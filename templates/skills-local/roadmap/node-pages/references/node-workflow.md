@@ -290,6 +290,8 @@ O dump também deve registrar:
 - os insumos para `.editorial/concept-ledger.md`;
 - candidatos de narrativa para o HTML, com escolha de uma narrativa dominante;
 - um exemplo condutor possível;
+- a situação de abertura, a transformação acompanhada, o momento de nomeação de
+  conceitos e o risco de tom corretivo;
 - necessidades reais de visualização;
 - obrigações reais de concretização didática, quando a prosa provavelmente não
   bastar para mostrar forma, estado, ordem, contraste, fronteira ou risco.
@@ -321,12 +323,21 @@ preparado conta como vazamento, mesmo quando o termo literal não aparece.
 O HTML é um capítulo técnico narrativo. Antes de escrevê-lo, faça internamente o
 projeto narrativo:
 
-- encontre a pergunta-motor do node;
+- encontre a pergunta-motor do node ou uma situação concreta que a torne
+  inevitável;
+- escolha a transformação que o leitor vai acompanhar;
 - escolha a narrativa dominante que o tema pede;
 - escolha um exemplo técnico condutor;
+- decida onde os conceitos serão nomeados depois de situação, necessidade ou
+  consequência suficiente;
 - monte a sequência de conceitos, respeitando dependências;
 - posicione visuais apenas quando eles revelarem uma relação difícil de segurar
   só em texto.
+
+O HTML deve construir um modelo positivo antes de corrigir mal-entendidos.
+Riscos, armadilhas, limites e conceitos reservados pertencem ao bastidor
+editorial até que a narrativa tenha preparado a relação que torna esse cuidado
+compreensível.
 
 O HTML deve ter:
 
@@ -363,6 +374,8 @@ O pipeline atua sobre o `node.html` completo e sobre os artefatos internos de
 - auditar conceitos, aliases e primeiras ocorrências contra
   `.editorial/concept-ledger.md`;
 - auditar suficiência qualitativa de exemplos, snippets, tabelas e visuais;
+- auditar semanticamente se o HTML está ensinando por progressão ou se o tom
+  principal virou correção contínua, checklist ou auditoria visível;
 - auditar a escolha da primitiva visual antes do Playwright, falhando quando
   linha do tempo, fluxo, topologia, estado ou contraste conceitual simples
   estiverem em `<pre>` sem exceção ASCII documentada;
@@ -487,11 +500,16 @@ Antes de responder, verifique:
   de `.editorial/`;
 - o HTML não contém Markdown cru;
 - o HTML não parece dump reformatado;
+- o HTML constrói um modelo positivo antes de corrigir mal-entendidos;
+- contraste corretivo, títulos negativos, labels de risco e blocos
+  seguro/perigoso não dominam o ritmo da página;
 - os conceitos importantes foram preparados antes do uso do termo técnico;
 - nenhum conceito, alias ou paráfrase marcado como proibido aparece no HTML
   final;
 - nenhuma referência final introduz conceito técnico não preparado;
 - o exemplo condutor atravessa a explicação;
+- quando o node é denso, o exemplo condutor evolui em mais de um bloco
+  narrativo;
 - exemplos necessários existem onde forma, estado, ordem, contraste, fronteira
   ou risco ficariam abstratos demais só em prosa;
 - exemplos excessivos foram removidos;

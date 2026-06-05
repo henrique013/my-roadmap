@@ -7,13 +7,17 @@ Este guardrail valida e corrige conceitos usados antes de serem preparados no
 
 ## Regra Central
 
-Não use um termo técnico antes de construir a necessidade dele.
+Prepare o uso de um termo técnico antes de depender dele.
+
+Preparar significa construir uma situação, necessidade ou consequência que torne
+o termo útil para o leitor. Não significa listar várias coisas que o termo não
+é.
 
 A ordem segura é:
 
 ```text
-necessidade do leitor
-  -> explicação em linguagem comum
+situação, necessidade ou consequência
+  -> explicação em linguagem comum ou exemplo pequeno
     -> nome técnico
       -> uso posterior do termo
 ```
@@ -24,6 +28,11 @@ aparece antes de o leitor receber a ideia mínima necessária para entendê-lo.
 
 Não basta remover a palavra literal. Se uma ideia equivalente continua
 aparecendo cedo demais por alias ou paráfrase, o vazamento permanece.
+
+Também não basta preparar o conceito apenas por negação. Se a primeira
+explicação relevante é uma sequência de "não é isto", "não é aquilo" e "não
+confunda", classifique como preparação fraca e reescreva para mostrar primeiro o
+papel positivo do conceito na situação acompanhada.
 
 ## Arquivos Obrigatórios
 
@@ -193,6 +202,8 @@ usuário.
 
 Formas válidas de correção:
 
+- abrir uma situação concreta que crie a necessidade do conceito;
+- mostrar uma consequência observável antes de nomear o termo;
 - mover o termo para depois da explicação;
 - substituir o termo por linguagem comum até ele poder ser nomeado;
 - inserir uma frase de necessidade antes da nomeação;
@@ -205,6 +216,9 @@ Formas válidas de correção:
 - transformar uma lista ou tabela inicial em prosa progressiva;
 - atualizar o dump ou o ledger antes, se a correção exigir fato, relação,
   conceito, alias ou fronteira ainda ausente.
+
+Evite correções que apenas empilham negações. O leitor precisa entender para que
+o conceito serve, não só quais confusões ele deve evitar.
 
 Forma ruim:
 
@@ -280,6 +294,7 @@ O guardrail passa somente quando:
 - `.editorial/pipeline/02-concept-introduction/concept-audit.md` registra status `passa`;
 - `.editorial/pipeline/02-concept-introduction/revision-plan.md` registra nenhuma reescrita obrigatória;
 - a leitura segue de informação já dada para informação nova;
+- a preparação dos conceitos não depende de correção contínua por negação;
 - depois de qualquer reescrita, o HTML completo foi relido.
 
 Se o HTML foi reescrito, retorne ao pipeline para reiniciar a rodada global

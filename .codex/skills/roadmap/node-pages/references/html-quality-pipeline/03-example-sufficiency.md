@@ -4,6 +4,11 @@ Este guardrail valida se o HTML tem suporte concreto suficiente para trechos
 que dependem de forma, estado, ordem, contraste ou fronteira, sem transformar a
 página em laboratório ou coleção de exemplos.
 
+Ele também verifica se o suporte concreto ajuda a narrativa a progredir. Em
+nodes densos, o melhor exemplo costuma ser um exemplo condutor pequeno que muda
+de estado, atravessa seções e mostra consequências, não uma coleção de blocos
+isolados de `certo versus errado`.
+
 ## Regra Central
 
 Exemplo é obrigatório apenas quando reduz ambiguidade essencial. Excesso de
@@ -61,8 +66,8 @@ Procure sinais de demanda concreta:
 - API, comando, schema ou protocolo;
 - processo temporal;
 - estado antes/depois;
-- risco operacional;
-- contraste seguro/perigoso;
+- consequência operacional;
+- contraste necessário entre caminhos, estados ou responsabilidades;
 - três ou mais peças técnicas relacionadas.
 
 Se a prosa bastar, registre `passa`. Se a falta de suporte concreto prejudicar
@@ -135,7 +140,7 @@ quantidade.
 | Vários parâmetros juntos | tabela função/risco |
 | Processo temporal | fluxo curto ou linha do tempo |
 | Estado antes/depois | miniestado ou comparação curta |
-| Risco operacional | contraste seguro/perigoso |
+| Risco operacional | consequência no exemplo condutor ou contraste curto quando indispensável |
 | Sintaxe/API/comando | trecho mínimo, sem roteiro |
 | Conceito causal simples | prosa pode bastar |
 | Recapitulação de conceito anterior | prosa curta basta |
@@ -278,6 +283,25 @@ Correção:
 - manter um snippet e uma leitura de campos;
 - remover sequência operacional.
 
+Falha por contraste dominante:
+
+```text
+Cada seção termina com um bloco de leitura correta contra leitura perigosa,
+mesmo quando o leitor ainda não acompanhou uma situação concreta.
+```
+
+Motivo:
+
+- a página vira auditoria de riscos;
+- o exemplo não progride;
+- o leitor recebe advertências antes de ter um modelo positivo.
+
+Correção:
+
+- escolher um exemplo condutor;
+- mostrar a consequência dentro desse exemplo;
+- manter contraste lado a lado apenas quando ele resolver uma ambiguidade real.
+
 ## Interação com o Guardrail de Conceitos
 
 Este guardrail não substitui `01-concept-introduction.md`.
@@ -306,6 +330,8 @@ O HTML passa quando:
 - todo trecho que precisa de forma concreta recebeu suporte mínimo;
 - nenhum suporte concreto é excessivo;
 - nenhum suporte concreto virou laboratório;
+- exemplos densos contribuem para progressão, não apenas para correção;
+- contraste seguro/perigoso não virou o padrão estrutural da página;
 - nenhum suporte concreto introduz conceito não preparado;
 - nenhum suporte concreto invade node futuro;
 - `.editorial/pipeline/03-example-sufficiency/example-audit.md` registra `Status geral: passa`;

@@ -10,17 +10,52 @@ técnica vira compreensão.
 limites e preparação conceitual. O HTML transforma isso em um capítulo técnico
 que conduz o leitor por uma linha de raciocínio.
 
+## Postura Narrativa
+
+Ensine construindo um modelo útil antes de corrigir um modelo errado.
+
+O capítulo deve soar como uma explicação progressiva, não como uma auditoria de
+equívocos convertida em prosa. A pessoa leitora deve sentir que está
+acompanhando uma situação técnica até ela revelar as peças relevantes.
+
+Sequência preferida:
+
+```text
+situação concreta
+  -> necessidade ou consequência observável
+    -> modelo mental positivo
+      -> nome técnico no momento em que ele passa a ajudar
+        -> limites, riscos e contrastes necessários
+```
+
+Evite usar a sequência abaixo como gesto principal:
+
+```text
+hipótese errada presumida
+  -> negação de X
+    -> negação de Y
+      -> aviso sobre erro comum
+```
+
+Riscos, fronteiras e armadilhas continuam importantes, mas são intervenções
+pontuais. Eles devem aparecer quando a narrativa já construiu a relação que
+torna o cuidado compreensível.
+
 ## Antes de Escrever
 
 Leia o `research-dump.md` completo e `.editorial/concept-ledger.md` antes de
 escrever. Faça internamente o projeto narrativo:
 
-1. encontre a pergunta-motor;
-2. escolha a narrativa dominante;
-3. escolha o exemplo técnico condutor;
-4. ordene os conceitos por dependência;
-5. decida quais relações realmente precisam de visual;
-6. defina títulos que nascem do assunto, não de um template.
+1. encontre a pergunta-motor ou uma situação de abertura;
+2. escolha a transformação que o leitor vai acompanhar;
+3. escolha a narrativa dominante;
+4. escolha o exemplo técnico condutor;
+5. marque onde os conceitos serão nomeados;
+6. ordene os conceitos por dependência;
+7. decida quais relações realmente precisam de visual;
+8. defina títulos que nascem do assunto, não de um template;
+9. identifique onde o contraste é realmente necessário e onde ele só deixaria o
+   texto corretivo.
 
 Essa etapa não precisa virar arquivo separado. Ela precisa aparecer no resultado.
 
@@ -74,6 +109,9 @@ anterior/próximo.
 A pergunta-motor é a pergunta que faz o node existir para o leitor. Ela deve
 abrir uma tensão técnica real.
 
+Ela não precisa aparecer literalmente como pergunta no HTML. Muitas vezes a
+melhor abertura é uma situação pequena que torna a pergunta inevitável.
+
 Fraco:
 
 ```text
@@ -105,6 +143,20 @@ existir e comece por ela ou por uma situação técnica que a torne inevitável.
 leitor deve entender a direção da página pelo problema que ela abre, não por um
 aviso sobre o que o autor pretende ensinar.
 
+Prefira uma abertura que mostre algo acontecendo:
+
+```text
+Uma loja vê três mensagens no app, mas a integração só encontra duas. Antes de
+culpar a ferramenta, a página precisa separar onde a conversa está, qual conta
+fala e qual identidade técnica a API carrega.
+```
+
+Evite abrir presumindo erro do leitor:
+
+```text
+O problema não é apenas X. X não é Y. Também não é Z.
+```
+
 ## Narrativa Variável por Tema
 
 A narrativa dominante deve nascer do node. Não use a mesma forma para todos os
@@ -115,6 +167,8 @@ Lentes possíveis:
 - processo: quando o assunto é como algo acontece em fases;
 - causal: quando o centro é por que algo acontece e o que isso provoca;
 - topológica: quando o leitor precisa entender partes e relações;
+- construção incremental: quando um modelo nasce simples e ganha peças ao longo
+  da página;
 - contraste: quando duas ideias parecidas precisam ser separadas;
 - diagnóstico: quando o leitor interpreta sinais e hipóteses;
 - trade-off: quando cada escolha muda risco, custo ou comportamento;
@@ -125,6 +179,11 @@ Lentes possíveis:
 Essas lentes não são modelos fixos. Um node pode combinar mais de uma, mas deve
 haver uma dominante para orientar ordem, exemplo, visuais e fechamento.
 
+Use `contraste` como lente dominante somente quando a separação entre ideias
+parecidas for realmente o centro do node. Caso contrário, trate contrastes como
+pausas curtas dentro de uma narrativa de processo, construção incremental,
+ciclo de vida, topologia ou diagnóstico.
+
 Se dois nodes diferentes saem com a mesma abertura, os mesmos títulos e os
 mesmos componentes, a skill provavelmente falhou.
 
@@ -133,14 +192,15 @@ mesmos componentes, a skill provavelmente falhou.
 Regra central:
 
 ```text
-Não use um termo técnico antes de construir a necessidade dele.
+Construa uma situação, necessidade ou consequência antes de depender de um termo
+técnico.
 ```
 
 A sequência de escrita deve seguir esta disciplina:
 
 ```text
-necessidade do leitor
-  -> explicação em linguagem comum
+situação, necessidade ou consequência
+  -> explicação em linguagem comum ou exemplo pequeno
     -> nome técnico
       -> uso do termo em raciocínios futuros
 ```
@@ -179,6 +239,10 @@ qual explicação mínima precisa vir antes e quais aliases ou paráfrases tamb�
 contam como uso. Não basta remover a sigla literal se a ideia equivalente
 continua aparecendo cedo demais.
 
+Preparar um conceito não significa negar várias alternativas antes de nomeá-lo.
+Se a preparação vira uma sequência de "não é isto, não é aquilo", reescreva para
+mostrar primeiro o que o conceito faz dentro da situação acompanhada.
+
 ## Relação com o Pipeline de Qualidade
 
 Depois da primeira geração do HTML, a skill executa
@@ -215,6 +279,7 @@ O exemplo condutor deve:
 
 - atravessar várias partes da explicação;
 - mostrar mudança de estado, decisão, fluxo ou contraste;
+- revelar consequência observável;
 - reduzir abstração sem infantilizar;
 - carregar apenas o contexto técnico necessário;
 - evoluir junto com a narrativa.
@@ -237,6 +302,11 @@ Exemplos de natureza possível:
 Esses exemplos não são templates. Eles mostram o tipo de carga técnica que um
 exemplo condutor deve carregar.
 
+Em nodes densos, o exemplo condutor deve ser mais do que uma ilustração local.
+Ele deve voltar em duas ou mais seções quando isso ajudar o leitor a acompanhar
+estado, ordem, relação entre peças ou consequência. Se o exemplo aparece uma vez
+e some, verifique se a página virou lista de contrastes em vez de progressão.
+
 ## Exemplos Como Complemento, Não Base
 
 A página continua sendo uma narrativa técnica em prosa. Exemplos, snippets,
@@ -245,6 +315,11 @@ tabelas e visuais entram apenas quando reduzem uma ambiguidade essencial.
 Use suporte concreto quando o leitor precisar ver forma, estado, ordem,
 contraste ou fronteira para entender o conceito. Não use exemplo para decorar,
 repetir a prosa ou transformar o node em laboratório.
+
+Quando o assunto envolver risco, prefira mostrar a consequência no exemplo
+condutor antes de abrir um bloco de "leitura correta" contra "leitura perigosa".
+Contraste lado a lado continua permitido, mas não deve virar o padrão visual de
+todo node.
 
 Quando o HTML explicar arquivo de configuração, regra, linha, campo, formato,
 schema, API ou comando, inclua um exemplar mínimo de leitura conceitual, salvo
@@ -352,6 +427,7 @@ Pergunte o que precisa ficar visível:
 - o que se parece mas não é igual?
 - que causa produz qual consequência?
 - onde está a fronteira entre dentro e fora do escopo?
+- qual consequência aparece quando uma peça é colocada no lugar errado?
 
 Mapeamento útil, sem virar obrigação:
 
@@ -425,6 +501,11 @@ Prefira:
 O texto pode ser simples sem ser pobre. Simples significa direto, preciso e sem
 exibicionismo.
 
+Evite que a voz principal soe como correção contínua. Expressões como `erro
+comum`, `não basta`, `não é`, `não deve`, `leitura perigosa` e `fronteira`
+podem aparecer quando forem necessárias, mas não devem ser o ritmo dominante da
+página.
+
 ## Títulos Derivados da Narrativa
 
 Os títulos devem carregar ideias técnicas do momento narrativo. Eles não devem
@@ -450,6 +531,10 @@ Títulos possíveis, quando o tema pedir:
 Não copie esses títulos como modelo. Eles mostram o princípio: o título deve
 nascer da explicação, não da lista de seções do dump.
 
+Títulos em forma de negação, como `X não é Y`, são permitidos quando o contraste
+for o coração técnico do bloco. Se muitos títulos usam essa fórmula, a página
+provavelmente está ensinando por correção em vez de progressão.
+
 ## Relação com o Dump
 
 Use o dump como fonte principal. Se o HTML precisar de algo que não está no
@@ -471,6 +556,7 @@ node.html
   - precisa de ritmo, transição e progressão
   - não deve expor a engrenagem pedagógica
   - não deve parecer checklist
+  - não deve parecer auditoria de equívocos
 ```
 
 Validação importante:
@@ -516,6 +602,7 @@ O HTML não deve conter:
 - comandos para executar quando o node for conceitual;
 - laboratório, exercício, hands-on, desafio ou projeto final;
 - fórmula fixa de títulos.
+- correção contínua como voz dominante.
 
 Essas proibições valem para o HTML. O dump pode ter seções explícitas de
 contrato, objetivo, escopo e critério porque ele é um artefato interno.
@@ -553,6 +640,7 @@ Antes de finalizar o HTML, verifique:
   anterior/próximo antes do corpo narrativo;
 - os títulos nascem do assunto, não de um template;
 - a narrativa dominante combina com o node;
+- a narrativa constrói um modelo positivo antes de corrigir mal-entendidos;
 - o HTML não segue a estrutura do dump;
 - as primeiras ocorrências relevantes de conceitos técnicos foram preparadas
   antes de aparecer;
@@ -580,6 +668,7 @@ Antes de finalizar o HTML, verifique:
 - os visuais mostram relações que o texto sozinho deixaria abstratas;
 - tabelas aparecem apenas depois de contexto suficiente;
 - o texto evita meta-exposição sobre o objetivo da aula;
+- o texto não usa contraste corretivo como ritmo dominante;
 - o leitor adulto é respeitado;
 - o fechamento conclui a linha de entendimento em vez de entregar checklist
   escolar;

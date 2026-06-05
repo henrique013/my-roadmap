@@ -32,6 +32,8 @@ O dump deve:
 - registrar os insumos do ledger editorial que vai virar
   `.editorial/concept-ledger.md`;
 - propor candidatos de narrativa para o HTML.
+- registrar como a narrativa pode abrir por situação concreta, acompanhar uma
+  transformação e nomear conceitos no momento certo;
 - registrar obrigações reais de concretização didática para trechos em que a
   prosa provavelmente não basta.
 
@@ -234,6 +236,12 @@ Registre:
 Cada risco relevante deve ter base em fonte, no roadmap ou em inferência
 declarada.
 
+Esta seção é bastidor de auditoria, não roteiro visível. No HTML, riscos e
+armadilhas só devem aparecer quando virarem consequência concreta da narrativa,
+do exemplo condutor ou de uma fronteira que o leitor já tem condições de
+entender. Não copie esta seção como bloco de `erros comuns` nem deixe esses
+itens comandarem o tom do capítulo.
+
 ### Limites e Fora de Escopo
 
 Separe:
@@ -406,6 +414,12 @@ Formato:
 Pergunta-motor possível:
 - ...
 
+Situação de abertura possível:
+- ...
+
+Transformação acompanhada:
+- ...
+
 Narrativa dominante:
 - ...
 
@@ -415,15 +429,31 @@ Por que esta narrativa combina com o node:
 Exemplo condutor possível:
 - ...
 
+Momento de nomeação dos conceitos:
+- ...
+
 Abstrações que precisam virar visual:
 - ...
 
+Contrastes realmente necessários:
+- ...
+
+Riscos, limites e armadilhas que devem ficar no bastidor:
+- ...
+
 Riscos de virar fórmula:
+- ...
+
+Risco de tom corretivo:
 - ...
 ```
 
 A pergunta-motor deve ser concreta. Ela deve revelar a tensão técnica que faz o
 node existir, não apenas perguntar "o que é X?".
+
+A narrativa dominante deve priorizar construção de modelo antes de correção. Se
+o candidato começa por várias negações ou por uma lista de erros presumidos,
+registre uma alternativa que abra com situação, necessidade ou consequência.
 
 ## Validação do Dump
 
