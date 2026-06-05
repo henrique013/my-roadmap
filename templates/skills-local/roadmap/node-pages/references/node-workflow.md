@@ -142,6 +142,11 @@ Extraia do node solicitado:
 - order local;
 - slug;
 - label;
+- rótulo humano do nível: `Básico`, `Intermediário` ou `Avançado`;
+- quantidade total de nodes no mesmo nível;
+- título ou tema humano do roadmap;
+- node anterior do mesmo nível, quando existir;
+- node seguinte do mesmo nível, quando existir;
 - papel na corrente;
 - pré-requisitos herdados;
 - o que introduz pela primeira vez;
@@ -162,6 +167,25 @@ apontarem para nodes específicos.
 O contrato do node é a fronteira da documentação. A pesquisa pode expandir
 profundidade, exemplos, fontes e explicações, mas não pode invadir o que o
 roadmap reservou para outro node.
+
+O HTML final deve usar esses dados estruturados para orientar a pessoa leitora
+antes da narrativa principal. O contexto de posição deve ser derivado de
+`.roadmap/roadmap-contract.json`, não apenas do `roadmap.html` ou do slug
+pedido. Use o `roadmap.html` somente como verificação cruzada.
+
+Ao montar o contexto de posição:
+
+- derive `data-level`, `data-node-order`, `data-node-count` e
+  `data-roadmap-slug` do contrato;
+- mostre posição em linguagem humana, como `Básico · 01 de 08`;
+- mostre o título ou tema humano do roadmap;
+- mostre o label do node atual;
+- mostre o label do node anterior e do próximo node do mesmo nível quando
+  existirem;
+- quando não houver anterior ou próximo, diga explicitamente que este é o
+  primeiro ou último node do nível;
+- crie link profundo para vizinho somente quando o `node.html` desse vizinho
+  existir.
 
 ## 4. Pasta do Node, Bastidor Editorial e Asset Visual
 
@@ -307,6 +331,8 @@ O HTML deve ter:
 - CSS embutido;
 - título adequado ao node;
 - link de retorno para `../../roadmap.html`;
+- área de contexto de posição com nível humano, ordem local, total de nodes do
+  nível, título/tema do roadmap, node atual e anterior/próximo do mesmo nível;
 - referências comentadas ao fim;
 - profundidade técnica, progressão e rastreabilidade.
 
@@ -405,6 +431,10 @@ Antes de responder, verifique:
 - `research-dump.md` existe, não está vazio e foi criado antes do HTML;
 - `node.html` existe e não está vazio;
 - `node.html` contém um link de retorno para `../../roadmap.html`;
+- `node.html` contém contexto de posição humano derivado do contrato, com
+  `data-node-position="true"`, `data-level`, `data-node-order`,
+  `data-node-count`, `data-roadmap-slug`, nível humano, posição local,
+  título/tema do roadmap, node atual e anterior/próximo do mesmo nível;
 - depois que `node.html` passar nas validações mecânicas e qualitativas, o
   `roadmap.html` pai contém um link relativo para
   `<level>/<node-slug>/node.html` no item do node atual;

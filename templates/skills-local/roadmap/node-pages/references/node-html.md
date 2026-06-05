@@ -28,6 +28,47 @@ Se o HTML precisar de conceito, alias, fonte, fronteira ou explicação que não
 esteja no dump e no ledger, atualize primeiro `research-dump.md` e
 `.editorial/concept-ledger.md`.
 
+## Contexto de Posição do Node
+
+Todo `node.html` deve orientar a pessoa leitora antes do corpo narrativo. Logo
+após o link de retorno ao roadmap, e antes da narrativa principal começar,
+inclua uma área compacta de orientação humana com:
+
+- rótulo humano do nível: `Básico`, `Intermediário` ou `Avançado`;
+- posição local no nível no formato humano, como `01 de 08`;
+- título ou tema humano do roadmap;
+- label humano do node atual;
+- contexto anterior/próximo do mesmo nível, quando existir;
+- indicação explícita de primeiro ou último node do nível quando não houver
+  anterior ou próximo.
+
+Essa área é orientação, não seção pedagógica. Ela não deve virar card de
+metadados como abertura, nem substituir a pergunta-motor ou a narrativa do
+capítulo.
+
+Use marcadores semânticos estáveis para permitir validação mecânica sem prender
+a redação a uma frase específica:
+
+```html
+<div
+  class="node-context"
+  data-node-position="true"
+  data-level="basico"
+  data-node-order="1"
+  data-node-count="8"
+  data-roadmap-slug="api-oficial-whatsapp">
+  <p><strong>Básico · 01 de 08</strong></p>
+  <p>Roadmap: API oficial do WhatsApp para automações de agência</p>
+  <p>Node atual: Ecossistema Meta e WhatsApp Business Platform</p>
+  <p>Anterior: primeiro node do nível · Próximo: Business Portfolio, BM e ativos do cliente</p>
+</div>
+```
+
+Os identificadores técnicos, como `node_id`, slug do node e slug do roadmap,
+podem continuar visíveis para rastreabilidade, mas devem ficar visualmente
+secundários. Eles não substituem nível humano, posição local e contexto
+anterior/próximo.
+
 ## Pergunta-Motor
 
 A pergunta-motor é a pergunta que faz o node existir para o leitor. Ela deve
@@ -494,6 +535,8 @@ O arquivo deve conter:
 - CSS embutido;
 - título adequado ao node;
 - link de retorno para `../../roadmap.html`;
+- contexto de posição humano com nível, ordem local, total de nodes do nível,
+  título/tema do roadmap, node atual e anterior/próximo do mesmo nível;
 - referências comentadas no fim.
 
 Mantenha boa hierarquia, leitura confortável, contraste suficiente e texto que
@@ -506,6 +549,8 @@ Antes de finalizar o HTML, verifique:
 
 - a primeira tela abre uma pergunta técnica real ou uma situação que a torna
   inevitável;
+- a primeira tela informa nível humano, posição local e contexto
+  anterior/próximo antes do corpo narrativo;
 - os títulos nascem do assunto, não de um template;
 - a narrativa dominante combina com o node;
 - o HTML não segue a estrutura do dump;

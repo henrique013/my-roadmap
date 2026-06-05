@@ -32,6 +32,42 @@ class LinkParser(HTMLParser):
             self.hrefs.append(href)
 
 
+class NodePositionParser(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.matches: list[dict[str, Any]] = []
+        self._capture_depth = 0
+        self._current: dict[str, Any] | None = None
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        attrs_map = {name.lower(): value or "" for name, value in attrs if name}
+        if self._current is not None:
+            self._capture_depth += 1
+
+        if attrs_map.get("data-node-position") == "true":
+            self._current = {
+                "tag": tag.lower(),
+                "attrs": attrs_map,
+                "text_parts": [],
+            }
+            self._capture_depth = 1
+
+    def handle_endtag(self, tag: str) -> None:
+        if self._current is None:
+            return
+        self._capture_depth -= 1
+        if self._capture_depth > 0:
+            return
+        current = self._current
+        current["text"] = " ".join(current.pop("text_parts"))
+        self.matches.append(current)
+        self._current = None
+
+    def handle_data(self, data: str) -> None:
+        if self._current is not None and data.strip():
+            self._current["text_parts"].append(data)
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Valida a estrutura mecânica obrigatória de um node tri-level."
@@ -181,6 +217,133 @@ def collect_hrefs(html_text: str) -> list[str]:
     parser.feed(html_text)
     parser.close()
     return parser.hrefs
+
+
+def normalize_visible(value: object) -> str:
+    return re.sub(r"\s+", " ", str(value or "")).strip()
+
+
+def normalize_for_contains(value: object) -> str:
+    return normalize_visible(value).casefold()
+
+
+def level_label(level: str) -> str:
+    return {
+        "basico": "Básico",
+        "intermediario": "Intermediário",
+        "avancado": "Avançado",
+    }[level]
+
+
+def contains_any(text: str, candidates: tuple[str, ...]) -> bool:
+    return any(candidate.casefold() in text for candidate in candidates)
+
+
+def order_markers(order: int, count: int) -> tuple[str, ...]:
+    padded_order = f"{order:02d}"
+    padded_count = f"{count:02d}"
+    return (
+        f"{padded_order} de {padded_count}",
+        f"{padded_order} of {padded_count}",
+        f"{padded_order}/{padded_count}",
+        f"{order} de {count}",
+        f"{order} of {count}",
+        f"{order}/{count}",
+    )
+
+
+def validate_node_position_context(
+    html_text: str,
+    contract: dict[str, Any] | None,
+    level: str,
+    node_slug: str,
+    contract_node: dict[str, Any],
+    failures: list[str],
+) -> None:
+    if contract is None:
+        return
+
+    parser = NodePositionParser()
+    parser.feed(html_text)
+    parser.close()
+
+    if len(parser.matches) != 1:
+        failures.append(
+            "HTML: contexto de posição deve conter exatamente um elemento com "
+            'data-node-position="true"'
+        )
+        return
+
+    match = parser.matches[0]
+    attrs = match.get("attrs", {})
+    text = normalize_for_contains(match.get("text", ""))
+    nodes = nodes_by_level(contract).get(level, [])
+    node_count = len(nodes)
+    order = contract_node.get("order")
+    label = normalize_visible(contract_node.get("label"))
+    roadmap_slug = normalize_visible(contract.get("roadmap_slug"))
+    roadmap_title = normalize_visible(contract.get("theme") or contract.get("title"))
+
+    expected_attrs = {
+        "data-level": level,
+        "data-node-order": str(order),
+        "data-node-count": str(node_count),
+        "data-roadmap-slug": roadmap_slug,
+    }
+    for attr_name, expected_value in expected_attrs.items():
+        if attrs.get(attr_name) != expected_value:
+            failures.append(
+                f"HTML: contexto de posição com {attr_name} inválido "
+                f"(esperado {expected_value})"
+            )
+
+    if type(order) is not int:
+        failures.append("HTML: contexto de posição exige order inteiro no contrato")
+        return
+    if node_count <= 0:
+        failures.append("HTML: contexto de posição exige nodes do nível no contrato")
+        return
+
+    required_texts = (
+        (level_label(level), "rótulo humano do nível"),
+        (label, "label humano do node atual"),
+        (roadmap_title, "título ou tema humano do roadmap"),
+    )
+    for expected_text, label_text in required_texts:
+        if not expected_text or normalize_for_contains(expected_text) not in text:
+            failures.append(f"HTML: contexto de posição não contém {label_text}")
+
+    if not contains_any(text, tuple(marker.casefold() for marker in order_markers(order, node_count))):
+        failures.append("HTML: contexto de posição não contém ordem local e total do nível")
+
+    slugs = [str(node.get("slug")) for node in nodes]
+    if node_slug not in slugs:
+        failures.append("HTML: contexto de posição não conseguiu resolver índice do node no nível")
+        return
+
+    index = slugs.index(node_slug)
+    previous_node = nodes[index - 1] if index > 0 else None
+    next_node = nodes[index + 1] if index + 1 < len(nodes) else None
+
+    if previous_node is None:
+        if not contains_any(text, ("primeiro", "first", "sem anterior", "no previous")):
+            failures.append(
+                "HTML: contexto de posição deve indicar ausência de node anterior"
+            )
+    else:
+        previous_label = normalize_for_contains(previous_node.get("label"))
+        if previous_label and previous_label not in text:
+            failures.append("HTML: contexto de posição não contém label do node anterior")
+
+    if next_node is None:
+        if not contains_any(text, ("último", "ultimo", "last", "sem próximo", "sem proximo", "no next")):
+            failures.append(
+                "HTML: contexto de posição deve indicar ausência de próximo node"
+            )
+    else:
+        next_label = normalize_for_contains(next_node.get("label"))
+        if next_label and next_label not in text:
+            failures.append("HTML: contexto de posição não contém label do próximo node")
 
 
 def validate_parent_roadmap_link(
@@ -360,8 +523,17 @@ def validate(args: argparse.Namespace) -> list[str]:
                     failures.append(f"evidência visual ausente ou vazia: {path}")
 
     if is_non_empty_file(node_html):
-        html_failures = collect_html_shape_failures(node_html.read_text(encoding="utf-8"))
+        node_html_text = node_html.read_text(encoding="utf-8")
+        html_failures = collect_html_shape_failures(node_html_text)
         failures.extend(f"HTML: {failure}" for failure in html_failures)
+        validate_node_position_context(
+            node_html_text,
+            contract,
+            resolved_level,
+            node_slug,
+            contract_node,
+            failures,
+        )
         validate_parent_roadmap_link(roadmap_html, resolved_level, node_slug, failures)
 
     return failures

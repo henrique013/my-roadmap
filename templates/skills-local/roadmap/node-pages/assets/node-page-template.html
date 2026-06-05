@@ -186,6 +186,25 @@
       margin-bottom: 24px;
     }
 
+    .node-context {
+      display: grid;
+      gap: 6px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      background: var(--soft);
+      margin: 0 0 18px;
+    }
+
+    .node-context p {
+      margin: 0;
+    }
+
+    .node-context strong {
+      color: #111827;
+    }
+
     .callout {
       padding: 13px 15px;
       border: 1px solid var(--border);
@@ -314,6 +333,18 @@
 <body>
   <main>
     <a class="backlink" href="../../roadmap.html">Voltar ao roadmap</a>
+    <div
+      class="node-context"
+      data-node-position="true"
+      data-level="basico"
+      data-node-order="1"
+      data-node-count="8"
+      data-roadmap-slug="exemplo-roadmap">
+      <p><strong>Básico · 01 de 08</strong></p>
+      <p>Roadmap: Nome humano do roadmap</p>
+      <p>Node atual: Node 01 - Nome do Node</p>
+      <p>Anterior: primeiro node do nível · Próximo: Nome humano do próximo node</p>
+    </div>
     <h1>Node 01 - Nome do Node</h1>
     <p class="lead">
       Abertura curta do node: problema conceitual, ideia central e mudanca de entendimento esperada.
