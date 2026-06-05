@@ -114,9 +114,9 @@ Antes de gerar qualquer conteudo final, leia:
     roadmap-page/assets/roadmap-page-template.html
 ```
 
-Use `roadmap-page-template.html` como referencia visual: tipografia simples, leitura
-confortavel, bordas discretas, tabelas limpas, blocos de chamada, cards curtos e
-responsividade basica.
+Use `roadmap-page-template.html` como referencia visual: tipografia base de
+18px, largura principal de 1260px, leitura confortavel, bordas discretas,
+tabelas limpas, blocos de chamada, cards curtos e responsividade basica.
 
 Leia tambem:
 

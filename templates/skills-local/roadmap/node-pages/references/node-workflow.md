@@ -219,8 +219,9 @@ node-pages/assets/node-page-template.html
 ```
 
 Use esse asset apenas como referência visual. A página do node deve manter
-leitura confortável, boa hierarquia, CSS embutido e compatibilidade visual com o
-roadmap. Não copie textos de exemplo do asset.
+tipografia base de 18px, largura principal de 1260px, leitura confortável, boa
+hierarquia, CSS embutido e compatibilidade visual com o roadmap. Não copie
+textos de exemplo do asset.
 
 Leia tambem:
 

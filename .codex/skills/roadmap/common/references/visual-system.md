@@ -42,7 +42,7 @@ Preferir:
 
 ```css
 main {
-  max-width: 1120px;
+  max-width: 1260px;
   margin: 0 auto;
   padding: 32px 28px 56px;
 }
@@ -64,16 +64,21 @@ pre,
 }
 ```
 
+Use `body { font-size: 18px; }` como base tipográfica. Escale os tamanhos
+explícitos do template proporcionalmente a partir da antiga base de `16px`,
+mantendo `code { font-size: 0.92em; }` para que código inline acompanhe o texto
+pai.
+
 Se a leitura ficar larga demais, reduza `main`, não cada parágrafo isolado.
 
 ## Falhas Explícitas
 
-Falha quando `main` está próximo de `1120px` ou `1180px` e existe:
+Falha quando `main` está próximo de `1260px` e existe:
 
 ```css
-p { max-width: 880px; }
-.lead { max-width: 920px; }
-.callout { max-width: 940px; }
+p { max-width: 990px; }
+.lead { max-width: 1035px; }
+.callout { max-width: 1058px; }
 ```
 
 sem justificativa visual explícita no asset e na auditoria.
