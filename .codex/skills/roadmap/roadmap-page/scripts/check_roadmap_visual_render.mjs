@@ -100,6 +100,98 @@ function colorAlpha(value) {
   return Number.isFinite(alpha) ? alpha : 1;
 }
 
+function pxNumber(value) {
+  const parsed = Number.parseFloat(String(value || "0"));
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function hasPositiveBoxValue(values) {
+  return values.some((value) => pxNumber(value) > 0.1);
+}
+
+function preCodeChipFailures(renderResults) {
+  const failures = [];
+
+  for (const result of renderResults) {
+    for (const block of result.preCodeStyles) {
+      const hasBackground = colorAlpha(block.backgroundColor) > 0.01;
+      const hasBorder = hasPositiveBoxValue(block.borderWidths);
+      const hasPadding = hasPositiveBoxValue(block.paddings);
+      const hasRadius = hasPositiveBoxValue(block.borderRadii);
+
+      if (hasBackground || hasBorder || hasPadding || hasRadius) {
+        failures.push({
+          viewport: result.viewport.name,
+          index: block.index,
+          text: block.text,
+          reason: [
+            hasBackground ? `background ${block.backgroundColor}` : null,
+            hasBorder ? `border ${block.borderWidths.join(" ")}` : null,
+            hasPadding ? `padding ${block.paddings.join(" ")}` : null,
+            hasRadius ? `border-radius ${block.borderRadii.join(" ")}` : null,
+          ].filter(Boolean).join(", "),
+        });
+      }
+    }
+  }
+
+  return failures;
+}
+
+function highlightFailures(renderResults) {
+  const failures = [];
+
+  for (const result of renderResults) {
+    for (const block of result.preBlocks) {
+      if (
+        block.hasCode &&
+        block.looksTechnical &&
+        !block.isConceptualVisual &&
+        !block.hasHighlight
+      ) {
+        failures.push({
+          viewport: result.viewport.name,
+          index: block.index,
+          text: block.text,
+        });
+      }
+    }
+  }
+
+  return failures;
+}
+
+function tableSurfaceFailures(renderResults) {
+  const failures = [];
+
+  for (const result of renderResults) {
+    for (const cell of result.tableCellStyles) {
+      if (cell.tagName === "td" && cell.backgroundColor !== "rgb(255, 255, 255)") {
+        failures.push({
+          viewport: result.viewport.name,
+          index: cell.index,
+          tagName: cell.tagName,
+          text: cell.text,
+          backgroundColor: cell.backgroundColor,
+          expected: "rgb(255, 255, 255)",
+        });
+      }
+      if (cell.tagName === "th" && cell.backgroundColor !== "rgb(232, 238, 246)") {
+        failures.push({
+          viewport: result.viewport.name,
+          index: cell.index,
+          tagName: cell.tagName,
+          text: cell.text,
+          backgroundColor: cell.backgroundColor,
+          expected: "rgb(232, 238, 246)",
+        });
+      }
+    }
+  }
+
+  return failures;
+}
+
 async function collectRenderData(page) {
   return page.evaluate(() => {
     function parseColor(value) {
@@ -155,6 +247,56 @@ async function collectRenderData(page) {
       const markedAsVisual = /(diagram|diagrama|fluxo|flow|ascii|timeline|linha-do-tempo|topology|topologia|state|estado|lane|progress|progresso|antes|depois|before|after)/.test(markers);
       const arrowFlow = /(?:->|=>|-->|<--|\|)/.test(text) && !/[=;{}[\]:]/.test(text);
       return markedAsVisual || arrowFlow;
+    }
+
+    function hasHighlightClass(element) {
+      return Array.from(element.querySelectorAll("*")).some((child) =>
+        Array.from(child.classList).some(
+          (className) =>
+            className.startsWith("syntax-") ||
+            className.startsWith("token") ||
+            className.startsWith("hljs-"),
+        ),
+      );
+    }
+
+    function looksTechnical(text) {
+      const trimmed = text.trim();
+      return (
+        /[=;{}[\]:]/.test(trimmed) ||
+        /^\s*[\w.-]+\s+\S+/m.test(trimmed) ||
+        /<[^>]+>/.test(trimmed)
+      );
+    }
+
+    function summarizeStyle(element, index) {
+      const style = window.getComputedStyle(element);
+      return {
+        index,
+        text: element.textContent.trim().slice(0, 120),
+        color: style.color,
+        backgroundColor: style.backgroundColor,
+        borderWidths: [
+          style.borderTopWidth,
+          style.borderRightWidth,
+          style.borderBottomWidth,
+          style.borderLeftWidth,
+        ],
+        paddings: [
+          style.paddingTop,
+          style.paddingRight,
+          style.paddingBottom,
+          style.paddingLeft,
+        ],
+        borderRadii: [
+          style.borderTopLeftRadius,
+          style.borderTopRightRadius,
+          style.borderBottomRightRadius,
+          style.borderBottomLeftRadius,
+        ],
+        fontFamily: style.fontFamily,
+        fontSize: style.fontSize,
+      };
     }
 
     function effectiveBackground(element) {
@@ -231,11 +373,28 @@ async function collectRenderData(page) {
       return {
         index,
         text: text.slice(0, 160),
+        hasCode: Boolean(pre.querySelector("code")),
+        hasHighlight: hasHighlightClass(pre),
         isConceptualVisual: isConceptualVisualPre(pre, text),
         hasAsciiException: pre.getAttribute("data-ascii-exception") === "true",
         asciiReason: pre.getAttribute("data-ascii-reason") || "",
+        looksTechnical: looksTechnical(text),
         className: pre.className,
         ariaLabel: pre.getAttribute("aria-label") || "",
+      };
+    });
+
+    const preCodeStyles = Array.from(document.querySelectorAll("pre code")).map(
+      (element, index) => summarizeStyle(element, index),
+    );
+
+    const tableCellStyles = Array.from(document.querySelectorAll("th, td")).map((element, index) => {
+      const style = window.getComputedStyle(element);
+      return {
+        index,
+        tagName: element.tagName.toLowerCase(),
+        text: element.textContent.trim().slice(0, 120),
+        backgroundColor: style.backgroundColor,
       };
     });
 
@@ -249,6 +408,8 @@ async function collectRenderData(page) {
       contentWidths,
       contrastSamples,
       preBlocks,
+      preCodeStyles,
+      tableCellStyles,
     };
   });
 }
@@ -407,6 +568,39 @@ function writeAudit(targets, renderResults, groupedFailures) {
       "",
     );
   }
+  for (const item of groupedFailures.preCodeChip) {
+    failureText.push(
+      "### `pre code` com estilo de chip",
+      "",
+      `- Onde apareceu: viewport ${item.viewport}, bloco ${item.index}.`,
+      `- Por que falha: ${item.reason}.`,
+      "- Revisão obrigatória: defina `pre code` com fundo transparente, borda 0, padding 0 e `font: inherit`.",
+      `- Trecho: \`${item.text}\``,
+      "",
+    );
+  }
+  for (const item of groupedFailures.highlight) {
+    failureText.push(
+      "### Snippet técnico sem highlight",
+      "",
+      `- Onde apareceu: viewport ${item.viewport}, bloco ${item.index}.`,
+      "- Por que falha: snippet técnico precisa de destaque semântico mínimo.",
+      "- Revisão obrigatória: adicionar spans/classes `syntax-*` ou justificar como texto literal excepcional.",
+      `- Trecho: \`${item.text}\``,
+      "",
+    );
+  }
+  for (const item of groupedFailures.tableSurface) {
+    failureText.push(
+      "### Superfície de tabela incorreta",
+      "",
+      `- Onde apareceu: viewport ${item.viewport}, célula ${item.index} (${item.tagName}).`,
+      `- Por que falha: background ${item.backgroundColor}; esperado ${item.expected}.`,
+      "- Revisão obrigatória: aplicar `var(--surface)` em `td` e `var(--soft-2)` em `th`.",
+      `- Trecho: \`${item.text}\``,
+      "",
+    );
+  }
   for (const item of groupedFailures.conceptualPre) {
     failureText.push(
       "### Visual conceitual em `<pre>`",
@@ -450,6 +644,9 @@ function writeAudit(targets, renderResults, groupedFailures) {
     "",
     "| Check | Status | Evidência |",
     "|---|---|---|",
+    `| \`pre code\` não herda chip de inline code | ${groupedFailures.preCodeChip.length === 0 ? "passa" : "falha"} | ${groupedFailures.preCodeChip.length === 0 ? "estilos computados sem fundo, borda, padding ou raio próprios" : `${groupedFailures.preCodeChip.length} ocorrência(s) com estilo de chip`} |`,
+    `| snippets técnicos têm highlight semântico | ${groupedFailures.highlight.length === 0 ? "passa" : "falha"} | ${groupedFailures.highlight.length === 0 ? "blocos técnicos usam classes de highlight ou são texto literal permitido" : `${groupedFailures.highlight.length} bloco(s) técnico(s) sem highlight`} |`,
+    `| tabelas usam superfície estruturada | ${groupedFailures.tableSurface.length === 0 ? "passa" : "falha"} | ${groupedFailures.tableSurface.length === 0 ? "td renderiza em branco e th usa o cinza aprovado" : `${groupedFailures.tableSurface.length} célula(s) com superfície incorreta`} |`,
     `| contraste mínimo em texto e código | ${groupedFailures.contrast.length === 0 ? "passa" : "falha"} | ${groupedFailures.contrast.length === 0 ? "amostras renderizadas com contraste >= 4.5:1" : `${groupedFailures.contrast.length} amostra(s) abaixo de 4.5:1`} |`,
     `| visuais conceituais não usam \`<pre>\` como atalho | ${groupedFailures.conceptualPre.length === 0 ? "passa" : "falha"} | ${groupedFailures.conceptualPre.length === 0 ? "nenhum <pre> suspeito sem exceção ASCII explícita" : `${groupedFailures.conceptualPre.length} bloco(s) visual(is) em <pre> sem exceção completa`} |`,
     `| página sem overflow horizontal global | ${groupedFailures.overflow.length === 0 ? "passa" : "falha"} | ${groupedFailures.overflow.length === 0 ? "desktop e mobile sem overflow global" : `${groupedFailures.overflow.length} viewport(s) com overflow global`} |`,
@@ -503,6 +700,9 @@ async function run() {
   }
 
   const groupedFailures = {
+    preCodeChip: preCodeChipFailures(renderResults),
+    highlight: highlightFailures(renderResults),
+    tableSurface: tableSurfaceFailures(renderResults),
     overflow: overflowFailures(renderResults),
     contentWidth: contentWidthFailures(renderResults),
     contrast: contrastFailures(renderResults),

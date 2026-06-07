@@ -13,6 +13,9 @@ Renderize `roadmap.html` antes da resposta final.
 - `.lead` não fica como coluna curta perdida;
 - `.callout` usa a largura disponível;
 - tabelas e blocos de código controlam overflow internamente;
+- tabelas usam `td` em superfície branca e `th` em `var(--soft-2)`;
+- snippets técnicos têm highlight semântico ou justificativa registrada no
+  audit visual;
 - mapas, fluxos, sequências e timelines conceituais não usam `<pre>` como
   atalho visual;
 - assets externos inesperados são bloqueados ou removidos;
@@ -40,5 +43,7 @@ Registre no audit visual:
 Registre também:
 
 ```md
+| tabelas usam superfície estruturada | passa/falha | ... |
+| snippets técnicos têm highlight semântico | passa/falha | ... |
 | visuais conceituais não usam `<pre>` como atalho | passa/falha | ... |
 ```

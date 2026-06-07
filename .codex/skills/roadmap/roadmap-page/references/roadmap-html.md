@@ -104,6 +104,52 @@ literal, código, configuração ou ASCII excepcional justificado.
 Quando ASCII for exceção, o bloco deve ter `data-ascii-exception="true"`,
 `data-ascii-reason` não vazio e justificativa no audit visual.
 
+## Snippets e Código Renderizado
+
+Inline `code` e bloco `<pre><code>` têm papéis visuais diferentes. Inline
+`code` deve parecer uma etiqueta curta dentro da frase. Bloco de código deve
+parecer uma superfície única de leitura.
+
+Quando usar `<pre><code>`, defina explicitamente `pre code` no CSS para remover
+fundo, borda, padding e `border-radius` herdados de inline `code`:
+
+```css
+pre code {
+  color: inherit;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  font: inherit;
+}
+```
+
+Snippets técnicos que mostram JSON, configuração, regra, parâmetro, campo, API,
+comando, consulta ou formato devem ter highlight semântico mínimo. Use classes
+`syntax-*` no próprio HTML quando não houver biblioteca local de highlight. Um
+bloco monocromático só passa para texto literal quando a ausência de highlight
+estiver justificada em `.roadmap/pipeline/05-visual-render/visual-audit.md`.
+
+Exemplo de JSON/configuração com highlight manual:
+
+```html
+<pre class="code-block language-json" aria-label="Exemplo conceitual de evento estruturado">
+<code>{
+  <span class="syntax-key">"level"</span><span class="syntax-op">:</span> <span class="syntax-value">"error"</span>,
+  <span class="syntax-key">"message"</span><span class="syntax-op">:</span> <span class="syntax-value">"Falha ao consultar pedido"</span>,
+  <span class="syntax-key">"status_code"</span><span class="syntax-op">:</span> <span class="syntax-value">500</span>
+}</code></pre>
+```
+
+Exemplo de CloudWatch Logs Insights com highlight manual:
+
+```html
+<pre class="code-block language-cwl" aria-label="Consulta conceitual de Logs Insights">
+<code><span class="syntax-key">fields</span> <span class="syntax-value">@timestamp</span>, <span class="syntax-value">route</span>, <span class="syntax-value">status_code</span>
+<span class="syntax-op">|</span> <span class="syntax-key">filter</span> <span class="syntax-value">status_code</span> <span class="syntax-op">&gt;=</span> <span class="syntax-value">500</span>
+<span class="syntax-op">|</span> <span class="syntax-key">stats</span> <span class="syntax-key">count</span><span class="syntax-op">()</span> <span class="syntax-key">by</span> <span class="syntax-value">route</span></code></pre>
+```
+
 ## Relação com o Contrato JSON
 
 O HTML e o JSON devem concordar sobre:
