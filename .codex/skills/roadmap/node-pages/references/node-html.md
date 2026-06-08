@@ -1,6 +1,8 @@
 # Contrato de `node.html`
 
-O HTML é uma narrativa técnica derivada do tema. Ele não deve ter formato fixo.
+O HTML é uma narrativa técnica derivada do tema, mas a página não é
+estruturalmente livre. O corpo narrativo varia por assunto; o shell da página é
+fixo e não deve ser redesenhado a cada node.
 
 Narrativa, aqui, não significa conto, personagem, fábula ou entretenimento.
 Narrativa significa ordem de entendimento: a sequência pela qual uma pergunta
@@ -9,6 +11,43 @@ técnica vira compreensão.
 `node.html` não representa o `research-dump.md`. O dump guarda fatos, fontes,
 limites e preparação conceitual. O HTML transforma isso em um capítulo técnico
 que conduz o leitor por uma linha de raciocínio.
+
+## Componentes Fixos e Corpo Dinâmico
+
+Todo `node.html` segue esta ordem fixa dentro de `<main>`:
+
+```text
+backlink para roadmap
+node-context
+h1
+lead
+meta opcional
+corpo narrativo dinâmico
+node-closing opcional
+footer.node-footer
+```
+
+Componentes fixos:
+
+- raiz visual `notion-dark`, tokens globais e `color-scheme: dark`;
+- link `.backlink`;
+- `.node-context`;
+- `h1` e `.lead` na posição inicial;
+- política de divisores;
+- `.node-closing`, quando existir;
+- `footer.node-footer`.
+
+Conteúdo dinâmico:
+
+- títulos e seções do corpo narrativo;
+- parágrafos, listas, tabelas explicativas, snippets, callouts e visuais
+  semânticos;
+- exemplos e transições que dependem do assunto do node.
+
+O corpo narrativo não pode criar outro topo, outro contexto de posição, outro
+rodapé de referências, outro root visual, outro padrão de link global ou outro
+mecanismo de divisor. Se uma seção precisa fechar a linha de entendimento, use
+`.node-closing` imediatamente antes de `footer.node-footer`.
 
 ## Postura Narrativa
 
@@ -67,7 +106,7 @@ esteja no dump e no ledger, atualize primeiro `research-dump.md` e
 
 Todo `node.html` deve orientar a pessoa leitora antes do corpo narrativo. Logo
 após o link de retorno ao roadmap, e antes da narrativa principal começar,
-inclua uma área compacta de orientação humana com:
+inclua exatamente uma área compacta de orientação humana com:
 
 - rótulo humano do nível: `Básico`, `Intermediário` ou `Avançado`;
 - posição local no nível no formato humano, como `01 de 08`;
@@ -82,8 +121,19 @@ Essa área é orientação, não seção pedagógica. Ela não deve virar card d
 metadados como abertura, nem substituir a pergunta-motor ou a narrativa do
 capítulo.
 
-Use marcadores semânticos estáveis para permitir validação mecânica sem prender
-a redação a uma frase específica:
+A forma visível é fixa:
+
+```text
+Básico · 01 de 08
+Roadmap: <título ou tema humano do roadmap>
+Node atual: <label humano do node atual>
+Anterior: <label real ou início do roadmap> · Próximo: <label real ou fim do roadmap>
+```
+
+Não acrescente linhas, títulos, badges, observações, campos técnicos ou labels
+alternativos dentro de `.node-context`.
+
+Use os marcadores semânticos estáveis abaixo para validação mecânica:
 
 ```html
 <div
@@ -118,10 +168,14 @@ quebrado.
 Não use texto genérico como `primeiro node do nível` ou `último node do nível`
 quando existir node anterior ou próximo em outro nível.
 
-Os identificadores técnicos, como `node_id`, slug do node e slug do roadmap,
-podem continuar visíveis para rastreabilidade, mas devem ficar visualmente
-secundários. Eles não substituem nível humano, posição local e contexto
-anterior/próximo.
+Não mostre identificadores técnicos no topo. `node_id`, slug do node, slug do
+roadmap, `Label canônico`, `Node ID` e qualquer variação equivalente ficam em
+atributos, contrato ou artefatos internos, nunca como texto visível de
+`.node-context`, `.meta` ou abertura do capítulo.
+
+O estilo visual de `.node-context` vem do template e não deve ser alterado no
+HTML gerado. Links dentro de `.node-context` usam o estilo próprio de
+`.node-context a`, sem herdar peso, cor ou decoração de links globais.
 
 ## Pergunta-Motor
 
@@ -600,6 +654,26 @@ Não use uma referência final para fazer vazar conceito reservado a node futuro
 Títulos de fonte, labels de link e comentários finais entram na auditoria de
 `.editorial/pipeline/01-visible-text/visible-text.md`.
 
+As referências visíveis têm forma fixa e aparecem uma única vez, no fim do
+`<main>`, sempre como `footer.node-footer`:
+
+```html
+<footer class="node-footer">
+  <h2>Referências</h2>
+  <ul class="reference-list">
+    <li class="reference-item">
+      <a href="https://example.com/fonte">Texto visível da fonte</a>
+      <span class="reference-note">Uso neste node: por que esta fonte sustenta a explicação.</span>
+    </li>
+  </ul>
+</footer>
+```
+
+Cada item deve ter exatamente um link e uma nota curta de uso. Não renderize
+referências como tabela, `ol`, `h3`, cards soltos, `section.refs`,
+`section.references`, `.final-note`, `Fontes usadas neste node`,
+`Referências usadas` ou `Referências comentadas`.
+
 ## Proibições no Corpo Principal
 
 O HTML não deve conter:
@@ -607,6 +681,19 @@ O HTML não deve conter:
 - dump reformatado;
 - página com seções fixas sempre iguais;
 - cards de metadados como abertura;
+- `Label canônico`;
+- `Node ID`;
+- `node_id` visível;
+- slug de node ou roadmap como texto de rastreabilidade;
+- `primeiro node do nível` ou `último node do nível` como fronteira genérica;
+- referências fora de `footer.node-footer`;
+- `Fontes usadas neste node`;
+- `Referências usadas`;
+- `Referências comentadas`;
+- `section.refs`, `section.references` ou `.final-note` para rodapé;
+- root CSS claro legado ou segundo `:root` de migração escura;
+- divisor terminal duplicado em `.refs`, `.references`, `.final-note`,
+  `.node-footer` ou equivalente;
 - `Objetivo do node`;
 - `Ao final você vai saber`;
 - `Pré-requisitos herdados`;
@@ -641,13 +728,20 @@ O arquivo deve conter:
 - CSS embutido;
 - título adequado ao node;
 - link de retorno para `../../roadmap.html`;
+- exatamente um `.node-context` com `data-node-position="true"`,
+  `data-level`, `data-node-order`, `data-node-count` e
+  `data-roadmap-slug`;
 - contexto de posição humano com nível, ordem local, total de nodes do nível,
   título/tema do roadmap, node atual e anterior/próximo na sequência global do
   roadmap;
 - links relativos para anterior/próximo somente quando o `node.html` do vizinho
   existir e não estiver vazio: `../<neighbor-slug>/node.html` no mesmo nível e
   `../../<neighbor-level>/<neighbor-slug>/node.html` em outro nível;
-- referências comentadas no fim.
+- opcionalmente uma seção `.node-closing` imediatamente antes do rodapé, apenas
+  com fechamento narrativo;
+- exatamente um `footer.node-footer` no fim, com título visível `Referências`,
+  `ul.reference-list` e itens `li.reference-item` com um link e uma nota
+  `.reference-note`.
 
 Mantenha boa hierarquia, leitura confortável, contraste suficiente e texto que
 caiba nos seus elementos. Use o asset da skill como referência visual, não como
@@ -656,6 +750,9 @@ O tema visual é sempre `notion-dark`: `body`, cards, contexto de node, tabelas,
 callouts, blocos de código e visuais conceituais customizados usam superfícies
 escuras; links, tags, foco, avisos e snippets usam cores semânticas pontuais.
 Não crie switch de tema nem modo claro alternativo.
+Não crie segundo bloco `:root`, não preserve tokens claros como `#ffffff`,
+`#f8fafc` ou `#f1f5f9`, e não use overrides tardios para converter uma base
+clara em tema escuro.
 
 ## Validação de Qualidade
 
@@ -665,6 +762,9 @@ Antes de finalizar o HTML, verifique:
   inevitável;
 - a primeira tela informa nível humano, posição local e contexto
   anterior/próximo antes do corpo narrativo;
+- `.node-context` não mostra `Label canônico`, `Node ID`, `node_id`, slug ou
+  marcador genérico de fronteira de nível;
+- `.node-context a` mantém peso, cor e decoração fixos;
 - os títulos nascem do assunto, não de um template;
 - a narrativa dominante combina com o node;
 - a narrativa constrói um modelo positivo antes de corrigir mal-entendidos;
@@ -674,6 +774,10 @@ Antes de finalizar o HTML, verifique:
 - aliases e paráfrases de conceitos não preparados foram removidos ou
   preparados;
 - referências finais não introduzem vocabulário técnico novo;
+- referências visíveis aparecem exatamente uma vez em `footer.node-footer`,
+  com título `Referências` e item `reference-item`;
+- não há tabela, `ol`, `h3`, `.refs`, `.references`, `.final-note` nem título
+  alternativo para referências;
 - o pipeline de qualidade foi executado até ponto fixo depois da primeira
   geração ou revisão do HTML;
 - `.editorial/pipeline/01-visible-text/visible-text.md`, `.editorial/pipeline/02-concept-introduction/concept-audit.md`,
@@ -691,6 +795,10 @@ Antes de finalizar o HTML, verifique:
 - snippets técnicos têm highlight semântico mínimo ou justificativa registrada;
 - visuais conceituais simples usam componentes HTML/CSS em vez de `<pre>`;
 - o elemento raiz contém `data-visual-theme="notion-dark"`;
+- existe exatamente um `:root` escuro canônico, sem tokens claros legados e sem
+  override tardio de tema;
+- existe uma única política de divisor: headings de seção separam blocos; o
+  rodapé e o fechamento não adicionam outro `border-top`;
 - nenhuma superfície clara legada permanece em `body`, cards, tabelas,
   callouts, tags, contexto de node ou componentes como `.flow-step`,
   `.state-card`, `.lane`, `.event-card`, `.stream-card`, `.part` e

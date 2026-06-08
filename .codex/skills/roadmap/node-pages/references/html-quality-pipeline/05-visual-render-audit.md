@@ -80,6 +80,20 @@ O guardrail falha quando:
 - inline `code` deixa de ser distinguível e legível fora de `pre`;
 - o elemento raiz não declara `data-visual-theme="notion-dark"`;
 - `color-scheme` computado não é escuro;
+- o HTML contém mais de um `:root`, tokens claros legados ou override tardio
+  para converter uma base clara em tema escuro;
+- `.node-context` não renderiza com o padding, margem, borda, borda esquerda,
+  raio, fundo, gap e largura definidos pelo template;
+- `.node-context a` não renderiza com cor, peso e sublinhado fixos do
+  componente;
+- `footer.node-footer` não existe, aparece mais de uma vez, adiciona divisor
+  próprio ou usa links fora do estilo fixo do rodapé;
+- `.tag` deixa de renderizar como chip compacto de largura intrínseca;
+- `.flow-step::after` desenha conector próprio em vez de usar somente o layout
+  canônico do componente;
+- classes terminais antigas como `.refs`, `.references` e `.final-note`
+  aparecem no HTML final;
+- existe divisor terminal duplicado em fechamento ou rodapé;
 - `body`, contexto de node, cards, callouts, tabelas, inline `code`, blocos
   `pre` ou visuais conceituais customizados usam superfícies claras legadas;
 - snippet técnico de configuração, regra, parâmetro, campo, API, comando ou
@@ -93,6 +107,9 @@ O guardrail falha quando:
 - tabela, card, callout, exemplo ou bloco de código quebra a leitura mobile;
 - as cores dos exemplos parecem acidentais, ilegíveis ou fora do padrão visual
   da página.
+- `visual-audit.md` registra `Status geral: passa` mantendo campos genéricos
+  sem inspeção real, como `...`, `registrar aqui`, `agent must inspect
+  screenshot`, `o agente deve confirmar` ou texto equivalente.
 
 Para blocos ASCII excepcionais, a ausência de highlight só pode passar se o
 bloco tiver
@@ -155,6 +172,12 @@ Status geral: passa | falha
 | Check | Status | Evidência |
 |---|---|---|
 | tema visual `notion-dark` aplicado | passa/falha | ... |
+| raiz CSS escura única, sem legado claro | passa/falha | ... |
+| `.node-context` usa estilo fixo | passa/falha | ... |
+| `.node-context a` usa estilo fixo | passa/falha | ... |
+| `footer.node-footer` usa forma e estilo fixos | passa/falha | ... |
+| divisores terminais não duplicam o divisor canônico | passa/falha | ... |
+| primitivas visuais fixas não derivam estilo próprio | passa/falha | ... |
 | `pre code` não herda chip de inline code | passa/falha | ... |
 | snippets técnicos têm highlight semântico | passa/falha | ... |
 | visuais conceituais não usam `<pre>` como atalho | passa/falha | ... |
@@ -173,6 +196,10 @@ Status geral: passa | falha
 
 ## Inspeção visual do agente
 
+- `.node-context`:
+- `footer.node-footer`:
+- Divisores:
+- Tema escuro:
 - Cores dos exemplos:
 - Leitura dos snippets:
 - Hierarquia visual:
@@ -197,6 +224,10 @@ Critério mecânico de passagem:
 ```text
 Status geral: passa
 ```
+
+Esse status só é válido quando os campos de inspeção visual foram preenchidos
+com observações concretas. Texto placeholder ou instrução para preencher depois
+torna a rodada inválida.
 
 ## Como Auditar
 

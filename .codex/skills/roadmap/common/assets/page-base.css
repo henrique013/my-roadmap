@@ -251,7 +251,12 @@ a:focus-visible {
 }
 
 .tag {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  align-self: start;
+  width: fit-content;
+  max-width: 100%;
   padding: 2px 7px;
   border-radius: 999px;
   font-size: 15px;
@@ -259,6 +264,18 @@ a:focus-visible {
   background: var(--tag-bg);
   color: var(--tag-text);
   border: 1px solid var(--tag-border);
+  overflow-wrap: anywhere;
+}
+
+.flow-steps .tag,
+.flow-steps .flow-step > .tag {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  align-self: start;
+  width: fit-content;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .tag.blue {
@@ -303,11 +320,21 @@ a:focus-visible {
   margin: 16px 0 22px;
 }
 
-.flow-steps span {
+.flow-steps > span:not(.tag) {
   border: 1px solid var(--border);
   border-radius: 6px;
   padding: 8px 10px;
   background: var(--soft);
+}
+
+.flow-steps > .flow-step {
+  min-width: 0;
+  flex: 1 1 180px;
+}
+
+.flow-steps > .flow-step::after {
+  content: none;
+  display: none;
 }
 
 .state-grid {

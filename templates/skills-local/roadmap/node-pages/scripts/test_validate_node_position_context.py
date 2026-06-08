@@ -94,19 +94,44 @@ def node_html(
     level = str(node["level"])
     level_label = LEVEL_LABELS[level]
     return f"""<!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-visual-theme="notion-dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{node["label"]}</title>
   <style>
-    body {{ font-family: Arial, sans-serif; }}
-    .node-context {{ border: 1px solid #ccc; padding: 8px; }}
+    :root {{
+      color-scheme: dark;
+      --page: #191919;
+      --surface: #202020;
+      --soft: #242424;
+      --text: #e6e6e6;
+      --heading: #f2f2f2;
+      --muted: #a3a3a3;
+      --border: #333333;
+      --accent: #6aaed6;
+      --focus: #6aaed6;
+    }}
+    * {{ box-sizing: border-box; }}
+    body {{ margin: 0; color: var(--text); background: var(--page); font-family: Arial, sans-serif; }}
+    main {{ max-width: 1260px; margin: 0 auto; padding: 32px 28px 56px; }}
+    h1, h2 {{ color: var(--heading); }}
+    h2 {{ border-top: 1px solid var(--border); padding-top: 28px; margin-top: 32px; }}
+    a {{ color: var(--accent); }}
+    .backlink {{ display: inline-flex; margin-bottom: 18px; font-weight: 700; }}
+    .lead {{ color: var(--muted); font-size: 19px; }}
+    .node-context {{ display: grid; gap: 6px; padding: 12px 14px; border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 6px; background: var(--soft); margin: 0 0 18px; width: 100%; }}
+    .node-context p {{ margin: 0; }}
+    .node-context a {{ color: var(--accent); font-weight: 400; text-decoration-line: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }}
+    .node-footer {{ margin: 0; padding: 0; border: 0; background: transparent; }}
+    .reference-list {{ display: grid; gap: 8px; margin: 8px 0 0; padding: 0; list-style: none; }}
+    .reference-item {{ display: grid; grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr); gap: 10px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); }}
+    .node-footer a {{ color: var(--accent); font-weight: 400; text-decoration-line: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }}
   </style>
 </head>
 <body>
   <main>
-    <a href="../../roadmap.html">Voltar ao roadmap</a>
+    <a class="backlink" href="../../roadmap.html">Voltar ao roadmap</a>
     <div
       class="node-context"
       data-node-position="true"
@@ -125,8 +150,16 @@ def node_html(
       <h2>Readable Section</h2>
       <p>Body text.</p>
     </section>
+    <footer class="node-footer">
+      <h2>Referências</h2>
+      <ul class="reference-list">
+        <li class="reference-item">
+          <a href="https://example.com/source">Documentação de fixture</a>
+          <span class="reference-note">Uso neste node: sustenta o contrato mecânico da fixture de teste.</span>
+        </li>
+      </ul>
+    </footer>
   </main>
-  <!-- Referências: fixture -->
 </body>
 </html>
 """
@@ -134,20 +167,48 @@ def node_html(
 
 def html_without_position(node: dict[str, object]) -> str:
     return f"""<!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-visual-theme="notion-dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{node["label"]}</title>
-  <style>body {{ font-family: Arial, sans-serif; }}</style>
+  <style>
+    :root {{
+      color-scheme: dark;
+      --page: #191919;
+      --surface: #202020;
+      --soft: #242424;
+      --text: #e6e6e6;
+      --heading: #f2f2f2;
+      --muted: #a3a3a3;
+      --border: #333333;
+      --accent: #6aaed6;
+    }}
+    body {{ margin: 0; color: var(--text); background: var(--page); font-family: Arial, sans-serif; }}
+    main {{ max-width: 1260px; margin: 0 auto; padding: 32px 28px 56px; }}
+    h2 {{ border-top: 1px solid var(--border); padding-top: 28px; margin-top: 32px; }}
+    .backlink {{ display: inline-flex; margin-bottom: 18px; font-weight: 700; }}
+    .lead {{ color: var(--muted); font-size: 19px; }}
+    .node-footer {{ margin: 0; padding: 0; border: 0; background: transparent; }}
+    .reference-list {{ display: grid; gap: 8px; margin: 8px 0 0; padding: 0; list-style: none; }}
+    .reference-item {{ display: grid; grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr); gap: 10px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); }}
+  </style>
 </head>
 <body>
   <main>
-    <a href="../../roadmap.html">Voltar ao roadmap</a>
+    <a class="backlink" href="../../roadmap.html">Voltar ao roadmap</a>
     <h1>{node["label"]}</h1>
     <p class="lead">Only technical metadata would not be enough.</p>
+    <footer class="node-footer">
+      <h2>Referências</h2>
+      <ul class="reference-list">
+        <li class="reference-item">
+          <a href="https://example.com/source">Documentação de fixture</a>
+          <span class="reference-note">Uso neste node: sustenta o contrato mecânico da fixture de teste.</span>
+        </li>
+      </ul>
+    </footer>
   </main>
-  <!-- Referências: fixture -->
 </body>
 </html>
 """

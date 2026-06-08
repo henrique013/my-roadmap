@@ -16,6 +16,20 @@ from extract_visible_text import extract_visible_text, render_markdown
 
 LEVELS = ("basico", "intermediario", "avancado")
 NODE_SLUG_RE = re.compile(r"^\d{2}-[a-z0-9][a-z0-9-]*$")
+NODE_ID_VISIBLE_RE = re.compile(
+    r"\b(?:basico|intermediario|avancado)/\d{2}-[a-z0-9][a-z0-9-]*\b",
+    re.IGNORECASE,
+)
+FORBIDDEN_CONTEXT_TEXTS = (
+    "label canônico",
+    "label canonico",
+    "node id",
+    "node_id",
+    "primeiro node do nível",
+    "primeiro node do nivel",
+    "último node do nível",
+    "ultimo node do nivel",
+)
 
 
 class LinkParser(HTMLParser):
@@ -39,11 +53,13 @@ class NodePositionParser(HTMLParser):
         self._capture_depth = 0
         self._current: dict[str, Any] | None = None
         self._anchor_stack: list[dict[str, Any]] = []
+        self._paragraph_stack: list[list[str]] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         attrs_map = {name.lower(): value or "" for name, value in attrs if name}
         if self._current is not None:
             self._capture_depth += 1
+            self._current["tags"].append(tag.lower())
             if tag.lower() == "a":
                 self._anchor_stack.append(
                     {
@@ -51,16 +67,21 @@ class NodePositionParser(HTMLParser):
                         "text_parts": [],
                     }
                 )
+            if tag.lower() == "p":
+                self._paragraph_stack.append([])
 
         if attrs_map.get("data-node-position") == "true":
             self._current = {
                 "tag": tag.lower(),
                 "attrs": attrs_map,
                 "text_parts": [],
+                "tags": [],
+                "paragraphs": [],
                 "anchors": [],
             }
             self._capture_depth = 1
             self._anchor_stack = []
+            self._paragraph_stack = []
 
     def handle_endtag(self, tag: str) -> None:
         if self._current is None:
@@ -69,20 +90,28 @@ class NodePositionParser(HTMLParser):
             anchor = self._anchor_stack.pop()
             anchor["text"] = " ".join(anchor.pop("text_parts"))
             self._current["anchors"].append(anchor)
+        if tag.lower() == "p" and self._paragraph_stack:
+            paragraph_parts = self._paragraph_stack.pop()
+            paragraph_text = normalize_visible(" ".join(paragraph_parts))
+            if paragraph_text:
+                self._current["paragraphs"].append(paragraph_text)
         self._capture_depth -= 1
         if self._capture_depth > 0:
             return
         current = self._current
-        current["text"] = " ".join(current.pop("text_parts"))
+        current["text"] = normalize_visible(" ".join(current.pop("text_parts")))
         self.matches.append(current)
         self._current = None
         self._anchor_stack = []
+        self._paragraph_stack = []
 
     def handle_data(self, data: str) -> None:
         if self._current is not None and data.strip():
             self._current["text_parts"].append(data)
             if self._anchor_stack:
                 self._anchor_stack[-1]["text_parts"].append(data)
+            if self._paragraph_stack:
+                self._paragraph_stack[-1].append(data)
 
 
 def parse_args() -> argparse.Namespace:
@@ -433,12 +462,52 @@ def validate_node_position_context(
     match = parser.matches[0]
     attrs = match.get("attrs", {})
     text = normalize_for_contains(match.get("text", ""))
+    visible_text = normalize_visible(match.get("text", ""))
+    paragraphs = [
+        normalize_visible(paragraph)
+        for paragraph in match.get("paragraphs", [])
+        if normalize_visible(paragraph)
+    ]
     nodes = nodes_by_level(contract).get(level, [])
     node_count = len(nodes)
     order = contract_node.get("order")
     label = normalize_visible(contract_node.get("label"))
     roadmap_slug = normalize_visible(contract.get("roadmap_slug"))
     roadmap_title = normalize_visible(contract.get("theme") or contract.get("title"))
+
+    if match.get("tag") != "div":
+        failures.append("HTML: contexto de posição deve usar tag div")
+    classes = set(str(attrs.get("class", "")).split())
+    if "node-context" not in classes:
+        failures.append("HTML: contexto de posição deve usar classe node-context")
+    forbidden_tags = {
+        tag for tag in match.get("tags", [])
+        if tag in {"h1", "h2", "h3", "table", "ul", "ol"}
+    }
+    if forbidden_tags:
+        failures.append(
+            "HTML: contexto de posição deve conter apenas linhas p compactas, "
+            f"não {', '.join(sorted(forbidden_tags))}"
+        )
+    if len(paragraphs) != 4:
+        failures.append("HTML: contexto de posição deve conter exatamente quatro linhas visíveis")
+    else:
+        if level_label(level) not in paragraphs[0]:
+            failures.append("HTML: primeira linha do contexto deve conter nível humano")
+        if not paragraphs[1].startswith("Roadmap: "):
+            failures.append('HTML: segunda linha do contexto deve iniciar com "Roadmap: "')
+        if not paragraphs[2].startswith("Node atual: "):
+            failures.append('HTML: terceira linha do contexto deve iniciar com "Node atual: "')
+        if not paragraphs[3].startswith("Anterior: ") or "Próximo:" not in paragraphs[3]:
+            failures.append(
+                'HTML: quarta linha do contexto deve conter "Anterior: " e "Próximo:"'
+            )
+
+    for forbidden in FORBIDDEN_CONTEXT_TEXTS:
+        if forbidden in text:
+            failures.append(f"HTML: contexto de posição contém texto proibido: {forbidden}")
+    if NODE_ID_VISIBLE_RE.search(visible_text):
+        failures.append("HTML: contexto de posição contém node_id ou slug técnico visível")
 
     expected_attrs = {
         "data-level": level,
@@ -491,11 +560,15 @@ def validate_node_position_context(
     previous_node, next_node = sequential_neighbors(contract, level, node_slug)
 
     if previous_node is None:
-        if not contains_any(text, ("início do roadmap", "inicio do roadmap", "sem anterior", "no previous")):
+        if not contains_any(text, ("início do roadmap", "inicio do roadmap")):
             failures.append(
-                "HTML: contexto de posição deve indicar ausência de node anterior no roadmap"
+                "HTML: contexto de posição deve indicar ausência de node anterior como início do roadmap"
             )
     else:
+        if contains_any(text, ("início do roadmap", "inicio do roadmap", "sem anterior", "no previous")):
+            failures.append(
+                "HTML: contexto de posição não deve indicar início do roadmap quando existe node anterior"
+            )
         previous_label = normalize_for_contains(previous_node.get("label"))
         if previous_label and previous_label not in text:
             failures.append("HTML: contexto de posição não contém label do node anterior")
@@ -509,11 +582,15 @@ def validate_node_position_context(
         )
 
     if next_node is None:
-        if not contains_any(text, ("fim do roadmap", "sem próximo", "sem proximo", "no next")):
+        if not contains_any(text, ("fim do roadmap",)):
             failures.append(
-                "HTML: contexto de posição deve indicar ausência de próximo node no roadmap"
+                "HTML: contexto de posição deve indicar ausência de próximo node como fim do roadmap"
             )
     else:
+        if contains_any(text, ("fim do roadmap", "sem próximo", "sem proximo", "no next")):
+            failures.append(
+                "HTML: contexto de posição não deve indicar fim do roadmap quando existe próximo node"
+            )
         next_label = normalize_for_contains(next_node.get("label"))
         if next_label and next_label not in text:
             failures.append("HTML: contexto de posição não contém label do próximo node")
@@ -593,8 +670,14 @@ def require_audit_pass(path: Path, label: str, failures: list[str]) -> None:
     if not is_non_empty_file(path):
         failures.append(f"{label} ausente ou vazio: {path}")
         return
-    if not file_contains_any(path, ("status geral: passa", "status: passa")):
+    text = path.read_text(encoding="utf-8")
+    if not any(pattern in text.lower() for pattern in ("status geral: passa", "status: passa")):
         failures.append(f"{label} não registra status de passagem")
+    if label == "visual-audit.md" and re.search(
+        r"(?is)(\.\.\.|agent must inspect|register problems here|registrar aqui|agente deve confirmar|deve confirmar antes da entrega|problemas observados:\s*$|problemas observados:\s*registrar)",
+        text,
+    ):
+        failures.append(f"{label} contém placeholder de inspeção visual")
 
 
 def require_revision_plan_clear(path: Path, label: str, failures: list[str]) -> None:

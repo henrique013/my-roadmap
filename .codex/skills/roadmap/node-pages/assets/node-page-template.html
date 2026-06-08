@@ -238,6 +238,7 @@
       border-radius: 6px;
       background: var(--soft);
       margin: 0 0 18px;
+      width: 100%;
     }
 
     .node-context p {
@@ -246,6 +247,61 @@
 
     .node-context strong {
       color: var(--heading);
+    }
+
+    .node-context a {
+      color: var(--accent);
+      font-weight: 400;
+      text-decoration-line: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    .node-context a:hover {
+      color: var(--accent-2);
+    }
+
+    .node-footer {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+    }
+
+    .node-footer h2 {
+      margin-top: 32px;
+    }
+
+    .reference-list {
+      display: grid;
+      gap: 8px;
+      margin: 8px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .reference-item {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface);
+    }
+
+    .reference-item a,
+    .node-footer a {
+      color: var(--accent);
+      font-weight: 400;
+      text-decoration-line: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    .reference-note {
+      color: var(--text);
     }
 
     .callout {
@@ -284,7 +340,12 @@
     }
 
     .tag {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-self: start;
+      align-self: start;
+      width: fit-content;
+      max-width: 100%;
       padding: 2px 7px;
       border-radius: 999px;
       font-size: 15px;
@@ -292,6 +353,18 @@
       background: var(--tag-bg);
       color: var(--tag-text);
       border: 1px solid var(--tag-border);
+      overflow-wrap: anywhere;
+    }
+
+    .flow-steps .tag,
+    .flow-steps .flow-step > .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-self: start;
+      align-self: start;
+      width: fit-content;
+      max-width: 100%;
+      overflow-wrap: anywhere;
     }
 
     .tag.blue {
@@ -336,11 +409,21 @@
       margin: 16px 0 22px;
     }
 
-    .flow-steps span {
+    .flow-steps > span:not(.tag) {
       border: 1px solid var(--border);
       border-radius: 6px;
       padding: 8px 10px;
       background: var(--soft);
+    }
+
+    .flow-steps > .flow-step {
+      min-width: 0;
+      flex: 1 1 180px;
+    }
+
+    .flow-steps > .flow-step::after {
+      content: none;
+      display: none;
     }
 
     .state-grid {
@@ -564,7 +647,8 @@
       }
 
       .timeline-step,
-      .state-grid {
+      .state-grid,
+      .reference-item {
         grid-template-columns: 1fr;
       }
 
@@ -660,7 +744,7 @@
       </table>
     </section>
 
-    <section>
+    <section class="node-closing">
       <h2>4. Desenvolvimento</h2>
       <div class="callout">
         <strong>Pergunta guia:</strong> formule a duvida que este node precisa resolver sem virar exercicio.
@@ -693,18 +777,16 @@
 <code><span class="syntax-key">parametro_principal</span> <span class="syntax-op">=</span> <span class="syntax-value">valor_preparado</span>
 <span class="syntax-key">limite_de_saida</span> <span class="syntax-op">=</span> <span class="syntax-value">&lt;placeholder_conceitual&gt;</span>
 <span class="syntax-key">reserva_por_consumidor</span> <span class="syntax-op">=</span> <span class="syntax-value">&lt;limite_planejado&gt;</span></code></pre>
-      <h3>Referencias</h3>
-      <table>
-        <tr>
-          <th>Fonte</th>
-          <th>Por que usar</th>
-        </tr>
-        <tr>
-          <td><a href="#">Referencia</a></td>
-          <td>Motivo especifico.</td>
-        </tr>
-      </table>
     </section>
+    <footer class="node-footer">
+      <h2>Referências</h2>
+      <ul class="reference-list">
+        <li class="reference-item">
+          <a href="#">Referência oficial ou primária</a>
+          <span class="reference-note">Uso neste node: motivo específico pelo qual a fonte sustenta a explicação visível.</span>
+        </li>
+      </ul>
+    </footer>
   </main>
 </body>
 </html>

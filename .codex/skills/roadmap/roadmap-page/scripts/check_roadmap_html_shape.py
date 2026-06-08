@@ -30,6 +30,89 @@ REQUIRED_TEXT_GROUPS = (
     ("referências consolidadas", "referencias consolidadas"),
 )
 
+VISIBLE_TEXT_SKIP_TAGS = {"code", "pre", "script", "style", "kbd", "samp"}
+
+UNACCENTED_PT_BR_VISIBLE_REPLACEMENTS = {
+    "nao": "não",
+    "Nao": "Não",
+    "documentacao": "documentação",
+    "Documentacao": "Documentação",
+    "ate": "até",
+    "Ate": "Até",
+    "tambem": "também",
+    "Tambem": "Também",
+    "so": "só",
+    "So": "Só",
+    "referencia": "referência",
+    "Referencia": "Referência",
+    "referencias": "referências",
+    "Referencias": "Referências",
+    "visao": "visão",
+    "Visao": "Visão",
+    "nivel": "nível",
+    "Nivel": "Nível",
+    "niveis": "níveis",
+    "Niveis": "Níveis",
+    "basico": "básico",
+    "Basico": "Básico",
+    "intermediario": "intermediário",
+    "Intermediario": "Intermediário",
+    "avancado": "avançado",
+    "Avancado": "Avançado",
+    "repeticao": "repetição",
+    "Repeticao": "Repetição",
+    "pagina": "página",
+    "Pagina": "Página",
+    "paginas": "páginas",
+    "Paginas": "Páginas",
+    "publicacao": "publicação",
+    "Publicacao": "Publicação",
+    "especificacao": "especificação",
+    "Especificacao": "Especificação",
+    "criterio": "critério",
+    "Criterio": "Critério",
+    "criterios": "critérios",
+    "Criterios": "Critérios",
+    "decisao": "decisão",
+    "Decisao": "Decisão",
+    "conteudo": "conteúdo",
+    "Conteudo": "Conteúdo",
+    "saida": "saída",
+    "Saida": "Saída",
+    "saidas": "saídas",
+    "Saidas": "Saídas",
+    "execucao": "execução",
+    "Execucao": "Execução",
+    "configuracao": "configuração",
+    "Configuracao": "Configuração",
+    "seguranca": "segurança",
+    "Seguranca": "Segurança",
+    "sensivel": "sensível",
+    "Sensivel": "Sensível",
+    "dificil": "difícil",
+    "Dificil": "Difícil",
+    "validacao": "validação",
+    "Validacao": "Validação",
+    "padronizacao": "padronização",
+    "Padronizacao": "Padronização",
+    "organizacao": "organização",
+    "Organizacao": "Organização",
+    "agregacoes": "agregações",
+    "Agregacoes": "Agregações",
+    "otimizacao": "otimização",
+    "Otimizacao": "Otimização",
+    "governanca": "governança",
+    "Governanca": "Governança",
+}
+
+UNACCENTED_PT_BR_VISIBLE_RE = re.compile(
+    r"\b("
+    + "|".join(
+        map(re.escape, sorted(UNACCENTED_PT_BR_VISIBLE_REPLACEMENTS, key=len, reverse=True))
+    )
+    + r")\b"
+)
+
 
 class ShapeParser(HTMLParser):
     def __init__(self) -> None:
@@ -82,8 +165,44 @@ class ShapeParser(HTMLParser):
                 )
 
 
+class VisibleTextAccentParser(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.parts: list[str] = []
+        self._skip_depth = 0
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag.lower() in VISIBLE_TEXT_SKIP_TAGS:
+            self._skip_depth += 1
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag.lower() in VISIBLE_TEXT_SKIP_TAGS and self._skip_depth:
+            self._skip_depth -= 1
+
+    def handle_data(self, data: str) -> None:
+        if self._skip_depth == 0 and data.strip():
+            self.parts.append(data)
+
+
 def strip_tags(html_fragment: str) -> str:
     return re.sub(r"(?is)<[^>]+>", " ", html_fragment)
+
+
+def normalize_visible(value: object) -> str:
+    return re.sub(r"\s+", " ", str(value or "")).strip()
+
+
+def visible_text_accent_failures(html_text: str) -> list[str]:
+    parser = VisibleTextAccentParser()
+    parser.feed(html_text)
+    parser.close()
+    visible_text = normalize_visible(" ".join(parser.parts))
+    findings: list[str] = []
+    for match in UNACCENTED_PT_BR_VISIBLE_RE.finditer(visible_text):
+        original = match.group(1)
+        corrected = UNACCENTED_PT_BR_VISIBLE_REPLACEMENTS[original]
+        findings.append(f"texto visível sem acentuação pt-BR: {original} -> {corrected}")
+    return sorted(set(findings))
 
 
 def numeric_only_flow_step_failures(html_text: str) -> list[str]:
@@ -153,6 +272,8 @@ def collect_failures(html_text: str) -> list[str]:
     for term in PROHIBITED_TERMS:
         if term in lower_text:
             failures.append(f"termo prático proibido detectado: {term}")
+
+    failures.extend(visible_text_accent_failures(html_text))
 
     for group in REQUIRED_TEXT_GROUPS:
         if not any(term in lower_text for term in group):
