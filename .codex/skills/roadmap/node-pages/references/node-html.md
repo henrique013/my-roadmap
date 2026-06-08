@@ -95,9 +95,15 @@ a redação a uma frase específica:
   <p><strong>Básico · 01 de 08</strong></p>
   <p>Roadmap: API oficial do WhatsApp para automações de agência</p>
   <p>Node atual: Ecossistema Meta e WhatsApp Business Platform</p>
-  <p>Anterior: primeiro node do nível · Próximo: Business Portfolio, BM e ativos do cliente</p>
+  <p>Anterior: primeiro node do nível · Próximo: <a href="../02-business-portfolio-bm-e-ativos/node.html">Business Portfolio, BM e ativos do cliente</a></p>
 </div>
 ```
+
+Quando o `node.html` do vizinho anterior ou próximo já existir e não estiver
+vazio, o label desse vizinho deve aparecer como link relativo no formato
+`../<neighbor-slug>/node.html`. Quando o vizinho existir no contrato, mas ainda
+não tiver `node.html` materializado ou esse arquivo estiver vazio, mantenha o
+label como texto não clicável para orientar a sequência sem criar link quebrado.
 
 Os identificadores técnicos, como `node_id`, slug do node e slug do roadmap,
 podem continuar visíveis para rastreabilidade, mas devem ficar visualmente
@@ -624,6 +630,8 @@ O arquivo deve conter:
 - link de retorno para `../../roadmap.html`;
 - contexto de posição humano com nível, ordem local, total de nodes do nível,
   título/tema do roadmap, node atual e anterior/próximo do mesmo nível;
+- links relativos `../<neighbor-slug>/node.html` para anterior/próximo do mesmo
+  nível somente quando o `node.html` do vizinho existir e não estiver vazio;
 - referências comentadas no fim.
 
 Mantenha boa hierarquia, leitura confortável, contraste suficiente e texto que

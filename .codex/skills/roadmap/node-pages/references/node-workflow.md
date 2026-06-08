@@ -184,8 +184,14 @@ Ao montar o contexto de posição:
   existirem;
 - quando não houver anterior ou próximo, diga explicitamente que este é o
   primeiro ou último node do nível;
-- crie link profundo para vizinho somente quando o `node.html` desse vizinho
-  existir.
+- quando o `node.html` do vizinho existir e não estiver vazio, mostre o label do
+  vizinho como link profundo relativo no formato
+  `../<neighbor-slug>/node.html`;
+- quando o vizinho existir no contrato, mas o `node.html` desse vizinho ainda
+  não existir ou estiver vazio, mostre o label ou orientação de sequência como
+  texto não clicável;
+- nunca mostre como texto puro um vizinho que já tem `node.html` não vazio, pois
+  nesse caso a navegação deve ser clicável.
 
 ## 4. Pasta do Node, Bastidor Editorial e Asset Visual
 
@@ -451,6 +457,9 @@ Antes de responder, verifique:
   `data-node-position="true"`, `data-level`, `data-node-order`,
   `data-node-count`, `data-roadmap-slug`, nível humano, posição local,
   título/tema do roadmap, node atual e anterior/próximo do mesmo nível;
+- no contexto de posição, anterior/próximo do mesmo nível com `node.html` não
+  vazio aparecem como links relativos `../<neighbor-slug>/node.html`, e
+  vizinhos ainda não gerados ou vazios aparecem somente como texto não clicável;
 - depois que `node.html` passar nas validações mecânicas e qualitativas, o
   `roadmap.html` pai contém um link relativo para
   `<level>/<node-slug>/node.html` no item do node atual;

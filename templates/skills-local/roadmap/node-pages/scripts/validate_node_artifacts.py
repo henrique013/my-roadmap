@@ -38,23 +38,37 @@ class NodePositionParser(HTMLParser):
         self.matches: list[dict[str, Any]] = []
         self._capture_depth = 0
         self._current: dict[str, Any] | None = None
+        self._anchor_stack: list[dict[str, Any]] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         attrs_map = {name.lower(): value or "" for name, value in attrs if name}
         if self._current is not None:
             self._capture_depth += 1
+            if tag.lower() == "a":
+                self._anchor_stack.append(
+                    {
+                        "href": attrs_map.get("href", ""),
+                        "text_parts": [],
+                    }
+                )
 
         if attrs_map.get("data-node-position") == "true":
             self._current = {
                 "tag": tag.lower(),
                 "attrs": attrs_map,
                 "text_parts": [],
+                "anchors": [],
             }
             self._capture_depth = 1
+            self._anchor_stack = []
 
     def handle_endtag(self, tag: str) -> None:
         if self._current is None:
             return
+        if tag.lower() == "a" and self._anchor_stack:
+            anchor = self._anchor_stack.pop()
+            anchor["text"] = " ".join(anchor.pop("text_parts"))
+            self._current["anchors"].append(anchor)
         self._capture_depth -= 1
         if self._capture_depth > 0:
             return
@@ -62,10 +76,13 @@ class NodePositionParser(HTMLParser):
         current["text"] = " ".join(current.pop("text_parts"))
         self.matches.append(current)
         self._current = None
+        self._anchor_stack = []
 
     def handle_data(self, data: str) -> None:
         if self._current is not None and data.strip():
             self._current["text_parts"].append(data)
+            if self._anchor_stack:
+                self._anchor_stack[-1]["text_parts"].append(data)
 
 
 def parse_args() -> argparse.Namespace:
@@ -252,8 +269,60 @@ def order_markers(order: int, count: int) -> tuple[str, ...]:
     )
 
 
+def neighbor_href(node: dict[str, Any]) -> str | None:
+    slug = node.get("slug")
+    if not isinstance(slug, str) or not NODE_SLUG_RE.fullmatch(slug):
+        return None
+    return f"../{slug}/node.html"
+
+
+def context_has_anchor(match: dict[str, Any], href: str, label: str) -> bool:
+    expected_label = normalize_for_contains(label)
+    for anchor in match.get("anchors", []):
+        if not isinstance(anchor, dict):
+            continue
+        if anchor.get("href") != href:
+            continue
+        if not expected_label:
+            return True
+        if expected_label in normalize_for_contains(anchor.get("text", "")):
+            return True
+    return False
+
+
+def validate_neighbor_navigation(
+    match: dict[str, Any],
+    roadmap_dir: Path,
+    level: str,
+    direction: str,
+    neighbor_node: dict[str, Any],
+    failures: list[str],
+) -> None:
+    href = neighbor_href(neighbor_node)
+    label = normalize_visible(neighbor_node.get("label"))
+    slug = normalize_visible(neighbor_node.get("slug"))
+    if not href or not slug:
+        failures.append(
+            f"HTML: contexto de posição não conseguiu resolver link do node {direction}"
+        )
+        return
+
+    neighbor_html = roadmap_dir / level / slug / "node.html"
+    has_required_anchor = context_has_anchor(match, href, label)
+    if is_non_empty_file(neighbor_html):
+        if not has_required_anchor:
+            failures.append(
+                f"HTML: contexto de posição deve linkar node {direction}: {href}"
+            )
+    elif has_required_anchor:
+        failures.append(
+            f"HTML: contexto de posição linka node {direction} sem node.html não vazio: {href}"
+        )
+
+
 def validate_node_position_context(
     html_text: str,
+    roadmap_dir: Path,
     contract: dict[str, Any] | None,
     level: str,
     node_slug: str,
@@ -334,6 +403,14 @@ def validate_node_position_context(
         previous_label = normalize_for_contains(previous_node.get("label"))
         if previous_label and previous_label not in text:
             failures.append("HTML: contexto de posição não contém label do node anterior")
+        validate_neighbor_navigation(
+            match,
+            roadmap_dir,
+            level,
+            "anterior",
+            previous_node,
+            failures,
+        )
 
     if next_node is None:
         if not contains_any(text, ("último", "ultimo", "last", "sem próximo", "sem proximo", "no next")):
@@ -344,6 +421,14 @@ def validate_node_position_context(
         next_label = normalize_for_contains(next_node.get("label"))
         if next_label and next_label not in text:
             failures.append("HTML: contexto de posição não contém label do próximo node")
+        validate_neighbor_navigation(
+            match,
+            roadmap_dir,
+            level,
+            "próximo",
+            next_node,
+            failures,
+        )
 
 
 def validate_parent_roadmap_link(
@@ -528,6 +613,7 @@ def validate(args: argparse.Namespace) -> list[str]:
         failures.extend(f"HTML: {failure}" for failure in html_failures)
         validate_node_position_context(
             node_html_text,
+            roadmap_dir,
             contract,
             resolved_level,
             node_slug,
