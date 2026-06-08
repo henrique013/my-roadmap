@@ -61,7 +61,9 @@ Inclua:
 - slug do node;
 - label do node;
 - posição numérica local no nível;
-- node anterior e próximo do mesmo nível, quando existirem;
+- node anterior e próximo do mesmo nível para incrementalidade;
+- node anterior e próximo na sequência global do roadmap para navegação do
+  contexto de posição, atravessando níveis quando necessário;
 - data da pesquisa;
 - observações temporais relevantes, como versões, datas de documentação ou
   mudanças recentes.

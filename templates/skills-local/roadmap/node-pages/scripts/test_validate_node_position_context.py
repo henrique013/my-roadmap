@@ -14,6 +14,11 @@ from validate_node_artifacts import validate
 
 
 LEVEL = "basico"
+LEVEL_LABELS = {
+    "basico": "Básico",
+    "intermediario": "Intermediário",
+    "avancado": "Avançado",
+}
 NODES = [
     {
         "node_id": "basico/01-first-node",
@@ -37,6 +42,17 @@ NODES = [
         "label": "Last Node",
     },
 ]
+INTERMEDIATE_NODES = [
+    {
+        "node_id": "intermediario/01-intermediate-node",
+        "level": "intermediario",
+        "order": 1,
+        "slug": "01-intermediate-node",
+        "label": "Intermediate First Node",
+    },
+]
+ADVANCED_NODES: list[dict[str, object]] = []
+ALL_NODES = NODES + INTERMEDIATE_NODES + ADVANCED_NODES
 
 
 def contract() -> dict[str, object]:
@@ -51,17 +67,32 @@ def contract() -> dict[str, object]:
             },
             {
                 "level": "intermediario",
-                "nodes": [],
+                "nodes": INTERMEDIATE_NODES,
             },
             {
                 "level": "avancado",
-                "nodes": [],
+                "nodes": ADVANCED_NODES,
             },
         ],
     }
 
 
-def node_html(node: dict[str, object], previous_markup: str, next_markup: str) -> str:
+def node_count_for(level: str) -> int:
+    return {
+        LEVEL: len(NODES),
+        "intermediario": len(INTERMEDIATE_NODES),
+        "avancado": len(ADVANCED_NODES),
+    }[level]
+
+
+def node_html(
+    node: dict[str, object],
+    previous_markup: str,
+    next_markup: str,
+    node_count: int,
+) -> str:
+    level = str(node["level"])
+    level_label = LEVEL_LABELS[level]
     return f"""<!doctype html>
 <html lang="pt-BR">
 <head>
@@ -81,9 +112,9 @@ def node_html(node: dict[str, object], previous_markup: str, next_markup: str) -
       data-node-position="true"
       data-level="{node["level"]}"
       data-node-order="{node["order"]}"
-      data-node-count="3"
+      data-node-count="{node_count}"
       data-roadmap-slug="position-fixture">
-      <p><strong>Básico · {int(node["order"]):02d} de 03</strong></p>
+      <p><strong>{level_label} · {int(node["order"]):02d} de {node_count:02d}</strong></p>
       <p>Roadmap: Position Fixture Roadmap</p>
       <p>Node atual: {node["label"]}</p>
       <p>Anterior: {previous_markup} · Próximo: {next_markup}</p>
@@ -126,11 +157,11 @@ def write_pipeline(node_dir: Path, html_text: str) -> None:
     editorial = node_dir / ".editorial"
     pipeline = editorial / "pipeline"
     visual = pipeline / "05-visual-render"
-    (pipeline / "01-visible-text").mkdir(parents=True)
-    (pipeline / "02-concept-introduction").mkdir(parents=True)
-    (pipeline / "03-example-sufficiency").mkdir(parents=True)
-    (pipeline / "04-visual-primitive-choice").mkdir(parents=True)
-    (visual / "playwright").mkdir(parents=True)
+    (pipeline / "01-visible-text").mkdir(parents=True, exist_ok=True)
+    (pipeline / "02-concept-introduction").mkdir(parents=True, exist_ok=True)
+    (pipeline / "03-example-sufficiency").mkdir(parents=True, exist_ok=True)
+    (pipeline / "04-visual-primitive-choice").mkdir(parents=True, exist_ok=True)
+    (visual / "playwright").mkdir(parents=True, exist_ok=True)
 
     (editorial / "concept-ledger.md").write_text("# Concept ledger\n", encoding="utf-8")
     visible = render_markdown(extract_visible_text(html_text))
@@ -168,15 +199,19 @@ def write_node(roadmap_dir: Path, node: dict[str, object], html_text: str) -> No
 
 
 def neighbor_markup(
+    current_level: str,
     node: dict[str, object],
     generated_slugs: set[str],
     force_plain: set[tuple[str, str]],
     direction: str,
 ) -> str:
+    level = str(node["level"])
     slug = str(node["slug"])
     label = str(node["label"])
     if slug in generated_slugs and (slug, direction) not in force_plain:
-        return f'<a href="../{slug}/node.html">{label}</a>'
+        if level == current_level:
+            return f'<a href="../{slug}/node.html">{label}</a>'
+        return f'<a href="../../{level}/{slug}/node.html">{label}</a>'
     return label
 
 
@@ -189,43 +224,49 @@ def build_fixture(
     roadmap_dir = root / "position-fixture"
     skipped = skip_generated or set()
     plain = force_plain or set()
-    generated_slugs = {str(node["slug"]) for node in NODES if str(node["slug"]) not in skipped}
+    generated_slugs = {str(node["slug"]) for node in ALL_NODES if str(node["slug"]) not in skipped}
     (roadmap_dir / ".roadmap").mkdir(parents=True)
     (roadmap_dir / ".roadmap" / "roadmap-contract.json").write_text(
         json.dumps(contract(), ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
     links = [
-        f'<a href="{LEVEL}/{node["slug"]}/node.html">{node["label"]}</a>'
-        for node in NODES
+        f'<a href="{node["level"]}/{node["slug"]}/node.html">{node["label"]}</a>'
+        for node in ALL_NODES
     ]
     roadmap_html = "<!doctype html><html><body>{}</body></html>".format("".join(links))
     (roadmap_dir / "roadmap.html").write_text(roadmap_html, encoding="utf-8")
 
-    for index, node in enumerate(NODES):
+    for index, node in enumerate(ALL_NODES):
         if str(node["slug"]) in skipped:
             continue
+        current_level = str(node["level"])
         previous_markup = (
-            "primeiro node do nível"
+            "início do roadmap"
             if index == 0
-            else neighbor_markup(NODES[index - 1], generated_slugs, plain, "previous")
+            else neighbor_markup(current_level, ALL_NODES[index - 1], generated_slugs, plain, "previous")
         )
         next_markup = (
-            "último node do nível"
-            if index == len(NODES) - 1
-            else neighbor_markup(NODES[index + 1], generated_slugs, plain, "next")
+            "fim do roadmap"
+            if index == len(ALL_NODES) - 1
+            else neighbor_markup(current_level, ALL_NODES[index + 1], generated_slugs, plain, "next")
         )
         if node["slug"] == omit_position_for:
             html_text = html_without_position(node)
         else:
-            html_text = node_html(node, previous_markup, next_markup)
+            html_text = node_html(node, previous_markup, next_markup, node_count_for(current_level))
         write_node(roadmap_dir, node, html_text)
 
     return roadmap_dir
 
 
 def validate_node(roadmap_dir: Path, node_slug: str) -> list[str]:
-    args = SimpleNamespace(roadmap_dir=str(roadmap_dir), level=LEVEL, node=node_slug)
+    node_level = next(
+        str(node["level"])
+        for node in ALL_NODES
+        if str(node["slug"]) == node_slug
+    )
+    args = SimpleNamespace(roadmap_dir=str(roadmap_dir), level=node_level, node=node_slug)
     return validate(args)
 
 
@@ -235,7 +276,7 @@ def main() -> int:
 
     with tempfile.TemporaryDirectory(prefix="node-position-context-") as tmp:
         roadmap_dir = build_fixture(Path(tmp))
-        for node in NODES:
+        for node in ALL_NODES:
             failures = validate_node(roadmap_dir, str(node["slug"]))
             if failures:
                 print(f"falha: {node['slug']} deveria passar")
@@ -293,6 +334,31 @@ def main() -> int:
         failures = validate_node(roadmap_dir, "02-middle-node")
         if not any("node vizinho próximo deve linkar node atual como anterior" in failure for failure in failures):
             print("falha: próximo node existente sem link para o atual deveria falhar")
+            for failure in failures:
+                print(f"- {failure}")
+            return 1
+
+    with tempfile.TemporaryDirectory(prefix="node-position-context-cross-level-next-") as tmp:
+        roadmap_dir = build_fixture(Path(tmp), force_plain={("01-intermediate-node", "next")})
+        failures = validate_node(roadmap_dir, "03-last-node")
+        if not any("deve linkar node próximo" in failure for failure in failures):
+            print("falha: último node do nível sem link para o primeiro do próximo nível deveria falhar")
+            for failure in failures:
+                print(f"- {failure}")
+            return 1
+
+    with tempfile.TemporaryDirectory(prefix="node-position-context-generic-level-boundary-") as tmp:
+        roadmap_dir = build_fixture(Path(tmp), force_plain={("01-intermediate-node", "next")})
+        last_html = roadmap_dir / LEVEL / "03-last-node" / "node.html"
+        html_text = last_html.read_text(encoding="utf-8").replace(
+            "Intermediate First Node",
+            "último node do nível",
+        )
+        last_html.write_text(html_text, encoding="utf-8")
+        write_pipeline(last_html.parent, html_text)
+        failures = validate_node(roadmap_dir, "03-last-node")
+        if not any("primeiro/último node do nível" in failure for failure in failures):
+            print("falha: marcador genérico de fronteira de nível deveria falhar")
             for failure in failures:
                 print(f"- {failure}")
             return 1

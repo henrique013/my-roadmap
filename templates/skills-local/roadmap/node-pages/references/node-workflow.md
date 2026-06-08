@@ -180,15 +180,22 @@ Ao montar o contexto de posição:
 - mostre posição em linguagem humana, como `Básico · 01 de 08`;
 - mostre o título ou tema humano do roadmap;
 - mostre o label do node atual;
-- mostre o label do node anterior e do próximo node do mesmo nível quando
-  existirem;
-- quando não houver anterior ou próximo, diga explicitamente que este é o
-  primeiro ou último node do nível;
-- quando o `node.html` do vizinho existir e não estiver vazio, mostre o label do
-  vizinho como link profundo relativo no formato
-  `../<neighbor-slug>/node.html`;
-- quando o vizinho existir no contrato, mas o `node.html` desse vizinho ainda
-  não existir ou estiver vazio, mostre o label ou orientação de sequência como
+- mostre o label do node anterior e do próximo node na sequência global do
+  roadmap, atravessando fronteiras de nível quando necessário;
+- quando o node atual for o último de um nível e existir nível seguinte com
+  nodes, o `Próximo` deve ser o label do primeiro node do próximo nível, nunca
+  texto genérico como `último node do nível`;
+- quando o node atual for o primeiro de um nível e existir nível anterior com
+  nodes, o `Anterior` deve ser o label do último node do nível anterior, nunca
+  texto genérico como `primeiro node do nível`;
+- use indicação genérica somente no início absoluto ou no fim absoluto do
+  roadmap, como `início do roadmap` ou `fim do roadmap`;
+- quando o `node.html` do node anterior ou próximo existir e não estiver vazio,
+  mostre o label desse node como link profundo relativo: use
+  `../<neighbor-slug>/node.html` para nodes no mesmo nível e
+  `../../<neighbor-level>/<neighbor-slug>/node.html` para nodes em outro nível;
+- quando o node anterior ou próximo existir no contrato, mas o `node.html` desse
+  node ainda não existir ou estiver vazio, mostre o label real desse node como
   texto não clicável;
 - nunca mostre como texto puro um vizinho que já tem `node.html` não vazio, pois
   nesse caso a navegação deve ser clicável.
@@ -356,7 +363,8 @@ O HTML deve ter:
 - título adequado ao node;
 - link de retorno para `../../roadmap.html`;
 - área de contexto de posição com nível humano, ordem local, total de nodes do
-  nível, título/tema do roadmap, node atual e anterior/próximo do mesmo nível;
+  nível, título/tema do roadmap, node atual e anterior/próximo na sequência
+  global do roadmap;
 - referências comentadas ao fim;
 - profundidade técnica, progressão e rastreabilidade.
 
@@ -460,10 +468,13 @@ Antes de responder, verifique:
 - `node.html` contém contexto de posição humano derivado do contrato, com
   `data-node-position="true"`, `data-level`, `data-node-order`,
   `data-node-count`, `data-roadmap-slug`, nível humano, posição local,
-  título/tema do roadmap, node atual e anterior/próximo do mesmo nível;
-- no contexto de posição, anterior/próximo do mesmo nível com `node.html` não
-  vazio aparecem como links relativos `../<neighbor-slug>/node.html`, e
-  vizinhos ainda não gerados ou vazios aparecem somente como texto não clicável;
+  título/tema do roadmap, node atual e anterior/próximo na sequência global do
+  roadmap;
+- no contexto de posição, anterior/próximo com `node.html` não vazio aparecem
+  como links relativos `../<neighbor-slug>/node.html` quando estão no mesmo
+  nível e `../../<neighbor-level>/<neighbor-slug>/node.html` quando atravessam
+  nível; vizinhos ainda não gerados ou vazios aparecem somente como texto não
+  clicável com o label real do node;
 - depois que `node.html` passar nas validações mecânicas e qualitativas, o
   `roadmap.html` pai contém um link relativo para
   `<level>/<node-slug>/node.html` no item do node atual;
@@ -549,7 +560,8 @@ incrementalidade ou identificação, aborte.
 
 Depois que o `node.html` do node atual passar por todos os guardrails, atualize
 o `roadmap.html` localizado na raiz do roadmap e, quando existirem, os
-`node.html` vizinhos do mesmo nível.
+`node.html` vizinhos na sequência global do roadmap, inclusive quando o vizinho
+estiver em outro nível.
 
 O link deve ser relativo ao `roadmap.html`:
 
@@ -565,20 +577,33 @@ Ao revisar o `roadmap.html`, preserve os links internos do índice para as
 âncoras de seção, como `#basico-01-exemplo`, e acrescente o link profundo do
 node como navegação complementar do mesmo item.
 
-Se o node anterior do mesmo nível já tiver `node.html` não vazio, atualize o
-contexto de posição desse node anterior para que o label do node atual apareça
-como link relativo:
+Se o node anterior na sequência global do roadmap já tiver `node.html` não
+vazio, atualize o contexto de posição desse node anterior para que o label do
+node atual apareça como link relativo. Use este formato quando estiver no mesmo
+nível:
 
 ```text
 ../<node-slug-atual>/node.html
 ```
 
-Se o próximo node do mesmo nível já tiver `node.html` não vazio, atualize o
-contexto de posição desse próximo node para que o label do node atual apareça
-como link relativo:
+Use este formato quando atravessar nível:
+
+```text
+../../<level-atual>/<node-slug-atual>/node.html
+```
+
+Se o próximo node na sequência global do roadmap já tiver `node.html` não vazio,
+atualize o contexto de posição desse próximo node para que o label do node atual
+apareça como link relativo. Use este formato quando estiver no mesmo nível:
 
 ```text
 ../<node-slug-atual>/node.html
+```
+
+Use este formato quando atravessar nível:
+
+```text
+../../<level-atual>/<node-slug-atual>/node.html
 ```
 
 Essas atualizações de vizinhos são restritas ao bloco de contexto de posição do

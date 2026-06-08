@@ -269,11 +269,44 @@ def order_markers(order: int, count: int) -> tuple[str, ...]:
     )
 
 
-def neighbor_href(node: dict[str, Any]) -> str | None:
+def neighbor_href(current_level: str, node: dict[str, Any]) -> str | None:
+    level = node.get("level")
     slug = node.get("slug")
+    if level not in LEVELS:
+        return None
     if not isinstance(slug, str) or not NODE_SLUG_RE.fullmatch(slug):
         return None
-    return f"../{slug}/node.html"
+    if level == current_level:
+        return f"../{slug}/node.html"
+    return f"../../{level}/{slug}/node.html"
+
+
+def sequential_neighbors(
+    contract: dict[str, Any],
+    level: str,
+    node_slug: str,
+) -> tuple[dict[str, Any] | None, dict[str, Any] | None]:
+    ordered_nodes: list[dict[str, Any]] = []
+    by_level = nodes_by_level(contract)
+    for level_name in LEVELS:
+        ordered_nodes.extend(by_level.get(level_name, []))
+
+    current_index: int | None = None
+    for index, node in enumerate(ordered_nodes):
+        if node.get("level") == level and node.get("slug") == node_slug:
+            current_index = index
+            break
+
+    if current_index is None:
+        return None, None
+
+    previous_node = ordered_nodes[current_index - 1] if current_index > 0 else None
+    next_node = (
+        ordered_nodes[current_index + 1]
+        if current_index + 1 < len(ordered_nodes)
+        else None
+    )
+    return previous_node, next_node
 
 
 def context_has_anchor(match: dict[str, Any], href: str, label: str) -> bool:
@@ -293,15 +326,16 @@ def context_has_anchor(match: dict[str, Any], href: str, label: str) -> bool:
 def validate_neighbor_navigation(
     match: dict[str, Any],
     roadmap_dir: Path,
-    level: str,
+    current_level: str,
     direction: str,
     neighbor_node: dict[str, Any],
     failures: list[str],
 ) -> None:
-    href = neighbor_href(neighbor_node)
+    href = neighbor_href(current_level, neighbor_node)
+    level = normalize_visible(neighbor_node.get("level"))
     label = normalize_visible(neighbor_node.get("label"))
     slug = normalize_visible(neighbor_node.get("slug"))
-    if not href or not slug:
+    if not href or level not in LEVELS or not slug:
         failures.append(
             f"HTML: contexto de posição não conseguiu resolver link do node {direction}"
         )
@@ -341,14 +375,15 @@ def validate_neighbor_links_current_node(
     if neighbor_node is None:
         return
 
+    neighbor_level = normalize_visible(neighbor_node.get("level"))
     neighbor_slug = normalize_visible(neighbor_node.get("slug"))
-    if not neighbor_slug:
+    if neighbor_level not in LEVELS or not neighbor_slug:
         failures.append(
-            f"HTML: node vizinho {neighbor_direction} sem slug no contrato"
+            f"HTML: node vizinho {neighbor_direction} sem level ou slug no contrato"
         )
         return
 
-    neighbor_html = roadmap_dir / level / neighbor_slug / "node.html"
+    neighbor_html = roadmap_dir / neighbor_level / neighbor_slug / "node.html"
     if not is_non_empty_file(neighbor_html):
         return
 
@@ -359,7 +394,7 @@ def validate_neighbor_links_current_node(
         )
         return
 
-    href = neighbor_href(current_node)
+    href = neighbor_href(neighbor_level, current_node)
     label = normalize_visible(current_node.get("label"))
     if not href or not label:
         failures.append("HTML: node atual sem href ou label para validação recíproca")
@@ -442,14 +477,23 @@ def validate_node_position_context(
         failures.append("HTML: contexto de posição não conseguiu resolver índice do node no nível")
         return
 
-    index = slugs.index(node_slug)
-    previous_node = nodes[index - 1] if index > 0 else None
-    next_node = nodes[index + 1] if index + 1 < len(nodes) else None
+    banned_level_boundary_text = (
+        "primeiro node do nível",
+        "primeiro node do nivel",
+        "último node do nível",
+        "ultimo node do nivel",
+    )
+    if contains_any(text, banned_level_boundary_text):
+        failures.append(
+            "HTML: contexto de posição não deve usar marcador genérico de primeiro/último node do nível"
+        )
+
+    previous_node, next_node = sequential_neighbors(contract, level, node_slug)
 
     if previous_node is None:
-        if not contains_any(text, ("primeiro", "first", "sem anterior", "no previous")):
+        if not contains_any(text, ("início do roadmap", "inicio do roadmap", "sem anterior", "no previous")):
             failures.append(
-                "HTML: contexto de posição deve indicar ausência de node anterior"
+                "HTML: contexto de posição deve indicar ausência de node anterior no roadmap"
             )
     else:
         previous_label = normalize_for_contains(previous_node.get("label"))
@@ -465,9 +509,9 @@ def validate_node_position_context(
         )
 
     if next_node is None:
-        if not contains_any(text, ("último", "ultimo", "last", "sem próximo", "sem proximo", "no next")):
+        if not contains_any(text, ("fim do roadmap", "sem próximo", "sem proximo", "no next")):
             failures.append(
-                "HTML: contexto de posição deve indicar ausência de próximo node"
+                "HTML: contexto de posição deve indicar ausência de próximo node no roadmap"
             )
     else:
         next_label = normalize_for_contains(next_node.get("label"))

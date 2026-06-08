@@ -168,11 +168,21 @@ Saídas obrigatórias:
 .tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/research-dump.md
 .tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/node.html
 .tmp/roadmaps/<roadmap-slug>/roadmap.html
+.tmp/roadmaps/<roadmap-slug>/<previous-node-level>/<previous-node-slug>/node.html  # somente contexto de posição, se já existir
+.tmp/roadmaps/<roadmap-slug>/<next-node-level>/<next-node-slug>/node.html          # somente contexto de posição, se já existir
 ```
 
 O `roadmap.html` pai é atualizado somente depois que o `node.html` do node atual
 passar nos guardrails obrigatórios, adicionando o link relativo profundo do node
 validado. Não mencione esse arquivo na resposta final, salvo pedido explícito.
+
+Quando o node anterior ou próximo na sequência global do roadmap já tiver
+`node.html` não vazio, inclusive ao atravessar fronteira de nível, o modo
+`node-pages` também atualiza somente o bloco de contexto de posição desse
+vizinho para manter a navegação recíproca exigida pelo pipeline. Essa atualização
+pertence ao escopo normal da geração do node atual: não recrie vizinhos, não
+altere narrativa, dump, ledger, pipeline editorial ou screenshots de outro node,
+e não peça confirmação extra apenas para esse link recíproco.
 
 Se `.tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/` já existir, faça um
 checkpoint explícito antes de recriar a pasta: informe o caminho resolvido e
@@ -199,7 +209,10 @@ Artefatos internos obrigatórios:
 
 Execute o pipeline de `node-pages` até ponto fixo. A incrementalidade continua
 obrigatória dentro do nível selecionado: não pule nodes daquele nível e leia o
-node anterior do mesmo nível quando ele existir.
+node anterior do mesmo nível quando ele existir. O contexto de posição, porém,
+deve navegar pela sequência global do roadmap: o último node de um nível aponta
+para o primeiro node do próximo nível quando ele existir, usando o label real do
+node, não texto genérico como `último node do nível`.
 
 Resposta final:
 

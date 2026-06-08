@@ -73,9 +73,10 @@ inclua uma área compacta de orientação humana com:
 - posição local no nível no formato humano, como `01 de 08`;
 - título ou tema humano do roadmap;
 - label humano do node atual;
-- contexto anterior/próximo do mesmo nível, quando existir;
-- indicação explícita de primeiro ou último node do nível quando não houver
-  anterior ou próximo.
+- contexto anterior/próximo na sequência global do roadmap, atravessando nível
+  quando necessário;
+- indicação explícita de início ou fim do roadmap somente quando não houver
+  node anterior ou próximo em nenhum nível.
 
 Essa área é orientação, não seção pedagógica. Ela não deve virar card de
 metadados como abertura, nem substituir a pergunta-motor ou a narrativa do
@@ -95,15 +96,27 @@ a redação a uma frase específica:
   <p><strong>Básico · 01 de 08</strong></p>
   <p>Roadmap: API oficial do WhatsApp para automações de agência</p>
   <p>Node atual: Ecossistema Meta e WhatsApp Business Platform</p>
-  <p>Anterior: primeiro node do nível · Próximo: <a href="../02-business-portfolio-bm-e-ativos/node.html">Business Portfolio, BM e ativos do cliente</a></p>
+  <p>Anterior: início do roadmap · Próximo: <a href="../02-business-portfolio-bm-e-ativos/node.html">Business Portfolio, BM e ativos do cliente</a></p>
 </div>
 ```
 
-Quando o `node.html` do vizinho anterior ou próximo já existir e não estiver
-vazio, o label desse vizinho deve aparecer como link relativo no formato
-`../<neighbor-slug>/node.html`. Quando o vizinho existir no contrato, mas ainda
-não tiver `node.html` materializado ou esse arquivo estiver vazio, mantenha o
-label como texto não clicável para orientar a sequência sem criar link quebrado.
+O contexto de posição segue a sequência global do roadmap, não apenas o nível
+local. Quando o node atual for o último de um nível e existir próximo nível com
+nodes, `Próximo` deve mostrar o label do primeiro node do próximo nível. Quando
+o node atual for o primeiro de um nível e existir nível anterior com nodes,
+`Anterior` deve mostrar o label do último node do nível anterior.
+
+Quando o `node.html` do node anterior ou próximo já existir e não estiver vazio,
+o label desse node deve aparecer como link relativo. Use
+`../<neighbor-slug>/node.html` para nodes no mesmo nível e
+`../../<neighbor-level>/<neighbor-slug>/node.html` para nodes em outro nível.
+Quando o node anterior ou próximo existir no contrato, mas ainda não tiver
+`node.html` materializado ou esse arquivo estiver vazio, mantenha o label real
+do node como texto não clicável para orientar a sequência sem criar link
+quebrado.
+
+Não use texto genérico como `primeiro node do nível` ou `último node do nível`
+quando existir node anterior ou próximo em outro nível.
 
 Os identificadores técnicos, como `node_id`, slug do node e slug do roadmap,
 podem continuar visíveis para rastreabilidade, mas devem ficar visualmente
@@ -629,9 +642,11 @@ O arquivo deve conter:
 - título adequado ao node;
 - link de retorno para `../../roadmap.html`;
 - contexto de posição humano com nível, ordem local, total de nodes do nível,
-  título/tema do roadmap, node atual e anterior/próximo do mesmo nível;
-- links relativos `../<neighbor-slug>/node.html` para anterior/próximo do mesmo
-  nível somente quando o `node.html` do vizinho existir e não estiver vazio;
+  título/tema do roadmap, node atual e anterior/próximo na sequência global do
+  roadmap;
+- links relativos para anterior/próximo somente quando o `node.html` do vizinho
+  existir e não estiver vazio: `../<neighbor-slug>/node.html` no mesmo nível e
+  `../../<neighbor-level>/<neighbor-slug>/node.html` em outro nível;
 - referências comentadas no fim.
 
 Mantenha boa hierarquia, leitura confortável, contraste suficiente e texto que
