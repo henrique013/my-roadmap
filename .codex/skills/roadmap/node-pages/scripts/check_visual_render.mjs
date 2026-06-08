@@ -154,6 +154,46 @@ function colorAlpha(value) {
   return Number.isFinite(alpha) ? alpha : 1;
 }
 
+function parseRgbColor(value) {
+  if (!value || value === "transparent") {
+    return null;
+  }
+  const match = String(value).match(/rgba?\(([^)]+)\)/i);
+  if (!match) {
+    return null;
+  }
+  const parts = match[1].split(/[,\s/]+/).filter(Boolean);
+  if (parts.length < 3) {
+    return null;
+  }
+  const rgb = parts.slice(0, 3).map((part) => Number.parseFloat(part));
+  const alpha = parts.length >= 4 ? Number.parseFloat(parts[3]) : 1;
+  if (rgb.some((part) => !Number.isFinite(part))) {
+    return null;
+  }
+  return {
+    r: rgb[0],
+    g: rgb[1],
+    b: rgb[2],
+    a: Number.isFinite(alpha) ? alpha : 1,
+  };
+}
+
+function relativeLuminance(color) {
+  const values = [color.r, color.g, color.b].map((value) => {
+    const channel = value / 255;
+    return channel <= 0.03928
+      ? channel / 12.92
+      : ((channel + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * values[0] + 0.7152 * values[1] + 0.0722 * values[2];
+}
+
+function isDarkSurface(value) {
+  const parsed = parseRgbColor(value);
+  return Boolean(parsed && parsed.a > 0.01 && relativeLuminance(parsed) <= 0.18);
+}
+
 function hasPositiveBoxValue(values) {
   return values.some((value) => pxNumber(value) > 0.1);
 }
@@ -315,6 +355,43 @@ function externalRequestFailures(externalRequests) {
   return [...new Set(externalRequests)].map((url) => ({ url }));
 }
 
+function darkThemeFailures(renderResults) {
+  const failures = [];
+
+  for (const result of renderResults) {
+    if (result.theme.marker !== "notion-dark") {
+      failures.push({
+        viewport: result.viewport.name,
+        check: "marker",
+        expected: "notion-dark",
+        actual: result.theme.marker || "(ausente)",
+      });
+    }
+    if (!/\bdark\b/i.test(result.theme.colorScheme || "")) {
+      failures.push({
+        viewport: result.viewport.name,
+        check: "color-scheme",
+        expected: "dark",
+        actual: result.theme.colorScheme || "(ausente)",
+      });
+    }
+    for (const sample of result.theme.surfaceSamples) {
+      if (!isDarkSurface(sample.backgroundColor)) {
+        failures.push({
+          viewport: result.viewport.name,
+          check: "dark-surface",
+          selector: sample.selector,
+          index: sample.index,
+          text: sample.text,
+          backgroundColor: sample.backgroundColor,
+        });
+      }
+    }
+  }
+
+  return failures;
+}
+
 async function collectRenderData(page) {
   return page.evaluate(() => {
     function parseColor(value) {
@@ -363,6 +440,11 @@ async function collectRenderData(page) {
       const light = Math.max(foregroundLuminance, backgroundLuminance);
       const dark = Math.min(foregroundLuminance, backgroundLuminance);
       return Number(((light + 0.05) / (dark + 0.05)).toFixed(2));
+    }
+
+    function isDarkSurface(background) {
+      const parsed = parseColor(background);
+      return Boolean(parsed && parsed.a > 0.01 && luminance(parsed) <= 0.18);
     }
 
     function isVisible(element) {
@@ -486,6 +568,14 @@ async function collectRenderData(page) {
       ["code:not(pre code)", "inline code"],
       ["pre", "bloco de código"],
       ["pre code", "conteúdo de bloco de código"],
+      [".tag", "tag"],
+      [".small", "texto auxiliar"],
+      [".route-label", "route-label"],
+      [".node-context", "contexto de node"],
+      [
+        ".flow-step, .step, .state-card, .stream-card, .event-card, .group-card, .tool-card, .part, .handoff-card, .lane, .boundary-card",
+        "visual customizado",
+      ],
       [".syntax-key", "syntax-key"],
       [".syntax-op", "syntax-op"],
       [".syntax-value", "syntax-value"],
@@ -513,6 +603,68 @@ async function collectRenderData(page) {
 
     const documentElement = document.documentElement;
     const body = document.body;
+    const themeSurfaceSelectors = [
+      ["body", "body"],
+      ["main", "main"],
+      [".node-context", ".node-context"],
+      [".card", ".card"],
+      [".callout", ".callout"],
+      [".timeline-step", ".timeline-step"],
+      [".flow-step", ".flow-step"],
+      [".flow-steps span", ".flow-steps span"],
+      [".step", ".step"],
+      [".risk-step", ".risk-step"],
+      [".position-strip", ".position-strip"],
+      [".contract-map", ".contract-map"],
+      [".visual-block", ".visual-block"],
+      [".content-grid", ".content-grid"],
+      [".state-card", ".state-card"],
+      [".stream-card", ".stream-card"],
+      [".event-card", ".event-card"],
+      [".group-card", ".group-card"],
+      [".tool-card", ".tool-card"],
+      [".part", ".part"],
+      [".group-shell", ".group-shell"],
+      [".umbrella-map", ".umbrella-map"],
+      [".topology-node", ".topology-node"],
+      [".lane", ".lane"],
+      [".process-card", ".process-card"],
+      [".visual-card", ".visual-card"],
+      [".concept-card", ".concept-card"],
+      [".path-card", ".path-card"],
+      [".decision-card", ".decision-card"],
+      [".stage", ".stage"],
+      [".segment", ".segment"],
+      [".panel", ".panel"],
+      [".box", ".box"],
+      [".map-card", ".map-card"],
+      [".layer", ".layer"],
+      [".node-card", ".node-card"],
+      [".mini-card", ".mini-card"],
+      [".boundary-card", ".boundary-card"],
+      [".handoff-card", ".handoff-card"],
+      [".flow-mini > *", ".flow-mini > *"],
+      ["th", "th"],
+      ["td", "td"],
+      ["code:not(pre code)", "inline code"],
+      ["pre", "pre"],
+      [".tag", ".tag"],
+    ];
+    const themeSurfaceSamples = themeSurfaceSelectors.flatMap(([selector, label]) =>
+      Array.from(document.querySelectorAll(selector))
+        .filter(isVisible)
+        .slice(0, 8)
+        .map((element, index) => {
+          const backgroundColor = effectiveBackground(element);
+          return {
+            selector: label,
+            index,
+            text: element.textContent.trim().slice(0, 80),
+            backgroundColor,
+            isDark: isDarkSurface(backgroundColor),
+          };
+        }),
+    );
     const clientWidth = documentElement.clientWidth;
     const scrollWidth = Math.max(
       documentElement.scrollWidth,
@@ -529,7 +681,7 @@ async function collectRenderData(page) {
       }
       if (
         element.closest(
-          ".card, table, pre, .tag, .small, .step, .risk-step, .position-strip, .contract-map, .visual-block, .content-grid, .timeline, .flow-steps, .state-grid, .topology, .lane-map, .lane",
+          ".card, table, pre, .tag, .small, .step, .risk-step, .position-strip, .contract-map, .visual-block, .content-grid, .timeline, .timeline-step, .flow-steps, .flow-step, .state-grid, .state-card, .topology, .topology-node, .lane-map, .lane, .stream-card, .event-card, .group-card, .tool-card, .part, .group-shell, .umbrella-map, .process-card, .visual-card, .concept-card, .path-card, .decision-card, .stage, .segment, .panel, .box, .map-card, .layer, .node-card, .mini-card, .boundary-card, .handoff-card, .flow-mini",
         )
       ) {
         return false;
@@ -554,6 +706,11 @@ async function collectRenderData(page) {
 
     return {
       title: document.title,
+      theme: {
+        marker: documentElement.getAttribute("data-visual-theme") || "",
+        colorScheme: window.getComputedStyle(documentElement).colorScheme || window.getComputedStyle(body).colorScheme || "",
+        surfaceSamples: themeSurfaceSamples,
+      },
       preBlocks,
       preCodeStyles,
       inlineCodeStyles,
@@ -617,6 +774,7 @@ function failureSection(title, items, renderItem) {
 
 function writeAudit(targets, renderResults, groupedFailures) {
   const failures = [
+    ...groupedFailures.theme,
     ...groupedFailures.preCodeChip,
     ...groupedFailures.highlight,
     ...groupedFailures.conceptualPre,
@@ -637,6 +795,13 @@ function writeAudit(targets, renderResults, groupedFailures) {
   });
 
   const checkRows = [
+    [
+      "tema visual `notion-dark` aplicado",
+      groupedFailures.theme.length === 0 ? "passa" : "falha",
+      groupedFailures.theme.length === 0
+        ? "marcador, color-scheme e superfícies escuras confirmados"
+        : `${groupedFailures.theme.length} problema(s) de tema`,
+    ],
     [
       "`pre code` não herda chip de inline code",
       groupedFailures.preCodeChip.length === 0 ? "passa" : "falha",
@@ -696,6 +861,15 @@ function writeAudit(targets, renderResults, groupedFailures) {
   ];
 
   const failureText = [
+    failureSection("Tema visual `notion-dark` inválido", groupedFailures.theme, (item) => [
+      `- Onde apareceu: viewport ${item.viewport}${item.selector ? `, seletor ${item.selector}` : ""}.`,
+      item.check === "dark-surface"
+        ? `- Por que falha: superfície ${item.backgroundColor} não é escura o suficiente.`
+        : `- Por que falha: ${item.check} atual \`${item.actual}\`; esperado \`${item.expected}\`.`,
+      "- Revisão obrigatória: aplicar `data-visual-theme=\"notion-dark\"`, `color-scheme: dark` e os tokens escuros do sistema visual.",
+      item.text ? `- Trecho: \`${item.text}\`` : "",
+      "",
+    ]),
     failureSection("`pre code` com estilo de chip", groupedFailures.preCodeChip, (item) => [
       `- Onde apareceu: viewport ${item.viewport}, bloco ${item.index}.`,
       `- Por que falha: ${item.reason}.`,
@@ -842,6 +1016,7 @@ async function run() {
   }
 
   const groupedFailures = {
+    theme: darkThemeFailures(renderResults),
     preCodeChip: preCodeChipFailures(renderResults),
     highlight: highlightFailures(renderResults),
     conceptualPre: conceptualPreFailures(renderResults),

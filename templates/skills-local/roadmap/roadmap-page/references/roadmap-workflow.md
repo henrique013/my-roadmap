@@ -122,7 +122,8 @@ Antes de gerar qualquer conteudo final, leia:
 
 Use `roadmap-page-template.html` como referencia visual: tipografia base de
 18px, largura principal de 1260px, leitura confortavel, bordas discretas,
-tabelas limpas, blocos de chamada, cards curtos e responsividade basica.
+tabelas limpas, blocos de chamada, cards curtos, responsividade basica e o
+tema visual unico `notion-dark`.
 
 Leia tambem:
 
@@ -135,10 +136,14 @@ roadmap-page/references/roadmap-quality-pipeline/pipeline.md
 Nao copie textos de exemplo do template visual para o roadmap.
 
 Nao referencie o asset no HTML final como fonte tematica.
+Nao crie switch de tema, modo claro alternativo ou CSS condicional de tema.
+O HTML final deve expor `data-visual-theme="notion-dark"` no elemento raiz.
 
 ### Checklist desta secao
 
 - [ ] O template visual foi lido antes de escrever o HTML.
+- [ ] O contrato visual `notion-dark` foi aplicado como tema unico.
+- [ ] O elemento raiz do HTML contem `data-visual-theme="notion-dark"`.
 - [ ] O HTML final usou o estilo como referencia, sem copiar exemplos.
 - [ ] O asset nao foi citado como referencia tematica.
 - [ ] O HTML final ficou limpo, escaneavel e responsivo.

@@ -8,7 +8,7 @@ coerente com `.roadmap/roadmap-contract.json`.
 O HTML deve conter:
 
 - `<!doctype html>`;
-- `html lang="pt-BR"`;
+- `html lang="pt-BR"` com `data-visual-theme="notion-dark"`;
 - `meta charset="utf-8"`;
 - viewport;
 - CSS embutido;
@@ -24,6 +24,12 @@ O HTML deve conter:
 - seções completas dos nodes agrupadas por nível;
 - checklist final de cobertura;
 - referências consolidadas.
+
+O tema visual é sempre `notion-dark`. O HTML deve usar `color-scheme: dark`,
+superfícies escuras para `body`, cards, tabelas, callouts, blocos de código e
+visuais conceituais customizados, e cores semânticas pontuais para links, tags,
+foco, avisos e snippets.
+Não crie switch de tema nem modo claro alternativo.
 
 Cada seção de nível deve ter `data-level` com valor `basico`,
 `intermediario` ou `avancado`.
@@ -94,6 +100,9 @@ Para isso, a identidade humana (`label`, `slug`) e a identidade mecânica
   visual explícita.
 - Não use `<pre>` como atalho para mapa, fluxo, sequência, linha do tempo,
   estado ou contraste conceitual simples.
+- Não use superfícies claras legadas para `body`, cards, `td`, `th`, callouts,
+  tags ou componentes como `.flow-step`, `.state-card`, `.lane`,
+  `.event-card`, `.stream-card`, `.part` e equivalentes.
 
 ## Primitivas Visuais
 

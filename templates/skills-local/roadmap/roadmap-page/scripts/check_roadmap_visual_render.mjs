@@ -100,6 +100,41 @@ function colorAlpha(value) {
   return Number.isFinite(alpha) ? alpha : 1;
 }
 
+function parseRgbColor(value) {
+  if (!value || value === "transparent") {
+    return null;
+  }
+  const match = String(value).match(/rgba?\(([^)]+)\)/i);
+  if (!match) {
+    return null;
+  }
+  const parts = match[1].split(/[,\s/]+/).filter(Boolean);
+  if (parts.length < 3) {
+    return null;
+  }
+  const rgb = parts.slice(0, 3).map((part) => Number.parseFloat(part));
+  const alpha = parts.length >= 4 ? Number.parseFloat(parts[3]) : 1;
+  if (rgb.some((part) => !Number.isFinite(part))) {
+    return null;
+  }
+  return { r: rgb[0], g: rgb[1], b: rgb[2], a: Number.isFinite(alpha) ? alpha : 1 };
+}
+
+function relativeLuminance(color) {
+  const values = [color.r, color.g, color.b].map((value) => {
+    const channel = value / 255;
+    return channel <= 0.03928
+      ? channel / 12.92
+      : ((channel + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * values[0] + 0.7152 * values[1] + 0.0722 * values[2];
+}
+
+function isDarkSurface(value) {
+  const parsed = parseRgbColor(value);
+  return Boolean(parsed && parsed.a > 0.01 && relativeLuminance(parsed) <= 0.18);
+}
+
 function pxNumber(value) {
   const parsed = Number.parseFloat(String(value || "0"));
   return Number.isFinite(parsed) ? parsed : 0;
@@ -161,29 +196,35 @@ function highlightFailures(renderResults) {
   return failures;
 }
 
-function tableSurfaceFailures(renderResults) {
+function darkThemeFailures(renderResults) {
   const failures = [];
 
   for (const result of renderResults) {
-    for (const cell of result.tableCellStyles) {
-      if (cell.tagName === "td" && cell.backgroundColor !== "rgb(255, 255, 255)") {
+    if (result.theme.marker !== "notion-dark") {
+      failures.push({
+        viewport: result.viewport.name,
+        check: "marker",
+        expected: "notion-dark",
+        actual: result.theme.marker || "(ausente)",
+      });
+    }
+    if (!/\bdark\b/i.test(result.theme.colorScheme || "")) {
+      failures.push({
+        viewport: result.viewport.name,
+        check: "color-scheme",
+        expected: "dark",
+        actual: result.theme.colorScheme || "(ausente)",
+      });
+    }
+    for (const sample of result.theme.surfaceSamples) {
+      if (!isDarkSurface(sample.backgroundColor)) {
         failures.push({
           viewport: result.viewport.name,
-          index: cell.index,
-          tagName: cell.tagName,
-          text: cell.text,
-          backgroundColor: cell.backgroundColor,
-          expected: "rgb(255, 255, 255)",
-        });
-      }
-      if (cell.tagName === "th" && cell.backgroundColor !== "rgb(232, 238, 246)") {
-        failures.push({
-          viewport: result.viewport.name,
-          index: cell.index,
-          tagName: cell.tagName,
-          text: cell.text,
-          backgroundColor: cell.backgroundColor,
-          expected: "rgb(232, 238, 246)",
+          check: "dark-surface",
+          selector: sample.selector,
+          index: sample.index,
+          text: sample.text,
+          backgroundColor: sample.backgroundColor,
         });
       }
     }
@@ -230,6 +271,11 @@ async function collectRenderData(page) {
       const light = Math.max(luminance(foregroundColor), luminance(backgroundColor));
       const dark = Math.min(luminance(foregroundColor), luminance(backgroundColor));
       return Number(((light + 0.05) / (dark + 0.05)).toFixed(2));
+    }
+
+    function isDarkSurface(background) {
+      const parsed = parseColor(background);
+      return Boolean(parsed && parsed.a > 0.01 && luminance(parsed) <= 0.18);
     }
 
     function isVisible(element) {
@@ -314,6 +360,69 @@ async function collectRenderData(page) {
 
     const documentElement = document.documentElement;
     const body = document.body;
+    const themeSurfaceSelectors = [
+      ["body", "body"],
+      ["main", "main"],
+      [".card", ".card"],
+      [".callout", ".callout"],
+      [".timeline-step", ".timeline-step"],
+      [".flow-step", ".flow-step"],
+      [".flow-steps span", ".flow-steps span"],
+      [".step", ".step"],
+      [".risk-step", ".risk-step"],
+      [".position-strip", ".position-strip"],
+      [".contract-map", ".contract-map"],
+      [".visual-block", ".visual-block"],
+      [".content-grid", ".content-grid"],
+      [".state-card", ".state-card"],
+      [".stream-card", ".stream-card"],
+      [".event-card", ".event-card"],
+      [".group-card", ".group-card"],
+      [".tool-card", ".tool-card"],
+      [".part", ".part"],
+      [".group-shell", ".group-shell"],
+      [".umbrella-map", ".umbrella-map"],
+      [".topology-node", ".topology-node"],
+      [".lane", ".lane"],
+      [".node-list a", ".node-list a"],
+      [".node-list .node-list-item", ".node-list .node-list-item"],
+      [".process-card", ".process-card"],
+      [".visual-card", ".visual-card"],
+      [".concept-card", ".concept-card"],
+      [".path-card", ".path-card"],
+      [".decision-card", ".decision-card"],
+      [".stage", ".stage"],
+      [".segment", ".segment"],
+      [".panel", ".panel"],
+      [".box", ".box"],
+      [".map-card", ".map-card"],
+      [".layer", ".layer"],
+      [".node-card", ".node-card"],
+      [".mini-card", ".mini-card"],
+      [".boundary-card", ".boundary-card"],
+      [".handoff-card", ".handoff-card"],
+      [".flow-mini > *", ".flow-mini > *"],
+      ["th", "th"],
+      ["td", "td"],
+      ["code:not(pre code)", "inline code"],
+      ["pre", "pre"],
+      [".tag", ".tag"],
+    ];
+    const themeSurfaceSamples = themeSurfaceSelectors.flatMap(([selector, label]) =>
+      Array.from(document.querySelectorAll(selector))
+        .filter(isVisible)
+        .slice(0, 8)
+        .map((element, index) => {
+          const backgroundColor = effectiveBackground(element);
+          return {
+            selector: label,
+            index,
+            text: element.textContent.trim().slice(0, 80),
+            backgroundColor,
+            isDark: isDarkSurface(backgroundColor),
+          };
+        }),
+    );
     const clientWidth = documentElement.clientWidth;
     const scrollWidth = Math.max(documentElement.scrollWidth, body ? body.scrollWidth : 0);
     const main = document.querySelector("main");
@@ -328,7 +437,7 @@ async function collectRenderData(page) {
       }
       if (
         element.closest(
-          ".card, table, pre, .tag, .small, .step, .risk-step, .position-strip, .contract-map, .visual-block, .content-grid, .timeline, .flow-steps, .state-grid, .topology, .lane-map, .lane",
+          ".card, table, pre, .tag, .small, .step, .risk-step, .position-strip, .contract-map, .visual-block, .content-grid, .timeline, .timeline-step, .flow-steps, .flow-step, .state-grid, .state-card, .topology, .topology-node, .lane-map, .lane, .node-list, .stream-card, .event-card, .group-card, .tool-card, .part, .group-shell, .umbrella-map, .process-card, .visual-card, .concept-card, .path-card, .decision-card, .stage, .segment, .panel, .box, .map-card, .layer, .node-card, .mini-card, .boundary-card, .handoff-card, .flow-mini",
         )
       ) {
         return false;
@@ -353,7 +462,22 @@ async function collectRenderData(page) {
     });
 
     const contrastSamples = [];
-    for (const [selector, label] of [["body", "body"], ["p", "parágrafo"], ["a", "link"], ["code:not(pre code)", "inline code"], ["pre", "bloco de código"]]) {
+    const sampleSelectors = [
+      ["body", "body"],
+      ["p", "parágrafo"],
+      ["a", "link"],
+      ["code:not(pre code)", "inline code"],
+      ["pre", "bloco de código"],
+      [".tag", "tag"],
+      [".small", "texto auxiliar"],
+      [".route-label", "route-label"],
+      [".node-list a", "node-list"],
+      [
+        ".flow-step, .step, .state-card, .stream-card, .event-card, .group-card, .tool-card, .part, .handoff-card, .lane, .boundary-card",
+        "visual customizado",
+      ],
+    ];
+    for (const [selector, label] of sampleSelectors) {
       const elements = Array.from(document.querySelectorAll(selector)).filter(isVisible).slice(0, 8);
       for (const element of elements) {
         const style = window.getComputedStyle(element);
@@ -388,18 +512,13 @@ async function collectRenderData(page) {
       (element, index) => summarizeStyle(element, index),
     );
 
-    const tableCellStyles = Array.from(document.querySelectorAll("th, td")).map((element, index) => {
-      const style = window.getComputedStyle(element);
-      return {
-        index,
-        tagName: element.tagName.toLowerCase(),
-        text: element.textContent.trim().slice(0, 120),
-        backgroundColor: style.backgroundColor,
-      };
-    });
-
     return {
       title: document.title,
+      theme: {
+        marker: documentElement.getAttribute("data-visual-theme") || "",
+        colorScheme: window.getComputedStyle(documentElement).colorScheme || window.getComputedStyle(body).colorScheme || "",
+        surfaceSamples: themeSurfaceSamples,
+      },
       overflow: {
         clientWidth,
         scrollWidth,
@@ -409,7 +528,6 @@ async function collectRenderData(page) {
       contrastSamples,
       preBlocks,
       preCodeStyles,
-      tableCellStyles,
     };
   });
 }
@@ -527,8 +645,22 @@ function writeAudit(targets, renderResults, groupedFailures) {
     : `${groupedFailures.contentWidth.length} bloco(s) estreito(s)`;
   const calloutFailure = groupedFailures.contentWidth.some((item) => item.selector === ".callout");
   const paragraphFailure = groupedFailures.contentWidth.some((item) => ["p", "ul", "ol", ".lead"].includes(item.selector));
+  const tableThemeFailure = groupedFailures.theme.some((item) => ["th", "td"].includes(item.selector));
 
   const failureText = [];
+  for (const item of groupedFailures.theme) {
+    failureText.push(
+      "### Tema visual `notion-dark` inválido",
+      "",
+      `- Onde apareceu: viewport ${item.viewport}${item.selector ? `, seletor ${item.selector}` : ""}.`,
+      item.check === "dark-surface"
+        ? `- Por que falha: superfície ${item.backgroundColor} não é escura o suficiente.`
+        : `- Por que falha: ${item.check} atual \`${item.actual}\`; esperado \`${item.expected}\`.`,
+      "- Revisão obrigatória: aplicar `data-visual-theme=\"notion-dark\"`, `color-scheme: dark` e os tokens escuros do sistema visual.",
+      item.text ? `- Trecho: \`${item.text}\`` : "",
+      "",
+    );
+  }
   for (const item of groupedFailures.contentWidth) {
     failureText.push(
       `### Bloco textual estreito ${item.index}`,
@@ -590,17 +722,6 @@ function writeAudit(targets, renderResults, groupedFailures) {
       "",
     );
   }
-  for (const item of groupedFailures.tableSurface) {
-    failureText.push(
-      "### Superfície de tabela incorreta",
-      "",
-      `- Onde apareceu: viewport ${item.viewport}, célula ${item.index} (${item.tagName}).`,
-      `- Por que falha: background ${item.backgroundColor}; esperado ${item.expected}.`,
-      "- Revisão obrigatória: aplicar `var(--surface)` em `td` e `var(--soft-2)` em `th`.",
-      `- Trecho: \`${item.text}\``,
-      "",
-    );
-  }
   for (const item of groupedFailures.conceptualPre) {
     failureText.push(
       "### Visual conceitual em `<pre>`",
@@ -644,9 +765,10 @@ function writeAudit(targets, renderResults, groupedFailures) {
     "",
     "| Check | Status | Evidência |",
     "|---|---|---|",
+    `| tema visual \`notion-dark\` aplicado | ${groupedFailures.theme.length === 0 ? "passa" : "falha"} | ${groupedFailures.theme.length === 0 ? "marcador, color-scheme e superfícies escuras confirmados" : `${groupedFailures.theme.length} problema(s) de tema`} |`,
     `| \`pre code\` não herda chip de inline code | ${groupedFailures.preCodeChip.length === 0 ? "passa" : "falha"} | ${groupedFailures.preCodeChip.length === 0 ? "estilos computados sem fundo, borda, padding ou raio próprios" : `${groupedFailures.preCodeChip.length} ocorrência(s) com estilo de chip`} |`,
     `| snippets técnicos têm highlight semântico | ${groupedFailures.highlight.length === 0 ? "passa" : "falha"} | ${groupedFailures.highlight.length === 0 ? "blocos técnicos usam classes de highlight ou são texto literal permitido" : `${groupedFailures.highlight.length} bloco(s) técnico(s) sem highlight`} |`,
-    `| tabelas usam superfície estruturada | ${groupedFailures.tableSurface.length === 0 ? "passa" : "falha"} | ${groupedFailures.tableSurface.length === 0 ? "td renderiza em branco e th usa o cinza aprovado" : `${groupedFailures.tableSurface.length} célula(s) com superfície incorreta`} |`,
+    `| tabelas usam superfície estruturada | ${tableThemeFailure ? "falha" : "passa"} | ${tableThemeFailure ? "há célula de tabela fora do contrato escuro" : "td usa superfície escura e th usa variação escura"} |`,
     `| contraste mínimo em texto e código | ${groupedFailures.contrast.length === 0 ? "passa" : "falha"} | ${groupedFailures.contrast.length === 0 ? "amostras renderizadas com contraste >= 4.5:1" : `${groupedFailures.contrast.length} amostra(s) abaixo de 4.5:1`} |`,
     `| visuais conceituais não usam \`<pre>\` como atalho | ${groupedFailures.conceptualPre.length === 0 ? "passa" : "falha"} | ${groupedFailures.conceptualPre.length === 0 ? "nenhum <pre> suspeito sem exceção ASCII explícita" : `${groupedFailures.conceptualPre.length} bloco(s) visual(is) em <pre> sem exceção completa`} |`,
     `| página sem overflow horizontal global | ${groupedFailures.overflow.length === 0 ? "passa" : "falha"} | ${groupedFailures.overflow.length === 0 ? "desktop e mobile sem overflow global" : `${groupedFailures.overflow.length} viewport(s) com overflow global`} |`,
@@ -700,9 +822,9 @@ async function run() {
   }
 
   const groupedFailures = {
+    theme: darkThemeFailures(renderResults),
     preCodeChip: preCodeChipFailures(renderResults),
     highlight: highlightFailures(renderResults),
-    tableSurface: tableSurfaceFailures(renderResults),
     overflow: overflowFailures(renderResults),
     contentWidth: contentWidthFailures(renderResults),
     contrast: contrastFailures(renderResults),

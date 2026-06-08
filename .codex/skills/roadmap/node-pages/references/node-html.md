@@ -622,7 +622,7 @@ títulos e a proibição de infantilização do leitor.
 O arquivo deve conter:
 
 - `<!doctype html>`;
-- `html lang="pt-BR"`;
+- `html lang="pt-BR"` com `data-visual-theme="notion-dark"`;
 - `meta charset="utf-8"`;
 - viewport;
 - CSS embutido;
@@ -637,6 +637,10 @@ O arquivo deve conter:
 Mantenha boa hierarquia, leitura confortável, contraste suficiente e texto que
 caiba nos seus elementos. Use o asset da skill como referência visual, não como
 fonte de conteúdo nem como contrato de componentes.
+O tema visual é sempre `notion-dark`: `body`, cards, contexto de node, tabelas,
+callouts, blocos de código e visuais conceituais customizados usam superfícies
+escuras; links, tags, foco, avisos e snippets usam cores semânticas pontuais.
+Não crie switch de tema nem modo claro alternativo.
 
 ## Validação de Qualidade
 
@@ -671,6 +675,11 @@ Antes de finalizar o HTML, verifique:
 - `pre code` não herda estilo visual de inline `code`;
 - snippets técnicos têm highlight semântico mínimo ou justificativa registrada;
 - visuais conceituais simples usam componentes HTML/CSS em vez de `<pre>`;
+- o elemento raiz contém `data-visual-theme="notion-dark"`;
+- nenhuma superfície clara legada permanece em `body`, cards, tabelas,
+  callouts, tags, contexto de node ou componentes como `.flow-step`,
+  `.state-card`, `.lane`, `.event-card`, `.stream-card`, `.part` e
+  equivalentes;
 - screenshots desktop e mobile foram inspecionadas antes da entrega;
 - não há overflow horizontal global em desktop ou mobile;
 - os visuais mostram relações que o texto sozinho deixaria abstratas;

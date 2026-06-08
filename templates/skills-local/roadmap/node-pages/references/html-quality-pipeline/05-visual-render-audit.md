@@ -78,6 +78,10 @@ O guardrail falha quando:
 
 - `pre code` herda fundo, borda, padding ou `border-radius` de inline `code`;
 - inline `code` deixa de ser distinguível e legível fora de `pre`;
+- o elemento raiz não declara `data-visual-theme="notion-dark"`;
+- `color-scheme` computado não é escuro;
+- `body`, contexto de node, cards, callouts, tabelas, inline `code`, blocos
+  `pre` ou visuais conceituais customizados usam superfícies claras legadas;
 - snippet técnico de configuração, regra, parâmetro, campo, API, comando ou
   formato não tem highlight semântico mínimo;
 - highlight vira ruído visual ou prejudica a leitura;
@@ -150,6 +154,7 @@ Status geral: passa | falha
 
 | Check | Status | Evidência |
 |---|---|---|
+| tema visual `notion-dark` aplicado | passa/falha | ... |
 | `pre code` não herda chip de inline code | passa/falha | ... |
 | snippets técnicos têm highlight semântico | passa/falha | ... |
 | visuais conceituais não usam `<pre>` como atalho | passa/falha | ... |

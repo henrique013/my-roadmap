@@ -1,15 +1,41 @@
 :root {
-  --text: #1f2937;
-  --muted: #5b6472;
-  --border: #cbd5e1;
-  --border-strong: #b6c2d1;
-  --page: #f8fafc;
-  --surface: #ffffff;
-  --soft: #f1f5f9;
-  --soft-2: #e8eef6;
-  --accent: #0f766e;
-  --warn: #9a6700;
-  --code: #0f172a;
+  color-scheme: dark;
+  --page: #191919;
+  --surface: #202020;
+  --surface-hover: #2a2a2a;
+  --soft: #242424;
+  --soft-2: #2a2a2a;
+  --text: #e6e6e6;
+  --strong: #f2f2f2;
+  --heading: #f2f2f2;
+  --muted: #a3a3a3;
+  --border: #333333;
+  --border-strong: #4a4a4a;
+  --accent: #6aaed6;
+  --accent-2: #8cc7ff;
+  --warn: #ffdc49;
+  --code: #e6e6e6;
+  --code-bg: #2f3437;
+  --tag-bg: #243831;
+  --tag-text: #7ad9c5;
+  --tag-border: #335f54;
+  --blue-soft: #1f2b3f;
+  --blue-text: #8cc7ff;
+  --blue-border: #365f93;
+  --warn-soft: #342f19;
+  --warn-border: #5f4f18;
+  --success-soft: #1f332b;
+  --success-text: #8be6c1;
+  --success-border: #2f6b57;
+  --purple-soft: #2b2342;
+  --purple-text: #c8b6ff;
+  --purple-border: #574582;
+  --risk-soft: #3a2028;
+  --risk-text: #ff9ab3;
+  --risk-border: #7a3a4d;
+  --pre-bg: #111111;
+  --pre-text: #d4d4d4;
+  --focus: #6aaed6;
 }
 
 * {
@@ -17,6 +43,7 @@
 }
 
 body {
+  color-scheme: dark;
   margin: 0;
   color: var(--text);
   background: var(--page);
@@ -34,7 +61,7 @@ main {
 h1,
 h2,
 h3 {
-  color: #111827;
+  color: var(--heading);
   line-height: 1.2;
   margin: 0 0 12px;
 }
@@ -110,7 +137,7 @@ th {
 
 code {
   color: var(--code);
-  background: #edf2f7;
+  background: var(--code-bg);
   border: 1px solid var(--border);
   border-radius: 4px;
   padding: 1px 4px;
@@ -121,8 +148,9 @@ code {
 pre {
   margin: 12px 0 22px;
   padding: 14px 16px;
-  color: #dbeafe;
-  background: #111827;
+  color: var(--pre-text);
+  background: var(--pre-bg);
+  border: 1px solid var(--border);
   border-radius: 6px;
   overflow: auto;
   font-family: Consolas, Monaco, "Courier New", monospace;
@@ -141,30 +169,40 @@ pre code {
 }
 
 .syntax-key {
-  color: #93c5fd;
+  color: #8cc7ff;
   font-weight: 700;
 }
 
 .syntax-op {
-  color: #c4b5fd;
+  color: #c8b6ff;
 }
 
 .syntax-value {
-  color: #bbf7d0;
+  color: #a8e6cf;
 }
 
 .syntax-comment {
-  color: #a8b3c7;
+  color: #a3a3a3;
 }
 
 .syntax-risk {
-  color: #fde68a;
+  color: #ffe27a;
 }
 
 a {
   color: var(--accent);
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
+}
+
+a:hover {
+  color: #8cc7ff;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
 .lead {
@@ -188,7 +226,14 @@ a {
 
 .warning {
   border-left-color: var(--warn);
-  background: #fff8e6;
+  background: var(--warn-soft);
+}
+
+.callout.boundary,
+.callout.warning {
+  border-left-color: var(--warn);
+  background: var(--warn-soft);
+  border-color: var(--warn-border);
 }
 
 .grid {
@@ -211,9 +256,21 @@ a {
   border-radius: 999px;
   font-size: 15px;
   font-weight: 700;
-  background: #e8f5f2;
-  color: #075e54;
-  border: 1px solid #b9ded6;
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  border: 1px solid var(--tag-border);
+}
+
+.tag.blue {
+  color: var(--blue-text);
+  background: var(--blue-soft);
+  border-color: var(--blue-border);
+}
+
+.tag.warn {
+  color: var(--warn);
+  background: var(--warn-soft);
+  border-color: var(--warn-border);
 }
 
 .small {
@@ -273,6 +330,195 @@ a {
   border-radius: 6px;
   padding: 10px 12px;
   background: var(--surface);
+}
+
+:where(
+  .visual-surface,
+  .timeline-step,
+  .flow-step,
+  .step,
+  .risk-step,
+  .position-strip,
+  .contract-map,
+  .state-card,
+  .stream-card,
+  .event-card,
+  .group-card,
+  .tool-card,
+  .part,
+  .group-shell,
+  .umbrella-map,
+  .topology-node,
+  .lane,
+  .process-card,
+  .visual-card,
+  .concept-card,
+  .path-card,
+  .decision-card,
+  .stage,
+  .segment,
+  .panel,
+  .box,
+  .map-card,
+  .layer,
+  .node-card,
+  .mini-card,
+  .boundary-card,
+  .handoff-card,
+  .flow-mini > *
+) {
+  color: var(--text);
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+:where(
+  .visual-surface,
+  .timeline-step,
+  .flow-step,
+  .step,
+  .risk-step,
+  .position-strip,
+  .contract-map,
+  .state-card,
+  .stream-card,
+  .event-card,
+  .group-card,
+  .tool-card,
+  .part,
+  .group-shell,
+  .umbrella-map,
+  .topology-node,
+  .lane,
+  .process-card,
+  .visual-card,
+  .concept-card,
+  .path-card,
+  .decision-card,
+  .stage,
+  .segment,
+  .panel,
+  .box,
+  .map-card,
+  .layer,
+  .node-card,
+  .mini-card,
+  .boundary-card,
+  .handoff-card,
+  .flow-mini > *
+) strong {
+  color: var(--heading);
+}
+
+.route-label {
+  color: var(--heading);
+}
+
+:where(.info, .context, .app, .stream) {
+  background: var(--blue-soft);
+  border-color: var(--blue-border);
+}
+
+:where(.success, .focus, .ecs, .group, .expire) {
+  background: var(--success-soft);
+  border-color: var(--success-border);
+}
+
+:where(.secondary, .event, .search) {
+  background: var(--purple-soft);
+  border-color: var(--purple-border);
+}
+
+:where(.warn, .warning, .risk, .danger, .logs, .aside, .keep) {
+  background: var(--warn-soft);
+  border-color: var(--warn-border);
+}
+
+:where(.danger, .risk, .search) {
+  color: var(--text);
+}
+
+.step,
+.stream-card,
+.stream-card.process,
+.stream-card.out,
+.stream-card.err,
+.umbrella-map,
+.group-shell,
+.part.focus,
+.part.context,
+.event-card,
+.event-card:nth-child(1),
+.event-card:nth-child(2),
+.event-card:nth-child(3),
+.event-card:nth-child(4),
+.group-card.group,
+.group-card.stream,
+.group-card.event,
+.state-card.keep,
+.state-card.expire,
+.tool-card.search,
+.tool-card.live,
+.tool-card.metric,
+.flow-step.app,
+.flow-step.stream,
+.flow-step.ecs,
+.flow-step.logs,
+.flow-step.search,
+.handoff-card,
+.handoff-card.transport,
+.handoff-card.meaning,
+.lane.main,
+.lane.aside,
+.boundary-card.project,
+.boundary-card.runtime {
+  color: var(--text);
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+.stream-card.process,
+.part.context,
+.event-card:nth-child(1),
+.group-card.stream,
+.tool-card.live,
+.flow-step.app,
+.flow-step.stream,
+.handoff-card.transport {
+  background: var(--blue-soft);
+  border-color: var(--blue-border);
+}
+
+.stream-card.out,
+.part.focus,
+.event-card:nth-child(2),
+.group-card.group,
+.state-card.expire,
+.tool-card.metric,
+.flow-step.ecs,
+.lane.main,
+.boundary-card.runtime {
+  background: var(--success-soft);
+  border-color: var(--success-border);
+}
+
+.event-card:nth-child(3),
+.group-card.event,
+.tool-card.search,
+.flow-step.search,
+.handoff-card.meaning,
+.boundary-card.project {
+  background: var(--purple-soft);
+  border-color: var(--purple-border);
+}
+
+.stream-card.err,
+.event-card:nth-child(4),
+.state-card.keep,
+.flow-step.logs,
+.lane.aside {
+  background: var(--warn-soft);
+  border-color: var(--warn-border);
 }
 
 @media (max-width: 860px) {

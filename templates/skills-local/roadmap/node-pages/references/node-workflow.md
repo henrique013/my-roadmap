@@ -226,7 +226,8 @@ node-pages/assets/node-page-template.html
 
 Use esse asset apenas como referência visual. A página do node deve manter
 tipografia base de 18px, largura principal de 1260px, leitura confortável, boa
-hierarquia, CSS embutido e compatibilidade visual com o roadmap. Não copie
+hierarquia, CSS embutido, o tema visual único `notion-dark` e compatibilidade
+visual com o roadmap. Não copie
 textos de exemplo do asset.
 
 Leia tambem:
@@ -235,6 +236,9 @@ Leia tambem:
 common/references/visual-system.md
 common/references/source-contract.md
 ```
+
+Não crie switch de tema, modo claro alternativo ou CSS condicional de tema.
+O HTML final deve expor `data-visual-theme="notion-dark"` no elemento raiz.
 
 ## 5. Pesquisa Profunda
 

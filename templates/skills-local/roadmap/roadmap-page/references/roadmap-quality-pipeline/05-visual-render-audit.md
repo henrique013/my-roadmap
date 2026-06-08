@@ -13,7 +13,11 @@ Renderize `roadmap.html` antes da resposta final.
 - `.lead` não fica como coluna curta perdida;
 - `.callout` usa a largura disponível;
 - tabelas e blocos de código controlam overflow internamente;
-- tabelas usam `td` em superfície branca e `th` em `var(--soft-2)`;
+- o elemento raiz declara `data-visual-theme="notion-dark"`;
+- `color-scheme` computado é escuro;
+- `body`, cards, callouts, `td`, `th`, inline `code`, blocos `pre` e visuais
+  conceituais customizados usam superfícies escuras do contrato visual;
+- tabelas usam `td` em `var(--surface)` e `th` em `var(--soft-2)`;
 - snippets técnicos têm highlight semântico ou justificativa registrada no
   audit visual;
 - mapas, fluxos, sequências e timelines conceituais não usam `<pre>` como
@@ -44,6 +48,7 @@ Registre também:
 
 ```md
 | tabelas usam superfície estruturada | passa/falha | ... |
+| tema visual `notion-dark` aplicado | passa/falha | ... |
 | snippets técnicos têm highlight semântico | passa/falha | ... |
 | visuais conceituais não usam `<pre>` como atalho | passa/falha | ... |
 ```
