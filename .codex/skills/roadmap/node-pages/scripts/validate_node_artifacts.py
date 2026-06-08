@@ -320,6 +320,58 @@ def validate_neighbor_navigation(
         )
 
 
+def position_context_match(html_text: str) -> dict[str, Any] | None:
+    parser = NodePositionParser()
+    parser.feed(html_text)
+    parser.close()
+    if len(parser.matches) != 1:
+        return None
+    return parser.matches[0]
+
+
+def validate_neighbor_links_current_node(
+    roadmap_dir: Path,
+    level: str,
+    neighbor_direction: str,
+    neighbor_node: dict[str, Any] | None,
+    current_relation: str,
+    current_node: dict[str, Any],
+    failures: list[str],
+) -> None:
+    if neighbor_node is None:
+        return
+
+    neighbor_slug = normalize_visible(neighbor_node.get("slug"))
+    if not neighbor_slug:
+        failures.append(
+            f"HTML: node vizinho {neighbor_direction} sem slug no contrato"
+        )
+        return
+
+    neighbor_html = roadmap_dir / level / neighbor_slug / "node.html"
+    if not is_non_empty_file(neighbor_html):
+        return
+
+    match = position_context_match(neighbor_html.read_text(encoding="utf-8"))
+    if match is None:
+        failures.append(
+            f"HTML: node vizinho {neighbor_direction} não contém contexto de posição válido: {neighbor_html}"
+        )
+        return
+
+    href = neighbor_href(current_node)
+    label = normalize_visible(current_node.get("label"))
+    if not href or not label:
+        failures.append("HTML: node atual sem href ou label para validação recíproca")
+        return
+
+    if not context_has_anchor(match, href, label):
+        failures.append(
+            "HTML: node vizinho "
+            f"{neighbor_direction} deve linkar node atual como {current_relation}: {href}"
+        )
+
+
 def validate_node_position_context(
     html_text: str,
     roadmap_dir: Path,
@@ -429,6 +481,25 @@ def validate_node_position_context(
             next_node,
             failures,
         )
+
+    validate_neighbor_links_current_node(
+        roadmap_dir,
+        level,
+        "anterior",
+        previous_node,
+        "próximo",
+        contract_node,
+        failures,
+    )
+    validate_neighbor_links_current_node(
+        roadmap_dir,
+        level,
+        "próximo",
+        next_node,
+        "anterior",
+        contract_node,
+        failures,
+    )
 
 
 def validate_parent_roadmap_link(

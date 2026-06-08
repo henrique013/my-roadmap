@@ -548,7 +548,8 @@ incrementalidade ou identificação, aborte.
 ## 11. Atualização do Roadmap Pai
 
 Depois que o `node.html` do node atual passar por todos os guardrails, atualize
-o `roadmap.html` localizado na raiz do roadmap.
+o `roadmap.html` localizado na raiz do roadmap e, quando existirem, os
+`node.html` vizinhos do mesmo nível.
 
 O link deve ser relativo ao `roadmap.html`:
 
@@ -562,5 +563,28 @@ existir e estiver validado. Não crie links para nodes planejados cujo
 
 Ao revisar o `roadmap.html`, preserve os links internos do índice para as
 âncoras de seção, como `#basico-01-exemplo`, e acrescente o link profundo do
-node como navegação complementar do mesmo item. Não altere o contrato de nodes
-que não fazem parte do pedido atual.
+node como navegação complementar do mesmo item.
+
+Se o node anterior do mesmo nível já tiver `node.html` não vazio, atualize o
+contexto de posição desse node anterior para que o label do node atual apareça
+como link relativo:
+
+```text
+../<node-slug-atual>/node.html
+```
+
+Se o próximo node do mesmo nível já tiver `node.html` não vazio, atualize o
+contexto de posição desse próximo node para que o label do node atual apareça
+como link relativo:
+
+```text
+../<node-slug-atual>/node.html
+```
+
+Essas atualizações de vizinhos são restritas ao bloco de contexto de posição do
+`node.html` vizinho. Não recrie vizinhos, não altere narrativa, dump, ledger,
+pipeline editorial ou screenshots de outro node, salvo quando a pessoa pedir
+explicitamente uma revisão desse outro node.
+
+Não crie links para nodes planejados cujo `node.html` ainda não exista. Não
+altere o contrato de nodes que não fazem parte do pedido atual.

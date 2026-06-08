@@ -279,6 +279,24 @@ def main() -> int:
                 print(f"- {failure}")
             return 1
 
+    with tempfile.TemporaryDirectory(prefix="node-position-context-prev-backlink-") as tmp:
+        roadmap_dir = build_fixture(Path(tmp), force_plain={("02-middle-node", "next")})
+        failures = validate_node(roadmap_dir, "02-middle-node")
+        if not any("node vizinho anterior deve linkar node atual como próximo" in failure for failure in failures):
+            print("falha: node anterior existente sem link para o atual deveria falhar")
+            for failure in failures:
+                print(f"- {failure}")
+            return 1
+
+    with tempfile.TemporaryDirectory(prefix="node-position-context-next-backlink-") as tmp:
+        roadmap_dir = build_fixture(Path(tmp), force_plain={("02-middle-node", "previous")})
+        failures = validate_node(roadmap_dir, "02-middle-node")
+        if not any("node vizinho próximo deve linkar node atual como anterior" in failure for failure in failures):
+            print("falha: próximo node existente sem link para o atual deveria falhar")
+            for failure in failures:
+                print(f"- {failure}")
+            return 1
+
     print("passa: contexto de posição valida links de vizinhos gerados, ausência e casos negativos")
     return 0
 
