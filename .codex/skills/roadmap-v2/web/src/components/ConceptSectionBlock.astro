@@ -1,0 +1,19 @@
+---
+import type { PageBlock } from '../lib/page-spec';
+
+interface Props {
+  block: PageBlock;
+}
+
+const { block } = Astro.props;
+const items = block.items ?? [];
+---
+<section class="block section-block" id={block.id}>
+  {block.title && <h2>{block.title}</h2>}
+  {block.text && <p class="block-text">{block.text}</p>}
+  {items.length > 0 && (
+    <ul class="concept-list">
+      {items.map((item) => <li><wa-callout>{String(item.example ?? item.text ?? '')}</wa-callout></li>)}
+    </ul>
+  )}
+</section>

@@ -1,0 +1,18 @@
+---
+import type { PageBlock } from '../lib/page-spec';
+
+interface Props {
+  block: PageBlock;
+}
+
+const { block } = Astro.props;
+const items = block.items ?? [];
+---
+<section class="block" id={block.id}>
+  {block.title && <h2>{block.title}</h2>}
+  <wa-breadcrumb>
+    {items.map((item) => (
+      <wa-breadcrumb-item href={String(item.href ?? '#')}>{String(item.label ?? item.rel ?? '')}</wa-breadcrumb-item>
+    ))}
+  </wa-breadcrumb>
+</section>

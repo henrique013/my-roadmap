@@ -4,7 +4,12 @@
   "scripts": {
     "roadmap:node-visual-check": "node templates/skills-local/roadmap/node-pages/scripts/check_visual_render.mjs",
     "roadmap:roadmap-visual-check": "node templates/skills-local/roadmap/roadmap-page/scripts/check_roadmap_visual_render.mjs",
-    "roadmap:roadmap-visual-check:test": "node templates/skills-local/roadmap/roadmap-page/scripts/test_check_roadmap_visual_render.mjs"
+    "roadmap:roadmap-visual-check:test": "node templates/skills-local/roadmap/roadmap-page/scripts/test_check_roadmap_visual_render.mjs",
+    "roadmap:v2-setup": "python3 .codex/skills/roadmap-v2/scripts/setup.py",
+    "roadmap:v2-test": "python3 .codex/skills/roadmap-v2/scripts/run_tests.py --mode all",
+    "roadmap:v2-test:unit": "python3 .codex/skills/roadmap-v2/scripts/run_tests.py --mode unit",
+    "roadmap:v2-test:integration": "python3 .codex/skills/roadmap-v2/scripts/run_tests.py --mode integration",
+    "roadmap:v2-test:portability": "python3 .codex/skills/roadmap-v2/scripts/run_tests.py --mode portability"
   },
   "devDependencies": {
     "playwright": "1.60.0"

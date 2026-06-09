@@ -6,6 +6,9 @@
 # Node artifact files
 node_modules/
 dist/
+**/web/public/vendor/webawesome/dist-cdn/
+**/web/.astro/
+**/web/dist.work/
 
 # Compiled Java class files
 *.class
@@ -14,6 +17,7 @@ dist/
 __pycache__/
 *.py[cod]
 .cache/
+.venv/
 
 # Log files
 *.log
@@ -28,6 +32,8 @@ dist/
 # Codex
 /.codex
 !/.codex/
+/.codex/runtime/
+/.codex-runtime/
 
 # JetBrains IDE
 .idea/

@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["navigation_index_path"],
+  "properties": {
+    "navigation_index_path": { "type": "string" }
+  },
+  "additionalProperties": true
+}

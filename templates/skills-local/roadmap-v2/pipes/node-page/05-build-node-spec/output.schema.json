@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["node_spec", "node_spec_path"],
+  "properties": {
+    "node_spec": { "type": "object" },
+    "node_spec_path": { "type": "string" }
+  },
+  "additionalProperties": true
+}

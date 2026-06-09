@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["node_id", "level", "node_slug"],
+  "properties": {
+    "node_id": { "type": "string" },
+    "level": { "type": "string" },
+    "node_slug": { "type": "string" }
+  },
+  "additionalProperties": true
+}

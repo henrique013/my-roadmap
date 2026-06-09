@@ -1,0 +1,13 @@
+id: 02-normalize-input
+kind: deterministic
+input: input.schema.json
+action: python:scripts.pipe_actions:normalize_input
+validation: none
+output: output.schema.json
+retry:
+  max_attempts: 1
+  on_fail: fail
+artifacts:
+  reads: []
+  writes: []
+blocks_pipeline_on_fail: true

@@ -1,0 +1,15 @@
+id: 05-build-node-spec
+kind: deterministic
+input: input.schema.json
+action: python:scripts.pipe_actions:build_node_spec
+validation: none
+output: output.schema.json
+retry:
+  max_attempts: 1
+  on_fail: fail
+artifacts:
+  reads:
+    - node-research.json
+  writes:
+    - nodes/<level>/<node-slug>/node-spec.json
+blocks_pipeline_on_fail: true

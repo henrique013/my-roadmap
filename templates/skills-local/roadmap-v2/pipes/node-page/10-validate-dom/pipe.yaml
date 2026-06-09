@@ -1,0 +1,14 @@
+id: 10-validate-dom
+kind: deterministic
+input: input.schema.json
+action: python:scripts.pipe_actions:validate_dom
+validation: none
+output: output.schema.json
+retry:
+  max_attempts: 1
+  on_fail: fail
+artifacts:
+  reads:
+    - .pipeline/render/09-render-astro/index.html
+  writes: []
+blocks_pipeline_on_fail: true

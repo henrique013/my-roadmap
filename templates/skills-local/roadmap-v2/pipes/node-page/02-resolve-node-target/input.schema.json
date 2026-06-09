@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["roadmap_spec"],
+  "properties": {
+    "roadmap_spec": { "type": "object" },
+    "node_id": { "type": "string" },
+    "level": { "type": "string" },
+    "node_slug": { "type": "string" }
+  },
+  "additionalProperties": true
+}

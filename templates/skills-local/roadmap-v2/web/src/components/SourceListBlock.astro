@@ -1,0 +1,24 @@
+---
+import type { PageBlock } from '../lib/page-spec';
+
+interface Props {
+  block: PageBlock;
+}
+
+const { block } = Astro.props;
+const items = block.items ?? [];
+---
+<section class="block" id={block.id}>
+  {block.title && <h2>{block.title}</h2>}
+  <ul class="source-list">
+    {items.map((item) => (
+      <li>
+        <wa-card>
+          <strong>{String(item.title ?? item.id ?? '')}</strong>
+          {item.url && <p><a href={String(item.url)} rel="noreferrer">{String(item.url)}</a></p>}
+          {item.reason && <p>{String(item.reason)}</p>}
+        </wa-card>
+      </li>
+    ))}
+  </ul>
+</section>

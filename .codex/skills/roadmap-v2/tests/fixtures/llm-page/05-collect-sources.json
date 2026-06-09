@@ -1,0 +1,34 @@
+{
+  "research_pack": {
+    "schema_version": "roadmap-v2.0",
+    "topic": "Replicação no Postgres",
+    "audience": "developers",
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Quais conceitos sustentam replicação no Postgres?",
+        "reason": "Definir nodes do nível básico."
+      }
+    ],
+    "sources": [
+      {
+        "id": "src-postgres-replication",
+        "title": "PostgreSQL Replication",
+        "url": "https://www.postgresql.org/docs/current/high-availability.html",
+        "source_type": "official-docs",
+        "reason": "Fonte oficial para conceitos de replicação.",
+        "supports": ["basico/01-modelo-mental-da-replicacao"]
+      }
+    ],
+    "facts": [
+      {
+        "id": "fact-wal",
+        "text": "WAL alimenta a replicação.",
+        "source_ids": ["src-postgres-replication"],
+        "supports": ["basico/01-modelo-mental-da-replicacao"]
+      }
+    ],
+    "open_questions": [],
+    "discarded_sources": []
+  }
+}

@@ -1,0 +1,13 @@
+id: 01-route-request
+kind: deterministic
+input: input.schema.json
+action: python:scripts.pipe_actions:route_request
+validation: none
+output: output.schema.json
+retry:
+  max_attempts: 1
+  on_fail: fail
+artifacts:
+  reads: []
+  writes: []
+blocks_pipeline_on_fail: true

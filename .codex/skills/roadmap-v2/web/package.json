@@ -1,0 +1,17 @@
+{
+  "name": "roadmap-v2-renderer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "copy:webawesome": "node scripts/copy-webawesome.mjs",
+    "build": "node scripts/build.mjs"
+  },
+  "dependencies": {
+    "@awesome.me/webawesome": "3.8.0",
+    "astro": "6.4.4"
+  },
+  "devDependencies": {
+    "playwright": "1.60.0",
+    "typescript": "6.0.3"
+  }
+}

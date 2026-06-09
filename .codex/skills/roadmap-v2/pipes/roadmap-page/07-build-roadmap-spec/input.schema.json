@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["roadmap_spec"],
+  "properties": {
+    "roadmap_spec": { "type": "object" }
+  },
+  "additionalProperties": true
+}

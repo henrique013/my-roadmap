@@ -22,15 +22,15 @@ O resultado principal é uma página HTML do roadmap, com os nodes organizados e
 
 ## Como o projeto é organizado
 
-A base do projeto são três skills:
+A família atual de geração é a `roadmap-v2`:
 
 | Skill | O que faz |
 |---|---|
-| `roadmap` | Skill principal. Entende o pedido e conduz a geração correta. |
-| `roadmap-page` | Flag usada quando você quer criar a página inicial de um roadmap. |
-| `roadmap-node-page` | Flag usada quando você quer criar a página profunda de um node do roadmap. |
+| `roadmap-v2` | Skill principal. Roteia e executa o pipeline determinístico. |
+| `roadmap-v2-page` | Flag usada quando você quer criar a página inicial de um roadmap. |
+| `roadmap-v2-node-page` | Flag usada quando você quer criar a página profunda de um node do roadmap. |
 
-Na prática, você sempre usa `roadmap` junto com uma das flags.
+Na prática, você sempre usa `roadmap-v2` junto com uma das flags.
 
 ## Nova instalação
 
@@ -40,21 +40,25 @@ Depois de clonar o repositório, entre na pasta do projeto e rode:
 make setup
 ```
 
-Esse comando prepara as dependências necessárias para o projeto gerar e validar os roadmaps.
+Esse comando prepara o runtime isolado da skill com as dependências Python,
+Node, Astro, Web Awesome e Playwright necessárias para gerar e validar os
+roadmaps.
 
-Se preferir fazer manualmente, o caminho principal é:
+Para a `roadmap-v2`, `make setup` é só um atalho local para:
 
 ```bash
-npm ci
-npx playwright install chromium
+python3 .codex/skills/roadmap-v2/scripts/setup.py
 ```
+
+O runtime gerado fica em `.codex-runtime/roadmap-v2/`, fora do pacote publicado
+da skill e fora das saídas finais.
 
 ## Como gerar um roadmap
 
 Use a skill principal com a flag de página inicial:
 
 ```text
-/roadmap /roadmap-page
+$roadmap-v2 $roadmap-v2-page
 Quero aprender replicação no Postgres.
 Tenho conhecimento intermediário em SQL e já usei Postgres em aplicações simples.
 Quero chegar a um nível em que eu consiga entender, operar e diagnosticar replicação em produção.
@@ -69,13 +73,13 @@ Você pode escrever em texto livre. O importante é deixar claro:
 Ao final, o projeto gera uma página em:
 
 ```text
-.tmp/roadmaps/<slug-do-roadmap>/roadmap.html
+.tmp/roadmaps-v2/<slug-do-roadmap>/roadmap.html
 ```
 
 Exemplo:
 
 ```text
-.tmp/roadmaps/replicacao-postgres/roadmap.html
+.tmp/roadmaps-v2/replicacao-postgres/roadmap.html
 ```
 
 Abra esse arquivo no navegador para ver o roadmap final.
@@ -85,7 +89,7 @@ Abra esse arquivo no navegador para ver o roadmap final.
 Depois que o roadmap inicial existir, você pode pedir uma página profunda para um node específico:
 
 ```text
-/roadmap /roadmap-node-page
+$roadmap-v2 $roadmap-v2-node-page
 replicacao-postgres
 01-modelo-mental-da-replicacao
 ```
@@ -95,29 +99,33 @@ Você também pode identificar o node pelo título, desde que fique claro qual n
 Ao final, o projeto gera:
 
 ```text
-.tmp/roadmaps/<slug-do-roadmap>/<slug-do-node>/node.html
+.tmp/roadmaps-v2/<slug-do-roadmap>/nodes/<level>/<slug-do-node>/node.html
 ```
 
 Exemplo:
 
 ```text
-.tmp/roadmaps/replicacao-postgres/01-modelo-mental-da-replicacao/node.html
+.tmp/roadmaps-v2/replicacao-postgres/nodes/basico/01-modelo-mental-da-replicacao/node.html
 ```
 
 Abra esse arquivo no navegador para estudar o node em detalhe.
 
 ## Onde ficam os resultados
 
-Os resultados visíveis ficam em `.tmp/roadmaps/`.
+Os resultados visíveis da v2 ficam em `.tmp/roadmaps-v2/`.
 
 Estrutura típica:
 
 ```text
-.tmp/roadmaps/
+.tmp/roadmaps-v2/
 └── replicacao-postgres/
     ├── roadmap.html
-    └── 01-modelo-mental-da-replicacao/
-        └── node.html
+    ├── roadmap-spec.json
+    ├── page-spec.json
+    └── nodes/
+        └── basico/
+            └── 01-modelo-mental-da-replicacao/
+                └── node.html
 ```
 
 A pasta `.tmp/` é uma área local de saída gerada. Ela serve para você abrir, revisar e usar os roadmaps produzidos.

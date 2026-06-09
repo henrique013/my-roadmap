@@ -1,0 +1,7 @@
+{
+  "request": {
+    "topic": "Replicação no Postgres",
+    "audience": "developers",
+    "assumptions": ["A pessoa já conhece SQL básico."]
+  }
+}

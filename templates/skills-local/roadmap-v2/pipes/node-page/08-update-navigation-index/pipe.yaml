@@ -1,0 +1,15 @@
+id: 08-update-navigation-index
+kind: deterministic
+input: input.schema.json
+action: python:scripts.pipe_actions:update_navigation_index
+validation: none
+output: output.schema.json
+retry:
+  max_attempts: 1
+  on_fail: fail
+artifacts:
+  reads:
+    - .pipeline/navigation-index.json
+  writes:
+    - .pipeline/navigation-index.json
+blocks_pipeline_on_fail: true

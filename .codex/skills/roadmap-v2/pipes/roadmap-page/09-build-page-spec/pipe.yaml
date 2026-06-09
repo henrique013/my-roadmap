@@ -1,0 +1,15 @@
+id: 09-build-page-spec
+kind: deterministic
+input: input.schema.json
+action: python:scripts.pipe_actions:build_page_spec
+validation: python:scripts.pipe_actions:validate_page_spec
+output: output.schema.json
+retry:
+  max_attempts: 1
+  on_fail: fail
+artifacts:
+  reads:
+    - roadmap-spec.json
+  writes:
+    - page-spec.json
+blocks_pipeline_on_fail: true

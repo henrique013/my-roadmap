@@ -1,0 +1,14 @@
+id: 03-validate-node-order
+kind: deterministic
+input: input.schema.json
+action: python:scripts.pipe_actions:validate_node_order
+validation: none
+output: output.schema.json
+retry:
+  max_attempts: 1
+  on_fail: fail
+artifacts:
+  reads:
+    - roadmap-spec.json
+  writes: []
+blocks_pipeline_on_fail: true

@@ -1,0 +1,23 @@
+---
+import type { PageBlock } from '../lib/page-spec';
+
+interface Props {
+  block: PageBlock;
+}
+
+const { block } = Astro.props;
+const items = block.items ?? [];
+---
+<section class="block" id={block.id}>
+  {block.title && <h2>{block.title}</h2>}
+  <wa-tab-group>
+    {items.map((item, index) => (
+      <wa-tab slot="nav" panel={`level-${index}`}>{String(item.title ?? item.id ?? index)}</wa-tab>
+    ))}
+    {items.map((item, index) => (
+      <wa-tab-panel name={`level-${index}`}>
+        <p class="block-text">{String(item.summary ?? '')}</p>
+      </wa-tab-panel>
+    ))}
+  </wa-tab-group>
+</section>

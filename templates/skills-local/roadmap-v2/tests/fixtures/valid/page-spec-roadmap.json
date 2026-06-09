@@ -1,0 +1,33 @@
+{
+  "schema_version": "roadmap-v2.0",
+  "page_type": "roadmap",
+  "title": "Replicação no Postgres",
+  "slug": "replicacao-no-postgres",
+  "description": "Roadmap estruturado para replicação no Postgres.",
+  "navigation": [],
+  "blocks": [
+    {
+      "id": "hero",
+      "type": "hero",
+      "title": "Replicação no Postgres",
+      "text": "Roadmap para aprender replicação."
+    },
+    {
+      "id": "node-grid",
+      "type": "node_grid",
+      "title": "Nodes",
+      "items": [
+        {
+          "node_id": "basico/01-modelo-mental-da-replicacao",
+          "level": "basico",
+          "order": 1,
+          "slug": "01-modelo-mental-da-replicacao",
+          "title": "Modelo mental da replicação",
+          "summary": "Entenda primário, réplica, WAL e atraso.",
+          "href": "nodes/basico/01-modelo-mental-da-replicacao/node.html"
+        }
+      ]
+    }
+  ],
+  "sources": []
+}

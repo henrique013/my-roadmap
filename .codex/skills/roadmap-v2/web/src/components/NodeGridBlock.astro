@@ -1,0 +1,23 @@
+---
+import type { PageBlock } from '../lib/page-spec';
+
+interface Props {
+  block: PageBlock;
+}
+
+const { block } = Astro.props;
+const items = block.items ?? [];
+---
+<section class="block" id={block.id}>
+  {block.title && <h2>{block.title}</h2>}
+  <div class="node-grid">
+    {items.map((item) => (
+      <wa-card class="node-card">
+        <wa-badge>{String(item.level_title ?? item.level ?? '')}</wa-badge>
+        <h3>{String(item.title ?? '')}</h3>
+        <p>{String(item.summary ?? '')}</p>
+        {item.href && <wa-button href={String(item.href)} variant="brand">Abrir</wa-button>}
+      </wa-card>
+    ))}
+  </div>
+</section>

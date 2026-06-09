@@ -1,0 +1,13 @@
+id: 03-resolve-output-path
+kind: deterministic
+input: input.schema.json
+action: python:scripts.pipe_actions:resolve_output_path
+validation: none
+output: output.schema.json
+retry:
+  max_attempts: 1
+  on_fail: fail
+artifacts:
+  reads: []
+  writes: []
+blocks_pipeline_on_fail: true

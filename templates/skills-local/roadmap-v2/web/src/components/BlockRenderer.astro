@@ -1,0 +1,35 @@
+---
+import type { PageBlock } from '../lib/page-spec';
+import ConceptSectionBlock from './ConceptSectionBlock.astro';
+import HeroBlock from './HeroBlock.astro';
+import LevelTabsBlock from './LevelTabsBlock.astro';
+import NavigationTrailBlock from './NavigationTrailBlock.astro';
+import NodeGridBlock from './NodeGridBlock.astro';
+import SourceListBlock from './SourceListBlock.astro';
+
+interface Props {
+  block: PageBlock;
+}
+
+const { block } = Astro.props;
+const supported = new Set([
+  'hero',
+  'level_tabs',
+  'node_grid',
+  'concept_section',
+  'source_list',
+  'navigation_trail',
+  'references'
+]);
+
+if (!supported.has(block.type)) {
+  throw new Error(`Unsupported PageSpec block type: ${block.type}`);
+}
+---
+{block.type === 'hero' && <HeroBlock block={block} />}
+{block.type === 'level_tabs' && <LevelTabsBlock block={block} />}
+{block.type === 'node_grid' && <NodeGridBlock block={block} />}
+{block.type === 'concept_section' && <ConceptSectionBlock block={block} />}
+{block.type === 'source_list' && <SourceListBlock block={block} />}
+{block.type === 'navigation_trail' && <NavigationTrailBlock block={block} />}
+{block.type === 'references' && <SourceListBlock block={block} />}

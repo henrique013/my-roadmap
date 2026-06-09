@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["node_id", "level", "node_slug", "target_node"],
+  "properties": {
+    "node_id": { "type": "string" },
+    "level": { "type": "string" },
+    "node_slug": { "type": "string" },
+    "target_node": { "type": "object" }
+  },
+  "additionalProperties": true
+}

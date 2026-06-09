@@ -1,0 +1,14 @@
+id: 02-resolve-node-target
+kind: deterministic
+input: input.schema.json
+action: python:scripts.pipe_actions:resolve_node_target
+validation: none
+output: output.schema.json
+retry:
+  max_attempts: 1
+  on_fail: fail
+artifacts:
+  reads:
+    - roadmap-spec.json
+  writes: []
+blocks_pipeline_on_fail: true
