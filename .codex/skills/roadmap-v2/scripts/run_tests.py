@@ -68,7 +68,7 @@ def require_python_test_dependencies() -> int:
     if not missing:
         return 0
     print("roadmap-v2 Python test dependencies are missing: " + ", ".join(missing), file=sys.stderr)
-    print(f"Run: python3 {SKILL_DIR / 'scripts' / 'setup.py'}", file=sys.stderr)
+    print("Run tests inside the roadmap-v2-runner image, or prepare a maintainer-only host runtime explicitly.", file=sys.stderr)
     return 1
 
 
@@ -79,7 +79,7 @@ def require_runtime_ready() -> int:
     print("roadmap-v2 integration runtime is not ready:", file=sys.stderr)
     for error in errors:
         print(f"- {error}", file=sys.stderr)
-    print(f"Run: python3 {SKILL_DIR / 'scripts' / 'setup.py'}", file=sys.stderr)
+    print("Run integration checks inside the roadmap-v2-runner image after rebuilding it.", file=sys.stderr)
     return 1
 
 
@@ -123,7 +123,7 @@ def main() -> int:
         "--mode",
         choices=["unit", "integration", "portability", "all"],
         default="unit",
-        help="Test mode to run. Integration and portability require the roadmap-v2 setup runtime.",
+        help="Test mode to run. Integration and portability require the prepared roadmap-v2 container runtime.",
     )
     args = parser.parse_args()
 

@@ -64,6 +64,13 @@ def runtime_python_has_modules(paths: RuntimePaths) -> list[str]:
 
 
 def playwright_chromium_is_installed(paths: RuntimePaths) -> bool:
+    executable = os.environ.get("PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH")
+    if executable and Path(executable).expanduser().is_file():
+        return True
+    resolved_chromium = shutil.which("chromium") or shutil.which("chromium-browser")
+    if resolved_chromium:
+        return True
+
     browser_path = os.environ.get("PLAYWRIGHT_BROWSERS_PATH")
     candidates: list[Path] = [paths.browsers_dir]
     if browser_path and browser_path != "0":
@@ -90,7 +97,7 @@ def collect_errors(skill_dir: Path) -> list[str]:
     if missing_python:
         errors.append("Dependências Python ausentes no runtime roadmap-v2: " + ", ".join(missing_python))
 
-    for binary in ["node", "npm"]:
+    for binary in ["node"]:
         if shutil.which(binary) is None:
             errors.append(f"Binário ausente no PATH: {binary}")
 
@@ -114,12 +121,12 @@ def print_failure(errors: list[str], skill_dir: Path) -> None:
     for error in errors:
         print(f"- {error}", file=sys.stderr)
     print("", file=sys.stderr)
-    print("Prepare as dependências da skill uma vez antes de rodar o pipeline:", file=sys.stderr)
-    print(f"  python3 {paths.skill_dir / 'scripts' / 'setup.py'}", file=sys.stderr)
+    print("O runtime normal da roadmap-v2 deve vir da imagem Docker `roadmap-v2-runner`.", file=sys.stderr)
+    print("Reconstrua a imagem se dependências, browser ou assets estiverem ausentes.", file=sys.stderr)
     print("", file=sys.stderr)
     print(f"Runtime esperado: {paths.runtime_home}", file=sys.stderr)
     print("", file=sys.stderr)
-    print("A execução da skill não instala dependências automaticamente.", file=sys.stderr)
+    print("A execução da skill não instala pacotes, não baixa browsers e não altera lockfiles.", file=sys.stderr)
 
 
 def run_preflight(skill_dir: Path) -> int:

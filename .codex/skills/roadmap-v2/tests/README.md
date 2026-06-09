@@ -9,14 +9,14 @@ python3 <skill-dir>/scripts/run_tests.py --mode portability
 python3 <skill-dir>/scripts/run_tests.py --mode all
 ```
 
-`unit` valida contratos, regras e runner sem depender do renderer Astro.
-`integration` e `portability` exigem que o setup da skill já tenha preparado o
-runtime isolado.
+`unit` valida contratos, regras e runner.
+`integration` e `portability` devem rodar dentro da imagem
+`roadmap-v2-runner`, com o runtime já preparado no build.
 
-Prepare o runtime com:
+No repositório, use:
 
 ```bash
-python3 <skill-dir>/scripts/setup.py
+make roadmap-v2-test-container
 ```
 
 Checks preparados:

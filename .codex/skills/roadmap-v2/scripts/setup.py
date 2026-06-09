@@ -116,7 +116,12 @@ def prepare_node(paths: RuntimePaths) -> None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Prepare the portable roadmap-v2 runtime.")
+    parser = argparse.ArgumentParser(
+        description=(
+            "Internal/legacy helper for preparing a roadmap-v2 runtime. "
+            "Normal roadmap-v2 execution uses the roadmap-v2-runner Docker image."
+        )
+    )
     parser.add_argument(
         "--skill-dir",
         default=str(SKILL_DIR),
@@ -137,7 +142,7 @@ def main() -> int:
     paths = resolve_runtime_paths(Path(args.skill_dir))
     prepare_python(paths)
     prepare_node(paths)
-    print(f"roadmap-v2 setup complete. Runtime home: {paths.runtime_home}")
+    print(f"roadmap-v2 internal runtime preparation complete. Runtime home: {paths.runtime_home}")
     return 0
 
 

@@ -32,26 +32,26 @@ A família atual de geração é a `roadmap-v2`:
 
 Na prática, você sempre usa `roadmap-v2` junto com uma das flags.
 
-## Nova instalação
+## Runtime
 
-Depois de clonar o repositório, entre na pasta do projeto e rode:
+A `roadmap-v2` roda por uma imagem Docker local, sem preparar Python, Node,
+Astro, Web Awesome, Playwright ou Chromium no workspace.
+
+Depois de clonar o repositório, rode:
 
 ```bash
 make setup
 ```
 
-Esse comando prepara o runtime isolado da skill com as dependências Python,
-Node, Astro, Web Awesome e Playwright necessárias para gerar e validar os
-roadmaps.
+Esse comando constrói a imagem `roadmap-v2-runner:local` e remove somente os
+runtimes legados gerados da `roadmap-v2`.
 
-Para a `roadmap-v2`, `make setup` é só um atalho local para:
+Para usar outro nome/tag de imagem, defina `ROADMAP_V2_IMAGE`.
 
-```bash
-python3 .codex/skills/roadmap-v2/scripts/setup.py
-```
-
-O runtime gerado fica em `.codex-runtime/roadmap-v2/`, fora do pacote publicado
-da skill e fora das saídas finais.
+O runtime antigo gerado em `.codex-runtime/roadmap-v2/` ou
+`.codex/runtime/roadmap-v2/` não faz parte do fluxo normal. O `make setup`
+remove somente esses diretórios de runtime legado; ele não remove roadmaps
+gerados em `.tmp/roadmaps-v2/`.
 
 ## Como gerar um roadmap
 
@@ -132,10 +132,10 @@ A pasta `.tmp/` é uma área local de saída gerada. Ela serve para você abrir,
 
 ## Fluxo recomendado
 
-1. Gere primeiro a página inicial do roadmap com `roadmap` + `roadmap-page`.
+1. Gere primeiro a página inicial do roadmap com `$roadmap-v2` + `$roadmap-v2-page`.
 2. Abra o `roadmap.html` no navegador.
 3. Escolha o primeiro node que quer estudar em profundidade.
-4. Gere a página desse node com `roadmap` + `roadmap-node-page`.
+4. Gere a página desse node com `$roadmap-v2` + `$roadmap-v2-node-page`.
 5. Repita o processo para os próximos nodes conforme avançar.
 
 ## Observação

@@ -27,17 +27,17 @@ const webAwesomeSource = join(nodeModules, '@awesome.me', 'webawesome', 'dist-cd
 const webAwesomeTarget = join(outDir, 'vendor', 'webawesome', 'dist-cdn');
 
 if (!existsSync(nodeModules)) {
-  console.error(`Missing roadmap-v2 renderer node_modules at ${nodeModules}. Run the roadmap-v2 setup command first.`);
+  console.error(`Missing roadmap-v2 renderer node_modules at ${nodeModules}. Rebuild the roadmap-v2-runner image.`);
   process.exit(2);
 }
 
 if (!existsSync(astroBin)) {
-  console.error(`Missing Astro runtime at ${astroBin}. Run the roadmap-v2 setup command first.`);
+  console.error(`Missing Astro runtime at ${astroBin}. Rebuild the roadmap-v2-runner image.`);
   process.exit(2);
 }
 
 if (!existsSync(webAwesomeSource)) {
-  console.error(`Missing Web Awesome assets at ${webAwesomeSource}. Run the roadmap-v2 setup command first.`);
+  console.error(`Missing Web Awesome assets at ${webAwesomeSource}. Rebuild the roadmap-v2-runner image.`);
   process.exit(2);
 }
 
@@ -96,6 +96,7 @@ child.on('exit', (code, signal) => {
   rm(webAwesomeTarget, { recursive: true, force: true })
     .then(() => mkdir(dirname(webAwesomeTarget), { recursive: true }))
     .then(() => cp(webAwesomeSource, webAwesomeTarget, { recursive: true, force: true }))
+    .then(() => rm(workDir, { recursive: true, force: true }))
     .then(() => process.exit(0))
     .catch((error) => {
       console.error(error);

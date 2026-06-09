@@ -182,71 +182,71 @@ Pesquisa usada; referências estão dentro do HTML.
 
 ## Execução do Pipeline
 
-O runner Python fica em:
+O backend normal da `roadmap-v2` é a imagem Docker `roadmap-v2-runner`.
+Docker é detalhe mecânico da skill; a interface pública continua sendo
+`$roadmap-v2` com exatamente uma flag de modo.
+
+Quando precisar executar o pipeline, prepare o JSON de entrada em um caminho
+persistido no output root, por exemplo:
 
 ```text
-<skill-dir>/scripts/run_pipeline.py
+.tmp/roadmaps-v2/<roadmap-slug>/.pipeline/request.json
 ```
 
-Execute o runner pelo script publicado da skill:
+Em seguida, execute o wrapper publicado da skill:
 
 ```bash
-python3 <skill-dir>/scripts/run_pipeline.py
+python3 <skill-dir>/scripts/run_container.py \
+  --mode roadmap-v2-page|roadmap-v2-node-page \
+  --input .tmp/roadmaps-v2/<roadmap-slug>/.pipeline/request.json \
+  --output-root .tmp/roadmaps-v2/<roadmap-slug>
 ```
 
-Depois do setup, o runner reexecuta automaticamente com o Python isolado da
-skill quando esse runtime existir.
-
-## Dependências e Setup
-
-As dependências da skill devem ser preparadas pelo setup público da própria
-skill, não durante a execução do pipeline:
+O wrapper preserva o contrato interno do runner dentro do container:
 
 ```bash
-python3 <skill-dir>/scripts/setup.py
+python3 /opt/roadmap-v2/skill/scripts/run_pipeline.py \
+  --mode roadmap-v2-page|roadmap-v2-node-page \
+  --input <request-json> \
+  --output-root <output-root>
 ```
 
-Esse setup instala:
+O container deve rodar como processo de comando, sem porta e sem serviço
+persistente. A execução padrão deve:
+
+- usar a imagem `roadmap-v2-runner:local`, ou o valor de `ROADMAP_V2_IMAGE`;
+- rodar com `--network none`;
+- rodar com `--user <uid-do-host>:<gid-do-host>`;
+- usar `/tmp` para `HOME`, `TMPDIR` e caches gerais;
+- montar `.tmp/roadmaps-v2/` ou o output root resolvido como volume gravável;
+- montar inputs externos e fixtures apenas como leitura;
+- escrever `.pipeline/llm-requests`, `.pipeline/llm-outputs`, logs, screenshots,
+  assets e HTML final dentro do output root montado.
+
+O wrapper deve garantir que arquivos criados em bind mounts fiquem graváveis
+pelo usuário do host, sem exigir `chown` após a execução.
+
+## Dependências e Imagem
+
+As dependências da skill pertencem à imagem `roadmap-v2-runner`, não ao host e
+não ao pacote publicado da skill. A imagem deve conter:
 
 - dependências Python declaradas em `<skill-dir>/requirements.txt`;
 - dependências Node/Astro/Web Awesome/Playwright declaradas em
   `<skill-dir>/web/package.json` e travadas por `<skill-dir>/web/package-lock.json`;
-- browser Chromium usado pelos gates visuais do Playwright.
+- Chromium e pacotes mínimos de sistema exigidos pelos gates visuais;
+- certificados e fontes necessárias para renderização local estável.
 
-Por padrão, os arquivos gerados pelo setup ficam fora do pacote da skill:
+Instalação de pacotes, `npm ci`, preparo de Python e disponibilidade do browser
+acontecem somente no build da imagem. Runtime normal não executa `pip install`,
+`npm ci`, `playwright install`, downloads de browser ou mutação de lockfile.
 
-```text
-.codex/runtime/roadmap-v2/
-├── python/
-├── node/
-├── browsers/
-└── cache/
-```
-
-Quando `.codex` estiver montado como read-only, o default efetivo é:
-
-```text
-.codex-runtime/roadmap-v2/
-├── python/
-├── node/
-├── browsers/
-└── cache/
-```
-
-O caminho pode ser alterado com `ROADMAP_V2_RUNTIME_HOME`. Se o repositório
-consumidor oferecer `make setup` ou scripts npm, trate-os apenas como atalhos
-para o setup público da skill.
+`<skill-dir>/scripts/setup.py`, quando existir, é helper interno/legado de
+manutenção e não é comando público de preparação da `roadmap-v2`.
 
 Antes de executar o pipeline, `run_pipeline.py` roda
-`<skill-dir>/scripts/preflight.py`. O preflight só verifica dependências e
-falha com instruções claras quando algo falta; ele não instala pacotes, não
-altera lockfiles e não baixa browser em runtime.
-
-O único comando público de preparação do ambiente é:
-
-```bash
-python3 <skill-dir>/scripts/setup.py
-```
+`<skill-dir>/scripts/preflight.py`. O preflight só verifica dependências já
+presentes na imagem e falha com instruções claras quando algo falta.
 
 O runner deve:
 

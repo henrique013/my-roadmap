@@ -32,9 +32,15 @@ const checks = [];
 let browser;
 
 try {
-  browser = await chromium.launch({
+  const launchOptions = {
     chromiumSandbox: false,
     args: ['--no-sandbox', '--disable-setuid-sandbox']
+  };
+  if (process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH) {
+    launchOptions.executablePath = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH;
+  }
+  browser = await chromium.launch({
+    ...launchOptions
   });
 } catch (error) {
   checks.push({
