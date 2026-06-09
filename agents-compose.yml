@@ -53,11 +53,5 @@ outputs:
         from: roadmap-page
       - origin: local
         from: roadmap-node-page
-      - origin: local
-        from: roadmap-v2
-      - origin: local
-        from: roadmap-v2-page
-      - origin: local
-        from: roadmap-v2-node-page
       - origin: remote
         from: prompt-awesome

@@ -22,43 +22,34 @@ O resultado principal é uma página HTML do roadmap, com os nodes organizados e
 
 ## Como o projeto é organizado
 
-A família atual de geração é a `roadmap-v2`:
+A família atual de geração é a `roadmap`:
 
 | Skill | O que faz |
 |---|---|
-| `roadmap-v2` | Skill principal. Roteia e executa o pipeline determinístico. |
-| `roadmap-v2-page` | Flag usada quando você quer criar a página inicial de um roadmap. |
-| `roadmap-v2-node-page` | Flag usada quando você quer criar a página profunda de um node do roadmap. |
+| `roadmap` | Skill principal. Roteia a geração da página inicial e das páginas profundas. |
+| `roadmap-page` | Flag usada quando você quer criar a página inicial tri-level de um roadmap. |
+| `roadmap-node-page` | Flag usada quando você quer criar a página profunda de um node do roadmap. |
 
-Na prática, você sempre usa `roadmap-v2` junto com uma das flags.
+Na prática, você sempre usa `roadmap` junto com uma das flags.
 
 ## Runtime
 
-A `roadmap-v2` roda por uma imagem Docker local, sem preparar Python, Node,
-Astro, Web Awesome, Playwright ou Chromium no workspace.
+A família `roadmap` não exige preparação de runtime no repositório.
 
-Depois de clonar o repositório, rode:
+Depois de clonar o repositório, o comando abaixo existe apenas como ponto de entrada padrão:
 
 ```bash
 make setup
 ```
 
-Esse comando constrói a imagem `roadmap-v2-runner:local` e remove somente os
-runtimes legados gerados da `roadmap-v2`.
-
-Para usar outro nome/tag de imagem, defina `ROADMAP_V2_IMAGE`.
-
-O runtime antigo gerado em `.codex-runtime/roadmap-v2/` ou
-`.codex/runtime/roadmap-v2/` não faz parte do fluxo normal. O `make setup`
-remove somente esses diretórios de runtime legado; ele não remove roadmaps
-gerados em `.tmp/roadmaps-v2/`.
+Ele não instala dependências nem prepara Docker. As validações visuais usam as dependências Node já declaradas no projeto quando forem executadas.
 
 ## Como gerar um roadmap
 
 Use a skill principal com a flag de página inicial:
 
 ```text
-$roadmap-v2 $roadmap-v2-page
+$roadmap $roadmap-page
 Quero aprender replicação no Postgres.
 Tenho conhecimento intermediário em SQL e já usei Postgres em aplicações simples.
 Quero chegar a um nível em que eu consiga entender, operar e diagnosticar replicação em produção.
@@ -73,13 +64,13 @@ Você pode escrever em texto livre. O importante é deixar claro:
 Ao final, o projeto gera uma página em:
 
 ```text
-.tmp/roadmaps-v2/<slug-do-roadmap>/roadmap.html
+.tmp/roadmaps/<slug-do-roadmap>/roadmap.html
 ```
 
 Exemplo:
 
 ```text
-.tmp/roadmaps-v2/replicacao-postgres/roadmap.html
+.tmp/roadmaps/replicacao-postgres/roadmap.html
 ```
 
 Abra esse arquivo no navegador para ver o roadmap final.
@@ -89,53 +80,54 @@ Abra esse arquivo no navegador para ver o roadmap final.
 Depois que o roadmap inicial existir, você pode pedir uma página profunda para um node específico:
 
 ```text
-$roadmap-v2 $roadmap-v2-node-page
+$roadmap $roadmap-node-page
 replicacao-postgres
+basico
 01-modelo-mental-da-replicacao
 ```
 
-Você também pode identificar o node pelo título, desde que fique claro qual node deve ser aprofundado.
+Você também pode identificar o node pelo `node_id`, pelo nível com slug, ou pelo título quando houver exatamente um candidato canônico no contrato do roadmap.
 
 Ao final, o projeto gera:
 
 ```text
-.tmp/roadmaps-v2/<slug-do-roadmap>/nodes/<level>/<slug-do-node>/node.html
+.tmp/roadmaps/<slug-do-roadmap>/<level>/<slug-do-node>/node.html
 ```
 
 Exemplo:
 
 ```text
-.tmp/roadmaps-v2/replicacao-postgres/nodes/basico/01-modelo-mental-da-replicacao/node.html
+.tmp/roadmaps/replicacao-postgres/basico/01-modelo-mental-da-replicacao/node.html
 ```
 
 Abra esse arquivo no navegador para estudar o node em detalhe.
 
 ## Onde ficam os resultados
 
-Os resultados visíveis da v2 ficam em `.tmp/roadmaps-v2/`.
+Os resultados visíveis ficam em `.tmp/roadmaps/`.
 
 Estrutura típica:
 
 ```text
-.tmp/roadmaps-v2/
+.tmp/roadmaps/
 └── replicacao-postgres/
     ├── roadmap.html
-    ├── roadmap-spec.json
-    ├── page-spec.json
-    └── nodes/
-        └── basico/
-            └── 01-modelo-mental-da-replicacao/
-                └── node.html
+    ├── .roadmap/
+    │   └── roadmap-contract.json
+    └── basico/
+        └── 01-modelo-mental-da-replicacao/
+            ├── research-dump.md
+            └── node.html
 ```
 
 A pasta `.tmp/` é uma área local de saída gerada. Ela serve para você abrir, revisar e usar os roadmaps produzidos.
 
 ## Fluxo recomendado
 
-1. Gere primeiro a página inicial do roadmap com `$roadmap-v2` + `$roadmap-v2-page`.
+1. Gere primeiro a página inicial do roadmap com `$roadmap` + `$roadmap-page`.
 2. Abra o `roadmap.html` no navegador.
 3. Escolha o primeiro node que quer estudar em profundidade.
-4. Gere a página desse node com `$roadmap-v2` + `$roadmap-v2-node-page`.
+4. Gere a página desse node com `$roadmap` + `$roadmap-node-page`.
 5. Repita o processo para os próximos nodes conforme avançar.
 
 ## Observação

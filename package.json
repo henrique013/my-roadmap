@@ -4,13 +4,7 @@
   "scripts": {
     "roadmap:node-visual-check": "node templates/skills-local/roadmap/node-pages/scripts/check_visual_render.mjs",
     "roadmap:roadmap-visual-check": "node templates/skills-local/roadmap/roadmap-page/scripts/check_roadmap_visual_render.mjs",
-    "roadmap:roadmap-visual-check:test": "node templates/skills-local/roadmap/roadmap-page/scripts/test_check_roadmap_visual_render.mjs",
-    "roadmap:v2-setup": "make setup",
-    "roadmap:v2-image": "docker build -t roadmap-v2-runner:local -f templates/skills-local/roadmap-v2/Dockerfile templates/skills-local/roadmap-v2",
-    "roadmap:v2-test": "docker run --rm --network none --read-only --tmpfs /tmp:rw,exec,nosuid,size=1024m,mode=1777 --entrypoint /opt/roadmap-v2/runtime/python/bin/python --mount type=bind,source=$PWD/templates/skills-local/roadmap-v2/tests,target=/opt/roadmap-v2/skill/tests,readonly roadmap-v2-runner:local -B /opt/roadmap-v2/skill/scripts/run_tests.py --mode all",
-    "roadmap:v2-test:unit": "docker run --rm --network none --read-only --tmpfs /tmp:rw,exec,nosuid,size=1024m,mode=1777 --entrypoint /opt/roadmap-v2/runtime/python/bin/python --mount type=bind,source=$PWD/templates/skills-local/roadmap-v2/tests,target=/opt/roadmap-v2/skill/tests,readonly roadmap-v2-runner:local -B /opt/roadmap-v2/skill/scripts/run_tests.py --mode unit",
-    "roadmap:v2-test:integration": "docker run --rm --network none --read-only --tmpfs /tmp:rw,exec,nosuid,size=1024m,mode=1777 --entrypoint /opt/roadmap-v2/runtime/python/bin/python --mount type=bind,source=$PWD/templates/skills-local/roadmap-v2/tests,target=/opt/roadmap-v2/skill/tests,readonly roadmap-v2-runner:local -B /opt/roadmap-v2/skill/scripts/run_tests.py --mode integration",
-    "roadmap:v2-test:portability": "docker run --rm --network none --read-only --tmpfs /tmp:rw,exec,nosuid,size=1024m,mode=1777 --entrypoint /opt/roadmap-v2/runtime/python/bin/python --mount type=bind,source=$PWD/templates/skills-local/roadmap-v2/tests,target=/opt/roadmap-v2/skill/tests,readonly roadmap-v2-runner:local -B /opt/roadmap-v2/skill/scripts/run_tests.py --mode portability"
+    "roadmap:roadmap-visual-check:test": "node templates/skills-local/roadmap/roadmap-page/scripts/test_check_roadmap_visual_render.mjs"
   },
   "devDependencies": {
     "playwright": "1.60.0"
