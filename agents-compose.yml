@@ -40,6 +40,8 @@ outputs:
             from: uuid-em-novas-implementacoes.tpl.md
           - origin: remote
             from: convencoes-para-skills.tpl.md
+          - origin: local
+            from: runtime-docker-e-makefile.tpl.md
   skills:
     out_dir: .codex/skills
     local:

@@ -176,3 +176,10 @@ Arquivo: `docs/conventions/convencoes-para-skills.md`
 
 - Leia este documento ao trabalhar com `skills` neste repositório.
 - Use este documento como ponto de entrada para o tema e para decidir quando ler a subconvention de semântica e determinismo.
+
+### Runtime Docker e Makefile
+
+Arquivo: `docs/conventions/runtime-docker-e-makefile.md`
+
+- Leia este documento ao alterar o runtime Docker, comandos que usam `docker/runtime/run`, dependências de execução do projeto ou targets do `Makefile`.
+- Use este documento para decidir o que pode rodar no host, o que deve rodar em imagem Docker e quando um target reutilizável do `Makefile` é justificado.
