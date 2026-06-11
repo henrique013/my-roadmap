@@ -33,9 +33,9 @@ const PLACEHOLDER_PATTERNS = [
 function usage() {
   return [
     "Uso:",
-    "  node <skill-dir>/node-pages/scripts/check_visual_render.mjs --self-test",
-    "  node <skill-dir>/node-pages/scripts/check_visual_render.mjs --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>",
-    "  node <skill-dir>/node-pages/scripts/check_visual_render.mjs --html <node-dir>/node.html",
+    "  docker/runtime/run node <skill-dir>/node-pages/scripts/check_visual_render.mjs --self-test",
+    "  docker/runtime/run node <skill-dir>/node-pages/scripts/check_visual_render.mjs --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>",
+    "  docker/runtime/run node <skill-dir>/node-pages/scripts/check_visual_render.mjs --html <node-dir>/node.html",
   ].join("\n");
 }
 

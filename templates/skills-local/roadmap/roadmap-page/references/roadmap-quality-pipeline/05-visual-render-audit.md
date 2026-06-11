@@ -28,7 +28,7 @@ Renderize `roadmap.html` antes da resposta final.
 Use:
 
 ```text
-node <skill-dir>/roadmap-page/scripts/check_roadmap_visual_render.mjs \
+docker/runtime/run node <skill-dir>/roadmap-page/scripts/check_roadmap_visual_render.mjs \
   --html <roadmap-dir>/roadmap.html
 ```
 

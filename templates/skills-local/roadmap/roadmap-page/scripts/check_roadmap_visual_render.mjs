@@ -14,8 +14,8 @@ const VIEWPORTS = [
 function usage() {
   return [
     "Uso:",
-    "  node <skill-dir>/roadmap-page/scripts/check_roadmap_visual_render.mjs --html <roadmap-dir>/roadmap.html",
-    "  node <skill-dir>/roadmap-page/scripts/check_roadmap_visual_render.mjs --roadmap-dir <roadmap-dir>",
+    "  docker/runtime/run node <skill-dir>/roadmap-page/scripts/check_roadmap_visual_render.mjs --html <roadmap-dir>/roadmap.html",
+    "  docker/runtime/run node <skill-dir>/roadmap-page/scripts/check_roadmap_visual_render.mjs --roadmap-dir <roadmap-dir>",
   ].join("\n");
 }
 

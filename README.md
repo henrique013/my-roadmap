@@ -34,15 +34,38 @@ Na prática, você sempre usa `roadmap` junto com uma das flags.
 
 ## Runtime
 
-A família `roadmap` não exige preparação de runtime no repositório.
+A família `roadmap` usa uma imagem Docker própria para as validações mecânicas.
+Para gerar e validar roadmaps como usuário do projeto, a dependência obrigatória
+no host é Docker.
 
-Depois de clonar o repositório, o comando abaixo existe apenas como ponto de entrada padrão:
+Depois de clonar o repositório, prepare a imagem runtime com:
 
 ```bash
 make setup
 ```
 
-Ele não instala dependências nem prepara Docker. As validações visuais usam as dependências Node já declaradas no projeto quando forem executadas.
+O runtime fica em `docker/runtime` e inclui Node.js, Python 3, Playwright,
+Chromium e as bibliotecas de navegador necessárias. O `Makefile` é a interface
+operacional do repositório e chama o wrapper `docker/runtime/run`.
+
+Exemplos de validação:
+
+```bash
+make roadmap-roadmap-html-shape ROADMAP_DIR=.tmp/roadmaps/<slug>
+make roadmap-roadmap-visual-check ROADMAP_DIR=.tmp/roadmaps/<slug>
+make roadmap-node-html-shape NODE_DIR=.tmp/roadmaps/<slug>/<level>/<node-slug>
+make roadmap-node-visual-check ROADMAP_DIR=.tmp/roadmaps/<slug> LEVEL=<level> NODE=<node-slug>
+```
+
+O wrapper monta o repositório em `/workspace`, executa os comandos dentro da
+imagem e mantém as saídas em `.tmp/roadmaps/**` no layout já usado pela skill.
+Por padrão, ele não monta `$HOME`, agente SSH, Docker socket nem arquivos de
+credenciais do host.
+
+Para desenvolver o repositório em si, ainda podem ser necessários Node.js para
+OpenSpec, Python 3 para fluxos de publicação como `update-docs`, e Docker para
+o runtime de roadmap. A skill `update-docs` fica fora do escopo desse runtime e
+não é executada por `docker/runtime/run`.
 
 ## Como gerar um roadmap
 

@@ -1,0 +1,97 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+REPO_ROOT="$(CDPATH= cd -- "${SCRIPT_DIR}/../.." && pwd -P)"
+
+IMAGE="${ROADMAP_RUNTIME_IMAGE:-my-roadmap-roadmap-runtime:playwright-1.60.0}"
+BUILD_MODE="${ROADMAP_RUNTIME_BUILD:-missing}"
+NETWORK_MODE="${ROADMAP_RUNTIME_NETWORK:-none}"
+IPC_MODE="${ROADMAP_RUNTIME_IPC:-host}"
+
+usage() {
+  cat <<'USAGE'
+Uso:
+  docker/runtime/run --build
+  docker/runtime/run [--] <comando> [args...]
+
+Exemplos:
+  docker/runtime/run python3 .codex/skills/roadmap/roadmap-page/scripts/check_roadmap_html_shape.py --html .tmp/roadmaps/exemplo/roadmap.html
+  docker/runtime/run node .codex/skills/roadmap/roadmap-page/scripts/check_roadmap_visual_render.mjs --html .tmp/roadmaps/exemplo/roadmap.html
+
+Variaveis:
+  ROADMAP_RUNTIME_IMAGE    Nome/tag da imagem. Padrao: my-roadmap-roadmap-runtime:playwright-1.60.0
+  ROADMAP_RUNTIME_BUILD    missing, always ou never. Padrao: missing
+  ROADMAP_RUNTIME_NETWORK  Modo de rede do docker run. Padrao: none
+  ROADMAP_RUNTIME_IPC      Modo IPC do docker run. Padrao: host
+USAGE
+}
+
+build_image() {
+  DOCKER_BUILDKIT=1 docker build \
+    --tag "${IMAGE}" \
+    "${SCRIPT_DIR}"
+}
+
+ensure_image() {
+  case "${BUILD_MODE}" in
+    always)
+      build_image
+      ;;
+    missing)
+      if ! docker image inspect "${IMAGE}" >/dev/null 2>&1; then
+        build_image
+      fi
+      ;;
+    never)
+      ;;
+    *)
+      echo "ROADMAP_RUNTIME_BUILD deve ser missing, always ou never" >&2
+      exit 2
+      ;;
+  esac
+}
+
+if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
+  usage
+  exit 0
+fi
+
+if [[ "${1:-}" == "--build" ]]; then
+  build_image
+  exit 0
+fi
+
+if [[ "${1:-}" == "--" ]]; then
+  shift
+fi
+
+if [[ "$#" -eq 0 ]]; then
+  usage >&2
+  exit 2
+fi
+
+ensure_image
+
+docker_run_args=(
+  --rm
+  --init
+  --workdir /workspace
+  --user "$(id -u):$(id -g)"
+  --env HOME=/tmp
+  --env XDG_CACHE_HOME=/tmp/.cache
+  --env npm_config_cache=/tmp/.npm
+  --env PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+  --tmpfs /tmp:exec,mode=1777
+  --mount "type=bind,source=${REPO_ROOT},target=/workspace"
+)
+
+if [[ -n "${NETWORK_MODE}" ]]; then
+  docker_run_args+=(--network "${NETWORK_MODE}")
+fi
+
+if [[ -n "${IPC_MODE}" ]]; then
+  docker_run_args+=(--ipc "${IPC_MODE}")
+fi
+
+exec docker run "${docker_run_args[@]}" "${IMAGE}" "$@"

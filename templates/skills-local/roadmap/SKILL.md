@@ -246,23 +246,28 @@ Não mencione `.editorial/` na resposta final.
 
 ## Validações Finais Obrigatórias
 
+Rode os comandos abaixo a partir da raiz do repositório. O wrapper
+`docker/runtime/run` executa as validações mecânicas dentro da imagem runtime da
+família `roadmap`; não dependa de Python, Node.js, Playwright, navegadores ou
+`node_modules` instalados no host.
+
 Para `roadmap-page`, se o modo gerou artefatos, rode obrigatoriamente:
 
 ```text
-python3 <skill-dir>/roadmap-page/scripts/check_roadmap_html_shape.py --html <roadmap-dir>/roadmap.html
-python3 <skill-dir>/roadmap-page/scripts/validate_roadmap_artifacts.py --roadmap-dir <roadmap-dir>
-node <skill-dir>/roadmap-page/scripts/check_roadmap_visual_render.mjs --html <roadmap-dir>/roadmap.html
+docker/runtime/run python3 <skill-dir>/roadmap-page/scripts/check_roadmap_html_shape.py --html <roadmap-dir>/roadmap.html
+docker/runtime/run python3 <skill-dir>/roadmap-page/scripts/validate_roadmap_artifacts.py --roadmap-dir <roadmap-dir>
+docker/runtime/run node <skill-dir>/roadmap-page/scripts/check_roadmap_visual_render.mjs --html <roadmap-dir>/roadmap.html
 ```
 
 Para `node-pages`, se o modo gerou artefatos, rode obrigatoriamente:
 
 ```text
-python3 <skill-dir>/node-pages/scripts/check_html_shape.py --html <node-dir>/node.html
-python3 <skill-dir>/node-pages/scripts/validate_node_artifacts.py --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>
-node <skill-dir>/node-pages/scripts/check_visual_render.mjs --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>
+docker/runtime/run python3 <skill-dir>/node-pages/scripts/check_html_shape.py --html <node-dir>/node.html
+docker/runtime/run python3 <skill-dir>/node-pages/scripts/validate_node_artifacts.py --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>
+docker/runtime/run node <skill-dir>/node-pages/scripts/check_visual_render.mjs --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>
 ```
 
 Se qualquer validação falhar por conteúdo gerado pela própria execução, corrija
-antes da resposta final. Se Python, Node.js, Playwright ou script obrigatório não
+antes da resposta final. Se Docker, a imagem runtime ou script obrigatório não
 estiver disponível, bloqueie a entrega ou informe a limitação sem declarar que o
 pipeline passou. Não aceite layout legado de pipeline como compatível.

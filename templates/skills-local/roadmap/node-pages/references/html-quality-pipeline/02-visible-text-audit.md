@@ -19,7 +19,7 @@ Gere ou atualize:
 Quando disponível, gere a extração com:
 
 ```text
-python3 <skill-dir>/node-pages/scripts/extract_visible_text.py \
+docker/runtime/run python3 <skill-dir>/node-pages/scripts/extract_visible_text.py \
   --html <node-dir>/node.html \
   --out <node-dir>/.editorial/pipeline/01-visible-text/visible-text.md
 ```

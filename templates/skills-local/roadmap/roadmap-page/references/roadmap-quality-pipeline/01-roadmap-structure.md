@@ -23,6 +23,6 @@ Valide se `roadmap.html` está completo, autocontido e sem Markdown cru.
 Use:
 
 ```text
-python3 <skill-dir>/roadmap-page/scripts/check_roadmap_html_shape.py \
+docker/runtime/run python3 <skill-dir>/roadmap-page/scripts/check_roadmap_html_shape.py \
   --html <roadmap-dir>/roadmap.html
 ```
