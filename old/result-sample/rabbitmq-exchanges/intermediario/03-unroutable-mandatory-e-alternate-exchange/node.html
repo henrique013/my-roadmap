@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="pt-BR" data-visual-theme="notion-dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quando a exchange não encontra caminho</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --page: #191919;
+      --surface: #202020;
+      --surface-hover: #2a2a2a;
+      --soft: #242424;
+      --soft-2: #2a2a2a;
+      --text: #e6e6e6;
+      --strong: #f2f2f2;
+      --heading: #f2f2f2;
+      --muted: #a3a3a3;
+      --border: #333333;
+      --border-strong: #4a4a4a;
+      --accent: #6aaed6;
+      --accent-2: #8cc7ff;
+      --warn: #ffdc49;
+      --code: #e6e6e6;
+      --code-bg: #2f3437;
+      --tag-bg: #243831;
+      --tag-text: #7ad9c5;
+      --tag-border: #335f54;
+      --blue-soft: #1f2b3f;
+      --blue-text: #8cc7ff;
+      --blue-border: #365f93;
+      --warn-soft: #342f19;
+      --warn-border: #5f4f18;
+      --success-soft: #1f332b;
+      --success-text: #8be6c1;
+      --success-border: #2f6b57;
+      --purple-soft: #2b2342;
+      --purple-text: #c8b6ff;
+      --purple-border: #574582;
+      --risk-soft: #3a2028;
+      --risk-text: #ff9ab3;
+      --risk-border: #7a3a4d;
+      --pre-bg: #111111;
+      --pre-text: #d4d4d4;
+      --focus: #6aaed6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      color-scheme: dark;
+      margin: 0;
+      color: var(--text);
+      background: var(--page);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif;
+      font-size: 18px;
+      line-height: 1.55;
+    }
+
+    main {
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 32px 28px 56px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: var(--heading);
+      line-height: 1.2;
+      letter-spacing: 0;
+      margin: 0 0 12px;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 26px;
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+      margin-top: 32px;
+    }
+
+    h3 {
+      font-size: 20px;
+      margin-top: 22px;
+    }
+
+    p,
+    ul,
+    ol,
+    .lead,
+    .callout {
+      max-width: none;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    ul {
+      margin: 8px 0 16px 22px;
+      padding: 0;
+    }
+
+    li {
+      margin: 4px 0;
+    }
+
+    table,
+    pre,
+    .content-grid,
+    .visual-block {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin: 14px 0 22px;
+      table-layout: fixed;
+      background: var(--surface);
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+      background: var(--surface);
+    }
+
+    th {
+      background: var(--soft-2);
+      text-align: left;
+      font-weight: 700;
+    }
+
+    code {
+      color: var(--code);
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 4px;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 0.92em;
+    }
+
+    pre {
+      margin: 12px 0 22px;
+      padding: 14px 16px;
+      color: var(--pre-text);
+      background: var(--pre-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: auto;
+      max-width: 100%;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 16px;
+      line-height: 1.45;
+      white-space: pre;
+    }
+
+    pre code {
+      color: inherit;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+      font: inherit;
+    }
+
+    .syntax-key {
+      color: var(--accent-2);
+      font-weight: 700;
+    }
+
+    .syntax-op {
+      color: var(--purple-text);
+    }
+
+    .syntax-value {
+      color: var(--success-text);
+    }
+
+    .syntax-comment {
+      color: var(--muted);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    a:hover {
+      color: var(--accent-2);
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .backlink {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 19px;
+    }
+
+    .node-context {
+      display: grid;
+      gap: 6px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      background: var(--soft);
+      margin: 0 0 18px;
+      width: 100%;
+    }
+
+    .node-context p {
+      margin: 0;
+    }
+
+    .node-context strong {
+      color: var(--heading);
+    }
+
+    .node-context a {
+      color: var(--accent);
+      font-weight: 400;
+      text-decoration-line: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    .node-context a:hover {
+      color: var(--accent-2);
+    }
+
+    .callout {
+      padding: 13px 15px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      background: var(--soft);
+      margin: 16px 0 22px;
+      border-radius: 6px;
+    }
+
+    .callout.warning {
+      border-left-color: var(--warn);
+      background: var(--warn-soft);
+      border-color: var(--warn-border);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-self: start;
+      align-self: start;
+      width: fit-content;
+      max-width: 100%;
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 700;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border: 1px solid var(--tag-border);
+      overflow-wrap: anywhere;
+    }
+
+    .tag.blue {
+      color: var(--blue-text);
+      background: var(--blue-soft);
+      border-color: var(--blue-border);
+    }
+
+    .tag.warn {
+      color: var(--warn);
+      background: var(--warn-soft);
+      border-color: var(--warn-border);
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .visual-block {
+      margin: 16px 0 22px;
+    }
+
+    .route-map {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: minmax(210px, 0.8fr) minmax(0, 1.8fr);
+      align-items: stretch;
+    }
+
+    .route-source,
+    .route-branch,
+    .decision-card,
+    .state-card {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface);
+      padding: 12px;
+    }
+
+    .route-source {
+      display: grid;
+      gap: 8px;
+      align-content: start;
+      border-left: 4px solid var(--accent);
+    }
+
+    .route-branches {
+      display: grid;
+      gap: 10px;
+    }
+
+    .route-branch {
+      display: grid;
+      gap: 6px;
+      border-left: 4px solid var(--border-strong);
+    }
+
+    .route-branch.drop {
+      background: var(--warn-soft);
+      border-color: var(--warn-border);
+      border-left-color: var(--warn);
+    }
+
+    .route-branch.return {
+      background: var(--blue-soft);
+      border-color: var(--blue-border);
+      border-left-color: var(--accent-2);
+    }
+
+    .route-branch.fallback {
+      background: var(--success-soft);
+      border-color: var(--success-border);
+      border-left-color: var(--success-text);
+    }
+
+    .branch-title {
+      color: var(--heading);
+      font-weight: 700;
+    }
+
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 16px 0 22px;
+    }
+
+    .decision-card {
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+
+    .decision-card:nth-child(1) {
+      background: var(--blue-soft);
+      border-color: var(--blue-border);
+    }
+
+    .decision-card:nth-child(2) {
+      background: var(--success-soft);
+      border-color: var(--success-border);
+    }
+
+    .decision-card:nth-child(3) {
+      background: var(--purple-soft);
+      border-color: var(--purple-border);
+    }
+
+    .state-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 16px 0 22px;
+    }
+
+    .state-card {
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+
+    .state-card.keep {
+      background: var(--success-soft);
+      border-color: var(--success-border);
+    }
+
+    .state-card.boundary {
+      background: var(--warn-soft);
+      border-color: var(--warn-border);
+    }
+
+    .node-footer {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+    }
+
+    .node-footer h2 {
+      margin-top: 32px;
+    }
+
+    .reference-list {
+      display: grid;
+      gap: 8px;
+      margin: 8px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .reference-item {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface);
+    }
+
+    .reference-item a,
+    .node-footer a {
+      color: var(--accent);
+      font-weight: 400;
+      text-decoration-line: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    .reference-note {
+      color: var(--text);
+    }
+
+    @media (max-width: 860px) {
+      main {
+        padding: 22px 16px 40px;
+      }
+
+      .route-map,
+      .decision-grid,
+      .state-grid,
+      .reference-item {
+        grid-template-columns: 1fr;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+        table-layout: auto;
+      }
+
+      th,
+      td {
+        min-width: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="backlink" href="../../roadmap.html">Voltar ao roadmap</a>
+    <div
+      class="node-context"
+      data-node-position="true"
+      data-level="intermediario"
+      data-node-order="3"
+      data-node-count="7"
+      data-roadmap-slug="rabbitmq-exchanges">
+      <p><strong>Intermediário · 03 de 07</strong></p>
+      <p>Roadmap: Exchanges no RabbitMQ</p>
+      <p>Node atual: Unroutable, mandatory e Alternate Exchange</p>
+      <p>Anterior: <a href="../02-broadcast-vs-consumidores-competindo/node.html">Broadcast vs consumidores competindo</a> · Próximo: <a href="../04-dead-letter-exchanges-e-retry-conceitual/node.html">Dead Letter Exchanges e retry conceitual</a></p>
+    </div>
+    <h1>Quando a exchange não encontra caminho</h1>
+    <p class="lead">Uma publicação pode chegar à exchange certa e ainda assim não entrar em nenhuma fila. Esse ponto do fluxo decide se a mensagem some, volta para o publisher ou segue para uma rota alternativa.</p>
+
+    <section>
+      <h2>A key nova ainda não tem destino</h2>
+      <p>Imagine uma migração pequena: o producer de pedidos deixou de publicar `orders.created.v1` e passou a publicar `orders.created.v2`. A exchange existe, o nome dela está correto e a aplicação conseguiu enviar a publicação. O problema é mais estreito: a topologia ainda só tem binding para a key antiga.</p>
+      <p>Nesse instante, a exchange tenta aplicar a regra de routing que já vinha dos nodes anteriores. Ela olha para a routing key, compara com os bindings existentes e não encontra um destino compatível. A publicação está sem rota: chegou ao ponto de roteamento, mas não encontrou fila, stream ou outra exchange para receber a mensagem.</p>
+      <div class="callout">
+        A diferença importa porque este não é um problema de quantidade de consumers. Nenhum worker está competindo e nenhuma fila recebeu a mensagem. A falha aconteceu antes da fila existir como destino dessa publicação.
+      </div>
+    </section>
+
+    <section>
+      <h2>Três caminhos depois da tentativa de roteamento</h2>
+      <p>Depois que a exchange não encontra destino, o desenho pode escolher entre silêncio, sinal ao publisher ou fallback de topologia. Os três caminhos partem do mesmo ponto, mas carregam responsabilidades diferentes.</p>
+      <div class="visual-block" aria-label="Três caminhos de uma publicação sem rota">
+        <div class="route-map">
+          <div class="route-source">
+            <span class="tag">Tentativa inicial</span>
+            <strong>Exchange de pedidos</strong>
+            <p>Recebe `orders.created.v2` e não encontra binding compatível para essa routing key.</p>
+          </div>
+          <div class="route-branches">
+            <div class="route-branch drop">
+              <span class="tag warn">Sem pedido de retorno</span>
+              <span class="branch-title">A publicação é descartada</span>
+              <p>Com `mandatory=false` e sem rota alternativa, o broker não devolve a mensagem ao publisher. O sinal precisa vir de métricas ou observação posterior.</p>
+            </div>
+            <div class="route-branch return">
+              <span class="tag blue">Pedido de retorno</span>
+              <span class="branch-title">A publicação volta ao publisher</span>
+              <p>Com `mandatory=true`, o broker retorna a mensagem sem rota. A aplicação publicadora precisa ter lógica de retorno para registrar, compensar ou corrigir o envio.</p>
+            </div>
+            <div class="route-branch fallback">
+              <span class="tag">Rota alternativa</span>
+              <span class="branch-title">A publicação segue para uma AE</span>
+              <p>Com uma Alternate Exchange configurada, a exchange principal repassa a publicação para outra exchange, que tenta roteá-la por sua própria topologia.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p>O primeiro caminho é perigoso quando a equipe espera descobrir o problema pela aplicação. O segundo transforma a falha de rota em sinal para o publisher. O terceiro mantém a mensagem dentro de uma topologia de fallback, útil quando a arquitetura quer capturar publicações órfãs em vez de apenas avisar quem publicou.</p>
+    </section>
+
+    <section>
+      <h2>O retorno só existe se alguém pediu para ouvir</h2>
+      <p>O parâmetro `mandatory` pertence à publicação. Ele não muda o tipo da exchange nem cria uma fila. Ele apenas diz: se esta publicação não puder ser roteada, devolva a mensagem ao lado que publicou.</p>
+      <p>Em AMQP 0-9-1, esse retorno aparece como `basic.return`. A mensagem volta com informação suficiente para a aplicação entender qual exchange e qual routing key estavam envolvidas. Mas esse sinal só vira comportamento útil se o publisher tiver um handler de retorno. Sem essa lógica, a falha pode continuar invisível para o domínio, mesmo com a flag ligada.</p>
+      <pre class="code-block language-conf" aria-label="Recorte conceitual de publicação com retorno">
+<code><span class="syntax-comment"># recorte conceitual, não executável</span>
+<span class="syntax-key">publicacao.exchange</span> <span class="syntax-op">=</span> <span class="syntax-value">orders.events</span>
+<span class="syntax-key">publicacao.routing_key</span> <span class="syntax-op">=</span> <span class="syntax-value">orders.created.v2</span>
+<span class="syntax-key">publicacao.mandatory</span> <span class="syntax-op">=</span> <span class="syntax-value">true</span>
+<span class="syntax-key">publisher.on_return</span> <span class="syntax-op">=</span> <span class="syntax-value">registrar_e_corrigir_rota</span></code></pre>
+      <p>Esse recorte mostra a posição do mecanismo: o publisher pediu um retorno para aquela publicação. Ele ainda não sabe se um consumer processou a mensagem, nem recebeu prova de trabalho concluído. Ele recebeu um sinal de que a exchange não encontrou rota.</p>
+    </section>
+
+    <section>
+      <h2>A rota alternativa pertence à exchange</h2>
+      <p>Quando a intenção não é apenas avisar o publisher, mas preservar a publicação em um caminho controlado, a topologia pode configurar uma Alternate Exchange. A AE é uma exchange comum escolhida como destino alternativo para publicações que a exchange principal não conseguiu rotear.</p>
+      <p>No exemplo da migração, a exchange `orders.events` pode ter uma AE ligada a uma fila de órfãs. As mensagens com `orders.created.v2` que ainda não encontram binding na rota principal seguem para essa área de fallback. A equipe pode observar a fila, ajustar bindings e enxergar o período de transição sem perder silenciosamente as publicações.</p>
+      <pre class="code-block language-conf" aria-label="Recorte conceitual de exchange com fallback">
+<code><span class="syntax-comment"># recorte conceitual, não executável</span>
+<span class="syntax-key">exchange.principal</span> <span class="syntax-op">=</span> <span class="syntax-value">orders.events</span>
+<span class="syntax-key">exchange.principal.alternate-exchange</span> <span class="syntax-op">=</span> <span class="syntax-value">orders.unrouted</span>
+<span class="syntax-key">exchange.fallback</span> <span class="syntax-op">=</span> <span class="syntax-value">orders.unrouted</span>
+<span class="syntax-key">fila.de_inspecao</span> <span class="syntax-op">&lt;-</span> <span class="syntax-value">orders.unrouted</span></code></pre>
+      <p>A diferença em relação ao retorno é estrutural. `mandatory` conversa com o publisher. A AE conversa com a topologia. Quando a mensagem é roteada pela AE, ela continua sendo uma mensagem roteada para o propósito de `mandatory`, porque encontrou um caminho alternativo.</p>
+    </section>
+
+    <section>
+      <h2>Escolher sinal, fallback ou os dois</h2>
+      <p>A decisão não precisa ser binária. Em muitos desenhos, `mandatory` ajuda a aplicação publicadora a saber que algo saiu do contrato esperado, enquanto a AE captura a publicação para análise ou tratamento genérico. O ponto é não confundir o papel de cada mecanismo.</p>
+      <table>
+        <tr>
+          <th>Mecanismo</th>
+          <th>Quem recebe o sinal</th>
+          <th>O que acontece com a mensagem</th>
+          <th>Risco se for mal lido</th>
+        </tr>
+        <tr>
+          <td>`mandatory=true`</td>
+          <td>Publisher</td>
+          <td>Sem rota, a mensagem é retornada ao lado que publicou.</td>
+          <td>Tratar retorno como prova de processamento ou esquecer o handler de retorno.</td>
+        </tr>
+        <tr>
+          <td>Alternate Exchange</td>
+          <td>Topologia de fallback</td>
+          <td>Sem rota na exchange principal, a mensagem é republicada para a AE.</td>
+          <td>Transformar fallback em lixeira invisível e esconder quebra de contrato.</td>
+        </tr>
+        <tr>
+          <td>Sem `mandatory` e sem AE</td>
+          <td>Ninguém diretamente</td>
+          <td>A publicação sem rota pode ser descartada.</td>
+          <td>Descobrir tarde que uma key nova nunca chegou a nenhuma fila.</td>
+        </tr>
+      </table>
+      <p>Quando a rota principal é parte de um contrato de domínio, o fallback precisa ser observável. Uma AE que captura tudo sem alerta pode parecer proteção, mas também pode mascarar uma topologia quebrada.</p>
+    </section>
+
+    <section>
+      <h2>O limite está antes da fila</h2>
+      <p>Este node termina no momento em que a exchange decidiu o destino inicial da publicação. Se a mensagem entrou em uma fila e depois saiu por rejeição, expiração, limite ou tentativa posterior, a história mudou de lugar: agora o problema está depois do roteamento inicial.</p>
+      <div class="state-grid" aria-label="Fronteira entre falha de rota inicial e evento em fila já roteada">
+        <div class="state-card keep">
+          <span class="tag">Neste node</span>
+          <strong>A exchange não achou destino</strong>
+          <p>A publicação ainda não chegou a uma fila. O desenho decide entre descarte, retorno ao publisher ou roteamento para AE.</p>
+        </div>
+        <div class="state-card boundary">
+          <span class="tag warn">Próximo passo</span>
+          <strong>A mensagem já estava em uma fila</strong>
+          <p>Rejeição, expiração e retry pertencem ao momento posterior, quando uma fila já recebeu a mensagem e outro mecanismo passa a decidir a saída.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="node-closing">
+      <h2>A pergunta certa fica no ponto de roteamento</h2>
+      <p>Quando uma publicação não aparece em nenhuma fila, a primeira pergunta não é quantos consumers estão online. A pergunta é se a exchange recebeu uma routing key que algum binding reconhece.</p>
+      <p>Se a resposta for não, há três leituras estáveis: sem pedido de retorno e sem fallback, a mensagem pode sumir do caminho; com `mandatory`, o publisher pode ser avisado; com AE, a topologia ganha uma rota alternativa. Dominar este node é saber em qual desses pontos a arquitetura escolheu colocar o sinal.</p>
+    </section>
+    <footer class="node-footer">
+      <h2>Referências</h2>
+      <ul class="reference-list">
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/publishers">Documentação de publishers</a>
+          <span class="reference-note">Uso neste node: sustenta mensagens sem rota, `mandatory`, retorno ao publisher e métricas de publicações sem rota.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/ae">Documentação de Alternate Exchanges</a>
+          <span class="reference-note">Uso neste node: sustenta AE como fallback de roteamento e a relação entre AE e `mandatory`.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/exchanges">Documentação de exchanges</a>
+          <span class="reference-note">Uso neste node: sustenta exchange como ponto de publicação e roteamento por bindings.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://raw.githubusercontent.com/rabbitmq/amqp-0.9.1-spec/main/docs/amqp-0-9-1-reference.md">Referência AMQP 0-9-1</a>
+          <span class="reference-note">Uso neste node: sustenta a semântica de `basic.publish`, `mandatory` e `basic.return`.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/confirms">Documentação sobre acknowledgements e confirmações</a>
+          <span class="reference-note">Uso neste node: sustenta a fronteira entre retorno de rota, confirmação do publisher e processamento pelo consumidor.</span>
+        </li>
+      </ul>
+    </footer>
+  </main>
+</body>
+</html>

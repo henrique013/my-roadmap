@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="pt-BR" data-visual-theme="notion-dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Exchange-to-exchange bindings - Exchanges no RabbitMQ</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --page: #191919;
+      --surface: #202020;
+      --surface-hover: #2a2a2a;
+      --soft: #242424;
+      --soft-2: #2a2a2a;
+      --text: #e6e6e6;
+      --strong: #f2f2f2;
+      --heading: #f2f2f2;
+      --muted: #a3a3a3;
+      --border: #333333;
+      --border-strong: #4a4a4a;
+      --accent: #6aaed6;
+      --accent-2: #8cc7ff;
+      --warn: #ffdc49;
+      --code: #e6e6e6;
+      --code-bg: #2f3437;
+      --tag-bg: #243831;
+      --tag-text: #7ad9c5;
+      --tag-border: #335f54;
+      --blue-soft: #1f2b3f;
+      --blue-text: #8cc7ff;
+      --blue-border: #365f93;
+      --warn-soft: #342f19;
+      --warn-border: #5f4f18;
+      --success-soft: #1f332b;
+      --success-text: #8be6c1;
+      --success-border: #2f6b57;
+      --purple-soft: #2b2342;
+      --purple-text: #c8b6ff;
+      --purple-border: #574582;
+      --risk-soft: #3a2028;
+      --risk-text: #ff9ab3;
+      --risk-border: #7a3a4d;
+      --pre-bg: #111111;
+      --pre-text: #d4d4d4;
+      --focus: #6aaed6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      color-scheme: dark;
+      margin: 0;
+      color: var(--text);
+      background: var(--page);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif;
+      font-size: 18px;
+      line-height: 1.55;
+    }
+
+    main {
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 32px 28px 56px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: var(--heading);
+      line-height: 1.2;
+      margin: 0 0 12px;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 26px;
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+      margin-top: 32px;
+    }
+
+    h3 {
+      font-size: 20px;
+      margin-top: 22px;
+    }
+
+    p,
+    ul,
+    ol,
+    .lead,
+    .callout {
+      max-width: none;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    ul {
+      margin: 8px 0 16px 22px;
+      padding: 0;
+    }
+
+    li {
+      margin: 4px 0;
+    }
+
+    table,
+    pre,
+    .content-grid,
+    .visual-block {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin: 14px 0 22px;
+      table-layout: fixed;
+      background: var(--surface);
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+      background: var(--surface);
+    }
+
+    th {
+      background: var(--soft-2);
+      text-align: left;
+      font-weight: 700;
+    }
+
+    code {
+      color: var(--code);
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 4px;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 0.92em;
+    }
+
+    pre {
+      margin: 12px 0 22px;
+      padding: 14px 16px;
+      color: var(--pre-text);
+      background: var(--pre-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: auto;
+      max-width: 100%;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 16px;
+      line-height: 1.45;
+      white-space: pre;
+    }
+
+    pre code {
+      color: inherit;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+      font: inherit;
+    }
+
+    .syntax-key {
+      color: #8cc7ff;
+      font-weight: 700;
+    }
+
+    .syntax-op {
+      color: #c8b6ff;
+    }
+
+    .syntax-value {
+      color: #a8e6cf;
+    }
+
+    .syntax-comment {
+      color: #a3a3a3;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    a:hover {
+      color: #8cc7ff;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .backlink {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 19px;
+    }
+
+    .node-context {
+      display: grid;
+      gap: 6px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      background: var(--soft);
+      margin: 0 0 18px;
+      width: 100%;
+    }
+
+    .node-context p {
+      margin: 0;
+    }
+
+    .node-context strong {
+      color: var(--heading);
+    }
+
+    .node-context a {
+      color: var(--accent);
+      font-weight: 400;
+      text-decoration-line: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    .node-context a:hover {
+      color: var(--accent-2);
+    }
+
+    .callout {
+      padding: 13px 15px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      background: var(--soft);
+      margin: 16px 0 22px;
+      border-radius: 6px;
+    }
+
+    .node-footer {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+    }
+
+    .node-footer h2 {
+      margin-top: 32px;
+    }
+
+    .reference-list {
+      display: grid;
+      gap: 8px;
+      margin: 8px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .reference-item {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface);
+    }
+
+    .reference-item a,
+    .node-footer a {
+      color: var(--accent);
+      font-weight: 400;
+      text-decoration-line: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    .reference-note {
+      color: var(--text);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 16px 0 22px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-self: start;
+      align-self: start;
+      width: fit-content;
+      max-width: 100%;
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 700;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border: 1px solid var(--tag-border);
+      overflow-wrap: anywhere;
+    }
+
+    .visual-block {
+      margin: 16px 0 24px;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--soft);
+    }
+
+    .topology-map {
+      display: grid;
+      grid-template-columns: minmax(190px, 0.9fr) minmax(180px, 0.7fr) minmax(300px, 1.4fr);
+      gap: 12px;
+      align-items: stretch;
+      margin: 14px 0;
+    }
+
+    .topology-column {
+      display: grid;
+      gap: 10px;
+    }
+
+    .topology-card,
+    .route-card,
+    .signal-card {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px;
+      background: var(--surface);
+    }
+
+    .topology-card.source {
+      background: var(--blue-soft);
+      border-color: var(--blue-border);
+    }
+
+    .topology-card.destination {
+      background: var(--success-soft);
+      border-color: var(--success-border);
+    }
+
+    .topology-card.queue {
+      background: var(--purple-soft);
+      border-color: var(--purple-border);
+    }
+
+    .route-stack {
+      display: grid;
+      gap: 8px;
+      align-content: center;
+    }
+
+    .route-card {
+      min-height: 58px;
+      display: grid;
+      align-content: center;
+      border-color: var(--blue-border);
+      background: var(--blue-soft);
+    }
+
+    .route-label {
+      color: var(--heading);
+      font-weight: 700;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .state-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 16px 0 22px;
+    }
+
+    .state-card {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px;
+      background: var(--surface);
+    }
+
+    .state-card.safe {
+      background: var(--success-soft);
+      border-color: var(--success-border);
+    }
+
+    .state-card.warn {
+      background: var(--warn-soft);
+      border-color: var(--warn-border);
+    }
+
+    .signal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 16px 0 22px;
+    }
+
+    .signal-card {
+      background: var(--surface);
+    }
+
+    .node-closing {
+      margin-top: 28px;
+      padding: 16px;
+      border: 0;
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      background: var(--soft);
+    }
+
+    .node-closing p:last-child {
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 860px) {
+      main {
+        padding: 22px 16px 40px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      h2 {
+        font-size: 23px;
+      }
+
+      .topology-map,
+      .state-grid,
+      .signal-grid,
+      .reference-item {
+        grid-template-columns: 1fr;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+        table-layout: auto;
+      }
+
+      th,
+      td {
+        min-width: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="backlink" href="../../roadmap.html">Voltar ao roadmap</a>
+    <div
+      class="node-context"
+      data-node-position="true"
+      data-level="intermediario"
+      data-node-order="6"
+      data-node-count="7"
+      data-roadmap-slug="rabbitmq-exchanges">
+      <p><strong>Intermediário · 06 de 07</strong></p>
+      <p>Roadmap: Exchanges no RabbitMQ</p>
+      <p>Node atual: Exchange-to-exchange bindings</p>
+      <p>Anterior: <a href="../05-policies-x-arguments-e-permissoes/node.html">Policies, x-arguments e permissões</a> · Próximo: Publisher confirms e confiabilidade</p>
+    </div>
+
+    <h1>Quando uma exchange precisa apontar para outra</h1>
+    <p class="lead">Uma topologia fica mais expressiva quando a primeira exchange mantém a entrada estável e outras exchanges recebem parte do fluxo para continuar roteando dentro de seus próprios contratos.</p>
+
+    <p>Imagine `events.public` como a entrada publicada pelos produtores. O domínio de pedidos quer organizar suas filas em `orders.internal`; auditoria quer receber uma cópia controlada em `audit.internal`. Se o publisher precisar conhecer cada fila final, a topologia vaza para quem só deveria publicar no contrato de entrada.</p>
+
+    <p>O passo novo é deixar que uma exchange seja destino de um binding. Esse é o exchange-to-exchange binding, ou E2E: uma aresta de roteamento em que a mensagem sai de uma exchange e chega a outra exchange, sem passar por um consumidor intermediário.</p>
+
+    <div class="tag-row" aria-label="Ideias centrais deste node">
+      <span class="tag">entrada estável</span>
+      <span class="tag">domínios internos</span>
+      <span class="tag">binding key preservada</span>
+      <span class="tag">contrato legível</span>
+      <span class="tag">sem consumidor intermediário</span>
+    </div>
+
+    <h2>A direção é parte do contrato</h2>
+    <p>Em E2E, a exchange onde a mensagem entra no trecho é a source exchange. A exchange que recebe esse trecho do fluxo é a destination exchange. A direção importa porque a source escolhe se o binding combina, e a destination ainda aplica suas próprias regras depois.</p>
+
+    <p>O método que materializa esse vínculo em RabbitMQ é `exchange.bind`. A forma conceitual abaixo não é um roteiro de execução; ela só deixa visível quais nomes carregam a direção da aresta.</p>
+
+    <pre class="code-block language-yaml" aria-label="Forma conceitual de exchange.bind entre source e destination exchanges"><code><span class="syntax-comment"># forma conceitual, não comando operacional</span>
+<span class="syntax-key">binding_kind</span><span class="syntax-op">:</span> <span class="syntax-value">exchange-to-exchange</span>
+<span class="syntax-key">source_exchange</span><span class="syntax-op">:</span> <span class="syntax-value">events.public</span>
+<span class="syntax-key">destination_exchange</span><span class="syntax-op">:</span> <span class="syntax-value">orders.internal</span>
+<span class="syntax-key">binding_key</span><span class="syntax-op">:</span> <span class="syntax-value">orders.*</span></code></pre>
+
+    <p>A binding key não perde significado. Se `events.public` usa roteamento por tópicos, `orders.created` pode combinar com `orders.*` e seguir para `orders.internal`. Dentro de `orders.internal`, o tipo da exchange e seus próprios bindings continuam decidindo quais filas recebem a mensagem.</p>
+
+    <div class="visual-block" aria-label="Mapa conceitual de source exchange ligada a destination exchanges">
+      <p>O mapa fica pequeno quando cada camada tem um trabalho claro.</p>
+      <div class="topology-map">
+        <div class="topology-column">
+          <div class="topology-card source">
+            <span class="tag">source</span>
+            <h3>events.public</h3>
+            <p>Entrada estável para produtores publicarem eventos públicos do sistema.</p>
+          </div>
+        </div>
+        <div class="route-stack">
+          <div class="route-card">
+            <span class="route-label">orders.*</span>
+            <span>binding E2E para pedidos</span>
+          </div>
+          <div class="route-card">
+            <span class="route-label">#.created</span>
+            <span>binding E2E para auditoria</span>
+          </div>
+        </div>
+        <div class="topology-column">
+          <div class="topology-card destination">
+            <span class="tag">destination</span>
+            <h3>orders.internal</h3>
+            <p>Reorganiza eventos de pedidos para filas internas como `orders.worker.q` e `orders.projection.q`.</p>
+          </div>
+          <div class="topology-card destination">
+            <span class="tag">destination</span>
+            <h3>audit.internal</h3>
+            <p>Recebe eventos criados e aplica suas regras para `audit.q`.</p>
+          </div>
+        </div>
+      </div>
+      <p class="small">A conclusão do mapa não é "sempre crie mais exchanges". A conclusão é que outra exchange pode ser destino quando essa camada preserva um contrato mais legível.</p>
+    </div>
+
+    <h2>A mensagem atravessa a topologia, não uma nova publicação</h2>
+    <p>Depois que `orders.internal` vira destino, a mensagem não precisa ser consumida por uma aplicação só para ser publicada de novo. RabbitMQ trata o E2E como extensão do roteamento. A source e as destinations contribuem para o caminho até as filas finais.</p>
+
+    <p>Essa diferença muda a leitura operacional. Um consumidor intermediário teria seu próprio ciclo de entrega, erro, confirmação e nova publicação. No E2E, a mensagem continua dentro do roteamento do broker. O desenho fica mais curto, mas a topologia precisa continuar fácil de ler.</p>
+
+    <table aria-label="Contraste entre E2E e republicação por aplicação intermediária">
+      <thead>
+        <tr>
+          <th>Desenho</th>
+          <th>Quem move a mensagem</th>
+          <th>O que precisa ficar claro</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Binding entre exchanges</td>
+          <td>O roteamento do RabbitMQ atravessa source e destination exchanges.</td>
+          <td>Direção source -> destination, binding key e tipo de cada exchange.</td>
+        </tr>
+        <tr>
+          <td>Consumidor que republica</td>
+          <td>Uma aplicação consome de uma fila e publica outra mensagem.</td>
+          <td>Ciclo de consumo, erro, nova publicação e responsabilidade da aplicação.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Por isso E2E costuma ser uma boa peça quando o problema é composição de routing, não transformação de payload nem regra de negócio entre uma fila e outra. Quando a mensagem precisa ser alterada, validada ou enriquecida por código, a topologia já está pedindo outra responsabilidade.</p>
+
+    <h2>O caminho pode ser transitivo sem duplicar a fila final</h2>
+    <p>Ao encadear exchanges, a topologia vira transitiva: uma mensagem pode alcançar uma exchange, que alcança outra, até chegar a filas. RabbitMQ detecta ciclos durante a entrega e garante que, para cada fila alcançada por uma mensagem, a fila receba uma única cópia.</p>
+
+    <div class="visual-block" aria-label="Roteamento transitivo com convergência e ciclo eliminado">
+      <p>O detalhe importante é separar proteção do broker de desenho recomendado.</p>
+      <div class="state-grid">
+        <div class="state-card safe">
+          <span class="tag">convergência</span>
+          <h3>Duas rotas chegam a `audit.q`</h3>
+          <p>`events.public` pode alcançar `audit.internal` diretamente e também passar por `orders.internal`. Se as duas rotas chegarem à mesma fila, a fila recebe uma cópia daquela mensagem.</p>
+        </div>
+        <div class="state-card warn">
+          <span class="tag">proteção</span>
+          <h3>Um ciclo não vira entrega infinita</h3>
+          <p>Se exchanges forem ligadas de volta para uma exchange anterior, o ciclo é eliminado durante a entrega. Isso protege o broker, mas não torna o ciclo um desenho simples de operar.</p>
+        </div>
+      </div>
+      <p class="small">A garantia permite raciocinar sobre grafos transitivos. Ela não substitui uma topologia com fronteiras compreensíveis.</p>
+    </div>
+
+    <p>Esse ponto é o limite saudável do E2E. Ele ajuda quando a topologia expressa camadas reais de roteamento: entrada pública, domínio interno, auditoria, projeções. Ele atrapalha quando cada exchange nova existe só para esconder uma decisão que deveria estar documentada no contrato da source.</p>
+
+    <h2>A exchange destino pode não mostrar entrada</h2>
+    <p>Como E2E não republica a mensagem para a destination exchange, a métrica de ingress dessa exchange não é o melhor sinal de que a rota funcionou. A documentação de exchanges registra que essa taxa de entrada da destination exchange não é atualizada nesse caso; as filas e streams finais continuam refletindo entregas quando são alcançados.</p>
+
+    <div class="signal-grid" aria-label="Leitura mínima de sinais em E2E">
+      <div class="signal-card visual-card">
+        <span class="tag">source</span>
+        <h3>events.public</h3>
+        <p>É o ponto em que publishers publicam e onde a topologia começa a ser avaliada.</p>
+      </div>
+      <div class="signal-card visual-card">
+        <span class="tag">destination</span>
+        <h3>orders.internal</h3>
+        <p>Pode participar do caminho sem mostrar nova taxa de entrada como se recebesse uma publicação direta.</p>
+      </div>
+      <div class="signal-card visual-card">
+        <span class="tag">filas finais</span>
+        <h3>orders.worker.q</h3>
+        <p>As filas e streams alcançados são os destinos onde a entrega final aparece.</p>
+      </div>
+    </div>
+
+    <p>A mesma leitura vale para permissões de topologia. Criar o vínculo toca os dois lados: a operação precisa autoridade para configurar a destination exchange e para escrever a partir da source exchange. Isso mantém o E2E dentro do mesmo raciocínio do node anterior: composição também é uma decisão governada.</p>
+
+    <h2>A fronteira continua sendo local e explícita</h2>
+    <p>Exchanges, filas, bindings, policies e permissões pertencem a um vhost. O E2E compõe recursos nessa fronteira lógica. Quando o problema real é conectar ambientes separados, nodes diferentes ou regiões diferentes, a pergunta já saiu do escopo deste node.</p>
+
+    <p>Um bom E2E deixa a frase de roteamento mais clara: "`events.public` entrega eventos de pedidos para `orders.internal`, que decide suas filas internas". Um E2E ruim só troca uma lista grande de filas por um grafo difícil de explicar.</p>
+
+    <section class="node-closing">
+      <p>Dominar este node é conseguir olhar para uma aresta entre exchanges e dizer o que ela preserva: direção source -> destination, regras normais de binding, roteamento transitivo controlado e ausência de nova publicação. O próximo passo separa aceitação da publicação pelo broker de processamento pelos consumidores, sem confundir routing bem-sucedido com trabalho concluído.</p>
+    </section>
+
+    <footer class="node-footer">
+      <h2>Referências</h2>
+      <ul class="reference-list">
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/e2e">RabbitMQ - Exchange to Exchange Bindings</a>
+          <span class="reference-note">Uso neste node: source, destination, `exchange.bind`, ciclos eliminados e cópia única por fila.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/exchanges">RabbitMQ - exchanges</a>
+          <span class="reference-note">Uso neste node: bindings para exchanges, E2E como extensão de roteamento e efeito sobre métrica de ingress.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/access-control">RabbitMQ - permissões de recursos</a>
+          <span class="reference-note">Uso neste node: permissões exigidas para criar binding entre exchanges.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/vhosts">RabbitMQ - virtual hosts</a>
+          <span class="reference-note">Uso neste node: vhost como fronteira lógica de exchanges, filas e bindings.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/publishers">RabbitMQ - publishers</a>
+          <span class="reference-note">Uso neste node: publicação em exchange e routing topology em AMQP 0-9-1.</span>
+        </li>
+      </ul>
+    </footer>
+  </main>
+</body>
+</html>

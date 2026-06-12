@@ -1,0 +1,5164 @@
+{
+  "status": "passa",
+  "generatedAt": "2026-06-10T13:43:41.629Z",
+  "html": "/home/henri/my-projects/my-roadmap/.tmp/roadmaps/rabbitmq-exchanges/intermediario/04-dead-letter-exchanges-e-retry-conceitual/node.html",
+  "viewports": [
+    {
+      "viewport": {
+        "name": "desktop",
+        "width": 1280,
+        "height": 900,
+        "isMobile": false
+      },
+      "screenshotPath": "/home/henri/my-projects/my-roadmap/.tmp/roadmaps/rabbitmq-exchanges/intermediario/04-dead-letter-exchanges-e-retry-conceitual/.editorial/pipeline/05-visual-render/playwright/desktop.png",
+      "title": "Quando a mensagem sai da fila",
+      "theme": {
+        "marker": "notion-dark",
+        "colorScheme": "dark",
+        "surfaceSamples": [
+          {
+            "selector": "body",
+            "index": 0,
+            "text": "Voltar ao roadmap\n    \n      Intermediário · 04 de 07\n      Roadmap: Exchanges n",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": "main",
+            "index": 0,
+            "text": "Voltar ao roadmap\n    \n      Intermediário · 04 de 07\n      Roadmap: Exchanges n",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-context",
+            "index": 0,
+            "text": "Intermediário · 04 de 07\n      Roadmap: Exchanges no RabbitMQ\n      Node atual: ",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-footer",
+            "index": 0,
+            "text": "Referências\n      \n        \n          Documentação de Dead Letter Exchanges\n    ",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 0,
+            "text": "Documentação de Dead Letter Exchanges\n          Uso neste node: sustenta DLX com",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 1,
+            "text": "Documentação sobre acknowledgements de consumidor\n          Uso neste node: sust",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 2,
+            "text": "Documentação de TTL e expiração\n          Uso neste node: sustenta expiração de ",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 3,
+            "text": "Documentação de limite de fila\n          Uso neste node: sustenta queue length l",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 4,
+            "text": "Documentação de policies\n          Uso neste node: sustenta a preferência por po",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 5,
+            "text": "Documentação de publishers\n          Uso neste node: sustenta a fronteira com pu",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 6,
+            "text": "Documentação de quorum queues\n          Uso neste node: sustenta delivery limit ",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 7,
+            "text": "Guia de confiabilidade\n          Uso neste node: sustenta a leitura de acknowled",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".callout",
+            "index": 0,
+            "text": "`requeue=true` repetido pode virar um ciclo quente: a mesma mensagem ocupa consu",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".visual-block",
+            "index": 0,
+            "text": "Antes da fila\n            Falha de rota inicial\n            A exchange não encon",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".visual-block",
+            "index": 1,
+            "text": "Consumer\n            Rejeição sem retorno\n            `basic.reject` ou `basic.n",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".visual-block",
+            "index": 2,
+            "text": "Isolar\n            Quarantine queue\n            Boa para mensagem inválida, cont",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".visual-block",
+            "index": 3,
+            "text": "1\n            Fila principal\n            A mensagem está pronta para consumo e f",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".state-card",
+            "index": 0,
+            "text": "Antes da fila\n            Falha de rota inicial\n            A exchange não encon",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".state-card",
+            "index": 1,
+            "text": "Depois da fila\n            Saída posterior da fila\n            A mensagem já est",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "isDark": true
+          },
+          {
+            "selector": ".visual-card",
+            "index": 0,
+            "text": "Requeue imediato\n          Mesma causa, mesma fila\n          A mensagem volta rá",
+            "backgroundColor": "rgb(58, 32, 40)",
+            "isDark": true
+          },
+          {
+            "selector": ".visual-card",
+            "index": 1,
+            "text": "Retry planejado\n          Espera antes de tentar\n          A mensagem sai do cir",
+            "backgroundColor": "rgb(43, 35, 66)",
+            "isDark": true
+          },
+          {
+            "selector": ".visual-card",
+            "index": 2,
+            "text": "Quarentena\n          Sem retorno automático\n          A mensagem fica separada q",
+            "backgroundColor": "rgb(31, 51, 43)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 0,
+            "text": "Decisão do consumer",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 1,
+            "text": "Movimento imediato",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 2,
+            "text": "Leitura conceitual",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 0,
+            "text": "`basic.nack` ou `basic.reject` com `requeue=true`",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 1,
+            "text": "A mensagem volta para a fila.",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 2,
+            "text": "É uma nova tentativa rápida, não uma estratégia completa de retry.",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 3,
+            "text": "`basic.nack` ou `basic.reject` com `requeue=false`",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 4,
+            "text": "A mensagem sai da fila; com DLX configurada, é republicada para ela.",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 5,
+            "text": "A fila decidiu que a mensagem precisa de outro caminho.",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "pre",
+            "index": 0,
+            "text": "# recorte conceitual, não executável\nfila_principal = orders.work\nfila_principal",
+            "backgroundColor": "rgb(17, 17, 17)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 0,
+            "text": "Antes da fila",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 1,
+            "text": "Depois da fila",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 2,
+            "text": "Consumer",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 3,
+            "text": "Tempo",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 4,
+            "text": "Capacidade",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 5,
+            "text": "Quorum queues",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 6,
+            "text": "Isolar",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 7,
+            "text": "Esperar",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          }
+        ]
+      },
+      "preBlocks": [
+        {
+          "index": 0,
+          "text": "# recorte conceitual, não executável\nfila_principal = orders.work\nfila_principal.dead_letter_exchange = orders.dlx\ndlx_exchange = orders.dlx\ndestino_pos_saida =",
+          "hasCode": true,
+          "hasHighlight": true,
+          "isConceptualVisual": false,
+          "hasAsciiException": false,
+          "asciiReason": "",
+          "looksTechnical": true,
+          "className": "code-block language-conf",
+          "ariaLabel": "Recorte conceitual de fila apontando para uma DLX"
+        }
+      ],
+      "preCodeStyles": [
+        {
+          "index": 0,
+          "text": "# recorte conceitual, não executável\nfila_principal = orders.work\nfila_principal.dead_letter_exchange = orders.dlx\ndlx_e",
+          "color": "rgb(212, 212, 212)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "effectiveBackgroundColor": "rgb(17, 17, 17)",
+          "borderWidths": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderStyles": [
+            "none",
+            "none",
+            "none",
+            "none"
+          ],
+          "paddings": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 460.91,
+          "heightPx": 110.75,
+          "parentWidthPx": 1204
+        }
+      ],
+      "inlineCodeStyles": [],
+      "componentStyles": {
+        "nodeContext": [
+          {
+            "index": 0,
+            "text": "Intermediário · 04 de 07\n      Roadmap: Exchanges no RabbitMQ\n      Node atual: Dead Letter Exchanges e retry conceitual",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "effectiveBackgroundColor": "rgb(36, 36, 36)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "4px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "12px",
+              "14px",
+              "12px",
+              "14px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "18px",
+              "0px"
+            ],
+            "borderRadii": [
+              "6px",
+              "6px",
+              "6px",
+              "6px"
+            ],
+            "display": "grid",
+            "gap": "6px",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "1204px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 1204,
+            "heightPx": 155.56,
+            "parentWidthPx": 1260
+          }
+        ],
+        "nodeContextLinks": [
+          {
+            "index": 0,
+            "text": "Unroutable, mandatory e Alternate Exchange",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(36, 36, 36)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "inline",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "auto",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 359.23,
+            "heightPx": 20,
+            "parentWidthPx": 1171
+          }
+        ],
+        "nodeFooter": [
+          {
+            "index": 0,
+            "text": "Referências\n      \n        \n          Documentação de Dead Letter Exchanges\n          Uso neste node: sustenta DLX como ",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(25, 25, 25)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "1204px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 1204,
+            "heightPx": 730.77,
+            "parentWidthPx": 1260
+          }
+        ],
+        "nodeFooterLinks": [
+          {
+            "index": 0,
+            "text": "Documentação de Dead Letter Exchanges",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "345.453px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 345.45,
+            "heightPx": 27.89,
+            "parentWidthPx": 1204
+          },
+          {
+            "index": 1,
+            "text": "Documentação sobre acknowledgements de consumidor",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "345.453px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 345.45,
+            "heightPx": 55.78,
+            "parentWidthPx": 1204
+          },
+          {
+            "index": 2,
+            "text": "Documentação de TTL e expiração",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "345.453px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 345.45,
+            "heightPx": 27.89,
+            "parentWidthPx": 1204
+          },
+          {
+            "index": 3,
+            "text": "Documentação de limite de fila",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "345.453px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 345.45,
+            "heightPx": 27.89,
+            "parentWidthPx": 1204
+          },
+          {
+            "index": 4,
+            "text": "Documentação de policies",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "345.453px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 345.45,
+            "heightPx": 27.89,
+            "parentWidthPx": 1204
+          },
+          {
+            "index": 5,
+            "text": "Documentação de publishers",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "345.453px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 345.45,
+            "heightPx": 27.89,
+            "parentWidthPx": 1204
+          },
+          {
+            "index": 6,
+            "text": "Documentação de quorum queues",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "345.453px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 345.45,
+            "heightPx": 27.89,
+            "parentWidthPx": 1204
+          },
+          {
+            "index": 7,
+            "text": "Guia de confiabilidade",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "345.453px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 345.45,
+            "heightPx": 27.89,
+            "parentWidthPx": 1204
+          }
+        ],
+        "terminalDividerCandidates": [
+          {
+            "index": 0,
+            "text": "A mensagem mudou de jurisdição\n      Quando uma mensagem não encontra rota, o problema pertence à exchange de entrada. Q",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(25, 25, 25)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "1204px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 1204,
+            "heightPx": 195.75,
+            "parentWidthPx": 1260
+          },
+          {
+            "index": 1,
+            "text": "Referências\n      \n        \n          Documentação de Dead Letter Exchanges\n          Uso neste node: sustenta DLX como ",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(25, 25, 25)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "1204px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 1204,
+            "heightPx": 730.77,
+            "parentWidthPx": 1260
+          }
+        ]
+      },
+      "visualPrimitives": {
+        "tags": [
+          {
+            "index": 0,
+            "text": "Antes da fila",
+            "color": "rgb(255, 220, 73)",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "effectiveBackgroundColor": "rgb(52, 47, 25)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "105.188px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 105.19,
+            "heightPx": 29.25,
+            "parentWidthPx": 596
+          },
+          {
+            "index": 1,
+            "text": "Depois da fila",
+            "color": "rgb(140, 199, 255)",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "effectiveBackgroundColor": "rgb(31, 43, 63)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "113.531px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 113.53,
+            "heightPx": 29.25,
+            "parentWidthPx": 596
+          },
+          {
+            "index": 2,
+            "text": "Consumer",
+            "color": "rgb(140, 199, 255)",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "effectiveBackgroundColor": "rgb(31, 43, 63)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "90.1875px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 90.19,
+            "heightPx": 29.25,
+            "parentWidthPx": 292
+          },
+          {
+            "index": 3,
+            "text": "Tempo",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "64.0625px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 64.06,
+            "heightPx": 29.25,
+            "parentWidthPx": 292
+          },
+          {
+            "index": 4,
+            "text": "Capacidade",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "100.203px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 100.2,
+            "heightPx": 29.25,
+            "parentWidthPx": 292
+          },
+          {
+            "index": 5,
+            "text": "Quorum queues",
+            "color": "rgb(255, 220, 73)",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "effectiveBackgroundColor": "rgb(52, 47, 25)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "131.016px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 131.02,
+            "heightPx": 29.25,
+            "parentWidthPx": 292
+          },
+          {
+            "index": 6,
+            "text": "Isolar",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "56.0312px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 56.03,
+            "heightPx": 29.25,
+            "parentWidthPx": 393.33
+          },
+          {
+            "index": 7,
+            "text": "Esperar",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "71.875px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 71.88,
+            "heightPx": 29.25,
+            "parentWidthPx": 393.33
+          },
+          {
+            "index": 8,
+            "text": "Evitar",
+            "color": "rgb(255, 154, 179)",
+            "backgroundColor": "rgb(58, 32, 40)",
+            "effectiveBackgroundColor": "rgb(58, 32, 40)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "57.7031px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 57.7,
+            "heightPx": 29.25,
+            "parentWidthPx": 393.34
+          },
+          {
+            "index": 9,
+            "text": "1",
+            "color": "rgb(140, 199, 255)",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "effectiveBackgroundColor": "rgb(31, 43, 63)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "24.3438px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 24.34,
+            "heightPx": 29.25,
+            "parentWidthPx": 232.8
+          },
+          {
+            "index": 10,
+            "text": "2",
+            "color": "rgb(140, 199, 255)",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "effectiveBackgroundColor": "rgb(31, 43, 63)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "24.3438px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 24.34,
+            "heightPx": 29.25,
+            "parentWidthPx": 232.8
+          },
+          {
+            "index": 11,
+            "text": "3",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "24.3438px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 24.34,
+            "heightPx": 29.25,
+            "parentWidthPx": 232.8
+          },
+          {
+            "index": 12,
+            "text": "4",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "24.3438px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 24.34,
+            "heightPx": 29.25,
+            "parentWidthPx": 232.8
+          },
+          {
+            "index": 13,
+            "text": "5",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "24.3438px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 24.34,
+            "heightPx": 29.25,
+            "parentWidthPx": 232.81
+          },
+          {
+            "index": 14,
+            "text": "Requeue imediato",
+            "color": "rgb(255, 154, 179)",
+            "backgroundColor": "rgb(58, 32, 40)",
+            "effectiveBackgroundColor": "rgb(58, 32, 40)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "145.203px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 145.2,
+            "heightPx": 29.25,
+            "parentWidthPx": 393.33
+          },
+          {
+            "index": 15,
+            "text": "Retry planejado",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "128.531px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 128.53,
+            "heightPx": 29.25,
+            "parentWidthPx": 393.33
+          },
+          {
+            "index": 16,
+            "text": "Quarentena",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "99.3594px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 99.36,
+            "heightPx": 29.25,
+            "parentWidthPx": 393.34
+          }
+        ],
+        "flowStepAfter": []
+      },
+      "contrastSamples": [
+        {
+          "label": "body",
+          "text": "Voltar ao roadmap\n    \n      Intermediário · 04 de 07\n      Roadmap: Exchanges n",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "parágrafo",
+          "text": "Intermediário · 04 de 07",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Roadmap: Exchanges no RabbitMQ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Node atual: Dead Letter Exchanges e retry conceitual",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Anterior: Unroutable, mandatory e Alternate Exchange · Próximo: Policies, x-argu",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "No node anterior, a mensagem ainda não tinha encontrado uma rota de entrada. Aqu",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 6.97
+        },
+        {
+          "label": "parágrafo",
+          "text": "Imagine uma mensagem de pedido em uma fila de trabalho. A exchange já fez seu pa",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "parágrafo",
+          "text": "Essa diferença protege a separação entre Alternate Exchange e Dead Letter Exchan",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "parágrafo",
+          "text": "A exchange não encontra binding compatível. A saída possível é descarte, retorno",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(52, 47, 25)",
+          "ratio": 10.74
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação de Dead Letter Exchanges\n          Uso neste node: sustenta DLX com",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação sobre acknowledgements de consumidor\n          Uso neste node: sust",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação de TTL e expiração\n          Uso neste node: sustenta expiração de ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação de limite de fila\n          Uso neste node: sustenta queue length l",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação de policies\n          Uso neste node: sustenta a preferência por po",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação de publishers\n          Uso neste node: sustenta a fronteira com pu",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação de quorum queues\n          Uso neste node: sustenta delivery limit ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Guia de confiabilidade\n          Uso neste node: sustenta a leitura de acknowled",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "`basic.nack` ou `basic.reject` com `requeue=true`",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "A mensagem volta para a fila.",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "É uma nova tentativa rápida, não uma estratégia completa de retry.",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "`basic.nack` ou `basic.reject` com `requeue=false`",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "A mensagem sai da fila; com DLX configurada, é republicada para ela.",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "A fila decidiu que a mensagem precisa de outro caminho.",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Decisão do consumer",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 11.5
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Movimento imediato",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 11.5
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Leitura conceitual",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 11.5
+        },
+        {
+          "label": "link",
+          "text": "Voltar ao roadmap",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 7.23
+        },
+        {
+          "label": "link",
+          "text": "Unroutable, mandatory e Alternate Exchange",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "link",
+          "text": "Documentação de Dead Letter Exchanges",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Documentação sobre acknowledgements de consumidor",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Documentação de TTL e expiração",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Documentação de limite de fila",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Documentação de policies",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Documentação de publishers",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "bloco de código",
+          "text": "# recorte conceitual, não executável\nfila_principal = orders.work\nfila_principal",
+          "color": "rgb(212, 212, 212)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.74
+        },
+        {
+          "label": "conteúdo de bloco de código",
+          "text": "# recorte conceitual, não executável\nfila_principal = orders.work\nfila_principal",
+          "color": "rgb(212, 212, 212)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.74
+        },
+        {
+          "label": "tag",
+          "text": "Antes da fila",
+          "color": "rgb(255, 220, 73)",
+          "backgroundColor": "rgb(52, 47, 25)",
+          "ratio": 9.95
+        },
+        {
+          "label": "tag",
+          "text": "Depois da fila",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(31, 43, 63)",
+          "ratio": 7.95
+        },
+        {
+          "label": "tag",
+          "text": "Consumer",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(31, 43, 63)",
+          "ratio": 7.95
+        },
+        {
+          "label": "tag",
+          "text": "Tempo",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "Capacidade",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "Quorum queues",
+          "color": "rgb(255, 220, 73)",
+          "backgroundColor": "rgb(52, 47, 25)",
+          "ratio": 9.95
+        },
+        {
+          "label": "tag",
+          "text": "Isolar",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "Esperar",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "contexto de node",
+          "text": "Intermediário · 04 de 07\n      Roadmap: Exchanges no RabbitMQ\n      Node atual: ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "link do contexto de node",
+          "text": "Unroutable, mandatory e Alternate Exchange",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "rodapé de referências",
+          "text": "Referências\n      \n        \n          Documentação de Dead Letter Exchanges\n    ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação de Dead Letter Exchanges",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação sobre acknowledgements de consumidor",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação de TTL e expiração",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação de limite de fila",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação de policies",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação de publishers",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação de quorum queues",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Guia de confiabilidade",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "visual customizado",
+          "text": "Antes da fila\n            Falha de rota inicial\n            A exchange não encon",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(52, 47, 25)",
+          "ratio": 10.74
+        },
+        {
+          "label": "visual customizado",
+          "text": "Depois da fila\n            Saída posterior da fila\n            A mensagem já est",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(31, 43, 63)",
+          "ratio": 11.4
+        },
+        {
+          "label": "syntax-key",
+          "text": "fila_principal",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "fila_principal.dead_letter_exchange",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "dlx_exchange",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "destino_pos_saida",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-value",
+          "text": "orders.work",
+          "color": "rgb(139, 230, 193)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.76
+        },
+        {
+          "label": "syntax-value",
+          "text": "orders.dlx",
+          "color": "rgb(139, 230, 193)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.76
+        },
+        {
+          "label": "syntax-value",
+          "text": "orders.dlx",
+          "color": "rgb(139, 230, 193)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.76
+        },
+        {
+          "label": "syntax-value",
+          "text": "fila_de_quarentena_ou_espera",
+          "color": "rgb(139, 230, 193)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.76
+        },
+        {
+          "label": "syntax-comment",
+          "text": "# recorte conceitual, não executável",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 7.49
+        }
+      ],
+      "contentWidths": [
+        {
+          "index": 0,
+          "selector": "p",
+          "text": "Intermediário · 04 de 07",
+          "width": 1171,
+          "mainWidth": 1260,
+          "ratio": 0.929
+        },
+        {
+          "index": 1,
+          "selector": "p",
+          "text": "Roadmap: Exchanges no RabbitMQ",
+          "width": 1171,
+          "mainWidth": 1260,
+          "ratio": 0.929
+        },
+        {
+          "index": 2,
+          "selector": "p",
+          "text": "Node atual: Dead Letter Exchanges e retry conceitual",
+          "width": 1171,
+          "mainWidth": 1260,
+          "ratio": 0.929
+        },
+        {
+          "index": 3,
+          "selector": "p",
+          "text": "Anterior: Unroutable, mandatory e Alternate Exchange · Próximo: Policies, x-arguments e permissões",
+          "width": 1171,
+          "mainWidth": 1260,
+          "ratio": 0.929
+        },
+        {
+          "index": 4,
+          "selector": ".lead",
+          "text": "No node anterior, a mensagem ainda não tinha encontrado uma rota de entrada. Aqui a situação mudou: ela já chegou a uma ",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 5,
+          "selector": "p",
+          "text": "Imagine uma mensagem de pedido em uma fila de trabalho. A exchange já fez seu papel: encontrou um binding, colocou a men",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 6,
+          "selector": "p",
+          "text": "Essa diferença protege a separação entre Alternate Exchange e Dead Letter Exchange. A AE aparece antes da fila, quando a",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 7,
+          "selector": "p",
+          "text": "Quando um consumer recebe uma entrega, ele só deveria reconhecer positivamente depois de assumir o processamento. Se não",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 8,
+          "selector": "p",
+          "text": "Com `requeue=true`, a mensagem volta para a fila e pode ser entregue de novo. Isso faz sentido quando outra instância po",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 9,
+          "selector": ".callout",
+          "text": "`requeue=true` repetido pode virar um ciclo quente: a mesma mensagem ocupa consumer, rede e broker sem avançar. Dead-let",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 10,
+          "selector": "p",
+          "text": "O nome Dead Letter Exchange pode sugerir um mecanismo especial, mas a peça continua sendo uma exchange comum. O que muda",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 11,
+          "selector": "p",
+          "text": "O recorte mostra a posição do mecanismo sem transformar isso em passo de configuração. A fila principal não vira DLX. A ",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 12,
+          "selector": "p",
+          "text": "Rejeição do consumer é só um dos caminhos. A documentação de RabbitMQ lista outras condições que também podem levar a me",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 13,
+          "selector": "p",
+          "text": "A lista é importante porque evita reduzir DLX a \"erro do consumer\". A fila pode dead-letter mensagens por uma decisão ex",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 14,
+          "selector": "p",
+          "text": "Depois que a DLX recebe a mensagem, a topologia precisa declarar uma intenção. Uma mensagem inválida pode ir para uma fi",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 15,
+          "selector": "p",
+          "text": "Um retry conceitual precisa de mais do que \"tentar de novo\". Ele precisa reduzir pressão, dar tempo para uma dependência",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 16,
+          "selector": "p",
+          "text": "TTL ajuda a criar espera, mas não deve ser lido como agenda precisa. A documentação de RabbitMQ descreve caveats de expi",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 17,
+          "selector": "p",
+          "text": "A DLX não decide sozinha se a mensagem merece nova tentativa ou isolamento. Essa decisão vem do desenho da topologia e d",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 18,
+          "selector": "p",
+          "text": "Esse ponto de parada é o que torna retry diferente de repetição. Sem limite, cada volta parece uma ação, mas a arquitetu",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 19,
+          "selector": "p",
+          "text": "Como DLX, TTL e limites são parâmetros de filas, a forma de aplicá-los importa. A documentação de RabbitMQ recomenda pol",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 20,
+          "selector": "p",
+          "text": "Este node só precisa dessa leitura: DLX é uma configuração de fila que aponta para uma exchange normal, e configurações ",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 21,
+          "selector": "p",
+          "text": "Quando uma mensagem não encontra rota, o problema pertence à exchange de entrada. Quando ela já está em uma fila e sai p",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 22,
+          "selector": "p",
+          "text": "Dominar DLX é enxergar essa mudança de jurisdição: a fila decide que a mensagem não deve continuar no mesmo lugar, a DLX",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 23,
+          "selector": "ul",
+          "text": "Documentação de Dead Letter Exchanges\n          Uso neste node: sustenta DLX como exchange normal, eventos de dead-lette",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        }
+      ],
+      "overflow": {
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "hasGlobalOverflow": false
+      }
+    },
+    {
+      "viewport": {
+        "name": "mobile",
+        "width": 390,
+        "height": 844,
+        "isMobile": true
+      },
+      "screenshotPath": "/home/henri/my-projects/my-roadmap/.tmp/roadmaps/rabbitmq-exchanges/intermediario/04-dead-letter-exchanges-e-retry-conceitual/.editorial/pipeline/05-visual-render/playwright/mobile.png",
+      "title": "Quando a mensagem sai da fila",
+      "theme": {
+        "marker": "notion-dark",
+        "colorScheme": "dark",
+        "surfaceSamples": [
+          {
+            "selector": "body",
+            "index": 0,
+            "text": "Voltar ao roadmap\n    \n      Intermediário · 04 de 07\n      Roadmap: Exchanges n",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": "main",
+            "index": 0,
+            "text": "Voltar ao roadmap\n    \n      Intermediário · 04 de 07\n      Roadmap: Exchanges n",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-context",
+            "index": 0,
+            "text": "Intermediário · 04 de 07\n      Roadmap: Exchanges no RabbitMQ\n      Node atual: ",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-footer",
+            "index": 0,
+            "text": "Referências\n      \n        \n          Documentação de Dead Letter Exchanges\n    ",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 0,
+            "text": "Documentação de Dead Letter Exchanges\n          Uso neste node: sustenta DLX com",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 1,
+            "text": "Documentação sobre acknowledgements de consumidor\n          Uso neste node: sust",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 2,
+            "text": "Documentação de TTL e expiração\n          Uso neste node: sustenta expiração de ",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 3,
+            "text": "Documentação de limite de fila\n          Uso neste node: sustenta queue length l",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 4,
+            "text": "Documentação de policies\n          Uso neste node: sustenta a preferência por po",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 5,
+            "text": "Documentação de publishers\n          Uso neste node: sustenta a fronteira com pu",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 6,
+            "text": "Documentação de quorum queues\n          Uso neste node: sustenta delivery limit ",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 7,
+            "text": "Guia de confiabilidade\n          Uso neste node: sustenta a leitura de acknowled",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".callout",
+            "index": 0,
+            "text": "`requeue=true` repetido pode virar um ciclo quente: a mesma mensagem ocupa consu",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".visual-block",
+            "index": 0,
+            "text": "Antes da fila\n            Falha de rota inicial\n            A exchange não encon",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".visual-block",
+            "index": 1,
+            "text": "Consumer\n            Rejeição sem retorno\n            `basic.reject` ou `basic.n",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".visual-block",
+            "index": 2,
+            "text": "Isolar\n            Quarantine queue\n            Boa para mensagem inválida, cont",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".visual-block",
+            "index": 3,
+            "text": "1\n            Fila principal\n            A mensagem está pronta para consumo e f",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".state-card",
+            "index": 0,
+            "text": "Antes da fila\n            Falha de rota inicial\n            A exchange não encon",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".state-card",
+            "index": 1,
+            "text": "Depois da fila\n            Saída posterior da fila\n            A mensagem já est",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "isDark": true
+          },
+          {
+            "selector": ".visual-card",
+            "index": 0,
+            "text": "Requeue imediato\n          Mesma causa, mesma fila\n          A mensagem volta rá",
+            "backgroundColor": "rgb(58, 32, 40)",
+            "isDark": true
+          },
+          {
+            "selector": ".visual-card",
+            "index": 1,
+            "text": "Retry planejado\n          Espera antes de tentar\n          A mensagem sai do cir",
+            "backgroundColor": "rgb(43, 35, 66)",
+            "isDark": true
+          },
+          {
+            "selector": ".visual-card",
+            "index": 2,
+            "text": "Quarentena\n          Sem retorno automático\n          A mensagem fica separada q",
+            "backgroundColor": "rgb(31, 51, 43)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 0,
+            "text": "Decisão do consumer",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 1,
+            "text": "Movimento imediato",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 2,
+            "text": "Leitura conceitual",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 0,
+            "text": "`basic.nack` ou `basic.reject` com `requeue=true`",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 1,
+            "text": "A mensagem volta para a fila.",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 2,
+            "text": "É uma nova tentativa rápida, não uma estratégia completa de retry.",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 3,
+            "text": "`basic.nack` ou `basic.reject` com `requeue=false`",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 4,
+            "text": "A mensagem sai da fila; com DLX configurada, é republicada para ela.",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 5,
+            "text": "A fila decidiu que a mensagem precisa de outro caminho.",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "pre",
+            "index": 0,
+            "text": "# recorte conceitual, não executável\nfila_principal = orders.work\nfila_principal",
+            "backgroundColor": "rgb(17, 17, 17)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 0,
+            "text": "Antes da fila",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 1,
+            "text": "Depois da fila",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 2,
+            "text": "Consumer",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 3,
+            "text": "Tempo",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 4,
+            "text": "Capacidade",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 5,
+            "text": "Quorum queues",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 6,
+            "text": "Isolar",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 7,
+            "text": "Esperar",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          }
+        ]
+      },
+      "preBlocks": [
+        {
+          "index": 0,
+          "text": "# recorte conceitual, não executável\nfila_principal = orders.work\nfila_principal.dead_letter_exchange = orders.dlx\ndlx_exchange = orders.dlx\ndestino_pos_saida =",
+          "hasCode": true,
+          "hasHighlight": true,
+          "isConceptualVisual": false,
+          "hasAsciiException": false,
+          "asciiReason": "",
+          "looksTechnical": true,
+          "className": "code-block language-conf",
+          "ariaLabel": "Recorte conceitual de fila apontando para uma DLX"
+        }
+      ],
+      "preCodeStyles": [
+        {
+          "index": 0,
+          "text": "# recorte conceitual, não executável\nfila_principal = orders.work\nfila_principal.dead_letter_exchange = orders.dlx\ndlx_e",
+          "color": "rgb(212, 212, 212)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "effectiveBackgroundColor": "rgb(17, 17, 17)",
+          "borderWidths": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderStyles": [
+            "none",
+            "none",
+            "none",
+            "none"
+          ],
+          "paddings": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 460.91,
+          "heightPx": 110.75,
+          "parentWidthPx": 358
+        }
+      ],
+      "inlineCodeStyles": [],
+      "componentStyles": {
+        "nodeContext": [
+          {
+            "index": 0,
+            "text": "Intermediário · 04 de 07\n      Roadmap: Exchanges no RabbitMQ\n      Node atual: Dead Letter Exchanges e retry conceitual",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "effectiveBackgroundColor": "rgb(36, 36, 36)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "4px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "12px",
+              "14px",
+              "12px",
+              "14px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "18px",
+              "0px"
+            ],
+            "borderRadii": [
+              "6px",
+              "6px",
+              "6px",
+              "6px"
+            ],
+            "display": "grid",
+            "gap": "6px",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "358px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 358,
+            "heightPx": 239.23,
+            "parentWidthPx": 390
+          }
+        ],
+        "nodeContextLinks": [
+          {
+            "index": 0,
+            "text": "Unroutable, mandatory e Alternate Exchange",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(36, 36, 36)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "inline",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "auto",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 271.16,
+            "heightPx": 47.89,
+            "parentWidthPx": 325
+          }
+        ],
+        "nodeFooter": [
+          {
+            "index": 0,
+            "text": "Referências\n      \n        \n          Documentação de Dead Letter Exchanges\n          Uso neste node: sustenta DLX como ",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(25, 25, 25)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "358px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 358,
+            "heightPx": 1452.25,
+            "parentWidthPx": 390
+          }
+        ],
+        "nodeFooterLinks": [
+          {
+            "index": 0,
+            "text": "Documentação de Dead Letter Exchanges",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "332px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 332,
+            "heightPx": 55.78,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 1,
+            "text": "Documentação sobre acknowledgements de consumidor",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "332px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 332,
+            "heightPx": 55.78,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 2,
+            "text": "Documentação de TTL e expiração",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "332px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 332,
+            "heightPx": 27.89,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 3,
+            "text": "Documentação de limite de fila",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "332px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 332,
+            "heightPx": 27.89,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 4,
+            "text": "Documentação de policies",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "332px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 332,
+            "heightPx": 27.89,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 5,
+            "text": "Documentação de publishers",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "332px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 332,
+            "heightPx": 27.89,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 6,
+            "text": "Documentação de quorum queues",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "332px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 332,
+            "heightPx": 27.89,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 7,
+            "text": "Guia de confiabilidade",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "332px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 332,
+            "heightPx": 27.89,
+            "parentWidthPx": 358
+          }
+        ],
+        "terminalDividerCandidates": [
+          {
+            "index": 0,
+            "text": "A mensagem mudou de jurisdição\n      Quando uma mensagem não encontra rota, o problema pertence à exchange de entrada. Q",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(25, 25, 25)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "358px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 358,
+            "heightPx": 450.06,
+            "parentWidthPx": 390
+          },
+          {
+            "index": 1,
+            "text": "Referências\n      \n        \n          Documentação de Dead Letter Exchanges\n          Uso neste node: sustenta DLX como ",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(25, 25, 25)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "358px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 358,
+            "heightPx": 1452.25,
+            "parentWidthPx": 390
+          }
+        ]
+      },
+      "visualPrimitives": {
+        "tags": [
+          {
+            "index": 0,
+            "text": "Antes da fila",
+            "color": "rgb(255, 220, 73)",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "effectiveBackgroundColor": "rgb(52, 47, 25)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "105.188px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 105.19,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 1,
+            "text": "Depois da fila",
+            "color": "rgb(140, 199, 255)",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "effectiveBackgroundColor": "rgb(31, 43, 63)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "113.531px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 113.53,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 2,
+            "text": "Consumer",
+            "color": "rgb(140, 199, 255)",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "effectiveBackgroundColor": "rgb(31, 43, 63)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "90.1875px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 90.19,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 3,
+            "text": "Tempo",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "64.0625px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 64.06,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 4,
+            "text": "Capacidade",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "100.203px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 100.2,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 5,
+            "text": "Quorum queues",
+            "color": "rgb(255, 220, 73)",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "effectiveBackgroundColor": "rgb(52, 47, 25)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "131.016px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 131.02,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 6,
+            "text": "Isolar",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "56.0312px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 56.03,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 7,
+            "text": "Esperar",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "71.875px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 71.88,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 8,
+            "text": "Evitar",
+            "color": "rgb(255, 154, 179)",
+            "backgroundColor": "rgb(58, 32, 40)",
+            "effectiveBackgroundColor": "rgb(58, 32, 40)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "57.7031px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 57.7,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 9,
+            "text": "1",
+            "color": "rgb(140, 199, 255)",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "effectiveBackgroundColor": "rgb(31, 43, 63)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "24.3438px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 24.34,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 10,
+            "text": "2",
+            "color": "rgb(140, 199, 255)",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "effectiveBackgroundColor": "rgb(31, 43, 63)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "24.3438px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 24.34,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 11,
+            "text": "3",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "24.3438px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 24.34,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 12,
+            "text": "4",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "24.3438px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 24.34,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 13,
+            "text": "5",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "24.3438px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 24.34,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 14,
+            "text": "Requeue imediato",
+            "color": "rgb(255, 154, 179)",
+            "backgroundColor": "rgb(58, 32, 40)",
+            "effectiveBackgroundColor": "rgb(58, 32, 40)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "145.203px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 145.2,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 15,
+            "text": "Retry planejado",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "128.531px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 128.53,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 16,
+            "text": "Quarentena",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "99.3594px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 99.36,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          }
+        ],
+        "flowStepAfter": []
+      },
+      "contrastSamples": [
+        {
+          "label": "body",
+          "text": "Voltar ao roadmap\n    \n      Intermediário · 04 de 07\n      Roadmap: Exchanges n",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "parágrafo",
+          "text": "Intermediário · 04 de 07",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Roadmap: Exchanges no RabbitMQ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Node atual: Dead Letter Exchanges e retry conceitual",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Anterior: Unroutable, mandatory e Alternate Exchange · Próximo: Policies, x-argu",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "No node anterior, a mensagem ainda não tinha encontrado uma rota de entrada. Aqu",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 6.97
+        },
+        {
+          "label": "parágrafo",
+          "text": "Imagine uma mensagem de pedido em uma fila de trabalho. A exchange já fez seu pa",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "parágrafo",
+          "text": "Essa diferença protege a separação entre Alternate Exchange e Dead Letter Exchan",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "parágrafo",
+          "text": "A exchange não encontra binding compatível. A saída possível é descarte, retorno",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(52, 47, 25)",
+          "ratio": 10.74
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação de Dead Letter Exchanges\n          Uso neste node: sustenta DLX com",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação sobre acknowledgements de consumidor\n          Uso neste node: sust",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação de TTL e expiração\n          Uso neste node: sustenta expiração de ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação de limite de fila\n          Uso neste node: sustenta queue length l",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação de policies\n          Uso neste node: sustenta a preferência por po",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação de publishers\n          Uso neste node: sustenta a fronteira com pu",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação de quorum queues\n          Uso neste node: sustenta delivery limit ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Guia de confiabilidade\n          Uso neste node: sustenta a leitura de acknowled",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "`basic.nack` ou `basic.reject` com `requeue=true`",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "A mensagem volta para a fila.",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "É uma nova tentativa rápida, não uma estratégia completa de retry.",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "`basic.nack` ou `basic.reject` com `requeue=false`",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "A mensagem sai da fila; com DLX configurada, é republicada para ela.",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "A fila decidiu que a mensagem precisa de outro caminho.",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Decisão do consumer",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 11.5
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Movimento imediato",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 11.5
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Leitura conceitual",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 11.5
+        },
+        {
+          "label": "link",
+          "text": "Voltar ao roadmap",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 7.23
+        },
+        {
+          "label": "link",
+          "text": "Unroutable, mandatory e Alternate Exchange",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "link",
+          "text": "Documentação de Dead Letter Exchanges",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Documentação sobre acknowledgements de consumidor",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Documentação de TTL e expiração",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Documentação de limite de fila",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Documentação de policies",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Documentação de publishers",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "bloco de código",
+          "text": "# recorte conceitual, não executável\nfila_principal = orders.work\nfila_principal",
+          "color": "rgb(212, 212, 212)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.74
+        },
+        {
+          "label": "conteúdo de bloco de código",
+          "text": "# recorte conceitual, não executável\nfila_principal = orders.work\nfila_principal",
+          "color": "rgb(212, 212, 212)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.74
+        },
+        {
+          "label": "tag",
+          "text": "Antes da fila",
+          "color": "rgb(255, 220, 73)",
+          "backgroundColor": "rgb(52, 47, 25)",
+          "ratio": 9.95
+        },
+        {
+          "label": "tag",
+          "text": "Depois da fila",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(31, 43, 63)",
+          "ratio": 7.95
+        },
+        {
+          "label": "tag",
+          "text": "Consumer",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(31, 43, 63)",
+          "ratio": 7.95
+        },
+        {
+          "label": "tag",
+          "text": "Tempo",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "Capacidade",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "Quorum queues",
+          "color": "rgb(255, 220, 73)",
+          "backgroundColor": "rgb(52, 47, 25)",
+          "ratio": 9.95
+        },
+        {
+          "label": "tag",
+          "text": "Isolar",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "Esperar",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "contexto de node",
+          "text": "Intermediário · 04 de 07\n      Roadmap: Exchanges no RabbitMQ\n      Node atual: ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "link do contexto de node",
+          "text": "Unroutable, mandatory e Alternate Exchange",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "rodapé de referências",
+          "text": "Referências\n      \n        \n          Documentação de Dead Letter Exchanges\n    ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação de Dead Letter Exchanges",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação sobre acknowledgements de consumidor",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação de TTL e expiração",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação de limite de fila",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação de policies",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação de publishers",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação de quorum queues",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Guia de confiabilidade",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "visual customizado",
+          "text": "Antes da fila\n            Falha de rota inicial\n            A exchange não encon",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(52, 47, 25)",
+          "ratio": 10.74
+        },
+        {
+          "label": "visual customizado",
+          "text": "Depois da fila\n            Saída posterior da fila\n            A mensagem já est",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(31, 43, 63)",
+          "ratio": 11.4
+        },
+        {
+          "label": "syntax-key",
+          "text": "fila_principal",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "fila_principal.dead_letter_exchange",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "dlx_exchange",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "destino_pos_saida",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-value",
+          "text": "orders.work",
+          "color": "rgb(139, 230, 193)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.76
+        },
+        {
+          "label": "syntax-value",
+          "text": "orders.dlx",
+          "color": "rgb(139, 230, 193)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.76
+        },
+        {
+          "label": "syntax-value",
+          "text": "orders.dlx",
+          "color": "rgb(139, 230, 193)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.76
+        },
+        {
+          "label": "syntax-value",
+          "text": "fila_de_quarentena_ou_espera",
+          "color": "rgb(139, 230, 193)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.76
+        },
+        {
+          "label": "syntax-comment",
+          "text": "# recorte conceitual, não executável",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 7.49
+        }
+      ],
+      "contentWidths": [
+        {
+          "index": 0,
+          "selector": "p",
+          "text": "Intermediário · 04 de 07",
+          "width": 325,
+          "mainWidth": 390,
+          "ratio": 0.833
+        },
+        {
+          "index": 1,
+          "selector": "p",
+          "text": "Roadmap: Exchanges no RabbitMQ",
+          "width": 325,
+          "mainWidth": 390,
+          "ratio": 0.833
+        },
+        {
+          "index": 2,
+          "selector": "p",
+          "text": "Node atual: Dead Letter Exchanges e retry conceitual",
+          "width": 325,
+          "mainWidth": 390,
+          "ratio": 0.833
+        },
+        {
+          "index": 3,
+          "selector": "p",
+          "text": "Anterior: Unroutable, mandatory e Alternate Exchange · Próximo: Policies, x-arguments e permissões",
+          "width": 325,
+          "mainWidth": 390,
+          "ratio": 0.833
+        },
+        {
+          "index": 4,
+          "selector": ".lead",
+          "text": "No node anterior, a mensagem ainda não tinha encontrado uma rota de entrada. Aqui a situação mudou: ela já chegou a uma ",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 5,
+          "selector": "p",
+          "text": "Imagine uma mensagem de pedido em uma fila de trabalho. A exchange já fez seu papel: encontrou um binding, colocou a men",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 6,
+          "selector": "p",
+          "text": "Essa diferença protege a separação entre Alternate Exchange e Dead Letter Exchange. A AE aparece antes da fila, quando a",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 7,
+          "selector": "p",
+          "text": "Quando um consumer recebe uma entrega, ele só deveria reconhecer positivamente depois de assumir o processamento. Se não",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 8,
+          "selector": "p",
+          "text": "Com `requeue=true`, a mensagem volta para a fila e pode ser entregue de novo. Isso faz sentido quando outra instância po",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 9,
+          "selector": ".callout",
+          "text": "`requeue=true` repetido pode virar um ciclo quente: a mesma mensagem ocupa consumer, rede e broker sem avançar. Dead-let",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 10,
+          "selector": "p",
+          "text": "O nome Dead Letter Exchange pode sugerir um mecanismo especial, mas a peça continua sendo uma exchange comum. O que muda",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 11,
+          "selector": "p",
+          "text": "O recorte mostra a posição do mecanismo sem transformar isso em passo de configuração. A fila principal não vira DLX. A ",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 12,
+          "selector": "p",
+          "text": "Rejeição do consumer é só um dos caminhos. A documentação de RabbitMQ lista outras condições que também podem levar a me",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 13,
+          "selector": "p",
+          "text": "A lista é importante porque evita reduzir DLX a \"erro do consumer\". A fila pode dead-letter mensagens por uma decisão ex",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 14,
+          "selector": "p",
+          "text": "Depois que a DLX recebe a mensagem, a topologia precisa declarar uma intenção. Uma mensagem inválida pode ir para uma fi",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 15,
+          "selector": "p",
+          "text": "Um retry conceitual precisa de mais do que \"tentar de novo\". Ele precisa reduzir pressão, dar tempo para uma dependência",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 16,
+          "selector": "p",
+          "text": "TTL ajuda a criar espera, mas não deve ser lido como agenda precisa. A documentação de RabbitMQ descreve caveats de expi",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 17,
+          "selector": "p",
+          "text": "A DLX não decide sozinha se a mensagem merece nova tentativa ou isolamento. Essa decisão vem do desenho da topologia e d",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 18,
+          "selector": "p",
+          "text": "Esse ponto de parada é o que torna retry diferente de repetição. Sem limite, cada volta parece uma ação, mas a arquitetu",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 19,
+          "selector": "p",
+          "text": "Como DLX, TTL e limites são parâmetros de filas, a forma de aplicá-los importa. A documentação de RabbitMQ recomenda pol",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 20,
+          "selector": "p",
+          "text": "Este node só precisa dessa leitura: DLX é uma configuração de fila que aponta para uma exchange normal, e configurações ",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 21,
+          "selector": "p",
+          "text": "Quando uma mensagem não encontra rota, o problema pertence à exchange de entrada. Quando ela já está em uma fila e sai p",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 22,
+          "selector": "p",
+          "text": "Dominar DLX é enxergar essa mudança de jurisdição: a fila decide que a mensagem não deve continuar no mesmo lugar, a DLX",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 23,
+          "selector": "ul",
+          "text": "Documentação de Dead Letter Exchanges\n          Uso neste node: sustenta DLX como exchange normal, eventos de dead-lette",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        }
+      ],
+      "overflow": {
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "hasGlobalOverflow": false
+      }
+    }
+  ],
+  "failures": {
+    "theme": [],
+    "fixedComponent": [],
+    "terminalDivider": [],
+    "visualPrimitive": [],
+    "preCodeChip": [],
+    "highlight": [],
+    "conceptualPre": [],
+    "inlineCode": [],
+    "contrast": [],
+    "overflow": [],
+    "contentWidth": [],
+    "externalRequests": [],
+    "auditPlaceholder": []
+  }
+}

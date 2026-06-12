@@ -1,0 +1,3932 @@
+{
+  "status": "passa",
+  "generatedAt": "2026-06-09T16:46:16.823Z",
+  "html": "/home/henri/my-projects/my-roadmap/.tmp/roadmaps/rabbitmq-exchanges/basico/06-filas-consumidores-e-entrega/node.html",
+  "viewports": [
+    {
+      "viewport": {
+        "name": "desktop",
+        "width": 1280,
+        "height": 900,
+        "isMobile": false
+      },
+      "screenshotPath": "/home/henri/my-projects/my-roadmap/.tmp/roadmaps/rabbitmq-exchanges/basico/06-filas-consumidores-e-entrega/.editorial/pipeline/05-visual-render/playwright/desktop.png",
+      "title": "Filas, consumidores e entrega",
+      "theme": {
+        "marker": "notion-dark",
+        "colorScheme": "dark",
+        "surfaceSamples": [
+          {
+            "selector": "body",
+            "index": 0,
+            "text": "Voltar ao roadmap\n    \n      Básico · 06 de 06\n      Roadmap: Exchanges no Rabbi",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": "main",
+            "index": 0,
+            "text": "Voltar ao roadmap\n    \n      Básico · 06 de 06\n      Roadmap: Exchanges no Rabbi",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-context",
+            "index": 0,
+            "text": "Básico · 06 de 06\n      Roadmap: Exchanges no RabbitMQ\n      Node atual: Filas, ",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-footer",
+            "index": 0,
+            "text": "Referências\n      \n        \n          Documentação oficial de filas\n          Us",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 0,
+            "text": "Documentação oficial de filas\n          Uso neste node: define fila como coleção",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 1,
+            "text": "Documentação oficial de consumers\n          Uso neste node: sustenta que consume",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 2,
+            "text": "Guia oficial de acknowledgements\n          Uso neste node: explica o reconhecime",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 3,
+            "text": "Documentação oficial de exchanges\n          Uso neste node: sustenta a fronteira",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 4,
+            "text": "Guia oficial do modelo AMQP 0-9-1\n          Uso neste node: complementa o modelo",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".callout",
+            "index": 0,
+            "text": "Fronteira principal: exchange decide caminho; fila acumula e entrega; consumer p",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".visual-block",
+            "index": 0,
+            "text": "1. Pronta\n          Está na fila emails\n          A mensagem foi roteada com suc",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".visual-block",
+            "index": 1,
+            "text": "Uma fila, vários workers\n          \n            Fila emails\n            Mensagen",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".state-card",
+            "index": 0,
+            "text": "1. Pronta\n          Está na fila emails\n          A mensagem foi roteada com suc",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "isDark": true
+          },
+          {
+            "selector": ".state-card",
+            "index": 1,
+            "text": "2. Entregue\n          Foi enviada para um worker\n          A delivery está em pr",
+            "backgroundColor": "rgb(43, 35, 66)",
+            "isDark": true
+          },
+          {
+            "selector": ".state-card",
+            "index": 2,
+            "text": "3. Reconhecida\n          O consumer confirmou a delivery\n          O broker pode",
+            "backgroundColor": "rgb(31, 51, 43)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 0,
+            "text": "Peça",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 1,
+            "text": "Pergunta que responde",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 2,
+            "text": "Limite útil neste node",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 0,
+            "text": "Exchange",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 1,
+            "text": "Para quais destinos a publicação deve ser roteada?",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 2,
+            "text": "Não segura mensagem esperando worker.",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 3,
+            "text": "Fila",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 4,
+            "text": "Quais mensagens estão aguardando ou foram entregues sem ack?",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 5,
+            "text": "Não representa um serviço inteiro quando vários serviços precisam de cópias próp",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 6,
+            "text": "Consumer",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 7,
+            "text": "Qual aplicação recebe uma delivery daquela fila?",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 0,
+            "text": "emails",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 1,
+            "text": "emails",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 2,
+            "text": "emails",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 3,
+            "text": "emails",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 4,
+            "text": "email",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 5,
+            "text": "audit",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 6,
+            "text": "analytics",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 0,
+            "text": "1. Pronta",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 1,
+            "text": "2. Entregue",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 2,
+            "text": "3. Reconhecida",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 3,
+            "text": "Uma fila, vários workers",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 4,
+            "text": "Várias filas, cópias independentes",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          }
+        ]
+      },
+      "preBlocks": [],
+      "preCodeStyles": [],
+      "inlineCodeStyles": [
+        {
+          "index": 0,
+          "text": "emails",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 69.59,
+          "heightPx": 23,
+          "parentWidthPx": 1204
+        },
+        {
+          "index": 1,
+          "text": "emails",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 69.59,
+          "heightPx": 23,
+          "parentWidthPx": 363.33
+        },
+        {
+          "index": 2,
+          "text": "emails",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 69.59,
+          "heightPx": 23,
+          "parentWidthPx": 1204
+        },
+        {
+          "index": 3,
+          "text": "emails",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 69.59,
+          "heightPx": 23,
+          "parentWidthPx": 105.61
+        },
+        {
+          "index": 4,
+          "text": "email",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 59.66,
+          "heightPx": 23,
+          "parentWidthPx": 95.67
+        },
+        {
+          "index": 5,
+          "text": "audit",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 59.66,
+          "heightPx": 23,
+          "parentWidthPx": 95.67
+        },
+        {
+          "index": 6,
+          "text": "analytics",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 99.38,
+          "heightPx": 23,
+          "parentWidthPx": 135.39
+        }
+      ],
+      "componentStyles": {
+        "nodeContext": [
+          {
+            "index": 0,
+            "text": "Básico · 06 de 06\n      Roadmap: Exchanges no RabbitMQ\n      Node atual: Filas, consumidores e entrega\n      Anterior: H",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "effectiveBackgroundColor": "rgb(36, 36, 36)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "4px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "12px",
+              "14px",
+              "12px",
+              "14px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "18px",
+              "0px"
+            ],
+            "borderRadii": [
+              "6px",
+              "6px",
+              "6px",
+              "6px"
+            ],
+            "display": "grid",
+            "gap": "6px",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "1204px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 1204,
+            "heightPx": 155.56,
+            "parentWidthPx": 1260
+          }
+        ],
+        "nodeContextLinks": [
+          {
+            "index": 0,
+            "text": "Headers exchange e metadados de roteamento",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(36, 36, 36)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "inline",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "auto",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 381.27,
+            "heightPx": 20,
+            "parentWidthPx": 1171
+          }
+        ],
+        "nodeFooter": [
+          {
+            "index": 0,
+            "text": "Referências\n      \n        \n          Documentação oficial de filas\n          Uso neste node: define fila como coleção o",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(25, 25, 25)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "1204px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 1204,
+            "heightPx": 477.31,
+            "parentWidthPx": 1260
+          }
+        ],
+        "nodeFooterLinks": [
+          {
+            "index": 0,
+            "text": "Documentação oficial de filas",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "345.453px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 345.45,
+            "heightPx": 27.89,
+            "parentWidthPx": 1204
+          },
+          {
+            "index": 1,
+            "text": "Documentação oficial de consumers",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "345.453px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 345.45,
+            "heightPx": 27.89,
+            "parentWidthPx": 1204
+          },
+          {
+            "index": 2,
+            "text": "Guia oficial de acknowledgements",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "345.453px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 345.45,
+            "heightPx": 27.89,
+            "parentWidthPx": 1204
+          },
+          {
+            "index": 3,
+            "text": "Documentação oficial de exchanges",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "345.453px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 345.45,
+            "heightPx": 27.89,
+            "parentWidthPx": 1204
+          },
+          {
+            "index": 4,
+            "text": "Guia oficial do modelo AMQP 0-9-1",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "345.453px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 345.45,
+            "heightPx": 27.89,
+            "parentWidthPx": 1204
+          }
+        ],
+        "terminalDividerCandidates": [
+          {
+            "index": 0,
+            "text": "O básico fecha quando a cópia tem endereço claro\n      Ao sair deste ponto, a leitura importante é simples: uma publicaç",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(25, 25, 25)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "8px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "1204px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 1204,
+            "heightPx": 155.86,
+            "parentWidthPx": 1260
+          },
+          {
+            "index": 1,
+            "text": "Referências\n      \n        \n          Documentação oficial de filas\n          Uso neste node: define fila como coleção o",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(25, 25, 25)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "1204px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 1204,
+            "heightPx": 477.31,
+            "parentWidthPx": 1260
+          }
+        ]
+      },
+      "visualPrimitives": {
+        "tags": [
+          {
+            "index": 0,
+            "text": "1. Pronta",
+            "color": "rgb(140, 199, 255)",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "effectiveBackgroundColor": "rgb(31, 43, 63)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "80.1875px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 80.19,
+            "heightPx": 29.25,
+            "parentWidthPx": 393.33
+          },
+          {
+            "index": 1,
+            "text": "2. Entregue",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "97.6875px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 97.69,
+            "heightPx": 29.25,
+            "parentWidthPx": 393.33
+          },
+          {
+            "index": 2,
+            "text": "3. Reconhecida",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "126.047px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 126.05,
+            "heightPx": 29.25,
+            "parentWidthPx": 393.34
+          },
+          {
+            "index": 3,
+            "text": "Uma fila, vários workers",
+            "color": "rgb(140, 199, 255)",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "effectiveBackgroundColor": "rgb(31, 43, 63)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "188.594px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 188.59,
+            "heightPx": 29.25,
+            "parentWidthPx": 594
+          },
+          {
+            "index": 4,
+            "text": "Várias filas, cópias independentes",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "261.094px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 261.09,
+            "heightPx": 29.25,
+            "parentWidthPx": 594
+          }
+        ],
+        "flowStepAfter": []
+      },
+      "contrastSamples": [
+        {
+          "label": "body",
+          "text": "Voltar ao roadmap\n    \n      Básico · 06 de 06\n      Roadmap: Exchanges no Rabbi",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "parágrafo",
+          "text": "Básico · 06 de 06",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Roadmap: Exchanges no RabbitMQ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Node atual: Filas, consumidores e entrega",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Anterior: Headers exchange e metadados de roteamento · Próximo: Contrato de topo",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Depois que a exchange decidiu para qual fila uma publicação deve ir, começa outr",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 6.97
+        },
+        {
+          "label": "parágrafo",
+          "text": "Pesquisa: documentação oficial RabbitMQ 4.3 consultada em 2026-06-09.",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 6.97
+        },
+        {
+          "label": "parágrafo",
+          "text": "Imagine que a topologia já roteou uma mensagem para a fila emails. A exchange fe",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "parágrafo",
+          "text": "Ela fica na fila. A fila é a coleção ordenada que guarda mensagens até que algum",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação oficial de filas\n          Uso neste node: define fila como coleção",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação oficial de consumers\n          Uso neste node: sustenta que consume",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Guia oficial de acknowledgements\n          Uso neste node: explica o reconhecime",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação oficial de exchanges\n          Uso neste node: sustenta a fronteira",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Guia oficial do modelo AMQP 0-9-1\n          Uso neste node: complementa o modelo",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Exchange",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Para quais destinos a publicação deve ser roteada?",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Não segura mensagem esperando worker.",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Fila",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Quais mensagens estão aguardando ou foram entregues sem ack?",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Não representa um serviço inteiro quando vários serviços precisam de cópias próp",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Consumer",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Qual aplicação recebe uma delivery daquela fila?",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Peça",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 11.5
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Pergunta que responde",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 11.5
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Limite útil neste node",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 11.5
+        },
+        {
+          "label": "link",
+          "text": "Voltar ao roadmap",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 7.23
+        },
+        {
+          "label": "link",
+          "text": "Headers exchange e metadados de roteamento",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "link",
+          "text": "Documentação oficial de filas",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Documentação oficial de consumers",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Guia oficial de acknowledgements",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Documentação oficial de exchanges",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Guia oficial do modelo AMQP 0-9-1",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "inline code",
+          "text": "emails",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "emails",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "emails",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "emails",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "email",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "audit",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "analytics",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "tag",
+          "text": "1. Pronta",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(31, 43, 63)",
+          "ratio": 7.95
+        },
+        {
+          "label": "tag",
+          "text": "2. Entregue",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "3. Reconhecida",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "Uma fila, vários workers",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(31, 43, 63)",
+          "ratio": 7.95
+        },
+        {
+          "label": "tag",
+          "text": "Várias filas, cópias independentes",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "texto auxiliar",
+          "text": "Cada worker recebe parte do trabalho. Uma mensagem não vira três cópias por exis",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.46
+        },
+        {
+          "label": "route-label",
+          "text": "Publicação roteada",
+          "color": "rgb(242, 242, 242)",
+          "backgroundColor": "rgb(31, 43, 63)",
+          "ratio": 12.71
+        },
+        {
+          "label": "contexto de node",
+          "text": "Básico · 06 de 06\n      Roadmap: Exchanges no RabbitMQ\n      Node atual: Filas, ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "link do contexto de node",
+          "text": "Headers exchange e metadados de roteamento",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "rodapé de referências",
+          "text": "Referências\n      \n        \n          Documentação oficial de filas\n          Us",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação oficial de filas",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação oficial de consumers",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Guia oficial de acknowledgements",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação oficial de exchanges",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Guia oficial do modelo AMQP 0-9-1",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "visual customizado",
+          "text": "1. Pronta\n          Está na fila emails\n          A mensagem foi roteada com suc",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(31, 43, 63)",
+          "ratio": 11.4
+        },
+        {
+          "label": "visual customizado",
+          "text": "2. Entregue\n          Foi enviada para um worker\n          A delivery está em pr",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(43, 35, 66)",
+          "ratio": 11.83
+        },
+        {
+          "label": "visual customizado",
+          "text": "3. Reconhecida\n          O consumer confirmou a delivery\n          O broker pode",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(31, 51, 43)",
+          "ratio": 10.74
+        }
+      ],
+      "contentWidths": [
+        {
+          "index": 0,
+          "selector": "p",
+          "text": "Básico · 06 de 06",
+          "width": 1171,
+          "mainWidth": 1260,
+          "ratio": 0.929
+        },
+        {
+          "index": 1,
+          "selector": "p",
+          "text": "Roadmap: Exchanges no RabbitMQ",
+          "width": 1171,
+          "mainWidth": 1260,
+          "ratio": 0.929
+        },
+        {
+          "index": 2,
+          "selector": "p",
+          "text": "Node atual: Filas, consumidores e entrega",
+          "width": 1171,
+          "mainWidth": 1260,
+          "ratio": 0.929
+        },
+        {
+          "index": 3,
+          "selector": "p",
+          "text": "Anterior: Headers exchange e metadados de roteamento · Próximo: Contrato de topologia e roteamento",
+          "width": 1171,
+          "mainWidth": 1260,
+          "ratio": 0.929
+        },
+        {
+          "index": 4,
+          "selector": ".lead",
+          "text": "Depois que a exchange decidiu para qual fila uma publicação deve ir, começa outro trecho do fluxo: a mensagem precisa es",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 5,
+          "selector": "p",
+          "text": "Pesquisa: documentação oficial RabbitMQ 4.3 consultada em 2026-06-09.",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 6,
+          "selector": "p",
+          "text": "Imagine que a topologia já roteou uma mensagem para a fila emails. A exchange fez a parte dela: aplicou as regras de rot",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 7,
+          "selector": "p",
+          "text": "Ela fica na fila. A fila é a coleção ordenada que guarda mensagens até que alguma aplicação registrada para consumir daq",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 8,
+          "selector": ".callout",
+          "text": "Fronteira principal: exchange decide caminho; fila acumula e entrega; consumer processa uma entrega recebida da fila.",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 9,
+          "selector": "p",
+          "text": "Enquanto não há worker disponível, a mensagem está pronta para entrega. Quando um consumer se registra na fila, RabbitMQ",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 10,
+          "selector": "p",
+          "text": "O ponto delicado é esse intervalo. A fila precisa distinguir uma mensagem apenas esperando de uma mensagem que já foi en",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 11,
+          "selector": "p",
+          "text": "Essa separação evita uma leitura apressada: entregar não é o mesmo que encerrar. O ack pertence ao lado do consumer e pr",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 12,
+          "selector": "p",
+          "text": "Um consumer é a aplicação, processo ou worker registrado para receber mensagens de uma fila. A inscrição acontece na fil",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 13,
+          "selector": "p",
+          "text": "No exemplo emails, três workers podem se registrar na mesma fila. Isso não cria três cópias da mesma mensagem. Cria três",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 14,
+          "selector": "p",
+          "text": "Essa é a diferença que fecha o nível básico. Quando três serviços precisam processar o mesmo evento de forma independent",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 15,
+          "selector": "p",
+          "text": "Com filas e consumers no lugar certo, a topologia fica mais fácil de ler. A exchange não precisa saber quantos workers e",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 16,
+          "selector": "p",
+          "text": "Ao sair deste ponto, a leitura importante é simples: uma publicação vira cópia por fila, não por consumer. Depois que a ",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 17,
+          "selector": "ul",
+          "text": "Documentação oficial de filas\n          Uso neste node: define fila como coleção ordenada e registra estados de mensagen",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        }
+      ],
+      "overflow": {
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "hasGlobalOverflow": false
+      }
+    },
+    {
+      "viewport": {
+        "name": "mobile",
+        "width": 390,
+        "height": 844,
+        "isMobile": true
+      },
+      "screenshotPath": "/home/henri/my-projects/my-roadmap/.tmp/roadmaps/rabbitmq-exchanges/basico/06-filas-consumidores-e-entrega/.editorial/pipeline/05-visual-render/playwright/mobile.png",
+      "title": "Filas, consumidores e entrega",
+      "theme": {
+        "marker": "notion-dark",
+        "colorScheme": "dark",
+        "surfaceSamples": [
+          {
+            "selector": "body",
+            "index": 0,
+            "text": "Voltar ao roadmap\n    \n      Básico · 06 de 06\n      Roadmap: Exchanges no Rabbi",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": "main",
+            "index": 0,
+            "text": "Voltar ao roadmap\n    \n      Básico · 06 de 06\n      Roadmap: Exchanges no Rabbi",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-context",
+            "index": 0,
+            "text": "Básico · 06 de 06\n      Roadmap: Exchanges no RabbitMQ\n      Node atual: Filas, ",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-footer",
+            "index": 0,
+            "text": "Referências\n      \n        \n          Documentação oficial de filas\n          Us",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 0,
+            "text": "Documentação oficial de filas\n          Uso neste node: define fila como coleção",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 1,
+            "text": "Documentação oficial de consumers\n          Uso neste node: sustenta que consume",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 2,
+            "text": "Guia oficial de acknowledgements\n          Uso neste node: explica o reconhecime",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 3,
+            "text": "Documentação oficial de exchanges\n          Uso neste node: sustenta a fronteira",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 4,
+            "text": "Guia oficial do modelo AMQP 0-9-1\n          Uso neste node: complementa o modelo",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".callout",
+            "index": 0,
+            "text": "Fronteira principal: exchange decide caminho; fila acumula e entrega; consumer p",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".visual-block",
+            "index": 0,
+            "text": "1. Pronta\n          Está na fila emails\n          A mensagem foi roteada com suc",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".visual-block",
+            "index": 1,
+            "text": "Uma fila, vários workers\n          \n            Fila emails\n            Mensagen",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".state-card",
+            "index": 0,
+            "text": "1. Pronta\n          Está na fila emails\n          A mensagem foi roteada com suc",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "isDark": true
+          },
+          {
+            "selector": ".state-card",
+            "index": 1,
+            "text": "2. Entregue\n          Foi enviada para um worker\n          A delivery está em pr",
+            "backgroundColor": "rgb(43, 35, 66)",
+            "isDark": true
+          },
+          {
+            "selector": ".state-card",
+            "index": 2,
+            "text": "3. Reconhecida\n          O consumer confirmou a delivery\n          O broker pode",
+            "backgroundColor": "rgb(31, 51, 43)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 0,
+            "text": "Peça",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 1,
+            "text": "Pergunta que responde",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 2,
+            "text": "Limite útil neste node",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 0,
+            "text": "Exchange",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 1,
+            "text": "Para quais destinos a publicação deve ser roteada?",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 2,
+            "text": "Não segura mensagem esperando worker.",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 3,
+            "text": "Fila",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 4,
+            "text": "Quais mensagens estão aguardando ou foram entregues sem ack?",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 5,
+            "text": "Não representa um serviço inteiro quando vários serviços precisam de cópias próp",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 6,
+            "text": "Consumer",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 7,
+            "text": "Qual aplicação recebe uma delivery daquela fila?",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 0,
+            "text": "emails",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 1,
+            "text": "emails",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 2,
+            "text": "emails",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 3,
+            "text": "emails",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 4,
+            "text": "email",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 5,
+            "text": "audit",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 6,
+            "text": "analytics",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 0,
+            "text": "1. Pronta",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 1,
+            "text": "2. Entregue",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 2,
+            "text": "3. Reconhecida",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 3,
+            "text": "Uma fila, vários workers",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 4,
+            "text": "Várias filas, cópias independentes",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          }
+        ]
+      },
+      "preBlocks": [],
+      "preCodeStyles": [],
+      "inlineCodeStyles": [
+        {
+          "index": 0,
+          "text": "emails",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 69.59,
+          "heightPx": 23,
+          "parentWidthPx": 358
+        },
+        {
+          "index": 1,
+          "text": "emails",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 69.59,
+          "heightPx": 23,
+          "parentWidthPx": 328
+        },
+        {
+          "index": 2,
+          "text": "emails",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 69.59,
+          "heightPx": 23,
+          "parentWidthPx": 358
+        },
+        {
+          "index": 3,
+          "text": "emails",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 69.59,
+          "heightPx": 23,
+          "parentWidthPx": 105.61
+        },
+        {
+          "index": 4,
+          "text": "email",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 59.66,
+          "heightPx": 23,
+          "parentWidthPx": 95.67
+        },
+        {
+          "index": 5,
+          "text": "audit",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 59.66,
+          "heightPx": 23,
+          "parentWidthPx": 95.67
+        },
+        {
+          "index": 6,
+          "text": "analytics",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 99.38,
+          "heightPx": 23,
+          "parentWidthPx": 135.39
+        }
+      ],
+      "componentStyles": {
+        "nodeContext": [
+          {
+            "index": 0,
+            "text": "Básico · 06 de 06\n      Roadmap: Exchanges no RabbitMQ\n      Node atual: Filas, consumidores e entrega\n      Anterior: H",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "effectiveBackgroundColor": "rgb(36, 36, 36)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "4px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "12px",
+              "14px",
+              "12px",
+              "14px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "18px",
+              "0px"
+            ],
+            "borderRadii": [
+              "6px",
+              "6px",
+              "6px",
+              "6px"
+            ],
+            "display": "grid",
+            "gap": "6px",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "358px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 358,
+            "heightPx": 239.23,
+            "parentWidthPx": 390
+          }
+        ],
+        "nodeContextLinks": [
+          {
+            "index": 0,
+            "text": "Headers exchange e metadados de roteamento",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(36, 36, 36)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "inline",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "auto",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 239.16,
+            "heightPx": 47.89,
+            "parentWidthPx": 325
+          }
+        ],
+        "nodeFooter": [
+          {
+            "index": 0,
+            "text": "Referências\n      \n        \n          Documentação oficial de filas\n          Uso neste node: define fila como coleção o",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(25, 25, 25)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "358px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 358,
+            "heightPx": 917.78,
+            "parentWidthPx": 390
+          }
+        ],
+        "nodeFooterLinks": [
+          {
+            "index": 0,
+            "text": "Documentação oficial de filas",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "332px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 332,
+            "heightPx": 27.89,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 1,
+            "text": "Documentação oficial de consumers",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "332px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 332,
+            "heightPx": 27.89,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 2,
+            "text": "Guia oficial de acknowledgements",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "332px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 332,
+            "heightPx": 27.89,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 3,
+            "text": "Documentação oficial de exchanges",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "332px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 332,
+            "heightPx": 27.89,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 4,
+            "text": "Guia oficial do modelo AMQP 0-9-1",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "332px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 332,
+            "heightPx": 27.89,
+            "parentWidthPx": 358
+          }
+        ],
+        "terminalDividerCandidates": [
+          {
+            "index": 0,
+            "text": "O básico fecha quando a cópia tem endereço claro\n      Ao sair deste ponto, a leitura importante é simples: uma publicaç",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(25, 25, 25)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "8px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "358px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 358,
+            "heightPx": 354.39,
+            "parentWidthPx": 390
+          },
+          {
+            "index": 1,
+            "text": "Referências\n      \n        \n          Documentação oficial de filas\n          Uso neste node: define fila como coleção o",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(25, 25, 25)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "358px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 358,
+            "heightPx": 917.78,
+            "parentWidthPx": 390
+          }
+        ]
+      },
+      "visualPrimitives": {
+        "tags": [
+          {
+            "index": 0,
+            "text": "1. Pronta",
+            "color": "rgb(140, 199, 255)",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "effectiveBackgroundColor": "rgb(31, 43, 63)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "80.1875px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 80.19,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 1,
+            "text": "2. Entregue",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "97.6875px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 97.69,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 2,
+            "text": "3. Reconhecida",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "126.047px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 126.05,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 3,
+            "text": "Uma fila, vários workers",
+            "color": "rgb(140, 199, 255)",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "effectiveBackgroundColor": "rgb(31, 43, 63)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "188.594px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 188.59,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 4,
+            "text": "Várias filas, cópias independentes",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "261.094px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 261.09,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          }
+        ],
+        "flowStepAfter": []
+      },
+      "contrastSamples": [
+        {
+          "label": "body",
+          "text": "Voltar ao roadmap\n    \n      Básico · 06 de 06\n      Roadmap: Exchanges no Rabbi",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "parágrafo",
+          "text": "Básico · 06 de 06",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Roadmap: Exchanges no RabbitMQ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Node atual: Filas, consumidores e entrega",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Anterior: Headers exchange e metadados de roteamento · Próximo: Contrato de topo",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Depois que a exchange decidiu para qual fila uma publicação deve ir, começa outr",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 6.97
+        },
+        {
+          "label": "parágrafo",
+          "text": "Pesquisa: documentação oficial RabbitMQ 4.3 consultada em 2026-06-09.",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 6.97
+        },
+        {
+          "label": "parágrafo",
+          "text": "Imagine que a topologia já roteou uma mensagem para a fila emails. A exchange fe",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "parágrafo",
+          "text": "Ela fica na fila. A fila é a coleção ordenada que guarda mensagens até que algum",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação oficial de filas\n          Uso neste node: define fila como coleção",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação oficial de consumers\n          Uso neste node: sustenta que consume",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Guia oficial de acknowledgements\n          Uso neste node: explica o reconhecime",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação oficial de exchanges\n          Uso neste node: sustenta a fronteira",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Guia oficial do modelo AMQP 0-9-1\n          Uso neste node: complementa o modelo",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Exchange",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Para quais destinos a publicação deve ser roteada?",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Não segura mensagem esperando worker.",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Fila",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Quais mensagens estão aguardando ou foram entregues sem ack?",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Não representa um serviço inteiro quando vários serviços precisam de cópias próp",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Consumer",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Qual aplicação recebe uma delivery daquela fila?",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Peça",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 11.5
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Pergunta que responde",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 11.5
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Limite útil neste node",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 11.5
+        },
+        {
+          "label": "link",
+          "text": "Voltar ao roadmap",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 7.23
+        },
+        {
+          "label": "link",
+          "text": "Headers exchange e metadados de roteamento",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "link",
+          "text": "Documentação oficial de filas",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Documentação oficial de consumers",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Guia oficial de acknowledgements",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Documentação oficial de exchanges",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Guia oficial do modelo AMQP 0-9-1",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "inline code",
+          "text": "emails",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "emails",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "emails",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "emails",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "email",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "audit",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "analytics",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "tag",
+          "text": "1. Pronta",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(31, 43, 63)",
+          "ratio": 7.95
+        },
+        {
+          "label": "tag",
+          "text": "2. Entregue",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "3. Reconhecida",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "Uma fila, vários workers",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(31, 43, 63)",
+          "ratio": 7.95
+        },
+        {
+          "label": "tag",
+          "text": "Várias filas, cópias independentes",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "texto auxiliar",
+          "text": "Cada worker recebe parte do trabalho. Uma mensagem não vira três cópias por exis",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.46
+        },
+        {
+          "label": "route-label",
+          "text": "Publicação roteada",
+          "color": "rgb(242, 242, 242)",
+          "backgroundColor": "rgb(31, 43, 63)",
+          "ratio": 12.71
+        },
+        {
+          "label": "contexto de node",
+          "text": "Básico · 06 de 06\n      Roadmap: Exchanges no RabbitMQ\n      Node atual: Filas, ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "link do contexto de node",
+          "text": "Headers exchange e metadados de roteamento",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "rodapé de referências",
+          "text": "Referências\n      \n        \n          Documentação oficial de filas\n          Us",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação oficial de filas",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação oficial de consumers",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Guia oficial de acknowledgements",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação oficial de exchanges",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Guia oficial do modelo AMQP 0-9-1",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "visual customizado",
+          "text": "1. Pronta\n          Está na fila emails\n          A mensagem foi roteada com suc",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(31, 43, 63)",
+          "ratio": 11.4
+        },
+        {
+          "label": "visual customizado",
+          "text": "2. Entregue\n          Foi enviada para um worker\n          A delivery está em pr",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(43, 35, 66)",
+          "ratio": 11.83
+        },
+        {
+          "label": "visual customizado",
+          "text": "3. Reconhecida\n          O consumer confirmou a delivery\n          O broker pode",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(31, 51, 43)",
+          "ratio": 10.74
+        }
+      ],
+      "contentWidths": [
+        {
+          "index": 0,
+          "selector": "p",
+          "text": "Básico · 06 de 06",
+          "width": 325,
+          "mainWidth": 390,
+          "ratio": 0.833
+        },
+        {
+          "index": 1,
+          "selector": "p",
+          "text": "Roadmap: Exchanges no RabbitMQ",
+          "width": 325,
+          "mainWidth": 390,
+          "ratio": 0.833
+        },
+        {
+          "index": 2,
+          "selector": "p",
+          "text": "Node atual: Filas, consumidores e entrega",
+          "width": 325,
+          "mainWidth": 390,
+          "ratio": 0.833
+        },
+        {
+          "index": 3,
+          "selector": "p",
+          "text": "Anterior: Headers exchange e metadados de roteamento · Próximo: Contrato de topologia e roteamento",
+          "width": 325,
+          "mainWidth": 390,
+          "ratio": 0.833
+        },
+        {
+          "index": 4,
+          "selector": ".lead",
+          "text": "Depois que a exchange decidiu para qual fila uma publicação deve ir, começa outro trecho do fluxo: a mensagem precisa es",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 5,
+          "selector": "p",
+          "text": "Pesquisa: documentação oficial RabbitMQ 4.3 consultada em 2026-06-09.",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 6,
+          "selector": "p",
+          "text": "Imagine que a topologia já roteou uma mensagem para a fila emails. A exchange fez a parte dela: aplicou as regras de rot",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 7,
+          "selector": "p",
+          "text": "Ela fica na fila. A fila é a coleção ordenada que guarda mensagens até que alguma aplicação registrada para consumir daq",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 8,
+          "selector": ".callout",
+          "text": "Fronteira principal: exchange decide caminho; fila acumula e entrega; consumer processa uma entrega recebida da fila.",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 9,
+          "selector": "p",
+          "text": "Enquanto não há worker disponível, a mensagem está pronta para entrega. Quando um consumer se registra na fila, RabbitMQ",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 10,
+          "selector": "p",
+          "text": "O ponto delicado é esse intervalo. A fila precisa distinguir uma mensagem apenas esperando de uma mensagem que já foi en",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 11,
+          "selector": "p",
+          "text": "Essa separação evita uma leitura apressada: entregar não é o mesmo que encerrar. O ack pertence ao lado do consumer e pr",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 12,
+          "selector": "p",
+          "text": "Um consumer é a aplicação, processo ou worker registrado para receber mensagens de uma fila. A inscrição acontece na fil",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 13,
+          "selector": "p",
+          "text": "No exemplo emails, três workers podem se registrar na mesma fila. Isso não cria três cópias da mesma mensagem. Cria três",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 14,
+          "selector": "p",
+          "text": "Essa é a diferença que fecha o nível básico. Quando três serviços precisam processar o mesmo evento de forma independent",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 15,
+          "selector": "p",
+          "text": "Com filas e consumers no lugar certo, a topologia fica mais fácil de ler. A exchange não precisa saber quantos workers e",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 16,
+          "selector": "p",
+          "text": "Ao sair deste ponto, a leitura importante é simples: uma publicação vira cópia por fila, não por consumer. Depois que a ",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 17,
+          "selector": "ul",
+          "text": "Documentação oficial de filas\n          Uso neste node: define fila como coleção ordenada e registra estados de mensagen",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        }
+      ],
+      "overflow": {
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "hasGlobalOverflow": false
+      }
+    }
+  ],
+  "failures": {
+    "theme": [],
+    "fixedComponent": [],
+    "terminalDivider": [],
+    "visualPrimitive": [],
+    "preCodeChip": [],
+    "highlight": [],
+    "conceptualPre": [],
+    "inlineCode": [],
+    "contrast": [],
+    "overflow": [],
+    "contentWidth": [],
+    "externalRequests": [],
+    "auditPlaceholder": []
+  }
+}

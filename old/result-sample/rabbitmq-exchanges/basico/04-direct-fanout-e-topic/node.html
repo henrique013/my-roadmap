@@ -1,0 +1,2037 @@
+<!doctype html>
+<html lang="pt-BR" data-visual-theme="notion-dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Direct, fanout e topic</title>
+  <style>
+    :root {
+          color-scheme: dark;
+          --page: #191919;
+          --surface: #202020;
+          --surface-hover: #2a2a2a;
+          --soft: #242424;
+          --soft-2: #2a2a2a;
+          --text: #e6e6e6;
+          --strong: #f2f2f2;
+          --heading: #f2f2f2;
+          --muted: #a3a3a3;
+          --border: #333333;
+          --border-strong: #4a4a4a;
+          --accent: #6aaed6;
+          --accent-2: #8cc7ff;
+          --warn: #ffdc49;
+          --code: #e6e6e6;
+          --code-bg: #2f3437;
+          --tag-bg: #243831;
+          --tag-text: #7ad9c5;
+          --tag-border: #335f54;
+          --blue-soft: #1f2b3f;
+          --blue-text: #8cc7ff;
+          --blue-border: #365f93;
+          --warn-soft: #342f19;
+          --warn-border: #5f4f18;
+          --success-soft: #1f332b;
+          --success-text: #8be6c1;
+          --success-border: #2f6b57;
+          --purple-soft: #2b2342;
+          --purple-text: #c8b6ff;
+          --purple-border: #574582;
+          --risk-soft: #3a2028;
+          --risk-text: #ff9ab3;
+          --risk-border: #7a3a4d;
+          --pre-bg: #111111;
+          --pre-text: #d4d4d4;
+          --focus: #6aaed6;
+        }
+    * {
+                  box-sizing: border-box;
+                }
+            
+                body {
+                  color-scheme: dark;
+                  margin: 0;
+                  color: var(--text);
+                  background: var(--page);
+                  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif;
+                  font-size: 18px;
+                  line-height: 1.55;
+                }
+            
+                main {
+                  max-width: 1260px;
+                  margin: 0 auto;
+                  padding: 32px 28px 56px;
+                }
+            
+                h1,
+                h2,
+                h3 {
+                  color: var(--heading);
+                  line-height: 1.2;
+                  letter-spacing: 0;
+                  margin: 0 0 12px;
+                }
+            
+                h1 {
+                  font-size: 36px;
+                  margin-bottom: 10px;
+                }
+            
+                h2 {
+                  font-size: 26px;
+                  border-top: 1px solid var(--border);
+                  padding-top: 28px;
+                  margin-top: 34px;
+                }
+            
+                h3 {
+                  font-size: 20px;
+                  margin-top: 22px;
+                }
+            
+                p,
+                ul,
+                ol,
+                .lead,
+                .callout {
+                  max-width: none;
+                }
+            
+                p {
+                  margin: 0 0 12px;
+                }
+            
+                ul {
+                  margin: 8px 0 16px 22px;
+                  padding: 0;
+                }
+            
+                li {
+                  margin: 4px 0;
+                }
+            
+                table,
+                pre,
+                .content-grid,
+                .visual-block {
+                  width: 100%;
+                  max-width: 100%;
+                }
+            
+                table {
+                  border-collapse: collapse;
+                  margin: 14px 0 22px;
+                  table-layout: fixed;
+                  background: var(--surface);
+                }
+            
+                th,
+                td {
+                  border: 1px solid var(--border);
+                  padding: 9px 10px;
+                  vertical-align: top;
+                  overflow-wrap: anywhere;
+                  background: var(--surface);
+                }
+            
+                th {
+                  background: var(--soft-2);
+                  text-align: left;
+                  font-weight: 700;
+                  color: var(--heading);
+                }
+            
+                code {
+                  color: var(--code);
+                  background: var(--code-bg);
+                  border: 1px solid var(--border);
+                  border-radius: 4px;
+                  padding: 1px 4px;
+                  font-family: Consolas, Monaco, "Courier New", monospace;
+                  font-size: 0.92em;
+                }
+            
+                pre {
+                  margin: 12px 0 22px;
+                  padding: 14px 16px;
+                  color: var(--pre-text);
+                  background: var(--pre-bg);
+                  border: 1px solid var(--border);
+                  border-radius: 6px;
+                  overflow: auto;
+                  max-width: 100%;
+                  font-family: Consolas, Monaco, "Courier New", monospace;
+                  font-size: 16px;
+                  line-height: 1.45;
+                  white-space: pre;
+                }
+            
+                pre code {
+                  color: inherit;
+                  background: transparent;
+                  border: 0;
+                  border-radius: 0;
+                  padding: 0;
+                  font: inherit;
+                }
+            
+                .syntax-key {
+                  color: #8cc7ff;
+                  font-weight: 700;
+                }
+            
+                .syntax-op {
+                  color: #c8b6ff;
+                }
+            
+                .syntax-value {
+                  color: #a8e6cf;
+                }
+            
+                .syntax-comment {
+                  color: #a3a3a3;
+                }
+            
+                .syntax-risk {
+                  color: #ffe27a;
+                }
+            
+                a {
+                  color: var(--accent);
+                  text-decoration-thickness: 1px;
+                  text-underline-offset: 2px;
+                }
+            
+                a:hover {
+                  color: var(--accent-2);
+                }
+            
+                a:focus-visible {
+                  outline: 2px solid var(--focus);
+                  outline-offset: 3px;
+                  border-radius: 4px;
+                }
+            
+                .backlink {
+                  display: inline-flex;
+                  align-items: center;
+                  margin-bottom: 18px;
+                  font-weight: 700;
+                }
+            
+                .lead {
+                  color: var(--muted);
+                  font-size: 19px;
+                }
+            
+                .meta {
+                  color: var(--muted);
+                  margin-bottom: 24px;
+                }
+            
+                .node-context {
+                  display: grid;
+                  gap: 6px;
+                  padding: 12px 14px;
+                  border: 1px solid var(--border);
+                  border-left: 4px solid var(--accent);
+                  border-radius: 6px;
+                  background: var(--soft);
+                  margin: 0 0 18px;
+                }
+            
+                .node-context p {
+                  margin: 0;
+                }
+            
+                .node-context strong {
+                  color: var(--heading);
+                }
+            
+                .callout {
+                  padding: 13px 15px;
+                  border: 1px solid var(--border);
+                  border-left: 4px solid var(--accent);
+                  background: var(--soft);
+                  margin: 16px 0 22px;
+                  border-radius: 6px;
+                }
+            
+                .callout.warning {
+                  border-left-color: var(--warn);
+                  background: var(--warn-soft);
+                }
+            
+                .tag {
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 6px;
+                  color: var(--tag-text);
+                  background: var(--tag-bg);
+                  border: 1px solid var(--tag-border);
+                  border-radius: 999px;
+                  padding: 2px 8px;
+                  font-size: 14px;
+                  font-weight: 700;
+                  margin: 0 6px 8px 0;
+                  white-space: nowrap;
+                }
+            
+                .tag.blue {
+                  color: var(--blue-text);
+                  background: var(--blue-soft);
+                  border-color: var(--blue-border);
+                }
+            
+                .tag.warn {
+                  color: var(--warn);
+                  background: var(--warn-soft);
+                  border-color: var(--warn-border);
+                }
+            
+                .tag.purple {
+                  color: var(--purple-text);
+                  background: var(--purple-soft);
+                  border-color: var(--purple-border);
+                }
+            
+                .content-grid {
+                  display: grid;
+                  grid-template-columns: repeat(3, minmax(0, 1fr));
+                  gap: 14px;
+                  margin: 16px 0 22px;
+                }
+            
+                .decision-card,
+                .route-card,
+                .match-card,
+                .boundary-card {
+                  background: var(--surface);
+                  border: 1px solid var(--border);
+                  border-radius: 6px;
+                  padding: 14px;
+                }
+            
+                .decision-card h3,
+                .route-card h3,
+                .match-card h3,
+                .boundary-card h3 {
+                  margin-top: 0;
+                }
+            
+                .decision-card.direct {
+                  border-left: 4px solid var(--accent);
+                }
+            
+                .decision-card.fanout {
+                  border-left: 4px solid var(--success-text);
+                }
+            
+                .decision-card.topic {
+                  border-left: 4px solid var(--purple-text);
+                }
+            
+                .decision-card p,
+                .route-card p,
+                .match-card p,
+                .boundary-card p {
+                  color: var(--muted);
+                }
+            
+                .routing-lab {
+                  display: grid;
+                  grid-template-columns: minmax(210px, 0.9fr) minmax(260px, 1.1fr) minmax(260px, 1.1fr);
+                  gap: 14px;
+                  align-items: stretch;
+                  margin: 16px 0 22px;
+                }
+            
+                .route-card {
+                  display: grid;
+                  gap: 10px;
+                  min-height: 220px;
+                }
+            
+                .key-pill {
+                  display: block;
+                  border: 1px solid var(--border-strong);
+                  border-radius: 6px;
+                  padding: 8px 10px;
+                  background: var(--soft);
+                  color: var(--heading);
+                  font-weight: 700;
+                  overflow-wrap: anywhere;
+                }
+            
+                .match-list {
+                  display: grid;
+                  gap: 10px;
+                }
+            
+                .match-card {
+                  display: grid;
+                  gap: 5px;
+                  border-color: var(--border-strong);
+                }
+            
+                .match-card.hit {
+                  background: var(--success-soft);
+                  border-color: var(--success-border);
+                }
+            
+                .match-card.miss {
+                  background: var(--soft);
+                }
+            
+                .match-card.warn {
+                  background: var(--warn-soft);
+                  border-color: var(--warn-border);
+                }
+            
+                .topic-strip {
+                  display: grid;
+                  grid-template-columns: repeat(3, minmax(0, 1fr));
+                  gap: 10px;
+                  margin: 14px 0 22px;
+                }
+            
+                .segment {
+                  background: var(--surface);
+                  border: 1px solid var(--border);
+                  border-radius: 6px;
+                  padding: 12px;
+                  min-height: 108px;
+                }
+            
+                .segment strong {
+                  color: var(--heading);
+                  display: block;
+                  margin-bottom: 6px;
+                }
+            
+                .small {
+                  color: var(--muted);
+                  font-size: 16px;
+                }
+            
+                @media (max-width: 900px) {
+                  main {
+                    padding: 24px 16px 42px;
+                  }
+            
+                  h1 {
+                    font-size: 30px;
+                  }
+            
+                  h2 {
+                    font-size: 23px;
+                  }
+            
+                  .content-grid,
+                  .routing-lab,
+                  .topic-strip {
+                    grid-template-columns: 1fr;
+                  }
+            
+                  table {
+                    display: block;
+                    overflow-x: auto;
+                    white-space: nowrap;
+                  }
+            
+                  th,
+                  td {
+                    min-width: 180px;
+                  }
+                }
+            .node-context {
+              display: grid;
+              gap: 6px;
+              padding: 12px 14px;
+              border: 1px solid var(--border);
+              border-left: 4px solid var(--accent);
+              border-radius: 6px;
+              background: var(--soft);
+              margin: 0 0 18px;
+              width: 100%;
+            }
+            .node-context p { margin: 0; }
+            .node-context strong { color: var(--heading); }
+            .node-context a {
+              color: var(--accent);
+              font-weight: 400;
+              text-decoration-line: underline;
+              text-decoration-thickness: 1px;
+              text-underline-offset: 2px;
+            }
+            .node-footer {
+              margin: 0;
+              padding: 0;
+              border: 0;
+              background: transparent;
+            }
+            .node-footer h2 { margin-top: 32px; }
+            .reference-list {
+              display: grid;
+              gap: 8px;
+              margin: 8px 0 0;
+              padding: 0;
+              list-style: none;
+            }
+            .reference-item {
+              display: grid;
+              grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr);
+              gap: 10px;
+              align-items: start;
+              padding: 10px 12px;
+              border: 1px solid var(--border);
+              border-radius: 6px;
+              background: var(--surface);
+            }
+            .reference-item a,
+            .node-footer a {
+              color: var(--accent);
+              font-weight: 400;
+              text-decoration-line: underline;
+              text-decoration-thickness: 1px;
+              text-underline-offset: 2px;
+            }
+            .reference-note { color: var(--text); }
+            @media (max-width: 860px) {
+              .reference-item { grid-template-columns: 1fr; }
+            }
+        * {
+              box-sizing: border-box;
+            }
+        
+            body {
+              color-scheme: dark;
+              margin: 0;
+              color: var(--text);
+              background: var(--page);
+              font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif;
+              font-size: 18px;
+              line-height: 1.55;
+            }
+        
+            main {
+              max-width: 1260px;
+              margin: 0 auto;
+              padding: 32px 28px 56px;
+            }
+        
+            h1,
+            h2,
+            h3 {
+              color: var(--heading);
+              line-height: 1.2;
+              margin: 0 0 12px;
+            }
+        
+            h1 {
+              font-size: 36px;
+              margin-bottom: 8px;
+            }
+        
+            h2 {
+              font-size: 26px;
+              border-top: 1px solid var(--border);
+              padding-top: 28px;
+              margin-top: 32px;
+            }
+        
+            h3 {
+              font-size: 20px;
+              margin-top: 22px;
+            }
+        
+            p,
+            ul,
+            ol,
+            .lead,
+            .callout {
+              max-width: none;
+            }
+        
+            p {
+              margin: 0 0 12px;
+            }
+        
+            ul {
+              margin: 8px 0 16px 22px;
+              padding: 0;
+            }
+        
+            li {
+              margin: 4px 0;
+            }
+        
+            table,
+            pre,
+            .content-grid,
+            .visual-block {
+              width: 100%;
+              max-width: 100%;
+            }
+        
+            table {
+              border-collapse: collapse;
+              margin: 14px 0 22px;
+              table-layout: fixed;
+              background: var(--surface);
+            }
+        
+            th,
+            td {
+              border: 1px solid var(--border);
+              padding: 9px 10px;
+              vertical-align: top;
+              overflow-wrap: anywhere;
+              background: var(--surface);
+            }
+        
+            th {
+              background: var(--soft-2);
+              text-align: left;
+              font-weight: 700;
+            }
+        
+            code {
+              color: var(--code);
+              background: var(--code-bg);
+              border: 1px solid var(--border);
+              border-radius: 4px;
+              padding: 1px 4px;
+              font-family: Consolas, Monaco, "Courier New", monospace;
+              font-size: 0.92em;
+            }
+        
+            pre {
+              margin: 12px 0 22px;
+              padding: 14px 16px;
+              color: var(--pre-text);
+              background: var(--pre-bg);
+              border: 1px solid var(--border);
+              border-radius: 6px;
+              overflow: auto;
+              max-width: 100%;
+              font-family: Consolas, Monaco, "Courier New", monospace;
+              font-size: 16px;
+              line-height: 1.45;
+              white-space: pre;
+            }
+        
+            pre code {
+              color: inherit;
+              background: transparent;
+              border: 0;
+              border-radius: 0;
+              padding: 0;
+              font: inherit;
+            }
+        
+            .syntax-key {
+              color: #8cc7ff;
+              font-weight: 700;
+            }
+        
+            .syntax-op {
+              color: #c8b6ff;
+            }
+        
+            .syntax-value {
+              color: #a8e6cf;
+            }
+        
+            .syntax-comment {
+              color: #a3a3a3;
+            }
+        
+            .syntax-risk {
+              color: #ffe27a;
+            }
+        
+            a {
+              color: var(--accent);
+              text-decoration-thickness: 1px;
+              text-underline-offset: 2px;
+            }
+        
+            a:hover {
+              color: #8cc7ff;
+            }
+        
+            a:focus-visible {
+              outline: 2px solid var(--focus);
+              outline-offset: 3px;
+              border-radius: 4px;
+            }
+        
+            .backlink {
+              display: inline-flex;
+              align-items: center;
+              margin-bottom: 18px;
+              font-weight: 700;
+            }
+        
+            .lead {
+              color: var(--muted);
+              font-size: 19px;
+            }
+        
+            .meta {
+              color: var(--muted);
+              margin-bottom: 24px;
+            }
+        
+            .node-context {
+              display: grid;
+              gap: 6px;
+              padding: 12px 14px;
+              border: 1px solid var(--border);
+              border-left: 4px solid var(--accent);
+              border-radius: 6px;
+              background: var(--soft);
+              margin: 0 0 18px;
+              width: 100%;
+            }
+        
+            .node-context p {
+              margin: 0;
+            }
+        
+            .node-context strong {
+              color: var(--heading);
+            }
+        
+            .node-context a {
+              color: var(--accent);
+              font-weight: 400;
+              text-decoration-line: underline;
+              text-decoration-thickness: 1px;
+              text-underline-offset: 2px;
+            }
+        
+            .node-context a:hover {
+              color: var(--accent-2);
+            }
+        
+            .node-footer {
+              margin: 0;
+              padding: 0;
+              border: 0;
+              background: transparent;
+            }
+        
+            .node-footer h2 {
+              margin-top: 32px;
+            }
+        
+            .reference-list {
+              display: grid;
+              gap: 8px;
+              margin: 8px 0 0;
+              padding: 0;
+              list-style: none;
+            }
+        
+            .reference-item {
+              display: grid;
+              grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr);
+              gap: 10px;
+              align-items: start;
+              padding: 10px 12px;
+              border: 1px solid var(--border);
+              border-radius: 6px;
+              background: var(--surface);
+            }
+        
+            .reference-item a,
+            .node-footer a {
+              color: var(--accent);
+              font-weight: 400;
+              text-decoration-line: underline;
+              text-decoration-thickness: 1px;
+              text-underline-offset: 2px;
+            }
+        
+            .reference-note {
+              color: var(--text);
+            }
+        
+            .callout {
+              padding: 13px 15px;
+              border: 1px solid var(--border);
+              border-left: 4px solid var(--accent);
+              background: var(--soft);
+              margin: 16px 0 22px;
+              border-radius: 6px;
+            }
+        
+            .warning {
+              border-left-color: var(--warn);
+              background: var(--warn-soft);
+            }
+        
+            .callout.boundary,
+            .callout.warning {
+              border-left-color: var(--warn);
+              background: var(--warn-soft);
+              border-color: var(--warn-border);
+            }
+        
+            .grid {
+              display: grid;
+              grid-template-columns: repeat(3, minmax(0, 1fr));
+              gap: 14px;
+              margin: 16px 0 22px;
+            }
+        
+            .card {
+              border: 1px solid var(--border);
+              border-radius: 6px;
+              padding: 14px;
+              background: var(--surface);
+            }
+        
+            .tag {
+              display: inline-block;
+              padding: 2px 7px;
+              border-radius: 999px;
+              font-size: 15px;
+              font-weight: 700;
+              background: var(--tag-bg);
+              color: var(--tag-text);
+              border: 1px solid var(--tag-border);
+            }
+        
+            .tag.blue {
+              color: var(--blue-text);
+              background: var(--blue-soft);
+              border-color: var(--blue-border);
+            }
+        
+            .tag.warn {
+              color: var(--warn);
+              background: var(--warn-soft);
+              border-color: var(--warn-border);
+            }
+        
+            .small {
+              color: var(--muted);
+              font-size: 16px;
+            }
+        
+            .timeline {
+              display: grid;
+              gap: 10px;
+              margin: 16px 0 22px;
+            }
+        
+            .timeline-step {
+              display: grid;
+              grid-template-columns: 72px 1fr;
+              gap: 12px;
+              align-items: start;
+              border: 1px solid var(--border);
+              border-radius: 6px;
+              padding: 10px 12px;
+              background: var(--surface);
+            }
+        
+            .flow-steps {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 8px;
+              align-items: center;
+              margin: 16px 0 22px;
+            }
+        
+            .flow-steps span {
+              border: 1px solid var(--border);
+              border-radius: 6px;
+              padding: 8px 10px;
+              background: var(--soft);
+            }
+        
+            .state-grid {
+              display: grid;
+              grid-template-columns: repeat(2, minmax(0, 1fr));
+              gap: 14px;
+              margin: 16px 0 22px;
+            }
+        
+            .topology,
+            .lane-map {
+              display: grid;
+              gap: 10px;
+              margin: 16px 0 22px;
+            }
+        
+            .topology-node,
+            .lane {
+              border: 1px solid var(--border);
+              border-radius: 6px;
+              padding: 10px 12px;
+              background: var(--surface);
+            }
+        
+            :where(
+              .visual-surface,
+              .timeline-step,
+              .flow-step,
+              .step,
+              .risk-step,
+              .position-strip,
+              .contract-map,
+              .state-card,
+              .stream-card,
+              .event-card,
+              .group-card,
+              .tool-card,
+              .part,
+              .group-shell,
+              .umbrella-map,
+              .topology-node,
+              .lane,
+              .process-card,
+              .visual-card,
+              .concept-card,
+              .path-card,
+              .decision-card,
+              .stage,
+              .segment,
+              .panel,
+              .box,
+              .map-card,
+              .layer,
+              .node-card,
+              .mini-card,
+              .boundary-card,
+              .handoff-card,
+              .flow-mini > *
+            ) {
+              color: var(--text);
+              background: var(--surface);
+              border-color: var(--border);
+            }
+        
+            :where(
+              .visual-surface,
+              .timeline-step,
+              .flow-step,
+              .step,
+              .risk-step,
+              .position-strip,
+              .contract-map,
+              .state-card,
+              .stream-card,
+              .event-card,
+              .group-card,
+              .tool-card,
+              .part,
+              .group-shell,
+              .umbrella-map,
+              .topology-node,
+              .lane,
+              .process-card,
+              .visual-card,
+              .concept-card,
+              .path-card,
+              .decision-card,
+              .stage,
+              .segment,
+              .panel,
+              .box,
+              .map-card,
+              .layer,
+              .node-card,
+              .mini-card,
+              .boundary-card,
+              .handoff-card,
+              .flow-mini > *
+            ) strong {
+              color: var(--heading);
+            }
+        
+            .route-label {
+              color: var(--heading);
+            }
+        
+            :where(.info, .context, .app, .stream) {
+              background: var(--blue-soft);
+              border-color: var(--blue-border);
+            }
+        
+            :where(.success, .focus, .ecs, .group, .expire) {
+              background: var(--success-soft);
+              border-color: var(--success-border);
+            }
+        
+            :where(.secondary, .event, .search) {
+              background: var(--purple-soft);
+              border-color: var(--purple-border);
+            }
+        
+            :where(.warn, .warning, .risk, .danger, .logs, .aside, .keep) {
+              background: var(--warn-soft);
+              border-color: var(--warn-border);
+            }
+        
+            :where(.danger, .risk, .search) {
+              color: var(--text);
+            }
+        
+            .step,
+            .stream-card,
+            .stream-card.process,
+            .stream-card.out,
+            .stream-card.err,
+            .umbrella-map,
+            .group-shell,
+            .part.focus,
+            .part.context,
+            .event-card,
+            .event-card:nth-child(1),
+            .event-card:nth-child(2),
+            .event-card:nth-child(3),
+            .event-card:nth-child(4),
+            .group-card.group,
+            .group-card.stream,
+            .group-card.event,
+            .state-card.keep,
+            .state-card.expire,
+            .tool-card.search,
+            .tool-card.live,
+            .tool-card.metric,
+            .flow-step.app,
+            .flow-step.stream,
+            .flow-step.ecs,
+            .flow-step.logs,
+            .flow-step.search,
+            .handoff-card,
+            .handoff-card.transport,
+            .handoff-card.meaning,
+            .lane.main,
+            .lane.aside,
+            .boundary-card.project,
+            .boundary-card.runtime {
+              color: var(--text);
+              background: var(--surface);
+              border-color: var(--border);
+            }
+        
+            .stream-card.process,
+            .part.context,
+            .event-card:nth-child(1),
+            .group-card.stream,
+            .tool-card.live,
+            .flow-step.app,
+            .flow-step.stream,
+            .handoff-card.transport {
+              background: var(--blue-soft);
+              border-color: var(--blue-border);
+            }
+        
+            .stream-card.out,
+            .part.focus,
+            .event-card:nth-child(2),
+            .group-card.group,
+            .state-card.expire,
+            .tool-card.metric,
+            .flow-step.ecs,
+            .lane.main,
+            .boundary-card.runtime {
+              background: var(--success-soft);
+              border-color: var(--success-border);
+            }
+        
+            .event-card:nth-child(3),
+            .group-card.event,
+            .tool-card.search,
+            .flow-step.search,
+            .handoff-card.meaning,
+            .boundary-card.project {
+              background: var(--purple-soft);
+              border-color: var(--purple-border);
+            }
+        
+            .stream-card.err,
+            .event-card:nth-child(4),
+            .state-card.keep,
+            .flow-step.logs,
+            .lane.aside {
+              background: var(--warn-soft);
+              border-color: var(--warn-border);
+            }
+        
+            @media (max-width: 860px) {
+              main {
+                padding: 22px 16px 40px;
+              }
+        
+              .grid {
+                grid-template-columns: 1fr;
+              }
+        
+              .timeline-step,
+              .state-grid,
+              .reference-item {
+                grid-template-columns: 1fr;
+              }
+        
+              table {
+                display: block;
+                overflow-x: auto;
+                table-layout: auto;
+              }
+        
+              th,
+              td {
+                min-width: 150px;
+              }
+            }
+        .node-context {
+          display: grid;
+          gap: 6px;
+          padding: 12px 14px;
+          border: 1px solid var(--border);
+          border-left: 4px solid var(--accent);
+          border-radius: 6px;
+          background: var(--soft);
+          margin: 0 0 18px;
+          width: 100%;
+        }
+        .node-context p { margin: 0; }
+        .node-context strong { color: var(--heading); }
+        .node-context a {
+          color: var(--accent);
+          font-weight: 400;
+          text-decoration-line: underline;
+          text-decoration-thickness: 1px;
+          text-underline-offset: 2px;
+        }
+        .node-footer {
+          margin: 0;
+          padding: 0;
+          border: 0;
+          background: transparent;
+        }
+        .node-footer h2 { margin-top: 32px; }
+        .reference-list {
+          display: grid;
+          gap: 8px;
+          margin: 8px 0 0;
+          padding: 0;
+          list-style: none;
+        }
+        .reference-item {
+          display: grid;
+          grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr);
+          gap: 10px;
+          align-items: start;
+          padding: 10px 12px;
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          background: var(--surface);
+        }
+        .reference-item a,
+        .node-footer a {
+          color: var(--accent);
+          font-weight: 400;
+          text-decoration-line: underline;
+          text-decoration-thickness: 1px;
+          text-underline-offset: 2px;
+        }
+        .reference-note { color: var(--text); }
+        @media (max-width: 860px) {
+          .reference-item { grid-template-columns: 1fr; }
+        }
+    * {
+          box-sizing: border-box;
+        }
+    
+        body {
+          color-scheme: dark;
+          margin: 0;
+          color: var(--text);
+          background: var(--page);
+          font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif;
+          font-size: 18px;
+          line-height: 1.55;
+        }
+    
+        main {
+          max-width: 1260px;
+          margin: 0 auto;
+          padding: 32px 28px 56px;
+        }
+    
+        h1,
+        h2,
+        h3 {
+          color: var(--heading);
+          line-height: 1.2;
+          margin: 0 0 12px;
+        }
+    
+        h1 {
+          font-size: 36px;
+          margin-bottom: 8px;
+        }
+    
+        h2 {
+          font-size: 26px;
+          border-top: 1px solid var(--border);
+          padding-top: 28px;
+          margin-top: 32px;
+        }
+    
+        h3 {
+          font-size: 20px;
+          margin-top: 22px;
+        }
+    
+        p,
+        ul,
+        ol,
+        .lead,
+        .callout {
+          max-width: none;
+        }
+    
+        p {
+          margin: 0 0 12px;
+        }
+    
+        ul {
+          margin: 8px 0 16px 22px;
+          padding: 0;
+        }
+    
+        li {
+          margin: 4px 0;
+        }
+    
+        table,
+        pre,
+        .content-grid,
+        .visual-block {
+          width: 100%;
+          max-width: 100%;
+        }
+    
+        table {
+          border-collapse: collapse;
+          margin: 14px 0 22px;
+          table-layout: fixed;
+          background: var(--surface);
+        }
+    
+        th,
+        td {
+          border: 1px solid var(--border);
+          padding: 9px 10px;
+          vertical-align: top;
+          overflow-wrap: anywhere;
+          background: var(--surface);
+        }
+    
+        th {
+          background: var(--soft-2);
+          text-align: left;
+          font-weight: 700;
+        }
+    
+        code {
+          color: var(--code);
+          background: var(--code-bg);
+          border: 1px solid var(--border);
+          border-radius: 4px;
+          padding: 1px 4px;
+          font-family: Consolas, Monaco, "Courier New", monospace;
+          font-size: 0.92em;
+        }
+    
+        pre {
+          margin: 12px 0 22px;
+          padding: 14px 16px;
+          color: var(--pre-text);
+          background: var(--pre-bg);
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          overflow: auto;
+          max-width: 100%;
+          font-family: Consolas, Monaco, "Courier New", monospace;
+          font-size: 16px;
+          line-height: 1.45;
+          white-space: pre;
+        }
+    
+        pre code {
+          color: inherit;
+          background: transparent;
+          border: 0;
+          border-radius: 0;
+          padding: 0;
+          font: inherit;
+        }
+    
+        .syntax-key {
+          color: #8cc7ff;
+          font-weight: 700;
+        }
+    
+        .syntax-op {
+          color: #c8b6ff;
+        }
+    
+        .syntax-value {
+          color: #a8e6cf;
+        }
+    
+        .syntax-comment {
+          color: #a3a3a3;
+        }
+    
+        .syntax-risk {
+          color: #ffe27a;
+        }
+    
+        a {
+          color: var(--accent);
+          text-decoration-thickness: 1px;
+          text-underline-offset: 2px;
+        }
+    
+        a:hover {
+          color: #8cc7ff;
+        }
+    
+        a:focus-visible {
+          outline: 2px solid var(--focus);
+          outline-offset: 3px;
+          border-radius: 4px;
+        }
+    
+        .backlink {
+          display: inline-flex;
+          align-items: center;
+          margin-bottom: 18px;
+          font-weight: 700;
+        }
+    
+        .lead {
+          color: var(--muted);
+          font-size: 19px;
+        }
+    
+        .meta {
+          color: var(--muted);
+          margin-bottom: 24px;
+        }
+    
+        .node-context {
+          display: grid;
+          gap: 6px;
+          padding: 12px 14px;
+          border: 1px solid var(--border);
+          border-left: 4px solid var(--accent);
+          border-radius: 6px;
+          background: var(--soft);
+          margin: 0 0 18px;
+          width: 100%;
+        }
+    
+        .node-context p {
+          margin: 0;
+        }
+    
+        .node-context strong {
+          color: var(--heading);
+        }
+    
+        .node-context a {
+          color: var(--accent);
+          font-weight: 400;
+          text-decoration-line: underline;
+          text-decoration-thickness: 1px;
+          text-underline-offset: 2px;
+        }
+    
+        .node-context a:hover {
+          color: var(--accent-2);
+        }
+    
+        .node-footer {
+          margin: 0;
+          padding: 0;
+          border: 0;
+          background: transparent;
+        }
+    
+        .node-footer h2 {
+          margin-top: 32px;
+        }
+    
+        .reference-list {
+          display: grid;
+          gap: 8px;
+          margin: 8px 0 0;
+          padding: 0;
+          list-style: none;
+        }
+    
+        .reference-item {
+          display: grid;
+          grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr);
+          gap: 10px;
+          align-items: start;
+          padding: 10px 12px;
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          background: var(--surface);
+        }
+    
+        .reference-item a,
+        .node-footer a {
+          color: var(--accent);
+          font-weight: 400;
+          text-decoration-line: underline;
+          text-decoration-thickness: 1px;
+          text-underline-offset: 2px;
+        }
+    
+        .reference-note {
+          color: var(--text);
+        }
+    
+        .callout {
+          padding: 13px 15px;
+          border: 1px solid var(--border);
+          border-left: 4px solid var(--accent);
+          background: var(--soft);
+          margin: 16px 0 22px;
+          border-radius: 6px;
+        }
+    
+        .warning {
+          border-left-color: var(--warn);
+          background: var(--warn-soft);
+        }
+    
+        .callout.boundary,
+        .callout.warning {
+          border-left-color: var(--warn);
+          background: var(--warn-soft);
+          border-color: var(--warn-border);
+        }
+    
+        .grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 14px;
+          margin: 16px 0 22px;
+        }
+    
+        .card {
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          padding: 14px;
+          background: var(--surface);
+        }
+    
+        .tag {
+          display: inline-block;
+          padding: 2px 7px;
+          border-radius: 999px;
+          font-size: 15px;
+          font-weight: 700;
+          background: var(--tag-bg);
+          color: var(--tag-text);
+          border: 1px solid var(--tag-border);
+        }
+    
+        .tag.blue {
+          color: var(--blue-text);
+          background: var(--blue-soft);
+          border-color: var(--blue-border);
+        }
+    
+        .tag.warn {
+          color: var(--warn);
+          background: var(--warn-soft);
+          border-color: var(--warn-border);
+        }
+    
+        .small {
+          color: var(--muted);
+          font-size: 16px;
+        }
+    
+        .timeline {
+          display: grid;
+          gap: 10px;
+          margin: 16px 0 22px;
+        }
+    
+        .timeline-step {
+          display: grid;
+          grid-template-columns: 72px 1fr;
+          gap: 12px;
+          align-items: start;
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          padding: 10px 12px;
+          background: var(--surface);
+        }
+    
+        .flow-steps {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          align-items: center;
+          margin: 16px 0 22px;
+        }
+    
+        .flow-steps span {
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          padding: 8px 10px;
+          background: var(--soft);
+        }
+    
+        .state-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 14px;
+          margin: 16px 0 22px;
+        }
+    
+        .topology,
+        .lane-map {
+          display: grid;
+          gap: 10px;
+          margin: 16px 0 22px;
+        }
+    
+        .topology-node,
+        .lane {
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          padding: 10px 12px;
+          background: var(--surface);
+        }
+    
+        :where(
+          .visual-surface,
+          .timeline-step,
+          .flow-step,
+          .step,
+          .risk-step,
+          .position-strip,
+          .contract-map,
+          .state-card,
+          .stream-card,
+          .event-card,
+          .group-card,
+          .tool-card,
+          .part,
+          .group-shell,
+          .umbrella-map,
+          .topology-node,
+          .lane,
+          .process-card,
+          .visual-card,
+          .concept-card,
+          .path-card,
+          .decision-card,
+          .stage,
+          .segment,
+          .panel,
+          .box,
+          .map-card,
+          .layer,
+          .node-card,
+          .mini-card,
+          .boundary-card,
+          .handoff-card,
+          .flow-mini > *
+        ) {
+          color: var(--text);
+          background: var(--surface);
+          border-color: var(--border);
+        }
+    
+        :where(
+          .visual-surface,
+          .timeline-step,
+          .flow-step,
+          .step,
+          .risk-step,
+          .position-strip,
+          .contract-map,
+          .state-card,
+          .stream-card,
+          .event-card,
+          .group-card,
+          .tool-card,
+          .part,
+          .group-shell,
+          .umbrella-map,
+          .topology-node,
+          .lane,
+          .process-card,
+          .visual-card,
+          .concept-card,
+          .path-card,
+          .decision-card,
+          .stage,
+          .segment,
+          .panel,
+          .box,
+          .map-card,
+          .layer,
+          .node-card,
+          .mini-card,
+          .boundary-card,
+          .handoff-card,
+          .flow-mini > *
+        ) strong {
+          color: var(--heading);
+        }
+    
+        .route-label {
+          color: var(--heading);
+        }
+    
+        :where(.info, .context, .app, .stream) {
+          background: var(--blue-soft);
+          border-color: var(--blue-border);
+        }
+    
+        :where(.success, .focus, .ecs, .group, .expire) {
+          background: var(--success-soft);
+          border-color: var(--success-border);
+        }
+    
+        :where(.secondary, .event, .search) {
+          background: var(--purple-soft);
+          border-color: var(--purple-border);
+        }
+    
+        :where(.warn, .warning, .risk, .danger, .logs, .aside, .keep) {
+          background: var(--warn-soft);
+          border-color: var(--warn-border);
+        }
+    
+        :where(.danger, .risk, .search) {
+          color: var(--text);
+        }
+    
+        .step,
+        .stream-card,
+        .stream-card.process,
+        .stream-card.out,
+        .stream-card.err,
+        .umbrella-map,
+        .group-shell,
+        .part.focus,
+        .part.context,
+        .event-card,
+        .event-card:nth-child(1),
+        .event-card:nth-child(2),
+        .event-card:nth-child(3),
+        .event-card:nth-child(4),
+        .group-card.group,
+        .group-card.stream,
+        .group-card.event,
+        .state-card.keep,
+        .state-card.expire,
+        .tool-card.search,
+        .tool-card.live,
+        .tool-card.metric,
+        .flow-step.app,
+        .flow-step.stream,
+        .flow-step.ecs,
+        .flow-step.logs,
+        .flow-step.search,
+        .handoff-card,
+        .handoff-card.transport,
+        .handoff-card.meaning,
+        .lane.main,
+        .lane.aside,
+        .boundary-card.project,
+        .boundary-card.runtime {
+          color: var(--text);
+          background: var(--surface);
+          border-color: var(--border);
+        }
+    
+        .stream-card.process,
+        .part.context,
+        .event-card:nth-child(1),
+        .group-card.stream,
+        .tool-card.live,
+        .flow-step.app,
+        .flow-step.stream,
+        .handoff-card.transport {
+          background: var(--blue-soft);
+          border-color: var(--blue-border);
+        }
+    
+        .stream-card.out,
+        .part.focus,
+        .event-card:nth-child(2),
+        .group-card.group,
+        .state-card.expire,
+        .tool-card.metric,
+        .flow-step.ecs,
+        .lane.main,
+        .boundary-card.runtime {
+          background: var(--success-soft);
+          border-color: var(--success-border);
+        }
+    
+        .event-card:nth-child(3),
+        .group-card.event,
+        .tool-card.search,
+        .flow-step.search,
+        .handoff-card.meaning,
+        .boundary-card.project {
+          background: var(--purple-soft);
+          border-color: var(--purple-border);
+        }
+    
+        .stream-card.err,
+        .event-card:nth-child(4),
+        .state-card.keep,
+        .flow-step.logs,
+        .lane.aside {
+          background: var(--warn-soft);
+          border-color: var(--warn-border);
+        }
+    
+        @media (max-width: 860px) {
+          main {
+            padding: 22px 16px 40px;
+          }
+    
+          .grid {
+            grid-template-columns: 1fr;
+          }
+    
+          .timeline-step,
+          .state-grid,
+          .reference-item {
+            grid-template-columns: 1fr;
+          }
+    
+          table {
+            display: block;
+            overflow-x: auto;
+            table-layout: auto;
+          }
+    
+          th,
+          td {
+            min-width: 150px;
+          }
+        }
+    .node-context {
+      display: grid;
+      gap: 6px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      background: var(--soft);
+      margin: 0 0 18px;
+      width: 100%;
+    }
+    .node-context p { margin: 0; }
+    .node-context strong { color: var(--heading); }
+    .node-context a {
+      color: var(--accent);
+      font-weight: 400;
+      text-decoration-line: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+    .node-footer {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+    }
+    .node-footer h2 { margin-top: 32px; }
+    .reference-list {
+      display: grid;
+      gap: 8px;
+      margin: 8px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .reference-item {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface);
+    }
+    .reference-item a,
+    .node-footer a {
+      color: var(--accent);
+      font-weight: 400;
+      text-decoration-line: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+    .reference-note { color: var(--text); }
+    @media (max-width: 860px) {
+      .reference-item { grid-template-columns: 1fr; }
+    }
+    /* Fixed visual invariants backported from the hardened templates. */
+    .tag,
+    .card > .tag,
+    .route-card > .tag,
+    .flow-step > .tag,
+    .flow-steps > .tag,
+    .flow-steps .flow-step > .tag,
+    .flow-steps .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-self: start;
+      align-self: start;
+      width: fit-content;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+
+    .flow-steps > .flow-step {
+      min-width: 0;
+      flex: 1 1 180px;
+    }
+
+    .flow-steps > .flow-step::after {
+      content: none;
+      display: none;
+    }
+
+    @media (max-width: 900px) {
+      table {
+        display: block;
+        overflow-x: auto;
+        table-layout: auto;
+      }
+
+      th,
+      td {
+        min-width: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="backlink" href="../../roadmap.html">Voltar ao roadmap</a>
+
+    <div
+      class="node-context"
+      data-node-position="true"
+      data-level="basico"
+      data-node-order="4"
+      data-node-count="6"
+      data-roadmap-slug="rabbitmq-exchanges">
+      <p><strong>Básico · 04 de 06</strong></p>
+      <p>Roadmap: Exchanges no RabbitMQ</p>
+      <p>Node atual: Direct, fanout e topic</p>
+      <p>Anterior: <a href="../03-bindings-routing-key-e-destinos/node.html">Bindings, routing key e destinos</a> · Próximo: <a href="../05-headers-e-metadados-de-roteamento/node.html">Headers exchange e metadados de roteamento</a></p>
+    </div>
+
+    <h1>Direct, fanout e topic</h1>
+    <p class="lead">O node anterior deixou a exchange com bindings legíveis. Agora a pergunta muda: quando uma publicação chega com uma routing key, a exchange deve comparar por igualdade, copiar para todos os destinos ou testar um padrão?</p>
+    <p class="meta">Pesquisa consultada em 2026-06-08: documentação oficial RabbitMQ 4.3, tutoriais oficiais e especificação AMQP 0-9.</p>
+
+    <h2>A diferença está na pergunta que a exchange faz</h2>
+    <p>Imagine três publicações pequenas: <code>orders.created</code>, <code>logs.error</code> e <code>audit.user.login</code>. Todas chegam a uma exchange, e todas carregam uma routing key. O que muda entre direct, fanout e topic não é a existência da key; é a pergunta que a exchange faz aos seus bindings.</p>
+
+    <div class="content-grid visual-block" aria-label="Três modos de decisão para uma exchange com bindings">
+      <div class="decision-card direct">
+        <span class="tag blue">Direct</span>
+        <h3>Igualdade exata</h3>
+        <p>A key da publicação é comparada com a key registrada no binding. Se os textos são iguais, aquele destino entra na rota.</p>
+      </div>
+      <div class="decision-card fanout">
+        <span class="tag">Fanout</span>
+        <h3>Cópia ampla</h3>
+        <p>A publicação segue para todos os destinos ligados. A routing key pode existir, mas não participa do filtro.</p>
+      </div>
+      <div class="decision-card topic">
+        <span class="tag purple">Topic</span>
+        <h3>Padrão por partes</h3>
+        <p>A key é lida como segmentos separados por ponto, e o binding registra um padrão que pode ter curingas.</p>
+      </div>
+    </div>
+
+    <p>Esse trio é suficiente para muita topologia cotidiana porque cobre três intenções diferentes: escolher uma etiqueta exata, enviar cópia ampla ou deixar a fila interessada em uma família de keys.</p>
+
+    <h2>Direct resolve quando a etiqueta precisa bater</h2>
+    <p>Quando a intenção é uma etiqueta exata, a exchange só precisa perguntar se a routing key da publicação é igual à binding key da regra. Esse é o papel da direct exchange.</p>
+
+    <div class="routing-lab visual-block" aria-label="Exemplo conceitual de direct exchange com uma publicação e duas filas alcançadas">
+      <div class="route-card">
+        <span class="tag blue">Publicação</span>
+        <h3>Key enviada</h3>
+        <span class="key-pill">orders.created</span>
+        <p>A key vem com a mensagem. Ela não escolhe fila por si só; ela será comparada com os bindings da exchange.</p>
+      </div>
+      <div class="route-card">
+        <span class="tag">Bindings</span>
+        <h3>Regras registradas</h3>
+        <div class="match-list">
+          <div class="match-card hit">
+            <strong>Fila de notificação</strong>
+            <span><code>orders.created</code> combina.</span>
+          </div>
+          <div class="match-card hit">
+            <strong>Fila de auditoria</strong>
+            <span><code>orders.created</code> combina.</span>
+          </div>
+          <div class="match-card miss">
+            <strong>Fila de cancelamento</strong>
+            <span><code>orders.cancelled</code> não combina.</span>
+          </div>
+        </div>
+      </div>
+      <div class="route-card">
+        <span class="tag">Consequência</span>
+        <h3>Mais de uma saída</h3>
+        <p>A palavra direct não limita a rota a uma fila. Se duas filas têm bindings com a mesma key, as duas recebem cópias da publicação.</p>
+      </div>
+    </div>
+
+    <p>Por isso direct é suficiente quando a decisão principal cabe em uma key completa: <code>orders.created</code>, <code>invoice.paid</code>, <code>logs.error</code>. Ele fica fraco quando a key precisa carregar mais de um eixo de escolha e cada destino quer uma fatia diferente desses eixos.</p>
+
+    <h2>Fanout resolve quando escolher não faz parte da intenção</h2>
+    <p>Às vezes a publicação não precisa selecionar uma categoria. O objetivo é que todos os destinos ligados recebam uma cópia. Nesse caso, a fanout exchange transforma a lista de bindings em uma lista de saídas, sem usar a routing key para filtrar.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Situação</th>
+          <th>Leitura correta</th>
+          <th>Consequência</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>logs.error</code> chega a uma fanout exchange</td>
+          <td>A key pode estar presente, mas a exchange não a consulta.</td>
+          <td>Todas as filas ligadas recebem cópia.</td>
+        </tr>
+        <tr>
+          <td>Uma fila ligada grava histórico e outra atualiza tela</td>
+          <td>São destinos diferentes recebendo a mesma publicação.</td>
+          <td>Isso é broadcast por topologia, não disputa entre consumidores.</td>
+        </tr>
+        <tr>
+          <td>Uma fila queria apenas erros críticos</td>
+          <td>Fanout não expressa esse filtro.</td>
+          <td>A topologia precisa de outra regra de decisão.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>O ponto de corte.</strong> Se todos os destinos ligados devem receber tudo, fanout é direto e legível. Se algum destino precisa escolher por categoria, fanout já não está respondendo à pergunta certa.</p>
+    </div>
+
+    <h2>Topic entra quando a key vira uma frase curta</h2>
+    <p>Quando uma key exata fica estreita demais, a exchange pode ler a routing key como segmentos separados por ponto. A topic exchange compara essa key com um routing pattern registrado no binding.</p>
+    <p>Antes de olhar os curingas, veja a forma: <code>audit.user.login</code> tem três segmentos. O primeiro sugere uma família, o segundo uma área, o terceiro uma ação. O binding pode fixar alguns segmentos e deixar outros variarem.</p>
+
+    <div class="topic-strip visual-block" aria-label="Segmentos de uma routing key topic">
+      <div class="segment">
+        <strong>audit</strong>
+        <p class="small">Primeiro segmento. Pode representar a família de eventos que interessa a uma fila.</p>
+      </div>
+      <div class="segment">
+        <strong>user</strong>
+        <p class="small">Segundo segmento. Pode variar quando a fila aceita várias áreas dentro da mesma família.</p>
+      </div>
+      <div class="segment">
+        <strong>login</strong>
+        <p class="small">Terceiro segmento. Pode ser fixo quando a fila só quer uma ação específica.</p>
+      </div>
+    </div>
+
+    <pre class="code-block" aria-label="Padrões topic mínimos para comparar com uma routing key"><code><span class="syntax-comment"># routing key publicada</span>
+<span class="syntax-value">audit.user.login</span>
+
+<span class="syntax-comment"># padrões registrados em bindings</span>
+<span class="syntax-key">audit.*.login</span> <span class="syntax-op">=> </span><span class="syntax-value">combina com exatamente um segmento no meio</span>
+<span class="syntax-key">audit.#</span> <span class="syntax-op">=> </span><span class="syntax-value">combina com zero ou mais segmentos depois de audit</span>
+<span class="syntax-key">orders.#</span> <span class="syntax-op">=> </span><span class="syntax-risk">não combina com audit.user.login</span></code></pre>
+
+    <p>O asterisco <code>*</code> cobre exatamente um segmento. A cerquilha <code>#</code> cobre zero ou mais segmentos. Essa diferença pequena muda muito a amplitude da rota: <code>audit.*.login</code> é seletivo; <code>audit.#</code> pega uma família inteira; <code>#</code> sozinho fica amplo a ponto de se aproximar de fanout para aquele binding.</p>
+
+    <h2>Como escolher sem decorar tipo por tipo</h2>
+    <p>A escolha fica mais simples quando começa pela intenção da fila, não pelo nome da exchange. Pergunte qual leitura a fila precisa fazer sobre cada publicação.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Intenção de roteamento</th>
+          <th>Tipo que costuma expressar melhor</th>
+          <th>Leitura da key</th>
+          <th>Cuidado imediato</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Receber apenas uma etiqueta exata, como <code>orders.created</code>.</td>
+          <td>Direct</td>
+          <td>Comparar igualdade entre binding key e routing key.</td>
+          <td>Mais de uma fila pode usar a mesma key.</td>
+        </tr>
+        <tr>
+          <td>Receber tudo que passar por aquela exchange.</td>
+          <td>Fanout</td>
+          <td>Não usar routing key como filtro.</td>
+          <td>Não usar quando o destino precisa escolher por categoria.</td>
+        </tr>
+        <tr>
+          <td>Receber uma família de keys com partes variáveis.</td>
+          <td>Topic</td>
+          <td>Comparar segmentos e curingas.</td>
+          <td><code>#</code> pode abrir demais a rota.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout warning">
+      <p><strong>O risco do padrão amplo.</strong> Em topic, <code>#</code> é útil quando a fila aceita uma família inteira de keys. Ele é perigoso quando vira atalho para "qualquer coisa". Quanto mais amplo o padrão, menos a topologia comunica a intenção real de cada destino.</p>
+    </div>
+
+    <p>Quando essa leitura está clara, direct, fanout e topic deixam de ser nomes para memorizar. Eles viram três respostas para a mesma pergunta: a publicação deve bater exatamente, ir para todos os destinos ligados ou combinar com um padrão por segmentos?</p>
+    <footer class="node-footer">
+      <h2>Referências</h2>
+      <ul class="reference-list">
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/exchanges">F1 - documentação oficial RabbitMQ 4.3</a>
+          <span class="reference-note">Uso neste node: Define exchanges, tipos, bindings, exchange padrão, propriedades, E2E e alternate exchanges na documentação corrente.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/tutorials/amqp-concepts">F2 - guia oficial RabbitMQ 4.3</a>
+          <span class="reference-note">Uso neste node: Explica o modelo AMQP 0-9-1: publishers, exchanges, bindings, queues, consumers e os quatro tipos clássicos.</span>
+        </li>
+      </ul>
+    </footer>
+  </main>
+</body>
+</html>

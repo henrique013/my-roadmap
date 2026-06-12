@@ -193,6 +193,6 @@ Arquivo: `docs/conventions/transicao-temporaria-da-skill-roadmap.md`
 - Leia este documento ao alterar, revisar, propor, depurar ou reorganizar a skill
 - `roadmap`, suas flags públicas, templates, scripts, assets, referências ou
 - artefatos relacionados durante a fase temporária de reescrita.
-- Use este documento para consultar a referência antiga e os prints antigos antes
-- de decidir o que preservar, substituir, remover ou redesenhar na skill de
-- roadmap.
+- Use este documento para consultar a referência antiga, os prints antigos e a
+- amostra de resultado antes de decidir o que preservar, substituir, remover ou
+- redesenhar na skill de roadmap.

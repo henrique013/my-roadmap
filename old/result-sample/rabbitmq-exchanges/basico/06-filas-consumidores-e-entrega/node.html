@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="pt-BR" data-visual-theme="notion-dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Filas, consumidores e entrega</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --page: #191919;
+      --surface: #202020;
+      --surface-hover: #2a2a2a;
+      --soft: #242424;
+      --soft-2: #2a2a2a;
+      --text: #e6e6e6;
+      --strong: #f2f2f2;
+      --heading: #f2f2f2;
+      --muted: #a3a3a3;
+      --border: #333333;
+      --border-strong: #4a4a4a;
+      --accent: #6aaed6;
+      --accent-2: #8cc7ff;
+      --warn: #ffdc49;
+      --code: #e6e6e6;
+      --code-bg: #2f3437;
+      --tag-bg: #243831;
+      --tag-text: #7ad9c5;
+      --tag-border: #335f54;
+      --blue-soft: #1f2b3f;
+      --blue-text: #8cc7ff;
+      --blue-border: #365f93;
+      --warn-soft: #342f19;
+      --warn-border: #5f4f18;
+      --success-soft: #1f332b;
+      --success-text: #8be6c1;
+      --success-border: #2f6b57;
+      --purple-soft: #2b2342;
+      --purple-text: #c8b6ff;
+      --purple-border: #574582;
+      --risk-soft: #3a2028;
+      --risk-text: #ff9ab3;
+      --risk-border: #7a3a4d;
+      --pre-bg: #111111;
+      --pre-text: #d4d4d4;
+      --focus: #6aaed6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      color-scheme: dark;
+      margin: 0;
+      color: var(--text);
+      background: var(--page);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif;
+      font-size: 18px;
+      line-height: 1.55;
+    }
+
+    main {
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 32px 28px 56px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: var(--heading);
+      line-height: 1.2;
+      letter-spacing: 0;
+      margin: 0 0 12px;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 26px;
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+      margin-top: 32px;
+    }
+
+    h3 {
+      font-size: 20px;
+      margin-top: 22px;
+    }
+
+    p,
+    ul,
+    ol,
+    .lead,
+    .callout {
+      max-width: none;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    ul {
+      margin: 8px 0 16px 22px;
+      padding: 0;
+    }
+
+    li {
+      margin: 4px 0;
+    }
+
+    table,
+    pre,
+    .content-grid,
+    .visual-block {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin: 14px 0 22px;
+      table-layout: fixed;
+      background: var(--surface);
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+      background: var(--surface);
+    }
+
+    th {
+      background: var(--soft-2);
+      text-align: left;
+      font-weight: 700;
+    }
+
+    code {
+      color: var(--code);
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 4px;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 0.92em;
+    }
+
+    pre {
+      margin: 12px 0 22px;
+      padding: 14px 16px;
+      color: var(--pre-text);
+      background: var(--pre-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: auto;
+      max-width: 100%;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 16px;
+      line-height: 1.45;
+      white-space: pre;
+    }
+
+    pre code {
+      color: inherit;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+      font: inherit;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    a:hover {
+      color: var(--accent-2);
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .backlink {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 19px;
+    }
+
+    .meta {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .node-context {
+      display: grid;
+      gap: 6px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      background: var(--soft);
+      margin: 0 0 18px;
+      width: 100%;
+    }
+
+    .node-context p {
+      margin: 0;
+    }
+
+    .node-context strong {
+      color: var(--heading);
+    }
+
+    .node-context a {
+      color: var(--accent);
+      font-weight: 400;
+      text-decoration-line: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    .node-context a:hover {
+      color: var(--accent-2);
+    }
+
+    .callout {
+      padding: 13px 15px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      background: var(--soft);
+      margin: 16px 0 22px;
+      border-radius: 6px;
+    }
+
+    .callout.boundary {
+      border-left-color: var(--warn);
+      background: var(--warn-soft);
+      border-color: var(--warn-border);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-self: start;
+      align-self: start;
+      width: fit-content;
+      max-width: 100%;
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 700;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border: 1px solid var(--tag-border);
+      overflow-wrap: anywhere;
+    }
+
+    .tag.blue {
+      color: var(--blue-text);
+      background: var(--blue-soft);
+      border-color: var(--blue-border);
+    }
+
+    .tag.warn {
+      color: var(--warn);
+      background: var(--warn-soft);
+      border-color: var(--warn-border);
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .state-flow {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 16px 0 22px;
+    }
+
+    .state-card {
+      min-height: 172px;
+      display: grid;
+      align-content: start;
+      gap: 8px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px;
+      background: var(--surface);
+    }
+
+    .state-card.ready {
+      background: var(--blue-soft);
+      border-color: var(--blue-border);
+    }
+
+    .state-card.delivered {
+      background: var(--purple-soft);
+      border-color: var(--purple-border);
+    }
+
+    .state-card.done {
+      background: var(--success-soft);
+      border-color: var(--success-border);
+    }
+
+    .state-card strong,
+    .queue-title,
+    .route-label,
+    .legend strong {
+      color: var(--heading);
+    }
+
+    .state-card p,
+    .queue-box p,
+    .copy-box p,
+    .legend span {
+      margin: 0;
+    }
+
+    .queue-contrast {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin: 16px 0 22px;
+    }
+
+    .contrast-panel {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px;
+      background: var(--surface);
+      display: grid;
+      gap: 12px;
+    }
+
+    .queue-box,
+    .copy-box,
+    .worker,
+    .exchange-box {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 12px;
+      background: var(--soft);
+    }
+
+    .exchange-box {
+      background: var(--blue-soft);
+      border-color: var(--blue-border);
+    }
+
+    .queue-box {
+      background: var(--success-soft);
+      border-color: var(--success-border);
+    }
+
+    .copy-box {
+      background: var(--purple-soft);
+      border-color: var(--purple-border);
+    }
+
+    .workers {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .worker {
+      text-align: center;
+      background: var(--surface);
+    }
+
+    .arrow {
+      color: var(--muted);
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .legend {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin: 14px 0 22px;
+    }
+
+    .legend div {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 12px;
+      background: var(--surface);
+    }
+
+    .node-closing {
+      margin-top: 8px;
+      padding: 0;
+      background: transparent;
+    }
+
+    .node-footer {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+    }
+
+    .node-footer h2 {
+      margin-top: 32px;
+    }
+
+    .reference-list {
+      display: grid;
+      gap: 8px;
+      margin: 8px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .reference-item {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface);
+    }
+
+    .reference-item a,
+    .node-footer a {
+      color: var(--accent);
+      font-weight: 400;
+      text-decoration-line: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    .reference-note {
+      color: var(--text);
+    }
+
+    @media (max-width: 860px) {
+      main {
+        padding: 22px 16px 40px;
+      }
+
+      .state-flow,
+      .queue-contrast,
+      .legend,
+      .reference-item {
+        grid-template-columns: 1fr;
+      }
+
+      .workers {
+        grid-template-columns: 1fr;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+        table-layout: auto;
+      }
+
+      th,
+      td {
+        min-width: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="backlink" href="../../roadmap.html">Voltar ao roadmap</a>
+    <div
+      class="node-context"
+      data-node-position="true"
+      data-level="basico"
+      data-node-order="6"
+      data-node-count="6"
+      data-roadmap-slug="rabbitmq-exchanges">
+      <p><strong>Básico · 06 de 06</strong></p>
+      <p>Roadmap: Exchanges no RabbitMQ</p>
+      <p>Node atual: Filas, consumidores e entrega</p>
+      <p>Anterior: <a href="../05-headers-e-metadados-de-roteamento/node.html">Headers exchange e metadados de roteamento</a> · Próximo: <a href="../../intermediario/01-contrato-de-topologia-e-roteamento/node.html">Contrato de topologia e roteamento</a></p>
+    </div>
+    <h1>Filas, consumidores e entrega</h1>
+    <p class="lead">Depois que a exchange decidiu para qual fila uma publicação deve ir, começa outro trecho do fluxo: a mensagem precisa esperar, ser entregue a um consumer e só então sair da fila com segurança.</p>
+    <p class="meta">Pesquisa: documentação oficial RabbitMQ 4.3 consultada em 2026-06-09.</p>
+
+    <section>
+      <h2>Depois do roteamento, a pergunta muda</h2>
+      <p>Imagine que a topologia já roteou uma mensagem para a fila <code>emails</code>. A exchange fez a parte dela: aplicou as regras de roteamento e colocou a mensagem no destino encontrado. Se nenhum worker de e-mail estiver online naquele instante, a mensagem não volta para a exchange nem fica esperando em um lugar abstrato entre as peças.</p>
+      <p>Ela fica na fila. A fila é a coleção ordenada que guarda mensagens até que alguma aplicação registrada para consumir daquela fila possa recebê-las. Por isso, a pergunta depois do roteamento deixa de ser "qual binding combina?" e passa a ser "qual é o estado dessa mensagem dentro da fila?".</p>
+      <div class="callout">
+        <strong>Fronteira principal:</strong> exchange decide caminho; fila acumula e entrega; consumer processa uma entrega recebida da fila.
+      </div>
+    </section>
+
+    <section>
+      <h2>A fila mantém trabalho em estados diferentes</h2>
+      <p>Enquanto não há worker disponível, a mensagem está pronta para entrega. Quando um consumer se registra na fila, RabbitMQ pode enviar essa mensagem para ele. Esse envio é uma delivery: a mensagem já saiu da lista de prontas, mas ainda não significa que o processamento terminou.</p>
+      <p>O ponto delicado é esse intervalo. A fila precisa distinguir uma mensagem apenas esperando de uma mensagem que já foi entregue a um consumer e ainda aguarda reconhecimento. O acknowledgement é o sinal do consumer dizendo ao broker que aquela delivery foi recebida e processada com sucesso. Só depois disso a mensagem entregue pode ser marcada para remoção futura.</p>
+
+      <div class="state-flow visual-block" aria-label="Estados conceituais de uma mensagem na fila">
+        <div class="state-card ready">
+          <span class="tag blue">1. Pronta</span>
+          <strong>Está na fila <code>emails</code></strong>
+          <p>A mensagem foi roteada com sucesso e aguarda algum consumer disponível.</p>
+        </div>
+        <div class="state-card delivered">
+          <span class="tag">2. Entregue</span>
+          <strong>Foi enviada para um worker</strong>
+          <p>A delivery está em processamento e ainda não recebeu acknowledgement.</p>
+        </div>
+        <div class="state-card done">
+          <span class="tag">3. Reconhecida</span>
+          <strong>O consumer confirmou a delivery</strong>
+          <p>O broker pode tratar aquela entrega como concluída e remover a mensagem no momento adequado.</p>
+        </div>
+      </div>
+
+      <p>Essa separação evita uma leitura apressada: entregar não é o mesmo que encerrar. O ack pertence ao lado do consumer e protege a remoção da mensagem depois do processamento. Outros sinais do lado de quem publicou existem em outro ponto do fluxo e não dizem que um consumer processou a mensagem.</p>
+    </section>
+
+    <section>
+      <h2>Consumer é inscrição em uma fila</h2>
+      <p>Um consumer é a aplicação, processo ou worker registrado para receber mensagens de uma fila. A inscrição acontece na fila, não na exchange. Depois que esse registro existe, RabbitMQ passa a empurrar deliveries para o handler do consumer quando há mensagens disponíveis.</p>
+      <p>No exemplo <code>emails</code>, três workers podem se registrar na mesma fila. Isso não cria três cópias da mesma mensagem. Cria três candidatos para receber trabalhos diferentes daquela fila. A fila continua sendo uma sequência de mensagens; os workers dividem essa sequência.</p>
+
+      <div class="queue-contrast visual-block" aria-label="Contraste entre workers na mesma fila e filas independentes">
+        <div class="contrast-panel">
+          <span class="tag blue">Uma fila, vários workers</span>
+          <div class="queue-box">
+            <strong class="queue-title">Fila <code>emails</code></strong>
+            <p>Mensagens: E1, E2, E3</p>
+          </div>
+          <div class="arrow">entregas separadas</div>
+          <div class="workers" aria-label="Workers competindo pela mesma fila">
+            <div class="worker">worker A</div>
+            <div class="worker">worker B</div>
+            <div class="worker">worker C</div>
+          </div>
+          <p class="small">Cada worker recebe parte do trabalho. Uma mensagem não vira três cópias por existir três consumers.</p>
+        </div>
+
+        <div class="contrast-panel">
+          <span class="tag">Várias filas, cópias independentes</span>
+          <div class="exchange-box">
+            <strong class="route-label">Publicação roteada</strong>
+            <p>Um evento pode chegar a mais de uma fila quando a topologia assim define.</p>
+          </div>
+          <div class="arrow">cópia por destino</div>
+          <div class="copy-box">
+            <strong>Fila <code>email</code></strong>
+            <p>Cópia para envio de mensagens.</p>
+          </div>
+          <div class="copy-box">
+            <strong>Fila <code>audit</code></strong>
+            <p>Cópia para registro de auditoria.</p>
+          </div>
+          <div class="copy-box">
+            <strong>Fila <code>analytics</code></strong>
+            <p>Cópia para leitura analítica.</p>
+          </div>
+        </div>
+      </div>
+
+      <p>Essa é a diferença que fecha o nível básico. Quando três serviços precisam processar o mesmo evento de forma independente, eles precisam de filas independentes recebendo cópias. Quando três workers só querem dividir o mesmo trabalho, eles ficam na mesma fila e competem pelas deliveries.</p>
+    </section>
+
+    <section>
+      <h2>A responsabilidade de cada peça fica menor</h2>
+      <p>Com filas e consumers no lugar certo, a topologia fica mais fácil de ler. A exchange não precisa saber quantos workers estão online. A fila não precisa reinterpretar a routing key. O consumer não decide para quais outros destinos a publicação deveria ter ido. Cada peça responde a uma pergunta menor.</p>
+
+      <table>
+        <tr>
+          <th>Peça</th>
+          <th>Pergunta que responde</th>
+          <th>Limite útil neste node</th>
+        </tr>
+        <tr>
+          <td>Exchange</td>
+          <td>Para quais destinos a publicação deve ser roteada?</td>
+          <td>Não segura mensagem esperando worker.</td>
+        </tr>
+        <tr>
+          <td>Fila</td>
+          <td>Quais mensagens estão aguardando ou foram entregues sem ack?</td>
+          <td>Não representa um serviço inteiro quando vários serviços precisam de cópias próprias.</td>
+        </tr>
+        <tr>
+          <td>Consumer</td>
+          <td>Qual aplicação recebe uma delivery daquela fila?</td>
+          <td>Não assina a exchange diretamente no modelo trabalhado aqui.</td>
+        </tr>
+        <tr>
+          <td>Acknowledgement</td>
+          <td>Quando uma delivery pode ser considerada processada pelo consumer?</td>
+          <td>Não prova que a publicação foi aceita nem resolve confiabilidade de ponta a ponta.</td>
+        </tr>
+      </table>
+
+      <div class="legend" aria-label="Resumo conceitual de fila, consumer e cópia por fila">
+        <div>
+          <strong>Sem consumer online</strong>
+          <span>A mensagem fica pronta na fila, desde que tenha sido roteada para ela.</span>
+        </div>
+        <div>
+          <strong>Com consumers na mesma fila</strong>
+          <span>As deliveries são distribuídas como trabalho compartilhado.</span>
+        </div>
+        <div>
+          <strong>Com filas separadas</strong>
+          <span>Cada fila guarda sua própria cópia e seu próprio ritmo de consumo.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="node-closing">
+      <h2>O básico fecha quando a cópia tem endereço claro</h2>
+      <p>Ao sair deste ponto, a leitura importante é simples: uma publicação vira cópia por fila, não por consumer. Depois que a cópia entra em uma fila, a conversa passa a ser entrega, processamento e ack. Essa base permite que o próximo nível trate contratos de topologia e decisões de desenho sem voltar a misturar roteamento, armazenamento e consumo.</p>
+    </section>
+
+    <footer class="node-footer">
+      <h2>Referências</h2>
+      <ul class="reference-list">
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/queues">Documentação oficial de filas</a>
+          <span class="reference-note">Uso neste node: define fila como coleção ordenada e registra estados de mensagens prontas ou entregues sem acknowledgement.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/consumers">Documentação oficial de consumers</a>
+          <span class="reference-note">Uso neste node: sustenta que consumers se registram em filas e recebem deliveries a partir delas.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/confirms">Guia oficial de acknowledgements</a>
+          <span class="reference-note">Uso neste node: explica o reconhecimento de delivery pelo consumer e sua função na remoção segura.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/exchanges">Documentação oficial de exchanges</a>
+          <span class="reference-note">Uso neste node: sustenta a fronteira entre roteamento por exchange e cópia para destinos ligados.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/tutorials/amqp-concepts">Guia oficial do modelo AMQP 0-9-1</a>
+          <span class="reference-note">Uso neste node: complementa o modelo de fila, consumer, subscription e acknowledgement no fluxo AMQP.</span>
+        </li>
+      </ul>
+    </footer>
+  </main>
+</body>
+</html>

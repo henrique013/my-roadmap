@@ -1,0 +1,6572 @@
+{
+  "status": "passa",
+  "generatedAt": "2026-06-08T20:18:10.962Z",
+  "html": "/home/henri/my-projects/my-roadmap/.tmp/roadmaps/rabbitmq-exchanges/basico/03-bindings-routing-key-e-destinos/node.html",
+  "viewports": [
+    {
+      "viewport": {
+        "name": "desktop",
+        "width": 1280,
+        "height": 900,
+        "isMobile": false
+      },
+      "screenshotPath": "/home/henri/my-projects/my-roadmap/.tmp/roadmaps/rabbitmq-exchanges/basico/03-bindings-routing-key-e-destinos/.editorial/pipeline/05-visual-render/playwright/desktop.png",
+      "title": "Bindings, routing key e destinos",
+      "theme": {
+        "marker": "notion-dark",
+        "colorScheme": "dark",
+        "surfaceSamples": [
+          {
+            "selector": "body",
+            "index": 0,
+            "text": "Voltar ao roadmap\n\n    \n      Básico · 03 de 06\n      Roadmap: Exchanges no Rabb",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": "main",
+            "index": 0,
+            "text": "Voltar ao roadmap\n\n    \n      Básico · 03 de 06\n      Roadmap: Exchanges no Rabb",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-context",
+            "index": 0,
+            "text": "Básico · 03 de 06\n      Roadmap: Exchanges no RabbitMQ\n      Node atual: Binding",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-footer",
+            "index": 0,
+            "text": "Referências\n      \n        \n          F1 - documentação oficial RabbitMQ 4.3\n   ",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 0,
+            "text": "F1 - documentação oficial RabbitMQ 4.3\n          Uso neste node: Define exchange",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 1,
+            "text": "F2 - guia oficial RabbitMQ 4.3\n          Uso neste node: Explica o modelo AMQP 0",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".callout",
+            "index": 0,
+            "text": "Fronteira do node. O tipo da exchange decide como routing key, binding key e arg",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".visual-block",
+            "index": 0,
+            "text": "Antes\n        orders.events sem regras\n        A publicação chega à exchange, ma",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".visual-block",
+            "index": 1,
+            "text": "Publicação\n        orders.events\n        Recebe uma mensagem com a routing key o",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".state-card",
+            "index": 0,
+            "text": "Antes\n        orders.events sem regras\n        A publicação chega à exchange, ma",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".state-card",
+            "index": 1,
+            "text": "Depois\n        orders.events com regras\n        Cada linha liga a exchange a um ",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".mini-card",
+            "index": 0,
+            "text": "1\n        Entrada\n        Qual exchange recebeu a publicação e qual routing key ",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".mini-card",
+            "index": 1,
+            "text": "2\n        Regras\n        Quais bindings existem a partir dessa source exchange?",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".mini-card",
+            "index": 2,
+            "text": "3\n        Saídas\n        Quais destinations são alcançados pelas regras que comb",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 0,
+            "text": "Peça",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 1,
+            "text": "Quem define",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 2,
+            "text": "Leitura correta",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 3,
+            "text": "Campo conceitual",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 4,
+            "text": "O que ele responde",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 5,
+            "text": "Exemplo no node",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 0,
+            "text": "routing_key da publicação",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 1,
+            "text": "Publisher, no momento do envio",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 2,
+            "text": "Valor que acompanha uma mensagem específica.",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 3,
+            "text": "binding_key da regra",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 4,
+            "text": "Topologia, antes da publicação",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 5,
+            "text": "Critério registrado para uma saída da exchange.",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 6,
+            "text": "arguments do binding",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 7,
+            "text": "Topologia, junto da regra",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 0,
+            "text": "orders.created",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 1,
+            "text": "orders.events",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 2,
+            "text": "orders.events",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 3,
+            "text": "orders.events",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 4,
+            "text": "orders.events",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 5,
+            "text": "orders.created",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 6,
+            "text": "routing_key",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 7,
+            "text": "binding_key",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "pre",
+            "index": 0,
+            "text": "# dado que acompanha a publicação\npublish.exchange = \"orders.events\"\npublish.rou",
+            "backgroundColor": "rgb(17, 17, 17)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 0,
+            "text": "Antes",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 1,
+            "text": "Depois",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 2,
+            "text": "Publicação",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 3,
+            "text": "Bindings",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 4,
+            "text": "Destinos",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 5,
+            "text": "1",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 6,
+            "text": "2",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 7,
+            "text": "3",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          }
+        ]
+      },
+      "preBlocks": [
+        {
+          "index": 0,
+          "text": "# dado que acompanha a publicação\npublish.exchange = \"orders.events\"\npublish.routing_key = \"orders.created\"\n\n# dado registrado na regra da topologia\nbinding.sou",
+          "hasCode": true,
+          "hasHighlight": true,
+          "isConceptualVisual": false,
+          "hasAsciiException": false,
+          "asciiReason": "",
+          "looksTechnical": true,
+          "className": "code-block language-text",
+          "ariaLabel": "Comparação conceitual entre a key da publicação e a key da regra"
+        }
+      ],
+      "preCodeStyles": [
+        {
+          "index": 0,
+          "text": "# dado que acompanha a publicação\npublish.exchange = \"orders.events\"\npublish.routing_key = \"orders.created\"\n\n# dado regi",
+          "color": "rgb(212, 212, 212)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "effectiveBackgroundColor": "rgb(17, 17, 17)",
+          "borderWidths": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderStyles": [
+            "none",
+            "none",
+            "none",
+            "none"
+          ],
+          "paddings": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 374.47,
+          "heightPx": 203.5,
+          "parentWidthPx": 1204
+        }
+      ],
+      "inlineCodeStyles": [
+        {
+          "index": 0,
+          "text": "orders.created",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "17.48px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 156.77,
+          "heightPx": 24,
+          "parentWidthPx": 1204
+        },
+        {
+          "index": 1,
+          "text": "orders.events",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 139.09,
+          "heightPx": 23,
+          "parentWidthPx": 1204
+        },
+        {
+          "index": 2,
+          "text": "orders.events",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "18.4px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 153.48,
+          "heightPx": 25,
+          "parentWidthPx": 562
+        },
+        {
+          "index": 3,
+          "text": "orders.events",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "18.4px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 153.48,
+          "heightPx": 25,
+          "parentWidthPx": 562
+        },
+        {
+          "index": 4,
+          "text": "orders.events",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 139.09,
+          "heightPx": 23,
+          "parentWidthPx": 1204
+        },
+        {
+          "index": 5,
+          "text": "orders.created",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 149.03,
+          "heightPx": 23,
+          "parentWidthPx": 1204
+        },
+        {
+          "index": 6,
+          "text": "routing_key",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 119.23,
+          "heightPx": 23,
+          "parentWidthPx": 401
+        },
+        {
+          "index": 7,
+          "text": "binding_key",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 119.23,
+          "heightPx": 23,
+          "parentWidthPx": 401
+        },
+        {
+          "index": 8,
+          "text": "arguments",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 99.38,
+          "heightPx": 23,
+          "parentWidthPx": 401
+        },
+        {
+          "index": 9,
+          "text": "orders.created",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 149.03,
+          "heightPx": 23,
+          "parentWidthPx": 1204
+        },
+        {
+          "index": 10,
+          "text": "orders.events",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "18.4px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 153.48,
+          "heightPx": 25,
+          "parentWidthPx": 235.8
+        },
+        {
+          "index": 11,
+          "text": "orders.created",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 149.03,
+          "heightPx": 23,
+          "parentWidthPx": 235.8
+        },
+        {
+          "index": 12,
+          "text": "orders.created",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 149.03,
+          "heightPx": 23,
+          "parentWidthPx": 373.8
+        },
+        {
+          "index": 13,
+          "text": "orders.email",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 129.17,
+          "heightPx": 23,
+          "parentWidthPx": 373.8
+        },
+        {
+          "index": 14,
+          "text": "orders.created",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 149.03,
+          "heightPx": 23,
+          "parentWidthPx": 373.8
+        },
+        {
+          "index": 15,
+          "text": "orders.audit",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 129.17,
+          "heightPx": 23,
+          "parentWidthPx": 373.8
+        },
+        {
+          "index": 16,
+          "text": "orders.created",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 149.03,
+          "heightPx": 23,
+          "parentWidthPx": 373.8
+        },
+        {
+          "index": 17,
+          "text": "orders.history",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 149.03,
+          "heightPx": 23,
+          "parentWidthPx": 373.8
+        },
+        {
+          "index": 18,
+          "text": "orders.email",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 129.17,
+          "heightPx": 23,
+          "parentWidthPx": 129.17
+        },
+        {
+          "index": 19,
+          "text": "orders.audit",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 129.17,
+          "heightPx": 23,
+          "parentWidthPx": 129.17
+        },
+        {
+          "index": 20,
+          "text": "orders.history",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 149.03,
+          "heightPx": 23,
+          "parentWidthPx": 149.03
+        },
+        {
+          "index": 21,
+          "text": "orders.events",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 139.09,
+          "heightPx": 23,
+          "parentWidthPx": 401
+        },
+        {
+          "index": 22,
+          "text": "orders.email",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 129.17,
+          "heightPx": 23,
+          "parentWidthPx": 401
+        },
+        {
+          "index": 23,
+          "text": "queue",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 59.66,
+          "heightPx": 23,
+          "parentWidthPx": 401
+        },
+        {
+          "index": 24,
+          "text": "stream",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 69.59,
+          "heightPx": 23,
+          "parentWidthPx": 401
+        },
+        {
+          "index": 25,
+          "text": "exchange",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 89.45,
+          "heightPx": 23,
+          "parentWidthPx": 401
+        },
+        {
+          "index": 26,
+          "text": "orders.created",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 149.03,
+          "heightPx": 23,
+          "parentWidthPx": 401
+        },
+        {
+          "index": 27,
+          "text": "{}",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 29.88,
+          "heightPx": 23,
+          "parentWidthPx": 401
+        }
+      ],
+      "componentStyles": {
+        "nodeContext": [
+          {
+            "index": 0,
+            "text": "Básico · 03 de 06\n      Roadmap: Exchanges no RabbitMQ\n      Node atual: Bindings, routing key e destinos\n      Anterior",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "effectiveBackgroundColor": "rgb(36, 36, 36)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "4px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "12px",
+              "14px",
+              "12px",
+              "14px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "18px",
+              "0px"
+            ],
+            "borderRadii": [
+              "6px",
+              "6px",
+              "6px",
+              "6px"
+            ],
+            "display": "grid",
+            "gap": "6px",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "1204px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 1204,
+            "heightPx": 155.56,
+            "parentWidthPx": 1260
+          }
+        ],
+        "nodeContextLinks": [
+          {
+            "index": 0,
+            "text": "Exchange padrão e publicação direta aparente",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(36, 36, 36)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "inline",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "auto",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 373.28,
+            "heightPx": 20,
+            "parentWidthPx": 1171
+          },
+          {
+            "index": 1,
+            "text": "Direct, fanout e topic",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(36, 36, 36)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "inline",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "auto",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 165.09,
+            "heightPx": 20,
+            "parentWidthPx": 1171
+          }
+        ],
+        "nodeFooter": [
+          {
+            "index": 0,
+            "text": "Referências\n      \n        \n          F1 - documentação oficial RabbitMQ 4.3\n          Uso neste node: Define exchanges,",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(25, 25, 25)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "1204px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 1204,
+            "heightPx": 251.75,
+            "parentWidthPx": 1260
+          }
+        ],
+        "nodeFooterLinks": [
+          {
+            "index": 0,
+            "text": "F1 - documentação oficial RabbitMQ 4.3",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "345.453px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 345.45,
+            "heightPx": 27.89,
+            "parentWidthPx": 1204
+          },
+          {
+            "index": 1,
+            "text": "F2 - guia oficial RabbitMQ 4.3",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "345.453px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 345.45,
+            "heightPx": 27.89,
+            "parentWidthPx": 1204
+          }
+        ],
+        "terminalDividerCandidates": [
+          {
+            "index": 0,
+            "text": "Referências\n      \n        \n          F1 - documentação oficial RabbitMQ 4.3\n          Uso neste node: Define exchanges,",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(25, 25, 25)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "1204px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 1204,
+            "heightPx": 251.75,
+            "parentWidthPx": 1260
+          }
+        ]
+      },
+      "visualPrimitives": {
+        "tags": [
+          {
+            "index": 0,
+            "text": "Antes",
+            "color": "rgb(255, 220, 73)",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "effectiveBackgroundColor": "rgb(52, 47, 25)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "6px",
+              "8px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "inline-flex",
+            "gap": "6px",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "57.6875px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 57.69,
+            "heightPx": 29.25,
+            "parentWidthPx": 595
+          },
+          {
+            "index": 1,
+            "text": "Depois",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "6px",
+              "8px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "inline-flex",
+            "gap": "6px",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "66.0156px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 66.02,
+            "heightPx": 29.25,
+            "parentWidthPx": 595
+          },
+          {
+            "index": 2,
+            "text": "Publicação",
+            "color": "rgb(140, 199, 255)",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "effectiveBackgroundColor": "rgb(31, 43, 63)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "6px",
+              "8px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "inline-flex",
+            "gap": "6px",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "95.2031px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 95.2,
+            "heightPx": 29.25,
+            "parentWidthPx": 268.8
+          },
+          {
+            "index": 3,
+            "text": "Bindings",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "6px",
+              "8px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "inline-flex",
+            "gap": "6px",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "80.1719px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 80.17,
+            "heightPx": 29.25,
+            "parentWidthPx": 436.8
+          },
+          {
+            "index": 4,
+            "text": "Destinos",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "6px",
+              "8px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "inline-flex",
+            "gap": "6px",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "79.3594px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 79.36,
+            "heightPx": 29.25,
+            "parentWidthPx": 470.41
+          },
+          {
+            "index": 5,
+            "text": "1",
+            "color": "rgb(140, 199, 255)",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "effectiveBackgroundColor": "rgb(31, 43, 63)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "6px",
+              "8px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "inline-flex",
+            "gap": "6px",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "24.3438px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 24.34,
+            "heightPx": 29.25,
+            "parentWidthPx": 392
+          },
+          {
+            "index": 6,
+            "text": "2",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "6px",
+              "8px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "inline-flex",
+            "gap": "6px",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "24.3438px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 24.34,
+            "heightPx": 29.25,
+            "parentWidthPx": 392
+          },
+          {
+            "index": 7,
+            "text": "3",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "6px",
+              "8px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "inline-flex",
+            "gap": "6px",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "24.3438px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 24.34,
+            "heightPx": 29.25,
+            "parentWidthPx": 392
+          }
+        ],
+        "flowStepAfter": []
+      },
+      "contrastSamples": [
+        {
+          "label": "body",
+          "text": "Voltar ao roadmap\n\n    \n      Básico · 03 de 06\n      Roadmap: Exchanges no Rabb",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "parágrafo",
+          "text": "Básico · 03 de 06",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Roadmap: Exchanges no RabbitMQ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Node atual: Bindings, routing key e destinos",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Anterior: Exchange padrão e publicação direta aparente · Próximo: Direct, fanout",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Uma exchange pode existir, receber uma publicação com orders.created e ainda ass",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 6.97
+        },
+        {
+          "label": "parágrafo",
+          "text": "Pesquisa consultada em 2026-06-08: documentação oficial RabbitMQ 4.3 e especific",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 6.97
+        },
+        {
+          "label": "parágrafo",
+          "text": "O node anterior mostrou a conveniência da exchange padrão. Agora a situação muda",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "parágrafo",
+          "text": "Nesse estado, a exchange não virou uma fila vazia. Uma fila vazia pode estar pro",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "item de lista",
+          "text": "F1 - documentação oficial RabbitMQ 4.3\n          Uso neste node: Define exchange",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "F2 - guia oficial RabbitMQ 4.3\n          Uso neste node: Explica o modelo AMQP 0",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "routing_key da publicação",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Publisher, no momento do envio",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Valor que acompanha uma mensagem específica.",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "binding_key da regra",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Topologia, antes da publicação",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Critério registrado para uma saída da exchange.",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "arguments do binding",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Topologia, junto da regra",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Peça",
+          "color": "rgb(242, 242, 242)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 12.82
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Quem define",
+          "color": "rgb(242, 242, 242)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 12.82
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Leitura correta",
+          "color": "rgb(242, 242, 242)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 12.82
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Campo conceitual",
+          "color": "rgb(242, 242, 242)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 12.82
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "O que ele responde",
+          "color": "rgb(242, 242, 242)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 12.82
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Exemplo no node",
+          "color": "rgb(242, 242, 242)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 12.82
+        },
+        {
+          "label": "link",
+          "text": "Voltar ao roadmap",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 7.23
+        },
+        {
+          "label": "link",
+          "text": "Exchange padrão e publicação direta aparente",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "link",
+          "text": "Direct, fanout e topic",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "link",
+          "text": "F1 - documentação oficial RabbitMQ 4.3",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "F2 - guia oficial RabbitMQ 4.3",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "inline code",
+          "text": "orders.created",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "orders.events",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "orders.events",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "orders.events",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "orders.events",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "orders.created",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "routing_key",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "binding_key",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "bloco de código",
+          "text": "# dado que acompanha a publicação\npublish.exchange = \"orders.events\"\npublish.rou",
+          "color": "rgb(212, 212, 212)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.74
+        },
+        {
+          "label": "conteúdo de bloco de código",
+          "text": "# dado que acompanha a publicação\npublish.exchange = \"orders.events\"\npublish.rou",
+          "color": "rgb(212, 212, 212)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.74
+        },
+        {
+          "label": "tag",
+          "text": "Antes",
+          "color": "rgb(255, 220, 73)",
+          "backgroundColor": "rgb(52, 47, 25)",
+          "ratio": 9.95
+        },
+        {
+          "label": "tag",
+          "text": "Depois",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "Publicação",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(31, 43, 63)",
+          "ratio": 7.95
+        },
+        {
+          "label": "tag",
+          "text": "Bindings",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "Destinos",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "1",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(31, 43, 63)",
+          "ratio": 7.95
+        },
+        {
+          "label": "tag",
+          "text": "2",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "3",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "contexto de node",
+          "text": "Básico · 03 de 06\n      Roadmap: Exchanges no RabbitMQ\n      Node atual: Binding",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "link do contexto de node",
+          "text": "Exchange padrão e publicação direta aparente",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "link do contexto de node",
+          "text": "Direct, fanout e topic",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "rodapé de referências",
+          "text": "Referências\n      \n        \n          F1 - documentação oficial RabbitMQ 4.3\n   ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "F1 - documentação oficial RabbitMQ 4.3",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "F2 - guia oficial RabbitMQ 4.3",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "visual customizado",
+          "text": "Antes\n        orders.events sem regras\n        A publicação chega à exchange, ma",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "visual customizado",
+          "text": "Depois\n        orders.events com regras\n        Cada linha liga a exchange a um ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "syntax-key",
+          "text": "publish.exchange",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "publish.routing_key",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "binding.source",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "binding.destination",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "binding.binding_key",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "binding.arguments",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-value",
+          "text": "\"orders.events\"",
+          "color": "rgb(168, 230, 207)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 13.38
+        },
+        {
+          "label": "syntax-value",
+          "text": "\"orders.created\"",
+          "color": "rgb(168, 230, 207)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 13.38
+        },
+        {
+          "label": "syntax-value",
+          "text": "\"orders.events\"",
+          "color": "rgb(168, 230, 207)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 13.38
+        },
+        {
+          "label": "syntax-value",
+          "text": "\"orders.email\"",
+          "color": "rgb(168, 230, 207)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 13.38
+        },
+        {
+          "label": "syntax-value",
+          "text": "\"orders.created\"",
+          "color": "rgb(168, 230, 207)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 13.38
+        },
+        {
+          "label": "syntax-value",
+          "text": "{}",
+          "color": "rgb(168, 230, 207)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 13.38
+        },
+        {
+          "label": "syntax-comment",
+          "text": "# dado que acompanha a publicação",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 7.49
+        },
+        {
+          "label": "syntax-comment",
+          "text": "# dado registrado na regra da topologia",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 7.49
+        }
+      ],
+      "contentWidths": [
+        {
+          "index": 0,
+          "selector": "p",
+          "text": "Básico · 03 de 06",
+          "width": 1171,
+          "mainWidth": 1260,
+          "ratio": 0.929
+        },
+        {
+          "index": 1,
+          "selector": "p",
+          "text": "Roadmap: Exchanges no RabbitMQ",
+          "width": 1171,
+          "mainWidth": 1260,
+          "ratio": 0.929
+        },
+        {
+          "index": 2,
+          "selector": "p",
+          "text": "Node atual: Bindings, routing key e destinos",
+          "width": 1171,
+          "mainWidth": 1260,
+          "ratio": 0.929
+        },
+        {
+          "index": 3,
+          "selector": "p",
+          "text": "Anterior: Exchange padrão e publicação direta aparente · Próximo: Direct, fanout e topic",
+          "width": 1171,
+          "mainWidth": 1260,
+          "ratio": 0.929
+        },
+        {
+          "index": 4,
+          "selector": ".lead",
+          "text": "Uma exchange pode existir, receber uma publicação com orders.created e ainda assim não ter para onde mandar a mensagem. ",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 5,
+          "selector": "p",
+          "text": "Pesquisa consultada em 2026-06-08: documentação oficial RabbitMQ 4.3 e especificação AMQP 0-9-1.",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 6,
+          "selector": "p",
+          "text": "O node anterior mostrou a conveniência da exchange padrão. Agora a situação muda: imagine uma exchange de domínio chamad",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 7,
+          "selector": "p",
+          "text": "Nesse estado, a exchange não virou uma fila vazia. Uma fila vazia pode estar pronta para armazenar mensagens futuras. Um",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 8,
+          "selector": "p",
+          "text": "A linha que cria uma saída é um binding. Ele não é a mensagem e não é o consumidor. É a regra de topologia que parte de ",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 9,
+          "selector": "p",
+          "text": "Quando o publisher envia uma mensagem para orders.events, ele pode carregar uma routing key. No exemplo condutor, a key ",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 10,
+          "selector": "p",
+          "text": "O binding, por sua vez, é criado antes da publicação. Ele também pode ter uma key registrada como critério da regra. Par",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 11,
+          "selector": "p",
+          "text": "Os valores podem ser iguais, como no recorte acima, mas eles não vêm do mesmo lugar. A routing key nasce na publicação. ",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 12,
+          "selector": "p",
+          "text": "Com as regras no lugar, a exchange avalia suas linhas. Uma publicação com orders.created pode encontrar uma saída, vária",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 13,
+          "selector": "p",
+          "text": "Esse mapa mostra três saídas para a mesma publicação. Se só uma linha combinasse, haveria uma rota. Se nenhuma linha com",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 14,
+          "selector": "p",
+          "text": "Ler um binding como seta é útil, mas incompleto. A regra tem uma exchange de origem, um destino, uma classificação do de",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 15,
+          "selector": "p",
+          "text": "O destino mais comum para começar a leitura é uma fila, porque ela torna visível onde a mensagem fica depois do roteamen",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 16,
+          "selector": ".callout",
+          "text": "Fronteira do node. O tipo da exchange decide como routing key, binding key e argumentos participam da avaliação. O próxi",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 17,
+          "selector": "p",
+          "text": "Fronteira do node. O tipo da exchange decide como routing key, binding key e argumentos participam da avaliação. O próxi",
+          "width": 1169,
+          "mainWidth": 1260,
+          "ratio": 0.928
+        },
+        {
+          "index": 18,
+          "selector": "p",
+          "text": "Quando você olha para uma exchange, leia primeiro se há bindings. Depois, leia de onde cada binding parte, para onde apo",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 19,
+          "selector": "p",
+          "text": "Se essa leitura fica clara, a exchange deixa de ser uma caixa mágica. Ela vira uma tabela de regras: uma publicação entr",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 20,
+          "selector": "ul",
+          "text": "F1 - documentação oficial RabbitMQ 4.3\n          Uso neste node: Define exchanges, tipos, bindings, exchange padrão, pro",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        }
+      ],
+      "overflow": {
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "hasGlobalOverflow": false
+      }
+    },
+    {
+      "viewport": {
+        "name": "mobile",
+        "width": 390,
+        "height": 844,
+        "isMobile": true
+      },
+      "screenshotPath": "/home/henri/my-projects/my-roadmap/.tmp/roadmaps/rabbitmq-exchanges/basico/03-bindings-routing-key-e-destinos/.editorial/pipeline/05-visual-render/playwright/mobile.png",
+      "title": "Bindings, routing key e destinos",
+      "theme": {
+        "marker": "notion-dark",
+        "colorScheme": "dark",
+        "surfaceSamples": [
+          {
+            "selector": "body",
+            "index": 0,
+            "text": "Voltar ao roadmap\n\n    \n      Básico · 03 de 06\n      Roadmap: Exchanges no Rabb",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": "main",
+            "index": 0,
+            "text": "Voltar ao roadmap\n\n    \n      Básico · 03 de 06\n      Roadmap: Exchanges no Rabb",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-context",
+            "index": 0,
+            "text": "Básico · 03 de 06\n      Roadmap: Exchanges no RabbitMQ\n      Node atual: Binding",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-footer",
+            "index": 0,
+            "text": "Referências\n      \n        \n          F1 - documentação oficial RabbitMQ 4.3\n   ",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 0,
+            "text": "F1 - documentação oficial RabbitMQ 4.3\n          Uso neste node: Define exchange",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 1,
+            "text": "F2 - guia oficial RabbitMQ 4.3\n          Uso neste node: Explica o modelo AMQP 0",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".callout",
+            "index": 0,
+            "text": "Fronteira do node. O tipo da exchange decide como routing key, binding key e arg",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".visual-block",
+            "index": 0,
+            "text": "Antes\n        orders.events sem regras\n        A publicação chega à exchange, ma",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".visual-block",
+            "index": 1,
+            "text": "Publicação\n        orders.events\n        Recebe uma mensagem com a routing key o",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".state-card",
+            "index": 0,
+            "text": "Antes\n        orders.events sem regras\n        A publicação chega à exchange, ma",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".state-card",
+            "index": 1,
+            "text": "Depois\n        orders.events com regras\n        Cada linha liga a exchange a um ",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".mini-card",
+            "index": 0,
+            "text": "1\n        Entrada\n        Qual exchange recebeu a publicação e qual routing key ",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".mini-card",
+            "index": 1,
+            "text": "2\n        Regras\n        Quais bindings existem a partir dessa source exchange?",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".mini-card",
+            "index": 2,
+            "text": "3\n        Saídas\n        Quais destinations são alcançados pelas regras que comb",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 0,
+            "text": "Peça",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 1,
+            "text": "Quem define",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 2,
+            "text": "Leitura correta",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 3,
+            "text": "Campo conceitual",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 4,
+            "text": "O que ele responde",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 5,
+            "text": "Exemplo no node",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 0,
+            "text": "routing_key da publicação",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 1,
+            "text": "Publisher, no momento do envio",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 2,
+            "text": "Valor que acompanha uma mensagem específica.",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 3,
+            "text": "binding_key da regra",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 4,
+            "text": "Topologia, antes da publicação",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 5,
+            "text": "Critério registrado para uma saída da exchange.",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 6,
+            "text": "arguments do binding",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 7,
+            "text": "Topologia, junto da regra",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 0,
+            "text": "orders.created",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 1,
+            "text": "orders.events",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 2,
+            "text": "orders.events",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 3,
+            "text": "orders.events",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 4,
+            "text": "orders.events",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 5,
+            "text": "orders.created",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 6,
+            "text": "routing_key",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 7,
+            "text": "binding_key",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "pre",
+            "index": 0,
+            "text": "# dado que acompanha a publicação\npublish.exchange = \"orders.events\"\npublish.rou",
+            "backgroundColor": "rgb(17, 17, 17)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 0,
+            "text": "Antes",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 1,
+            "text": "Depois",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 2,
+            "text": "Publicação",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 3,
+            "text": "Bindings",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 4,
+            "text": "Destinos",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 5,
+            "text": "1",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 6,
+            "text": "2",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 7,
+            "text": "3",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          }
+        ]
+      },
+      "preBlocks": [
+        {
+          "index": 0,
+          "text": "# dado que acompanha a publicação\npublish.exchange = \"orders.events\"\npublish.routing_key = \"orders.created\"\n\n# dado registrado na regra da topologia\nbinding.sou",
+          "hasCode": true,
+          "hasHighlight": true,
+          "isConceptualVisual": false,
+          "hasAsciiException": false,
+          "asciiReason": "",
+          "looksTechnical": true,
+          "className": "code-block language-text",
+          "ariaLabel": "Comparação conceitual entre a key da publicação e a key da regra"
+        }
+      ],
+      "preCodeStyles": [
+        {
+          "index": 0,
+          "text": "# dado que acompanha a publicação\npublish.exchange = \"orders.events\"\npublish.routing_key = \"orders.created\"\n\n# dado regi",
+          "color": "rgb(212, 212, 212)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "effectiveBackgroundColor": "rgb(17, 17, 17)",
+          "borderWidths": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderStyles": [
+            "none",
+            "none",
+            "none",
+            "none"
+          ],
+          "paddings": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 374.47,
+          "heightPx": 203.5,
+          "parentWidthPx": 358
+        }
+      ],
+      "inlineCodeStyles": [
+        {
+          "index": 0,
+          "text": "orders.created",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "17.48px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 156.77,
+          "heightPx": 24,
+          "parentWidthPx": 358
+        },
+        {
+          "index": 1,
+          "text": "orders.events",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 139.09,
+          "heightPx": 23,
+          "parentWidthPx": 358
+        },
+        {
+          "index": 2,
+          "text": "orders.events",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "18.4px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 153.48,
+          "heightPx": 25,
+          "parentWidthPx": 325
+        },
+        {
+          "index": 3,
+          "text": "orders.events",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "18.4px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 153.48,
+          "heightPx": 25,
+          "parentWidthPx": 325
+        },
+        {
+          "index": 4,
+          "text": "orders.events",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 139.09,
+          "heightPx": 23,
+          "parentWidthPx": 358
+        },
+        {
+          "index": 5,
+          "text": "orders.created",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 149.03,
+          "heightPx": 23,
+          "parentWidthPx": 358
+        },
+        {
+          "index": 6,
+          "text": "routing_key",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 119.23,
+          "heightPx": 23,
+          "parentWidthPx": 256.33
+        },
+        {
+          "index": 7,
+          "text": "binding_key",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 119.23,
+          "heightPx": 23,
+          "parentWidthPx": 256.33
+        },
+        {
+          "index": 8,
+          "text": "arguments",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 99.38,
+          "heightPx": 23,
+          "parentWidthPx": 256.33
+        },
+        {
+          "index": 9,
+          "text": "orders.created",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 149.03,
+          "heightPx": 23,
+          "parentWidthPx": 358
+        },
+        {
+          "index": 10,
+          "text": "orders.events",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "18.4px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 153.48,
+          "heightPx": 25,
+          "parentWidthPx": 325
+        },
+        {
+          "index": 11,
+          "text": "orders.created",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 149.03,
+          "heightPx": 23,
+          "parentWidthPx": 325
+        },
+        {
+          "index": 12,
+          "text": "orders.created",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 149.03,
+          "heightPx": 23,
+          "parentWidthPx": 295
+        },
+        {
+          "index": 13,
+          "text": "orders.email",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 129.17,
+          "heightPx": 23,
+          "parentWidthPx": 295
+        },
+        {
+          "index": 14,
+          "text": "orders.created",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 149.03,
+          "heightPx": 23,
+          "parentWidthPx": 295
+        },
+        {
+          "index": 15,
+          "text": "orders.audit",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 129.17,
+          "heightPx": 23,
+          "parentWidthPx": 295
+        },
+        {
+          "index": 16,
+          "text": "orders.created",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 149.03,
+          "heightPx": 23,
+          "parentWidthPx": 295
+        },
+        {
+          "index": 17,
+          "text": "orders.history",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 149.03,
+          "heightPx": 23,
+          "parentWidthPx": 295
+        },
+        {
+          "index": 18,
+          "text": "orders.email",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 129.17,
+          "heightPx": 23,
+          "parentWidthPx": 129.17
+        },
+        {
+          "index": 19,
+          "text": "orders.audit",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 129.17,
+          "heightPx": 23,
+          "parentWidthPx": 129.17
+        },
+        {
+          "index": 20,
+          "text": "orders.history",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "700",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 149.03,
+          "heightPx": 23,
+          "parentWidthPx": 149.03
+        },
+        {
+          "index": 21,
+          "text": "orders.events",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 139.09,
+          "heightPx": 23,
+          "parentWidthPx": 308.06
+        },
+        {
+          "index": 22,
+          "text": "orders.email",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 129.17,
+          "heightPx": 23,
+          "parentWidthPx": 308.06
+        },
+        {
+          "index": 23,
+          "text": "queue",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 59.66,
+          "heightPx": 23,
+          "parentWidthPx": 308.06
+        },
+        {
+          "index": 24,
+          "text": "stream",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 69.59,
+          "heightPx": 23,
+          "parentWidthPx": 308.06
+        },
+        {
+          "index": 25,
+          "text": "exchange",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 89.45,
+          "heightPx": 23,
+          "parentWidthPx": 308.06
+        },
+        {
+          "index": 26,
+          "text": "orders.created",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 149.03,
+          "heightPx": 23,
+          "parentWidthPx": 308.06
+        },
+        {
+          "index": 27,
+          "text": "{}",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "effectiveBackgroundColor": "rgb(47, 52, 55)",
+          "borderWidths": [
+            "1px",
+            "1px",
+            "1px",
+            "1px"
+          ],
+          "borderStyles": [
+            "solid",
+            "solid",
+            "solid",
+            "solid"
+          ],
+          "paddings": [
+            "1px",
+            "4px",
+            "1px",
+            "4px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "4px",
+            "4px",
+            "4px",
+            "4px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16.56px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 29.88,
+          "heightPx": 23,
+          "parentWidthPx": 308.06
+        }
+      ],
+      "componentStyles": {
+        "nodeContext": [
+          {
+            "index": 0,
+            "text": "Básico · 03 de 06\n      Roadmap: Exchanges no RabbitMQ\n      Node atual: Bindings, routing key e destinos\n      Anterior",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "effectiveBackgroundColor": "rgb(36, 36, 36)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "4px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "12px",
+              "14px",
+              "12px",
+              "14px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "18px",
+              "0px"
+            ],
+            "borderRadii": [
+              "6px",
+              "6px",
+              "6px",
+              "6px"
+            ],
+            "display": "grid",
+            "gap": "6px",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "358px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 358,
+            "heightPx": 239.23,
+            "parentWidthPx": 390
+          }
+        ],
+        "nodeContextLinks": [
+          {
+            "index": 0,
+            "text": "Exchange padrão e publicação direta aparente",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(36, 36, 36)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "inline",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "auto",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 320.22,
+            "heightPx": 47.89,
+            "parentWidthPx": 325
+          },
+          {
+            "index": 1,
+            "text": "Direct, fanout e topic",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(36, 36, 36)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "inline",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "auto",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 320.17,
+            "heightPx": 47.89,
+            "parentWidthPx": 325
+          }
+        ],
+        "nodeFooter": [
+          {
+            "index": 0,
+            "text": "Referências\n      \n        \n          F1 - documentação oficial RabbitMQ 4.3\n          Uso neste node: Define exchanges,",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(25, 25, 25)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "358px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 358,
+            "heightPx": 439.09,
+            "parentWidthPx": 390
+          }
+        ],
+        "nodeFooterLinks": [
+          {
+            "index": 0,
+            "text": "F1 - documentação oficial RabbitMQ 4.3",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "332px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 332,
+            "heightPx": 27.89,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 1,
+            "text": "F2 - guia oficial RabbitMQ 4.3",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "332px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 332,
+            "heightPx": 27.89,
+            "parentWidthPx": 358
+          }
+        ],
+        "terminalDividerCandidates": [
+          {
+            "index": 0,
+            "text": "Referências\n      \n        \n          F1 - documentação oficial RabbitMQ 4.3\n          Uso neste node: Define exchanges,",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(25, 25, 25)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "358px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 358,
+            "heightPx": 439.09,
+            "parentWidthPx": 390
+          }
+        ]
+      },
+      "visualPrimitives": {
+        "tags": [
+          {
+            "index": 0,
+            "text": "Antes",
+            "color": "rgb(255, 220, 73)",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "effectiveBackgroundColor": "rgb(52, 47, 25)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "6px",
+              "8px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "inline-flex",
+            "gap": "6px",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "57.6875px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 57.69,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 1,
+            "text": "Depois",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "6px",
+              "8px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "inline-flex",
+            "gap": "6px",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "66.0156px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 66.02,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 2,
+            "text": "Publicação",
+            "color": "rgb(140, 199, 255)",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "effectiveBackgroundColor": "rgb(31, 43, 63)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "6px",
+              "8px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "inline-flex",
+            "gap": "6px",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "95.2031px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 95.2,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 3,
+            "text": "Bindings",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "6px",
+              "8px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "inline-flex",
+            "gap": "6px",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "80.1719px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 80.17,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 4,
+            "text": "Destinos",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "6px",
+              "8px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "inline-flex",
+            "gap": "6px",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "79.3594px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 79.36,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 5,
+            "text": "1",
+            "color": "rgb(140, 199, 255)",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "effectiveBackgroundColor": "rgb(31, 43, 63)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "6px",
+              "8px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "inline-flex",
+            "gap": "6px",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "24.3438px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 24.34,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 6,
+            "text": "2",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "6px",
+              "8px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "inline-flex",
+            "gap": "6px",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "24.3438px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 24.34,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 7,
+            "text": "3",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "6px",
+              "8px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "inline-flex",
+            "gap": "6px",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "24.3438px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 24.34,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          }
+        ],
+        "flowStepAfter": []
+      },
+      "contrastSamples": [
+        {
+          "label": "body",
+          "text": "Voltar ao roadmap\n\n    \n      Básico · 03 de 06\n      Roadmap: Exchanges no Rabb",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "parágrafo",
+          "text": "Básico · 03 de 06",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Roadmap: Exchanges no RabbitMQ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Node atual: Bindings, routing key e destinos",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Anterior: Exchange padrão e publicação direta aparente · Próximo: Direct, fanout",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Uma exchange pode existir, receber uma publicação com orders.created e ainda ass",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 6.97
+        },
+        {
+          "label": "parágrafo",
+          "text": "Pesquisa consultada em 2026-06-08: documentação oficial RabbitMQ 4.3 e especific",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 6.97
+        },
+        {
+          "label": "parágrafo",
+          "text": "O node anterior mostrou a conveniência da exchange padrão. Agora a situação muda",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "parágrafo",
+          "text": "Nesse estado, a exchange não virou uma fila vazia. Uma fila vazia pode estar pro",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "item de lista",
+          "text": "F1 - documentação oficial RabbitMQ 4.3\n          Uso neste node: Define exchange",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "F2 - guia oficial RabbitMQ 4.3\n          Uso neste node: Explica o modelo AMQP 0",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "routing_key da publicação",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Publisher, no momento do envio",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Valor que acompanha uma mensagem específica.",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "binding_key da regra",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Topologia, antes da publicação",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Critério registrado para uma saída da exchange.",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "arguments do binding",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Topologia, junto da regra",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Peça",
+          "color": "rgb(242, 242, 242)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 12.82
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Quem define",
+          "color": "rgb(242, 242, 242)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 12.82
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Leitura correta",
+          "color": "rgb(242, 242, 242)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 12.82
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Campo conceitual",
+          "color": "rgb(242, 242, 242)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 12.82
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "O que ele responde",
+          "color": "rgb(242, 242, 242)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 12.82
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Exemplo no node",
+          "color": "rgb(242, 242, 242)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 12.82
+        },
+        {
+          "label": "link",
+          "text": "Voltar ao roadmap",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 7.23
+        },
+        {
+          "label": "link",
+          "text": "Exchange padrão e publicação direta aparente",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "link",
+          "text": "Direct, fanout e topic",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "link",
+          "text": "F1 - documentação oficial RabbitMQ 4.3",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "F2 - guia oficial RabbitMQ 4.3",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "inline code",
+          "text": "orders.created",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "orders.events",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "orders.events",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "orders.events",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "orders.events",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "orders.created",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "routing_key",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "binding_key",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "bloco de código",
+          "text": "# dado que acompanha a publicação\npublish.exchange = \"orders.events\"\npublish.rou",
+          "color": "rgb(212, 212, 212)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.74
+        },
+        {
+          "label": "conteúdo de bloco de código",
+          "text": "# dado que acompanha a publicação\npublish.exchange = \"orders.events\"\npublish.rou",
+          "color": "rgb(212, 212, 212)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.74
+        },
+        {
+          "label": "tag",
+          "text": "Antes",
+          "color": "rgb(255, 220, 73)",
+          "backgroundColor": "rgb(52, 47, 25)",
+          "ratio": 9.95
+        },
+        {
+          "label": "tag",
+          "text": "Depois",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "Publicação",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(31, 43, 63)",
+          "ratio": 7.95
+        },
+        {
+          "label": "tag",
+          "text": "Bindings",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "Destinos",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "1",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(31, 43, 63)",
+          "ratio": 7.95
+        },
+        {
+          "label": "tag",
+          "text": "2",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "3",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "contexto de node",
+          "text": "Básico · 03 de 06\n      Roadmap: Exchanges no RabbitMQ\n      Node atual: Binding",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "link do contexto de node",
+          "text": "Exchange padrão e publicação direta aparente",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "link do contexto de node",
+          "text": "Direct, fanout e topic",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "rodapé de referências",
+          "text": "Referências\n      \n        \n          F1 - documentação oficial RabbitMQ 4.3\n   ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "F1 - documentação oficial RabbitMQ 4.3",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "F2 - guia oficial RabbitMQ 4.3",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "visual customizado",
+          "text": "Antes\n        orders.events sem regras\n        A publicação chega à exchange, ma",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "visual customizado",
+          "text": "Depois\n        orders.events com regras\n        Cada linha liga a exchange a um ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "syntax-key",
+          "text": "publish.exchange",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "publish.routing_key",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "binding.source",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "binding.destination",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "binding.binding_key",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "binding.arguments",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-value",
+          "text": "\"orders.events\"",
+          "color": "rgb(168, 230, 207)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 13.38
+        },
+        {
+          "label": "syntax-value",
+          "text": "\"orders.created\"",
+          "color": "rgb(168, 230, 207)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 13.38
+        },
+        {
+          "label": "syntax-value",
+          "text": "\"orders.events\"",
+          "color": "rgb(168, 230, 207)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 13.38
+        },
+        {
+          "label": "syntax-value",
+          "text": "\"orders.email\"",
+          "color": "rgb(168, 230, 207)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 13.38
+        },
+        {
+          "label": "syntax-value",
+          "text": "\"orders.created\"",
+          "color": "rgb(168, 230, 207)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 13.38
+        },
+        {
+          "label": "syntax-value",
+          "text": "{}",
+          "color": "rgb(168, 230, 207)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 13.38
+        },
+        {
+          "label": "syntax-comment",
+          "text": "# dado que acompanha a publicação",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 7.49
+        },
+        {
+          "label": "syntax-comment",
+          "text": "# dado registrado na regra da topologia",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 7.49
+        }
+      ],
+      "contentWidths": [
+        {
+          "index": 0,
+          "selector": "p",
+          "text": "Básico · 03 de 06",
+          "width": 325,
+          "mainWidth": 390,
+          "ratio": 0.833
+        },
+        {
+          "index": 1,
+          "selector": "p",
+          "text": "Roadmap: Exchanges no RabbitMQ",
+          "width": 325,
+          "mainWidth": 390,
+          "ratio": 0.833
+        },
+        {
+          "index": 2,
+          "selector": "p",
+          "text": "Node atual: Bindings, routing key e destinos",
+          "width": 325,
+          "mainWidth": 390,
+          "ratio": 0.833
+        },
+        {
+          "index": 3,
+          "selector": "p",
+          "text": "Anterior: Exchange padrão e publicação direta aparente · Próximo: Direct, fanout e topic",
+          "width": 325,
+          "mainWidth": 390,
+          "ratio": 0.833
+        },
+        {
+          "index": 4,
+          "selector": ".lead",
+          "text": "Uma exchange pode existir, receber uma publicação com orders.created e ainda assim não ter para onde mandar a mensagem. ",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 5,
+          "selector": "p",
+          "text": "Pesquisa consultada em 2026-06-08: documentação oficial RabbitMQ 4.3 e especificação AMQP 0-9-1.",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 6,
+          "selector": "p",
+          "text": "O node anterior mostrou a conveniência da exchange padrão. Agora a situação muda: imagine uma exchange de domínio chamad",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 7,
+          "selector": "p",
+          "text": "Nesse estado, a exchange não virou uma fila vazia. Uma fila vazia pode estar pronta para armazenar mensagens futuras. Um",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 8,
+          "selector": "p",
+          "text": "A linha que cria uma saída é um binding. Ele não é a mensagem e não é o consumidor. É a regra de topologia que parte de ",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 9,
+          "selector": "p",
+          "text": "Quando o publisher envia uma mensagem para orders.events, ele pode carregar uma routing key. No exemplo condutor, a key ",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 10,
+          "selector": "p",
+          "text": "O binding, por sua vez, é criado antes da publicação. Ele também pode ter uma key registrada como critério da regra. Par",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 11,
+          "selector": "p",
+          "text": "Os valores podem ser iguais, como no recorte acima, mas eles não vêm do mesmo lugar. A routing key nasce na publicação. ",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 12,
+          "selector": "p",
+          "text": "Com as regras no lugar, a exchange avalia suas linhas. Uma publicação com orders.created pode encontrar uma saída, vária",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 13,
+          "selector": "p",
+          "text": "Esse mapa mostra três saídas para a mesma publicação. Se só uma linha combinasse, haveria uma rota. Se nenhuma linha com",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 14,
+          "selector": "p",
+          "text": "Ler um binding como seta é útil, mas incompleto. A regra tem uma exchange de origem, um destino, uma classificação do de",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 15,
+          "selector": "p",
+          "text": "O destino mais comum para começar a leitura é uma fila, porque ela torna visível onde a mensagem fica depois do roteamen",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 16,
+          "selector": ".callout",
+          "text": "Fronteira do node. O tipo da exchange decide como routing key, binding key e argumentos participam da avaliação. O próxi",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 17,
+          "selector": "p",
+          "text": "Fronteira do node. O tipo da exchange decide como routing key, binding key e argumentos participam da avaliação. O próxi",
+          "width": 323,
+          "mainWidth": 390,
+          "ratio": 0.828
+        },
+        {
+          "index": 18,
+          "selector": "p",
+          "text": "Quando você olha para uma exchange, leia primeiro se há bindings. Depois, leia de onde cada binding parte, para onde apo",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 19,
+          "selector": "p",
+          "text": "Se essa leitura fica clara, a exchange deixa de ser uma caixa mágica. Ela vira uma tabela de regras: uma publicação entr",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 20,
+          "selector": "ul",
+          "text": "F1 - documentação oficial RabbitMQ 4.3\n          Uso neste node: Define exchanges, tipos, bindings, exchange padrão, pro",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        }
+      ],
+      "overflow": {
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "hasGlobalOverflow": false
+      }
+    }
+  ],
+  "failures": {
+    "theme": [],
+    "fixedComponent": [],
+    "terminalDivider": [],
+    "visualPrimitive": [],
+    "preCodeChip": [],
+    "highlight": [],
+    "conceptualPre": [],
+    "inlineCode": [],
+    "contrast": [],
+    "overflow": [],
+    "contentWidth": [],
+    "externalRequests": [],
+    "auditPlaceholder": []
+  }
+}

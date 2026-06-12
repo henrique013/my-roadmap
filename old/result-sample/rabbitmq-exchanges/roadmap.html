@@ -1,0 +1,2486 @@
+<!doctype html>
+<html lang="pt-BR" data-visual-theme="notion-dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Roadmap - Exchanges no RabbitMQ</title>
+  <style>
+    :root {
+      --text: #1f2937;
+      --muted: #5b6472;
+      --border: #cbd5e1;
+      --border-strong: #b6c2d1;
+      --page: #f8fafc;
+      --surface: #ffffff;
+      --soft: #f1f5f9;
+      --soft-2: #e8eef6;
+      --accent: #0f766e;
+      --accent-2: #1d4ed8;
+      --warn: #8a6100;
+      --danger: #b42318;
+      --code: #0f172a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--page);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 18px;
+      line-height: 1.55;
+    }
+
+    main {
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 32px 28px 56px;
+    }
+
+    h1, h2, h3 {
+      color: #111827;
+      line-height: 1.2;
+      margin: 0 0 12px;
+    }
+
+    h1 { font-size: 36px; margin-bottom: 8px; }
+    h2 { font-size: 26px; border-top: 1px solid var(--border); padding-top: 28px; margin-top: 32px; }
+    h3 { font-size: 20px; margin-top: 22px; }
+
+    p, ul, ol, .lead, .callout { max-width: none; }
+    p { margin: 0 0 12px; }
+    ul, ol { margin: 8px 0 16px 22px; padding: 0; }
+    li { margin: 4px 0; }
+
+    a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+    code {
+      color: var(--code);
+      background: #edf2f7;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 4px;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 0.92em;
+      overflow-wrap: anywhere;
+    }
+
+    pre {
+      margin: 12px 0 22px;
+      padding: 14px 16px;
+      color: #dbeafe;
+      background: #111827;
+      border-radius: 6px;
+      overflow: auto;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 16px;
+      line-height: 1.45;
+      white-space: pre;
+    }
+
+    pre code {
+      color: inherit;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+      font: inherit;
+    }
+
+    .syntax-key { color: #93c5fd; font-weight: 700; }
+    .syntax-op { color: #c4b5fd; }
+    .syntax-value { color: #bbf7d0; }
+    .syntax-comment { color: #a8b3c7; }
+    .syntax-risk { color: #fde68a; }
+
+    table {
+      width: 100%;
+      max-width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 22px;
+      table-layout: fixed;
+      background: var(--surface);
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+      background: var(--surface);
+    }
+
+    th { background: var(--soft-2); text-align: left; font-weight: 700; }
+
+    .lead { color: var(--muted); font-size: 19px; }
+    .meta { color: var(--muted); margin-bottom: 24px; }
+
+    .callout {
+      padding: 13px 15px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      background: var(--soft);
+      margin: 16px 0 22px;
+      border-radius: 6px;
+    }
+
+    .warning { border-left-color: var(--warn); background: #fff8e6; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 16px 0 22px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px;
+      background: var(--surface);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 700;
+      background: #e8f5f2;
+      color: #075e54;
+      border: 1px solid #b9ded6;
+      margin-bottom: 6px;
+    }
+
+    .tag.blue { background: #eaf1ff; color: #1d4ed8; border-color: #b9cffd; }
+    .tag.warn { background: #fff4d6; color: var(--warn); border-color: #f0d48a; }
+
+    .small { color: var(--muted); font-size: 16px; }
+
+    .route-map {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      align-items: stretch;
+      margin: 16px 0 22px;
+    }
+
+    .route-box {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px;
+      background: var(--surface);
+      min-height: 118px;
+    }
+
+    .route-label {
+      display: block;
+      font-weight: 800;
+      color: #111827;
+      margin-bottom: 8px;
+    }
+
+    .route-text { display: block; color: var(--muted); font-size: 16px; }
+
+    .node-list {
+      display: grid;
+      gap: 10px;
+      margin: 16px 0 22px;
+    }
+
+    .node-list > a,
+    .node-list .node-list-item {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 12px;
+      align-items: start;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 12px;
+      background: var(--surface);
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .node-list > a:hover,
+    .node-list .node-list-item:hover { border-color: var(--border-strong); background: #fbfdff; }
+    .node-order { font-weight: 800; color: var(--accent); }
+    .node-title { display: block; font-weight: 800; margin-bottom: 4px; }
+    .node-meta { display: flex; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: 16px; }
+    .node-title-link,
+    .node-actions a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+    .node-actions a {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 1px 8px;
+      background: var(--soft);
+    }
+
+    .node-section {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 18px;
+      background: var(--surface);
+      margin: 18px 0 24px;
+    }
+
+    .node-section h2 { border-top: 0; padding-top: 0; margin-top: 0; }
+    .two-col { display: block; }
+
+    @media (max-width: 860px) {
+      main { padding: 22px 16px 40px; }
+      .grid, .route-map { grid-template-columns: 1fr; }
+      .node-list > a, .node-list .node-list-item { grid-template-columns: 1fr; }
+      table {
+        display: block;
+        overflow-x: auto;
+        table-layout: auto;
+      }
+      th,
+      td {
+        min-width: 150px;
+      }
+    }
+    /* Dark Notion migrated theme: scoped migration for existing generated artifacts. */
+    :root {
+      color-scheme: dark;
+      --page: #191919;
+      --surface: #202020;
+      --surface-hover: #2a2a2a;
+      --soft: #242424;
+      --soft-2: #2a2a2a;
+      --text: #e6e6e6;
+      --strong: #f2f2f2;
+      --heading: #f2f2f2;
+      --muted: #a3a3a3;
+      --border: #333333;
+      --border-strong: #4a4a4a;
+      --accent: #6aaed6;
+      --accent-2: #8cc7ff;
+      --warn: #ffdc49;
+      --code: #e6e6e6;
+      --code-bg: #2f3437;
+      --tag-bg: #243831;
+      --tag-text: #7ad9c5;
+      --tag-border: #335f54;
+      --blue-soft: #1f2b3f;
+      --blue-text: #8cc7ff;
+      --blue-border: #365f93;
+      --warn-soft: #342f19;
+      --warn-border: #5f4f18;
+      --success-soft: #1f332b;
+      --success-text: #8be6c1;
+      --success-border: #2f6b57;
+      --purple-soft: #2b2342;
+      --purple-text: #c8b6ff;
+      --purple-border: #574582;
+      --risk-soft: #3a2028;
+      --risk-text: #ff9ab3;
+      --risk-border: #7a3a4d;
+      --pre-bg: #111111;
+      --pre-text: #d4d4d4;
+      --focus: #6aaed6;
+    }
+
+    html,
+    body {
+      color-scheme: dark;
+      background: var(--page);
+    }
+
+    body {
+      color: var(--text);
+    }
+
+    h1,
+    h2,
+    h3,
+    th,
+    .node-title,
+    .fact strong,
+    .node-context strong,
+    main strong {
+      color: var(--heading);
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    a:hover {
+      color: #8cc7ff;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    code:not(pre code),
+    .node-meta code {
+      color: var(--code);
+      background: var(--code-bg);
+      border-color: var(--border);
+    }
+
+    pre {
+      color: var(--pre-text);
+      background: var(--pre-bg);
+      border: 1px solid var(--border);
+    }
+
+    pre code {
+      color: inherit;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+      font: inherit;
+    }
+
+    .syntax-key { color: #8cc7ff; }
+    .syntax-op { color: #c8b6ff; }
+    .syntax-value { color: #a8e6cf; }
+    .syntax-comment { color: #a3a3a3; }
+    .syntax-risk { color: #ffe27a; }
+
+    table,
+    th,
+    td,
+    .card,
+    .timeline-step,
+    .node-list > a,
+    .node-list .node-list-item,
+    .topology-node,
+    .lane {
+      background: var(--surface);
+      border-color: var(--border);
+    }
+
+    th {
+      background: var(--soft-2);
+    }
+
+    .callout,
+    .node-context,
+    .flow-steps span {
+      background: var(--soft);
+      border-color: var(--border);
+    }
+
+    .warning,
+    .warn,
+    .risk,
+    .danger {
+      background: var(--warn-soft);
+      border-color: var(--warn);
+    }
+
+    .callout.boundary,
+    .callout.warning {
+      background: var(--warn-soft);
+      border-color: var(--warn-border);
+      border-left-color: var(--warn);
+    }
+
+    .tag,
+    .label,
+    .message-chip {
+      color: var(--tag-text);
+      background: var(--tag-bg);
+      border-color: var(--tag-border);
+    }
+
+    .tag.blue {
+      color: var(--blue-text);
+      background: var(--blue-soft);
+      border-color: var(--blue-border);
+    }
+
+    .tag.warn {
+      color: var(--warn);
+      background: var(--warn-soft);
+      border-color: var(--warn-border);
+    }
+
+    .node-list > a:hover,
+    .node-list .node-list-item:hover {
+      background: var(--surface-hover);
+      border-color: var(--border-strong);
+    }
+
+    .route-label {
+      color: var(--heading);
+    }
+
+    .step,
+    .stream-card,
+    .stream-card.process,
+    .stream-card.out,
+    .stream-card.err,
+    .umbrella-map,
+    .group-shell,
+    .part.focus,
+    .part.context,
+    .event-card,
+    .event-card:nth-child(1),
+    .event-card:nth-child(2),
+    .event-card:nth-child(3),
+    .event-card:nth-child(4),
+    .group-card.group,
+    .group-card.stream,
+    .group-card.event,
+    .state-card.keep,
+    .state-card.expire,
+    .tool-card.search,
+    .tool-card.live,
+    .tool-card.metric,
+    .flow-step.app,
+    .flow-step.stream,
+    .flow-step.ecs,
+    .flow-step.logs,
+    .flow-step.search,
+    .handoff-card,
+    .handoff-card.transport,
+    .handoff-card.meaning,
+    .lane.main,
+    .lane.aside,
+    .boundary-card.project,
+    .boundary-card.runtime {
+      color: var(--text);
+      background: var(--surface);
+      border-color: var(--border);
+    }
+
+    .stream-card.process,
+    .part.context,
+    .event-card:nth-child(1),
+    .group-card.stream,
+    .tool-card.live,
+    .flow-step.app,
+    .flow-step.stream,
+    .handoff-card.transport {
+      background: var(--blue-soft);
+      border-color: var(--blue-border);
+    }
+
+    .stream-card.out,
+    .part.focus,
+    .event-card:nth-child(2),
+    .group-card.group,
+    .state-card.expire,
+    .tool-card.metric,
+    .flow-step.ecs,
+    .lane.main,
+    .boundary-card.runtime {
+      background: var(--success-soft);
+      border-color: var(--success-border);
+    }
+
+    .event-card:nth-child(3),
+    .group-card.event,
+    .tool-card.search,
+    .flow-step.search,
+    .handoff-card.meaning,
+    .boundary-card.project {
+      background: var(--purple-soft);
+      border-color: var(--purple-border);
+    }
+
+    .stream-card.err,
+    .event-card:nth-child(4),
+    .state-card.keep,
+    .flow-step.logs,
+    .lane.aside {
+      background: var(--warn-soft);
+      border-color: var(--warn-border);
+    }
+
+    /* Fixed visual invariants backported from the hardened templates. */
+    .tag,
+    .card > .tag,
+    .route-card > .tag,
+    .flow-step > .tag,
+    .flow-steps > .tag,
+    .flow-steps .flow-step > .tag,
+    .flow-steps .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-self: start;
+      align-self: start;
+      width: fit-content;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+
+    .flow-steps > .flow-step {
+      min-width: 0;
+      flex: 1 1 180px;
+    }
+
+    .flow-steps > .flow-step::after {
+      content: none;
+      display: none;
+    }
+
+    @media (max-width: 900px) {
+      table {
+        display: block;
+        overflow-x: auto;
+        table-layout: auto;
+      }
+
+      th,
+      td {
+        min-width: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Roadmap - Exchanges no RabbitMQ</h1>
+    <p class="lead">Trilha tri-level para reaprender exchanges com precisão: primeiro o modelo mental, depois decisões de topologia e, por fim, limites avançados como AE, DLX, E2E, plugins, quorum queues e federation.</p>
+    <p class="meta">Pesquisa: 2026-06-08. Base principal: documentação oficial RabbitMQ 4.3 e especificação AMQP 0-9-1.</p>
+
+    <section>
+      <h2>1. Visão Geral</h2>
+      <div class="grid">
+        <div class="card"><span class="tag">Perfil</span><p>Pessoa com conhecimento básico a intermediário, experiência real anterior e necessidade de reconstruir fundamentos sem simplificações perigosas.</p></div>
+        <div class="card"><span class="tag blue">Compreensão</span><p>Ao final, você deve explicar o papel da exchange, escolher tipos adequados e prever efeitos sobre filas, consumidores, retry e diagnóstico.</p></div>
+        <div class="card"><span class="tag warn">Foco</span><p>O roadmap cobre conceitos e critérios de domínio. Configuração por linguagem, comandos e setup operacional ficam fora deste artefato.</p></div>
+      </div>
+      <div class="callout"><strong>Compreensão final esperada:</strong> Ao final, a pessoa deve conseguir explicar qual problema uma exchange resolve, como produtores, bindings, routing keys, filas e consumidores trabalham juntos, como escolher default/direct/fanout/topic/headers, como diferenciar AE de DLX, e quais decisões afetam broadcast, consumo concorrente, retry, diagnóstico e governança de topologia.</div>
+      <h3>Premissas e limites</h3>
+      <table>
+        <tr><th>Tipo</th><th>Declaração</th></tr>
+        <tr><td>Premissa</td><td>O recorte principal usa RabbitMQ 4.3 e o modelo AMQP 0-9-1, porque o tema pedido é exchanges, bindings, routing keys, filas, produtores e consumidores.</td></tr><tr><td>Premissa</td><td>A pessoa já conhece noções de mensageria; por isso o básico é conceitual e direto, sem tratar o leitor como iniciante absoluto.</td></tr><tr><td>Premissa</td><td>Pedidos de validação foram convertidos em perguntas de checagem, critérios de domínio e cenários conceituais, pois este workflow de roadmap não gera prática guiada.</td></tr>
+        <tr><td>Limite</td><td>Não cobre implementação por linguagem, comandos operacionais, setup local, UI de management ou configuração passo a passo.</td></tr><tr><td>Limite</td><td>Streams aparecem apenas como destino possível citado pela documentação de exchanges; o foco permanece em filas AMQP 0-9-1.</td></tr><tr><td>Limite</td><td>Tipos especializados, federation e quorum queues entram somente como fronteiras avançadas ligadas a exchanges, não como guias completos desses temas.</td></tr><tr><td>Limite</td><td>Garantias de entrega dependem de fila, durabilidade, persistência da mensagem, confirms, acks e configuração; nenhuma exchange isoladamente garante processamento pelo consumidor.</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>2. Mapa Tri-level</h2>
+      <div class="grid">
+        <div class="card"><span class="tag">Básico</span><p>Fundamentos, vocabulário indispensável e modelos mentais para separar exchange, fila, binding, routing key e consumer.</p></div>
+        <div class="card"><span class="tag blue">Intermediário</span><p>Arquitetura, contratos, falhas de roteamento, AE, DLX, policies, E2E e confiabilidade de publicação.</p></div>
+        <div class="card"><span class="tag warn">Avançado</span><p>Diagnóstico, tipos especializados, quorum queues, federation e governança de topologias multidomínio.</p></div>
+      </div>
+      <div class="route-map" aria-label="Fluxo conceitual de uma mensagem no RabbitMQ">
+        <div class="route-box"><span class="route-label">Publisher</span><span class="route-text">Publica payload, propriedades e routing key em uma exchange.</span></div>
+        <div class="route-box"><span class="route-label">Exchange</span><span class="route-text">Roteia; não armazena mensagens como uma fila.</span></div>
+        <div class="route-box"><span class="route-label">Bindings</span><span class="route-text">Regras que conectam source exchange a destinos.</span></div>
+        <div class="route-box"><span class="route-label">Queues</span><span class="route-text">Guardam mensagens e controlam entrega aos consumers.</span></div>
+        <div class="route-box"><span class="route-label">Consumers</span><span class="route-text">Consomem das filas e reconhecem processamento quando configurado.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>3. Lista resumida navegável por nível</h2>
+      <p>Cada item aponta para o contrato completo do node neste próprio <code>roadmap.html</code>. Nodes documentados também exibem um link relativo para <code>node.html</code>.</p>
+    </section>
+
+    <section data-level="basico">
+      <h2>Básico</h2>
+      <p>fundamentos, vocabulário indispensável e modelos mentais. Esta corrente tem 6 nodes, definidos por densidade semântica do tema.</p>
+      <div class="node-list" aria-label="Lista resumida navegável dos nodes do nível Básico">
+        <div class="node-list-item">
+          <span class="node-order">01</span>
+          <span>
+            <a class="node-title-link" href="#basico-01-modelo-amqp-e-papel-da-exchange"><span class="node-title">Modelo AMQP e papel da exchange</span></a>
+            <span class="node-meta"><code>basico/01-modelo-amqp-e-papel-da-exchange</code><code>01-modelo-amqp-e-papel-da-exchange</code><span>documentado</span><span class="node-actions"><a href="basico/01-modelo-amqp-e-papel-da-exchange/node.html">Abrir página</a></span></span>
+          </span>
+        </div>
+        <div class="node-list-item">
+          <span class="node-order">02</span>
+          <span>
+            <a class="node-title-link" href="#basico-02-exchange-padrao-e-publicacao-direta-aparente"><span class="node-title">Exchange padrão e publicação direta aparente</span></a>
+            <span class="node-meta"><code>basico/02-exchange-padrao-e-publicacao-direta-aparente</code><code>02-exchange-padrao-e-publicacao-direta-aparente</code><span>documentado</span><span class="node-actions"><a href="basico/02-exchange-padrao-e-publicacao-direta-aparente/node.html">Abrir página</a></span></span>
+          </span>
+        </div>
+        <div class="node-list-item">
+          <span class="node-order">03</span>
+          <span>
+            <a class="node-title-link" href="#basico-03-bindings-routing-key-e-destinos"><span class="node-title">Bindings, routing key e destinos</span></a>
+            <span class="node-meta"><code>basico/03-bindings-routing-key-e-destinos</code><code>03-bindings-routing-key-e-destinos</code><span>documentado</span><span class="node-actions"><a href="basico/03-bindings-routing-key-e-destinos/node.html">Abrir página</a></span></span>
+          </span>
+        </div>
+        <div class="node-list-item">
+          <span class="node-order">04</span>
+          <span>
+            <a class="node-title-link" href="#basico-04-direct-fanout-e-topic"><span class="node-title">Direct, fanout e topic</span></a>
+            <span class="node-meta"><code>basico/04-direct-fanout-e-topic</code><code>04-direct-fanout-e-topic</code><span>documentado</span><span class="node-actions"><a href="basico/04-direct-fanout-e-topic/node.html">Abrir página</a></span></span>
+          </span>
+        </div>
+        <div class="node-list-item">
+          <span class="node-order">05</span>
+          <span>
+            <a class="node-title-link" href="#basico-05-headers-e-metadados-de-roteamento"><span class="node-title">Headers exchange e metadados de roteamento</span></a>
+            <span class="node-meta"><code>basico/05-headers-e-metadados-de-roteamento</code><code>05-headers-e-metadados-de-roteamento</code><span>documentado</span><span class="node-actions"><a href="basico/05-headers-e-metadados-de-roteamento/node.html">Abrir página</a></span></span>
+          </span>
+        </div>
+        <div class="node-list-item">
+          <span class="node-order">06</span>
+          <span>
+            <a class="node-title-link" href="#basico-06-filas-consumidores-e-entrega"><span class="node-title">Filas, consumidores e entrega</span></a>
+            <span class="node-meta"><code>basico/06-filas-consumidores-e-entrega</code><code>06-filas-consumidores-e-entrega</code><span>documentado</span><span class="node-actions"><a href="basico/06-filas-consumidores-e-entrega/node.html">Abrir página</a></span></span>
+          </span>
+        </div>
+      </div>
+    </section>
+    <section data-level="intermediario">
+      <h2>Intermediário</h2>
+      <p>arquitetura, relações, decisões e trade-offs. Esta corrente tem 7 nodes, definidos por densidade semântica do tema.</p>
+      <div class="node-list" aria-label="Lista resumida navegável dos nodes do nível Intermediário">
+        <div class="node-list-item">
+          <span class="node-order">01</span>
+          <span>
+            <a class="node-title-link" href="#intermediario-01-contrato-de-topologia-e-roteamento"><span class="node-title">Contrato de topologia e roteamento</span></a>
+            <span class="node-meta"><code>intermediario/01-contrato-de-topologia-e-roteamento</code><code>01-contrato-de-topologia-e-roteamento</code><span>documentado</span><span class="node-actions"><a href="intermediario/01-contrato-de-topologia-e-roteamento/node.html">Abrir página</a></span></span>
+          </span>
+        </div>
+        <div class="node-list-item">
+          <span class="node-order">02</span>
+          <span>
+            <a class="node-title-link" href="#intermediario-02-broadcast-vs-consumidores-competindo"><span class="node-title">Broadcast vs consumidores competindo</span></a>
+            <span class="node-meta"><code>intermediario/02-broadcast-vs-consumidores-competindo</code><code>02-broadcast-vs-consumidores-competindo</code><span>documentado</span><span class="node-actions"><a href="intermediario/02-broadcast-vs-consumidores-competindo/node.html">Abrir página</a></span></span>
+          </span>
+        </div>
+        <div class="node-list-item">
+          <span class="node-order">03</span>
+          <span>
+            <a class="node-title-link" href="#intermediario-03-unroutable-mandatory-e-alternate-exchange"><span class="node-title">Unroutable, mandatory e Alternate Exchange</span></a>
+            <span class="node-meta"><code>intermediario/03-unroutable-mandatory-e-alternate-exchange</code><code>03-unroutable-mandatory-e-alternate-exchange</code><span>documentado</span><span class="node-actions"><a href="intermediario/03-unroutable-mandatory-e-alternate-exchange/node.html">Abrir página</a></span></span>
+          </span>
+        </div>
+        <div class="node-list-item">
+          <span class="node-order">04</span>
+          <span>
+            <a class="node-title-link" href="#intermediario-04-dead-letter-exchanges-e-retry-conceitual"><span class="node-title">Dead Letter Exchanges e retry conceitual</span></a>
+            <span class="node-meta"><code>intermediario/04-dead-letter-exchanges-e-retry-conceitual</code><code>04-dead-letter-exchanges-e-retry-conceitual</code><span>documentado</span><span class="node-actions"><a href="intermediario/04-dead-letter-exchanges-e-retry-conceitual/node.html">Abrir página</a></span></span>
+          </span>
+        </div>
+        <div class="node-list-item">
+          <span class="node-order">05</span>
+          <span>
+            <a class="node-title-link" href="#intermediario-05-policies-x-arguments-e-permissoes"><span class="node-title">Policies, x-arguments e permissões</span></a>
+            <span class="node-meta"><code>intermediario/05-policies-x-arguments-e-permissoes</code><code>05-policies-x-arguments-e-permissoes</code><span>documentado</span><span class="node-actions"><a href="intermediario/05-policies-x-arguments-e-permissoes/node.html">Abrir página</a></span></span>
+          </span>
+        </div>
+        <a href="#intermediario-06-exchange-to-exchange-bindings">
+          <span class="node-order">06</span>
+          <span>
+            <span class="node-title">Exchange-to-exchange bindings</span>
+            <span class="node-meta"><code>intermediario/06-exchange-to-exchange-bindings</code><code>06-exchange-to-exchange-bindings</code><span>documentado</span><span class="node-actions"><a href="intermediario/06-exchange-to-exchange-bindings/node.html">Abrir página</a></span></span>
+          </span>
+        </a>
+        <a href="#intermediario-07-publisher-confirms-e-confiabilidade">
+          <span class="node-order">07</span>
+          <span>
+            <span class="node-title">Publisher confirms e confiabilidade</span>
+            <span class="node-meta"><code>intermediario/07-publisher-confirms-e-confiabilidade</code><code>07-publisher-confirms-e-confiabilidade</code><span>planejado</span></span>
+          </span>
+        </a>
+      </div>
+    </section>
+    <section data-level="avancado">
+      <h2>Avançado</h2>
+      <p>limites, casos de borda, falhas, comportamento avançado e critérios de especialista. Esta corrente tem 5 nodes, definidos por densidade semântica do tema.</p>
+      <div class="node-list" aria-label="Lista resumida navegável dos nodes do nível Avançado">
+        <a href="#avancado-01-diagnostico-de-roteamento-e-observabilidade">
+          <span class="node-order">01</span>
+          <span>
+            <span class="node-title">Diagnóstico de roteamento e observabilidade</span>
+            <span class="node-meta"><code>avancado/01-diagnostico-de-roteamento-e-observabilidade</code><code>01-diagnostico-de-roteamento-e-observabilidade</code><span>planejado</span></span>
+          </span>
+        </a>
+        <a href="#avancado-02-tipos-especializados-e-plugins">
+          <span class="node-order">02</span>
+          <span>
+            <span class="node-title">Tipos especializados e plugins</span>
+            <span class="node-meta"><code>avancado/02-tipos-especializados-e-plugins</code><code>02-tipos-especializados-e-plugins</code><span>planejado</span></span>
+          </span>
+        </a>
+        <a href="#avancado-03-quorum-queues-dlx-e-redelivery-limits">
+          <span class="node-order">03</span>
+          <span>
+            <span class="node-title">Quorum queues, DLX e limites de redelivery</span>
+            <span class="node-meta"><code>avancado/03-quorum-queues-dlx-e-redelivery-limits</code><code>03-quorum-queues-dlx-e-redelivery-limits</code><span>planejado</span></span>
+          </span>
+        </a>
+        <a href="#avancado-04-federated-exchanges-e-wan">
+          <span class="node-order">04</span>
+          <span>
+            <span class="node-title">Federated exchanges e WAN</span>
+            <span class="node-meta"><code>avancado/04-federated-exchanges-e-wan</code><code>04-federated-exchanges-e-wan</code><span>planejado</span></span>
+          </span>
+        </a>
+        <a href="#avancado-05-governanca-e-limites-de-complexidade">
+          <span class="node-order">05</span>
+          <span>
+            <span class="node-title">Governança e limites de complexidade</span>
+            <span class="node-meta"><code>avancado/05-governanca-e-limites-de-complexidade</code><code>05-governanca-e-limites-de-complexidade</code><span>planejado</span></span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <h2>Matriz Anti-Repetição Global</h2>
+      <table>
+        <tr><th>Conceito</th><th>Primeira introdução</th><th>Retomadas permitidas</th><th>Retomadas bloqueadas</th><th>Motivo da fronteira</th></tr>
+        <tr>
+          <td>Exchange como roteador, não armazenamento</td>
+          <td><code>basico/01-modelo-amqp-e-papel-da-exchange</code></td>
+          <td>básico/06-filas-consumidores-e-entrega: Contraste curto com filas que armazenam mensagens.; avançado/05-governança-e-limites-de-complexidade: Critério para detectar topologias pensadas como fila mental.</td>
+          <td>intermediário/04-dead-letter-exchanges-e-retry-conceitual: DLX deve partir do conceito já herdado, sem redefinir exchange.</td>
+          <td>O conceito é base global; depois só pode aparecer como contraste ou critério de revisão.</td>
+        </tr>
+        <tr>
+          <td>Default exchange como direct especial</td>
+          <td><code>basico/02-exchange-padrao-e-publicacao-direta-aparente</code></td>
+          <td>intermediário/01-contrato-de-topologia-e-roteamento: Contraste com direct exchange própria para contratos explícitos.; intermediário/07-publisher-confirms-e-confiabilidade: Usada apenas para diferenciar erro de exchange inexistente e rota ausente.</td>
+          <td>avançado/02-tipos-especializados-e-plugins: Tipos especializados não devem reensinar a default exchange.</td>
+          <td>Default exchange deve resolver a confusão inicial e não dominar o restante do roadmap.</td>
+        </tr>
+        <tr>
+          <td>Bindings e routing keys</td>
+          <td><code>basico/03-bindings-routing-key-e-destinos</code></td>
+          <td>básico/04-direct-fanout-e-topic: Aplicação da regra em tipos diferentes.; intermediário/06-exchange-to-exchange-bindings: Nova camada com destino exchange.; avançado/04-federated-exchanges-e-wan: Contraste com replicação entre brokers.</td>
+          <td>avançado/05-governança-e-limites-de-complexidade: A governança deve avaliar contratos, não redefinir bindings.</td>
+          <td>Bindings são introduzidos uma vez e depois usados como pré-requisito para tipos, E2E e contratos.</td>
+        </tr>
+        <tr>
+          <td>Tipos clássicos de exchange</td>
+          <td><code>basico/04-direct-fanout-e-topic</code></td>
+          <td>básico/05-headers-e-metadados-de-roteamento: Headers completa a comparação como quarto tipo clássico.; intermediário/01-contrato-de-topologia-e-roteamento: Usar tipos como opções de desenho.; avançado/02-tipos-especializados-e-plugins: Contraste com tipos especializados.</td>
+          <td>avançado/01-diagnóstico-de-roteamento-e-observabilidade: Diagnóstico deve usar os tipos como contexto, não redefini-los.</td>
+          <td>O aprendizado dos tipos clássicos fica no básico; níveis posteriores tratam decisão e limites.</td>
+        </tr>
+        <tr>
+          <td>Broadcast versus competing consumers</td>
+          <td><code>basico/06-filas-consumidores-e-entrega</code></td>
+          <td>intermediário/02-broadcast-vs-consumidores-competindo: Aprofundamento arquitetural com cenários.; avançado/02-tipos-especializados-e-plugins: Contraste com particionamento por hash.</td>
+          <td>intermediário/03-unroutable-mandatory-e-alternate-exchange: Unroutable não é problema de competição entre consumers.</td>
+          <td>O básico define a diferença; o intermediário aplica em desenho de topologia.</td>
+        </tr>
+        <tr>
+          <td>AE e DLX como problemas diferentes</td>
+          <td><code>intermediario/03-unroutable-mandatory-e-alternate-exchange</code></td>
+          <td>intermediário/04-dead-letter-exchanges-e-retry-conceitual: Contraste explícito entre falha de rota inicial e saída posterior da fila.; avançado/01-diagnóstico-de-roteamento-e-observabilidade: Usar AE e DLX como sinais de diagnóstico distintos.</td>
+          <td>avançado/03-quorum-queues-dlx-e-redelivery-limits: O node de quorum deve aprofundar DLX, não reexplicar AE.</td>
+          <td>AE é para mensagem sem rota na exchange; DLX é para mensagem dead-lettered por uma fila.</td>
+        </tr>
+        <tr>
+          <td>Policies e x-arguments</td>
+          <td><code>intermediario/05-policies-x-arguments-e-permissoes</code></td>
+          <td>avançado/03-quorum-queues-dlx-e-redelivery-limits: Aplicação em delivery-limit e dead-lettering.; avançado/05-governança-e-limites-de-complexidade: Critério de governança para mudanças sem redeploy.</td>
+          <td>básico/06-filas-consumidores-e-entrega: O básico não deve antecipar governança operacional.</td>
+          <td>Policies entram apenas quando o aluno já entende o que está sendo configurado.</td>
+        </tr>
+        <tr>
+          <td>Composição avançada de topologia</td>
+          <td><code>intermediario/06-exchange-to-exchange-bindings</code></td>
+          <td>avançado/04-federated-exchanges-e-wan: Contraste entre composição local e replicação assíncrona externa.; avançado/05-governança-e-limites-de-complexidade: Critério para revisar grafos de exchanges.</td>
+          <td>básico/04-direct-fanout-e-topic: O básico não deve carregar topologia composta.</td>
+          <td>Composição só aparece depois que bindings simples e contratos já estão claros.</td>
+        </tr>
+      </table>
+    </section>
+
+    <h2>Nodes completos - Básico</h2>
+    <section class="node-section" id="basico-01-modelo-amqp-e-papel-da-exchange" data-level="basico" data-node-id="basico/01-modelo-amqp-e-papel-da-exchange" data-node-slug="01-modelo-amqp-e-papel-da-exchange">
+      <h2>Node 01 - Modelo AMQP e papel da exchange</h2>
+      <p><strong>Level:</strong> <code>basico</code> | <strong>Node ID:</strong> <code>basico/01-modelo-amqp-e-papel-da-exchange</code> | <strong>Slug:</strong> <code>01-modelo-amqp-e-papel-da-exchange</code> | <strong>Ordem local:</strong> 1</p>
+      <div class="callout"><strong>Papel na corrente local e no conjunto tri-level:</strong> Cria o modelo mental central: produtores publicam em exchanges, exchanges roteiam por bindings, filas armazenam e consumidores recebem das filas.</div>
+      <div class="two-col">
+        <div>
+          <h3>Pré-requisitos herdados</h3>
+<ul>
+          <li>Noção de mensagem, produtor, consumidor e comunicação assíncrona.</li>
+        </ul>
+          <h3>O que introduz pela primeira vez</h3>
+<ul>
+          <li>Exchange como entidade de roteamento</li>
+          <li>Fluxo publisher -&gt; exchange -&gt; binding -&gt; fila -&gt; consumer</li>
+          <li>Diferença entre roteamento e armazenamento</li>
+        </ul>
+          <h3>O que deve cobrir</h3>
+<ul>
+          <li>Explicar por que a exchange é o ponto de publicação no AMQP 0-9-1.</li>
+          <li>Mostrar que uma mensagem pode ir para zero, uma ou várias filas conforme o roteamento.</li>
+          <li>Diferenciar broker, publisher, exchange, queue, binding e consumer sem ainda entrar em tipos específicos.</li>
+          <li>Deixar explícito que a exchange não é o local onde consumidores se registram.</li>
+        </ul>
+          <h3>O que não deve cobrir</h3>
+<ul>
+          <li>Não detalhar direct, fanout, topic e headers; isso fica em nodes posteriores.</li>
+          <li>Não entrar em DLX, AE, confirms ou operação de produção.</li>
+          <li>Não transformar o fluxo em roteiro de comandos.</li>
+        </ul>
+        </div>
+        <div>
+          <h3>Perguntas de checagem</h3>
+<ul>
+          <li>Qual problema a exchange resolve entre produtores e consumidores?</li>
+          <li>Por que dizer que a exchange armazena mensagens é conceitualmente errado?</li>
+          <li>Como uma única publicação pode virar várias cópias em filas diferentes?</li>
+        </ul>
+          <h3>Vocabulário conceitual</h3>
+<ul>
+          <li>publisher</li>
+          <li>producer</li>
+          <li>broker</li>
+          <li>exchange</li>
+          <li>queue</li>
+          <li>binding</li>
+          <li>consumer</li>
+          <li>message copy</li>
+        </ul>
+          <h3>Exemplos conceituais ou diagramas permitidos</h3>
+<ul>
+          <li>Diagrama HTML/CSS do caminho publisher -&gt; exchange -&gt; bindings -&gt; queues -&gt; consumers.</li>
+          <li>Cenário conceitual de eventos de pedido consumidos por faturamento e notificação em filas separadas.</li>
+        </ul>
+          <h3>Armadilhas e erros comuns</h3>
+<ul>
+          <li>Confundir exchange com fila.</li>
+          <li>Achar que consumidor assina exchange diretamente.</li>
+          <li>Achar que existe sempre uma única fila por publicação.</li>
+        </ul>
+        </div>
+      </div>
+      <h3>Critério de domínio</h3>
+      <p>Consegue desenhar o fluxo de uma mensagem e explicar onde ocorre roteamento, onde ocorre armazenamento e onde ocorre consumo.</p>
+      <h3>Handoff</h3>
+      <p>Com esse fluxo claro, o próximo node apresenta a exchange padrão, que cria a aparência de publicação direta em fila.</p>
+      <h3>Referências específicas</h3>
+      <table>
+        <tr><th>Fonte</th><th>URL</th><th>Por que usar neste node</th></tr>
+          <tr>
+            <td><code>F1</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/exchanges">https://www.rabbitmq.com/docs/exchanges</a></td>
+            <td>Definição oficial de exchange e bindings.</td>
+          </tr>
+          <tr>
+            <td><code>F2</code></td>
+            <td><a href="https://www.rabbitmq.com/tutorials/amqp-concepts">https://www.rabbitmq.com/tutorials/amqp-concepts</a></td>
+            <td>Modelo AMQP 0-9-1 em visão ampla.</td>
+          </tr>
+          <tr>
+            <td><code>F16</code></td>
+            <td><a href="https://www.rabbitmq.com/assets/files/amqp0-9-1-43a54a005e97180a4fbe6e567a125d84.pdf">https://www.rabbitmq.com/assets/files/amqp0-9-1-43a54a005e97180a4fbe6e567a125d84.pdf</a></td>
+            <td>Base do protocolo AMQP 0-9-1.</td>
+          </tr>
+      </table>
+    </section>
+    <section class="node-section" id="basico-02-exchange-padrao-e-publicacao-direta-aparente" data-level="basico" data-node-id="basico/02-exchange-padrao-e-publicacao-direta-aparente" data-node-slug="02-exchange-padrao-e-publicacao-direta-aparente">
+      <h2>Node 02 - Exchange padrão e publicação direta aparente</h2>
+      <p><strong>Level:</strong> <code>basico</code> | <strong>Node ID:</strong> <code>basico/02-exchange-padrao-e-publicacao-direta-aparente</code> | <strong>Slug:</strong> <code>02-exchange-padrao-e-publicacao-direta-aparente</code> | <strong>Ordem local:</strong> 2</p>
+      <div class="callout"><strong>Papel na corrente local e no conjunto tri-level:</strong> Remove a principal ambiguidade inicial: publicar com exchange vazia parece publicar em uma fila, mas ainda usa uma direct exchange especial.</div>
+      <div class="two-col">
+        <div>
+          <h3>Pré-requisitos herdados</h3>
+<ul>
+          <li>Entender o fluxo básico publisher -&gt; exchange -&gt; fila.</li>
+        </ul>
+          <h3>O que introduz pela primeira vez</h3>
+<ul>
+          <li>Default exchange</li>
+          <li>Nome vazio da exchange em AMQP 0-9-1</li>
+          <li>Binding automático pelo nome da fila</li>
+        </ul>
+          <h3>O que deve cobrir</h3>
+<ul>
+          <li>Explicar que a default exchange sempre existe e usa nome vazio na publicação AMQP 0-9-1.</li>
+          <li>Mostrar o binding automático de cada fila à default exchange usando o nome da fila como routing key.</li>
+          <li>Comparar uso simples da default exchange com uma direct exchange própria para topologias explícitas.</li>
+          <li>Registrar que a default exchange não deve ser tratada como exchange customizada para bindings manuais.</li>
+        </ul>
+          <h3>O que não deve cobrir</h3>
+<ul>
+          <li>Não reensinar direct exchange comum em profundidade; isso fica no node de tipos.</li>
+          <li>Não apresentar a default exchange como solução padrão para topologias de domínio.</li>
+          <li>Não discutir permissões e governance ainda.</li>
+        </ul>
+        </div>
+        <div>
+          <h3>Perguntas de checagem</h3>
+<ul>
+          <li>Por que `exchange=&quot;&quot;` não significa ausência de exchange?</li>
+          <li>Quando uma direct exchange própria é mais clara do que usar a default exchange?</li>
+          <li>O que torna `amq.default` especial em relação a exchanges declaradas pela aplicação?</li>
+        </ul>
+          <h3>Vocabulário conceitual</h3>
+<ul>
+          <li>default exchange</li>
+          <li>amq.default</li>
+          <li>empty string exchange name</li>
+          <li>routing key como nome da fila</li>
+          <li>pre-declared exchange</li>
+        </ul>
+          <h3>Exemplos conceituais ou diagramas permitidos</h3>
+<ul>
+          <li>Comparação visual entre publicação na default exchange e publicação em uma exchange `orders.direct`.</li>
+          <li>Cenário conceitual de fila `task_queue` recebendo pela routing key igual ao nome da fila.</li>
+        </ul>
+          <h3>Armadilhas e erros comuns</h3>
+<ul>
+          <li>Dizer que RabbitMQ permite publicar diretamente no consumidor.</li>
+          <li>Usar a default exchange como se fosse uma exchange de domínio com bindings arbitrários.</li>
+          <li>Confundir o nome de permissão `amq.default` com o nome usado na publicação AMQP 0-9-1.</li>
+        </ul>
+        </div>
+      </div>
+      <h3>Critério de domínio</h3>
+      <p>Consegue explicar por que a publicação direta em fila é uma conveniência da default exchange, não uma exceção ao modelo de exchanges.</p>
+      <h3>Handoff</h3>
+      <p>Depois da exchange padrão, o próximo node detalha bindings e routing keys como regras que fazem o roteamento acontecer.</p>
+      <h3>Referências específicas</h3>
+      <table>
+        <tr><th>Fonte</th><th>URL</th><th>Por que usar neste node</th></tr>
+          <tr>
+            <td><code>F1</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/exchanges">https://www.rabbitmq.com/docs/exchanges</a></td>
+            <td>Propriedades da default exchange.</td>
+          </tr>
+          <tr>
+            <td><code>F2</code></td>
+            <td><a href="https://www.rabbitmq.com/tutorials/amqp-concepts">https://www.rabbitmq.com/tutorials/amqp-concepts</a></td>
+            <td>Exemplo oficial de binding automático por nome de fila.</td>
+          </tr>
+      </table>
+    </section>
+    <section class="node-section" id="basico-03-bindings-routing-key-e-destinos" data-level="basico" data-node-id="basico/03-bindings-routing-key-e-destinos" data-node-slug="03-bindings-routing-key-e-destinos">
+      <h2>Node 03 - Bindings, routing key e destinos</h2>
+      <p><strong>Level:</strong> <code>basico</code> | <strong>Node ID:</strong> <code>basico/03-bindings-routing-key-e-destinos</code> | <strong>Slug:</strong> <code>03-bindings-routing-key-e-destinos</code> | <strong>Ordem local:</strong> 3</p>
+      <div class="callout"><strong>Papel na corrente local e no conjunto tri-level:</strong> Transforma exchange de conceito abstrato em tabela de roteamento: bindings ligam source exchange a destinos e a routing key participa conforme o tipo.</div>
+      <div class="two-col">
+        <div>
+          <h3>Pré-requisitos herdados</h3>
+<ul>
+          <li>Entender que exchanges recebem publicações e roteiam para destinos.</li>
+        </ul>
+          <h3>O que introduz pela primeira vez</h3>
+<ul>
+          <li>Binding como regra de roteamento</li>
+          <li>Routing key da publicação</li>
+          <li>Binding key como critério de ligação</li>
+          <li>Destino queue, stream ou exchange</li>
+        </ul>
+          <h3>O que deve cobrir</h3>
+<ul>
+          <li>Definir source, destination, destination type e argumentos de binding.</li>
+          <li>Explicar zero, uma ou várias rotas possíveis para uma publicação.</li>
+          <li>Separar routing key enviada pelo publisher da regra criada no binding.</li>
+          <li>Mostrar que uma exchange recém-declarada sem bindings é uma tabela de roteamento vazia.</li>
+        </ul>
+          <h3>O que não deve cobrir</h3>
+<ul>
+          <li>Não detalhar comportamento por tipo de exchange além do necessário para preparar o próximo node.</li>
+          <li>Não cobrir E2E em profundidade; apenas indicar que outro exchange pode ser destino.</li>
+          <li>Não tratar mensagens sem rota com mandatory e AE; isso fica no intermediário.</li>
+        </ul>
+        </div>
+        <div>
+          <h3>Perguntas de checagem</h3>
+<ul>
+          <li>O que muda entre uma exchange vazia e uma fila vazia?</li>
+          <li>Quem define a routing key e quem define o binding?</li>
+          <li>Como uma mesma mensagem pode ser roteada para duas filas diferentes?</li>
+        </ul>
+          <h3>Vocabulário conceitual</h3>
+<ul>
+          <li>binding</li>
+          <li>binding key</li>
+          <li>routing key</li>
+          <li>source exchange</li>
+          <li>destination queue</li>
+          <li>destination exchange</li>
+          <li>binding arguments</li>
+        </ul>
+          <h3>Exemplos conceituais ou diagramas permitidos</h3>
+<ul>
+          <li>Mapa HTML/CSS de uma exchange com três bindings e destinos diferentes.</li>
+          <li>Cenário de `orders.created` indo para fila de e-mail e fila de auditoria por bindings distintos.</li>
+        </ul>
+          <h3>Armadilhas e erros comuns</h3>
+<ul>
+          <li>Tratar binding key e routing key como sinônimos fora de contexto.</li>
+          <li>Esperar que uma exchange sem bindings guarde mensagens para depois.</li>
+          <li>Esquecer que alguns tipos ignoram routing key.</li>
+        </ul>
+        </div>
+      </div>
+      <h3>Critério de domínio</h3>
+      <p>Consegue ler uma topologia simples e prever quais filas recebem a mensagem a partir dos bindings.</p>
+      <h3>Handoff</h3>
+      <p>Com bindings e routing keys definidos, o próximo node compara os tipos principais de exchange.</p>
+      <h3>Referências específicas</h3>
+      <table>
+        <tr><th>Fonte</th><th>URL</th><th>Por que usar neste node</th></tr>
+          <tr>
+            <td><code>F1</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/exchanges">https://www.rabbitmq.com/docs/exchanges</a></td>
+            <td>Definição oficial de bindings e propriedades.</td>
+          </tr>
+          <tr>
+            <td><code>F2</code></td>
+            <td><a href="https://www.rabbitmq.com/tutorials/amqp-concepts">https://www.rabbitmq.com/tutorials/amqp-concepts</a></td>
+            <td>Modelo AMQP e exemplos de routing rules.</td>
+          </tr>
+      </table>
+    </section>
+    <section class="node-section" id="basico-04-direct-fanout-e-topic" data-level="basico" data-node-id="basico/04-direct-fanout-e-topic" data-node-slug="04-direct-fanout-e-topic">
+      <h2>Node 04 - Direct, fanout e topic</h2>
+      <p><strong>Level:</strong> <code>basico</code> | <strong>Node ID:</strong> <code>basico/04-direct-fanout-e-topic</code> | <strong>Slug:</strong> <code>04-direct-fanout-e-topic</code> | <strong>Ordem local:</strong> 4</p>
+      <div class="callout"><strong>Papel na corrente local e no conjunto tri-level:</strong> Apresenta os três tipos que resolvem a maioria dos desenhos: match exato, broadcast e padrões por segmentos.</div>
+      <div class="two-col">
+        <div>
+          <h3>Pré-requisitos herdados</h3>
+<ul>
+          <li>Entender binding, routing key e múltiplos destinos.</li>
+        </ul>
+          <h3>O que introduz pela primeira vez</h3>
+<ul>
+          <li>Direct exchange</li>
+          <li>Fanout exchange</li>
+          <li>Topic exchange</li>
+          <li>Wildcard `*`</li>
+          <li>Wildcard `#`</li>
+        </ul>
+          <h3>O que deve cobrir</h3>
+<ul>
+          <li>Comparar direct como igualdade exata entre routing key e binding key.</li>
+          <li>Explicar fanout como cópia para todos os destinos ligados, ignorando routing key.</li>
+          <li>Explicar topic como match por segmentos separados por ponto, com `*` e `#`.</li>
+          <li>Mostrar quando direct pode fazer multicast se várias filas usam a mesma binding key.</li>
+          <li>Destacar que `#` em topic pode aproximar o comportamento de fanout.</li>
+        </ul>
+          <h3>O que não deve cobrir</h3>
+<ul>
+          <li>Não cobrir headers exchange; fica no próximo node.</li>
+          <li>Não discutir DLX, AE, policies ou plugins.</li>
+          <li>Não aprofundar naming conventions de eventos além dos exemplos conceituais.</li>
+        </ul>
+        </div>
+        <div>
+          <h3>Perguntas de checagem</h3>
+<ul>
+          <li>Quando direct é suficiente?</li>
+          <li>Por que fanout não é o mesmo que vários consumidores na mesma fila?</li>
+          <li>Quando topic é mais expressivo que direct?</li>
+          <li>Como `#` pode tornar um binding amplo demais?</li>
+        </ul>
+          <h3>Vocabulário conceitual</h3>
+<ul>
+          <li>direct</li>
+          <li>fanout</li>
+          <li>topic</li>
+          <li>routing pattern</li>
+          <li>`*` wildcard</li>
+          <li>`#` wildcard</li>
+          <li>broadcast</li>
+          <li>multicast</li>
+        </ul>
+          <h3>Exemplos conceituais ou diagramas permitidos</h3>
+<ul>
+          <li>Tabela comparando `orders.created`, `logs.error` e `audit.user.login` em direct/fanout/topic.</li>
+          <li>Cenário de notificação e auditoria recebendo cópias por filas diferentes.</li>
+        </ul>
+          <h3>Armadilhas e erros comuns</h3>
+<ul>
+          <li>Usar fanout quando se queria filtro por categoria.</li>
+          <li>Usar topic sem convenção estável de routing keys.</li>
+          <li>Achar que direct só entrega para uma fila.</li>
+          <li>Usar `#` como curinga genérico sem avaliar volume.</li>
+        </ul>
+        </div>
+      </div>
+      <h3>Critério de domínio</h3>
+      <p>Consegue escolher entre direct, fanout e topic a partir da intenção de roteamento e explicar a consequência para cada fila ligada.</p>
+      <h3>Handoff</h3>
+      <p>Depois dos tipos baseados em key textual, o próximo node cobre headers exchange para critérios por atributos.</p>
+      <h3>Referências específicas</h3>
+      <table>
+        <tr><th>Fonte</th><th>URL</th><th>Por que usar neste node</th></tr>
+          <tr>
+            <td><code>F1</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/exchanges">https://www.rabbitmq.com/docs/exchanges</a></td>
+            <td>Definições atuais de direct, fanout e topic.</td>
+          </tr>
+          <tr>
+            <td><code>F2</code></td>
+            <td><a href="https://www.rabbitmq.com/tutorials/amqp-concepts">https://www.rabbitmq.com/tutorials/amqp-concepts</a></td>
+            <td>Guia oficial com exemplos conceituais dos tipos clássicos.</td>
+          </tr>
+      </table>
+    </section>
+    <section class="node-section" id="basico-05-headers-e-metadados-de-roteamento" data-level="basico" data-node-id="basico/05-headers-e-metadados-de-roteamento" data-node-slug="05-headers-e-metadados-de-roteamento">
+      <h2>Node 05 - Headers exchange e metadados de roteamento</h2>
+      <p><strong>Level:</strong> <code>basico</code> | <strong>Node ID:</strong> <code>basico/05-headers-e-metadados-de-roteamento</code> | <strong>Slug:</strong> <code>05-headers-e-metadados-de-roteamento</code> | <strong>Ordem local:</strong> 5</p>
+      <div class="callout"><strong>Papel na corrente local e no conjunto tri-level:</strong> Completa os tipos clássicos com roteamento por atributos, útil quando uma routing key textual ficaria artificial.</div>
+      <div class="two-col">
+        <div>
+          <h3>Pré-requisitos herdados</h3>
+<ul>
+          <li>Entender direct, fanout e topic como roteamento por key ou padrão.</li>
+        </ul>
+          <h3>O que introduz pela primeira vez</h3>
+<ul>
+          <li>Headers exchange</li>
+          <li>`x-match`</li>
+          <li>Roteamento por headers</li>
+          <li>Payload opaco para o broker</li>
+        </ul>
+          <h3>O que deve cobrir</h3>
+<ul>
+          <li>Explicar que headers exchange ignora routing key e avalia headers da mensagem.</li>
+          <li>Diferenciar `x-match=all`, `x-match=any`, `all-with-x` e `any-with-x` em nível conceitual.</li>
+          <li>Mostrar quando múltiplos atributos independentes justificam headers.</li>
+          <li>Reforçar que o broker não interpreta o payload para rotear.</li>
+        </ul>
+          <h3>O que não deve cobrir</h3>
+<ul>
+          <li>Não tratar headers como substituto automático de topic.</li>
+          <li>Não cobrir serializers ou payload schema.</li>
+          <li>Não discutir plugins de exchange especializada ainda.</li>
+        </ul>
+        </div>
+        <div>
+          <h3>Perguntas de checagem</h3>
+<ul>
+          <li>Por que headers exchange ignora routing key?</li>
+          <li>Quando `topic` é mais legível que headers?</li>
+          <li>Que risco aparece quando o roteamento depende de headers mal padronizados?</li>
+        </ul>
+          <h3>Vocabulário conceitual</h3>
+<ul>
+          <li>headers exchange</li>
+          <li>message headers</li>
+          <li>`x-match`</li>
+          <li>all</li>
+          <li>any</li>
+          <li>routing by attributes</li>
+          <li>opaque payload</li>
+        </ul>
+          <h3>Exemplos conceituais ou diagramas permitidos</h3>
+<ul>
+          <li>Cenário conceitual de mensagens com `tenant=acme`, `format=pdf`, `priority=high`.</li>
+          <li>Tabela de escolha entre topic e headers para categorias hierárquicas versus atributos independentes.</li>
+        </ul>
+          <h3>Armadilhas e erros comuns</h3>
+<ul>
+          <li>Criar muitos headers de roteamento sem contrato.</li>
+          <li>Misturar dados de negócio sensíveis em headers usados só para roteamento.</li>
+          <li>Forçar headers quando uma routing key simples resolveria.</li>
+        </ul>
+        </div>
+      </div>
+      <h3>Critério de domínio</h3>
+      <p>Consegue explicar headers exchange sem confundir headers de mensagem com corpo da mensagem ou com routing key textual.</p>
+      <h3>Handoff</h3>
+      <p>Com os tipos clássicos cobertos, o próximo node separa definitivamente fila, consumidor, ack e distribuição de trabalho.</p>
+      <h3>Referências específicas</h3>
+      <table>
+        <tr><th>Fonte</th><th>URL</th><th>Por que usar neste node</th></tr>
+          <tr>
+            <td><code>F1</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/exchanges">https://www.rabbitmq.com/docs/exchanges</a></td>
+            <td>Documentação atual do tipo headers e argumentos.</td>
+          </tr>
+          <tr>
+            <td><code>F2</code></td>
+            <td><a href="https://www.rabbitmq.com/tutorials/amqp-concepts">https://www.rabbitmq.com/tutorials/amqp-concepts</a></td>
+            <td>Guia AMQP sobre headers exchange.</td>
+          </tr>
+      </table>
+    </section>
+    <section class="node-section" id="basico-06-filas-consumidores-e-entrega" data-level="basico" data-node-id="basico/06-filas-consumidores-e-entrega" data-node-slug="06-filas-consumidores-e-entrega">
+      <h2>Node 06 - Filas, consumidores e entrega</h2>
+      <p><strong>Level:</strong> <code>basico</code> | <strong>Node ID:</strong> <code>basico/06-filas-consumidores-e-entrega</code> | <strong>Slug:</strong> <code>06-filas-consumidores-e-entrega</code> | <strong>Ordem local:</strong> 6</p>
+      <div class="callout"><strong>Papel na corrente local e no conjunto tri-level:</strong> Fecha a base separando o que pertence à exchange do que pertence à fila e ao consumidor: armazenamento, entrega, concorrência e acknowledgement.</div>
+      <div class="two-col">
+        <div>
+          <h3>Pré-requisitos herdados</h3>
+<ul>
+          <li>Entender exchanges, bindings, routing keys e tipos clássicos.</li>
+        </ul>
+          <h3>O que introduz pela primeira vez</h3>
+<ul>
+          <li>Fila como armazenamento ordenado</li>
+          <li>Consumer como subscription de entrega</li>
+          <li>Acknowledgement de consumidor</li>
+          <li>Competição entre consumidores da mesma fila</li>
+        </ul>
+          <h3>O que deve cobrir</h3>
+<ul>
+          <li>Explicar que filas armazenam mensagens prontas e entregues mas ainda não reconhecidas.</li>
+          <li>Mostrar que consumidores consomem de filas, não de exchanges.</li>
+          <li>Introduzir acknowledgements apenas como remoção segura da fila após processamento.</li>
+          <li>Diferenciar várias filas recebendo cópias de vários consumidores competindo dentro de uma fila.</li>
+        </ul>
+          <h3>O que não deve cobrir</h3>
+<ul>
+          <li>Não aprofundar prefetch, retries, redelivery loops ou confirms.</li>
+          <li>Não discutir quorum queues ainda.</li>
+          <li>Não reabrir os tipos de exchange em detalhes.</li>
+        </ul>
+        </div>
+        <div>
+          <h3>Perguntas de checagem</h3>
+<ul>
+          <li>Onde a mensagem fica se não houver consumidor online?</li>
+          <li>O que muda quando dois consumidores estão na mesma fila?</li>
+          <li>Por que broadcast exige múltiplas filas quando cada serviço precisa de sua própria cópia?</li>
+        </ul>
+          <h3>Vocabulário conceitual</h3>
+<ul>
+          <li>ready message</li>
+          <li>delivered message</li>
+          <li>consumer</li>
+          <li>subscription</li>
+          <li>acknowledgement</li>
+          <li>competing consumers</li>
+        </ul>
+          <h3>Exemplos conceituais ou diagramas permitidos</h3>
+<ul>
+          <li>Cenário conceitual de uma fila `emails` com três workers competindo por mensagens.</li>
+          <li>Contraste visual entre uma fila com três consumers e três filas ligadas à mesma exchange.</li>
+        </ul>
+          <h3>Armadilhas e erros comuns</h3>
+<ul>
+          <li>Achar que fanout para uma fila com três consumers entrega três cópias.</li>
+          <li>Confundir ack do consumidor com confirm do publisher.</li>
+          <li>Supor que exchange segura mensagem até o consumer aparecer.</li>
+        </ul>
+        </div>
+      </div>
+      <h3>Critério de domínio</h3>
+      <p>Consegue explicar a diferença entre broadcast para filas e distribuição de carga entre consumidores da mesma fila.</p>
+      <h3>Handoff</h3>
+      <p>A base está completa; o intermediário passa a tratar escolhas de topologia, falhas de roteamento e desenho operacional.</p>
+      <h3>Referências específicas</h3>
+      <table>
+        <tr><th>Fonte</th><th>URL</th><th>Por que usar neste node</th></tr>
+          <tr>
+            <td><code>F4</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/queues">https://www.rabbitmq.com/docs/queues</a></td>
+            <td>Definição oficial de filas e estados de mensagens.</td>
+          </tr>
+          <tr>
+            <td><code>F5</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/consumers">https://www.rabbitmq.com/docs/consumers</a></td>
+            <td>Definição oficial de consumidores.</td>
+          </tr>
+          <tr>
+            <td><code>F6</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/confirms">https://www.rabbitmq.com/docs/confirms</a></td>
+            <td>Base de acknowledgements e negative acknowledgements.</td>
+          </tr>
+      </table>
+    </section>
+    <h2>Nodes completos - Intermediário</h2>
+    <section class="node-section" id="intermediario-01-contrato-de-topologia-e-roteamento" data-level="intermediario" data-node-id="intermediario/01-contrato-de-topologia-e-roteamento" data-node-slug="01-contrato-de-topologia-e-roteamento">
+      <h2>Node 01 - Contrato de topologia e roteamento</h2>
+      <p><strong>Level:</strong> <code>intermediario</code> | <strong>Node ID:</strong> <code>intermediario/01-contrato-de-topologia-e-roteamento</code> | <strong>Slug:</strong> <code>01-contrato-de-topologia-e-roteamento</code> | <strong>Ordem local:</strong> 1</p>
+      <div class="callout"><strong>Papel na corrente local e no conjunto tri-level:</strong> Ensina a escolher exchanges como contrato entre produtores e topologia, reduzindo acoplamento com filas internas.</div>
+      <div class="two-col">
+        <div>
+          <h3>Pré-requisitos herdados</h3>
+<ul>
+          <li>Dominar o vocabulário básico e os tipos clássicos.</li>
+        </ul>
+          <h3>O que introduz pela primeira vez</h3>
+<ul>
+          <li>Contrato de routing key</li>
+          <li>Ownership de exchange</li>
+          <li>Fronteira publisher-topology-consumer</li>
+        </ul>
+          <h3>O que deve cobrir</h3>
+<ul>
+          <li>Definir quando o produtor deve conhecer uma routing key, mas não a fila final.</li>
+          <li>Estabelecer convenções de nomes de exchanges por domínio ou fluxo.</li>
+          <li>Comparar uma exchange por domínio, por evento, por severidade e por tenant.</li>
+          <li>Explicar como mudanças de consumidores podem ocorrer via bindings sem alterar publishers quando o contrato é estável.</li>
+        </ul>
+          <h3>O que não deve cobrir</h3>
+<ul>
+          <li>Não reexplicar tipos básicos; use-os como pré-requisito.</li>
+          <li>Não discutir permissões e policies em profundidade; isso fica em node próprio.</li>
+          <li>Não desenhar topologias multi-cluster ainda.</li>
+        </ul>
+        </div>
+        <div>
+          <h3>Perguntas de checagem</h3>
+<ul>
+          <li>Que parte do contrato pertence ao publisher?</li>
+          <li>Como adicionar um novo consumidor sem mudar o produtor?</li>
+          <li>Quando uma routing key vira contrato público demais?</li>
+        </ul>
+          <h3>Vocabulário conceitual</h3>
+<ul>
+          <li>topology contract</li>
+          <li>event contract</li>
+          <li>exchange ownership</li>
+          <li>routing key convention</li>
+          <li>consumer group queue</li>
+        </ul>
+          <h3>Exemplos conceituais ou diagramas permitidos</h3>
+<ul>
+          <li>Matriz de decisão com domínio `orders`, routing keys `orders.created` e filas internas por serviço.</li>
+          <li>Cenário de evolução: adicionar auditoria sem redeploy do publisher.</li>
+        </ul>
+          <h3>Armadilhas e erros comuns</h3>
+<ul>
+          <li>Nomear fila como routing key pública quando a fila é detalhe interno.</li>
+          <li>Criar uma exchange por consumidor em vez de por contrato de publicação.</li>
+          <li>Trocar routing key sem plano de compatibilidade.</li>
+        </ul>
+        </div>
+      </div>
+      <h3>Critério de domínio</h3>
+      <p>Consegue propor uma topologia onde producers conhecem o contrato de publicação, mas não os nomes das filas consumidoras.</p>
+      <h3>Handoff</h3>
+      <p>Com contrato definido, o próximo node aprofunda a decisão entre broadcast e competição por fila.</p>
+      <h3>Referências específicas</h3>
+      <table>
+        <tr><th>Fonte</th><th>URL</th><th>Por que usar neste node</th></tr>
+          <tr>
+            <td><code>F1</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/exchanges">https://www.rabbitmq.com/docs/exchanges</a></td>
+            <td>Base de bindings e tipos de exchange.</td>
+          </tr>
+          <tr>
+            <td><code>F3</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/publishers">https://www.rabbitmq.com/docs/publishers</a></td>
+            <td>Publicação AMQP 0-9-1 em exchanges.</td>
+          </tr>
+      </table>
+    </section>
+    <section class="node-section" id="intermediario-02-broadcast-vs-consumidores-competindo" data-level="intermediario" data-node-id="intermediario/02-broadcast-vs-consumidores-competindo" data-node-slug="02-broadcast-vs-consumidores-competindo">
+      <h2>Node 02 - Broadcast vs consumidores competindo</h2>
+      <p><strong>Level:</strong> <code>intermediario</code> | <strong>Node ID:</strong> <code>intermediario/02-broadcast-vs-consumidores-competindo</code> | <strong>Slug:</strong> <code>02-broadcast-vs-consumidores-competindo</code> | <strong>Ordem local:</strong> 2</p>
+      <div class="callout"><strong>Papel na corrente local e no conjunto tri-level:</strong> Isola a decisão arquitetural que mais causa erro: cópia por fila é diferente de distribuição entre consumers de uma mesma fila.</div>
+      <div class="two-col">
+        <div>
+          <h3>Pré-requisitos herdados</h3>
+<ul>
+          <li>Entender filas e consumidores como destino de entrega, não como tipo de exchange.</li>
+        </ul>
+          <h3>O que introduz pela primeira vez</h3>
+<ul>
+          <li>Broadcast para várias filas</li>
+          <li>Competing consumers</li>
+          <li>Multicast por direct/topic</li>
+          <li>Distribuição por consumer capacity e prefetch</li>
+        </ul>
+          <h3>O que deve cobrir</h3>
+<ul>
+          <li>Explicar broadcast como múltiplas filas recebendo cópias da mesma publicação.</li>
+          <li>Explicar load balancing como consumidores competindo por mensagens da mesma fila.</li>
+          <li>Mostrar que fanout não entrega uma cópia para cada consumer se todos estão na mesma fila.</li>
+          <li>Conectar prefetch e capacidade de consumer à distribuição, sem entrar em tuning detalhado.</li>
+        </ul>
+          <h3>O que não deve cobrir</h3>
+<ul>
+          <li>Não repetir detalhes de fanout/direct/topic além do necessário.</li>
+          <li>Não transformar prefetch em guia operacional.</li>
+          <li>Não discutir single active consumer e ordenação em profundidade ainda.</li>
+        </ul>
+        </div>
+        <div>
+          <h3>Perguntas de checagem</h3>
+<ul>
+          <li>Se três serviços precisam processar o mesmo evento, quantas filas são necessárias?</li>
+          <li>Se três workers dividem trabalho, eles ficam em filas separadas ou na mesma fila?</li>
+          <li>Como prefetch pode afetar a distribuição observada?</li>
+        </ul>
+          <h3>Vocabulário conceitual</h3>
+<ul>
+          <li>broadcast</li>
+          <li>copy per queue</li>
+          <li>competing consumers</li>
+          <li>consumer capacity</li>
+          <li>prefetch</li>
+          <li>queue group</li>
+        </ul>
+          <h3>Exemplos conceituais ou diagramas permitidos</h3>
+<ul>
+          <li>Contraste visual com uma exchange ligada a três filas versus uma fila ligada a três consumers.</li>
+          <li>Cenário de e-mail, auditoria e analytics recebendo o mesmo evento em filas separadas.</li>
+        </ul>
+          <h3>Armadilhas e erros comuns</h3>
+<ul>
+          <li>Usar fanout esperando balanceamento.</li>
+          <li>Criar uma fila por worker quando a intenção é dividir trabalho.</li>
+          <li>Colocar serviços diferentes na mesma fila e esperar que todos recebam o evento.</li>
+        </ul>
+        </div>
+      </div>
+      <h3>Critério de domínio</h3>
+      <p>Consegue decidir se um cenário exige cópias independentes em filas separadas ou concorrência dentro de uma única fila.</p>
+      <h3>Handoff</h3>
+      <p>Depois da distribuição planejada, o próximo node trata a publicação que não encontra rota.</p>
+      <h3>Referências específicas</h3>
+      <table>
+        <tr><th>Fonte</th><th>URL</th><th>Por que usar neste node</th></tr>
+          <tr>
+            <td><code>F1</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/exchanges">https://www.rabbitmq.com/docs/exchanges</a></td>
+            <td>Fanout, direct e bindings para múltiplos destinos.</td>
+          </tr>
+          <tr>
+            <td><code>F4</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/queues">https://www.rabbitmq.com/docs/queues</a></td>
+            <td>Filas como armazenamento e entrega.</td>
+          </tr>
+          <tr>
+            <td><code>F5</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/consumers">https://www.rabbitmq.com/docs/consumers</a></td>
+            <td>Consumidores e capacidade de consumo.</td>
+          </tr>
+          <tr>
+            <td><code>F6</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/confirms">https://www.rabbitmq.com/docs/confirms</a></td>
+            <td>Prefetch e acknowledgements como base de entrega.</td>
+          </tr>
+      </table>
+    </section>
+    <section class="node-section" id="intermediario-03-unroutable-mandatory-e-alternate-exchange" data-level="intermediario" data-node-id="intermediario/03-unroutable-mandatory-e-alternate-exchange" data-node-slug="03-unroutable-mandatory-e-alternate-exchange">
+      <h2>Node 03 - Unroutable, mandatory e Alternate Exchange</h2>
+      <p><strong>Level:</strong> <code>intermediario</code> | <strong>Node ID:</strong> <code>intermediario/03-unroutable-mandatory-e-alternate-exchange</code> | <strong>Slug:</strong> <code>03-unroutable-mandatory-e-alternate-exchange</code> | <strong>Ordem local:</strong> 3</p>
+      <div class="callout"><strong>Papel na corrente local e no conjunto tri-level:</strong> Cobre o que acontece quando a exchange não encontra binding compatível e como publishers e AEs lidam com esse caso.</div>
+      <div class="two-col">
+        <div>
+          <h3>Pré-requisitos herdados</h3>
+<ul>
+          <li>Entender bindings e contrato de routing.</li>
+        </ul>
+          <h3>O que introduz pela primeira vez</h3>
+<ul>
+          <li>Unroutable message</li>
+          <li>`mandatory` flag</li>
+          <li>`basic.return`</li>
+          <li>Alternate Exchange</li>
+          <li>Fallback de roteamento</li>
+        </ul>
+          <h3>O que deve cobrir</h3>
+<ul>
+          <li>Explicar descarte padrão ou republish para AE quando `mandatory=false` e não há rota.</li>
+          <li>Explicar retorno ao publisher quando `mandatory=true` e há handler de retorno.</li>
+          <li>Comparar mandatory com AE: sinal ao publisher versus roteamento alternativo.</li>
+          <li>Mostrar usos de AE para migração de routing keys, coleta de órfãs e semântica fallback.</li>
+        </ul>
+          <h3>O que não deve cobrir</h3>
+<ul>
+          <li>Não confundir AE com DLX; DLX fica no próximo node.</li>
+          <li>Não afirmar que mandatory garante entrega ao consumidor.</li>
+          <li>Não tratar AE como solução para falha de processamento dentro da fila.</li>
+        </ul>
+        </div>
+        <div>
+          <h3>Perguntas de checagem</h3>
+<ul>
+          <li>O que acontece com uma mensagem sem binding compatível?</li>
+          <li>Quando AE é melhor que depender só de retorno ao publisher?</li>
+          <li>Por que mandatory não prova que o consumer processou a mensagem?</li>
+        </ul>
+          <h3>Vocabulário conceitual</h3>
+<ul>
+          <li>unroutable</li>
+          <li>`mandatory`</li>
+          <li>`basic.return`</li>
+          <li>alternate exchange</li>
+          <li>fallback routing</li>
+          <li>routing miss</li>
+        </ul>
+          <h3>Exemplos conceituais ou diagramas permitidos</h3>
+<ul>
+          <li>Cenário conceitual de migração de `orders.created.v1` para `orders.created.v2` com AE capturando órfãs.</li>
+          <li>Tabela comparando descarte, retorno e AE.</li>
+        </ul>
+          <h3>Armadilhas e erros comuns</h3>
+<ul>
+          <li>Usar AE para mensagens rejeitadas pelo consumer.</li>
+          <li>Não configurar handler de retorno ao usar mandatory.</li>
+          <li>Ignorar métricas de unroutable e descobrir perda tarde demais.</li>
+        </ul>
+        </div>
+      </div>
+      <h3>Critério de domínio</h3>
+      <p>Consegue explicar os três destinos possíveis de uma publicação sem rota: descarte, retorno ao publisher ou roteamento para AE configurada.</p>
+      <h3>Handoff</h3>
+      <p>Com falha de roteamento inicial clara, o próximo node trata mensagens que saem de filas por eventos posteriores.</p>
+      <h3>Referências específicas</h3>
+      <table>
+        <tr><th>Fonte</th><th>URL</th><th>Por que usar neste node</th></tr>
+          <tr>
+            <td><code>F3</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/publishers">https://www.rabbitmq.com/docs/publishers</a></td>
+            <td>Regras de publicação sem rota e mandatory.</td>
+          </tr>
+          <tr>
+            <td><code>F8</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/ae">https://www.rabbitmq.com/docs/ae</a></td>
+            <td>Definição e configuração de Alternate Exchanges.</td>
+          </tr>
+          <tr>
+            <td><code>F1</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/exchanges">https://www.rabbitmq.com/docs/exchanges</a></td>
+            <td>AE como recurso ligado a exchanges.</td>
+          </tr>
+      </table>
+    </section>
+    <section class="node-section" id="intermediario-04-dead-letter-exchanges-e-retry-conceitual" data-level="intermediario" data-node-id="intermediario/04-dead-letter-exchanges-e-retry-conceitual" data-node-slug="04-dead-letter-exchanges-e-retry-conceitual">
+      <h2>Node 04 - Dead Letter Exchanges e retry conceitual</h2>
+      <p><strong>Level:</strong> <code>intermediario</code> | <strong>Node ID:</strong> <code>intermediario/04-dead-letter-exchanges-e-retry-conceitual</code> | <strong>Slug:</strong> <code>04-dead-letter-exchanges-e-retry-conceitual</code> | <strong>Ordem local:</strong> 4</p>
+      <div class="callout"><strong>Papel na corrente local e no conjunto tri-level:</strong> Separa DLX de AE e mostra como filas republiquem mensagens para uma exchange normal em rejeição, TTL, limite ou delivery-limit.</div>
+      <div class="two-col">
+        <div>
+          <h3>Pré-requisitos herdados</h3>
+<ul>
+          <li>Entender unroutable e AE como falha de roteamento na entrada.</li>
+        </ul>
+          <h3>O que introduz pela primeira vez</h3>
+<ul>
+          <li>Dead Letter Exchange</li>
+          <li>Negative acknowledgement</li>
+          <li>`requeue=false`</li>
+          <li>TTL</li>
+          <li>Queue length limit</li>
+          <li>Delivery limit</li>
+        </ul>
+          <h3>O que deve cobrir</h3>
+<ul>
+          <li>Definir DLX como exchange normal configurada em filas.</li>
+          <li>Listar os eventos que levam uma mensagem a dead-lettering.</li>
+          <li>Diferenciar falha de roteamento inicial de saída posterior da fila.</li>
+          <li>Explicar por que DLX é base de quarentena, análise e retry com atraso.</li>
+          <li>Registrar que policies são preferíveis a x-arguments rígidos para DLX quando aplicável.</li>
+        </ul>
+          <h3>O que não deve cobrir</h3>
+<ul>
+          <li>Não desenhar passo a passo de implementação.</li>
+          <li>Não aprofundar quorum queues e delivery-limit além da fronteira conceitual.</li>
+          <li>Não confundir DLX com fila morta; a exchange roteia para filas de destino.</li>
+        </ul>
+        </div>
+        <div>
+          <h3>Perguntas de checagem</h3>
+<ul>
+          <li>Por que DLX não é um tipo especial de exchange?</li>
+          <li>Quais eventos fazem a mensagem sair da fila para dead-lettering?</li>
+          <li>Como `requeue=true` infinito difere de dead-lettering planejado?</li>
+        </ul>
+          <h3>Vocabulário conceitual</h3>
+<ul>
+          <li>DLX</li>
+          <li>dead-lettering</li>
+          <li>`basic.nack`</li>
+          <li>`basic.reject`</li>
+          <li>TTL</li>
+          <li>delivery-limit</li>
+          <li>retry queue</li>
+          <li>quarantine queue</li>
+        </ul>
+          <h3>Exemplos conceituais ou diagramas permitidos</h3>
+<ul>
+          <li>Fluxo conceitual: fila principal -&gt; DLX -&gt; fila de análise ou espera -&gt; exchange principal.</li>
+          <li>Cenário de mensagem inválida separada para fila de quarentena.</li>
+        </ul>
+          <h3>Armadilhas e erros comuns</h3>
+<ul>
+          <li>Chamar DLX de fila.</li>
+          <li>Declarar DLX no papel e não garantir que a exchange destino exista.</li>
+          <li>Criar loops de retry sem limite ou observabilidade.</li>
+          <li>Usar `requeue=true` como substituto de política de retry.</li>
+        </ul>
+        </div>
+      </div>
+      <h3>Critério de domínio</h3>
+      <p>Consegue explicar quando a mensagem é dead-lettered e como a DLX participa sem armazenar a mensagem por si mesma.</p>
+      <h3>Handoff</h3>
+      <p>Depois de DLX, o próximo node trata policies, x-arguments e permissões que governam essas configurações.</p>
+      <h3>Referências específicas</h3>
+      <table>
+        <tr><th>Fonte</th><th>URL</th><th>Por que usar neste node</th></tr>
+          <tr>
+            <td><code>F7</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/dlx">https://www.rabbitmq.com/docs/dlx</a></td>
+            <td>Eventos e configuração de Dead Letter Exchanges.</td>
+          </tr>
+          <tr>
+            <td><code>F6</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/confirms">https://www.rabbitmq.com/docs/confirms</a></td>
+            <td>Negative acknowledgements e requeue.</td>
+          </tr>
+          <tr>
+            <td><code>F12</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/quorum-queues">https://www.rabbitmq.com/docs/quorum-queues</a></td>
+            <td>Delivery-limit e dead-lettering em quorum queues.</td>
+          </tr>
+      </table>
+    </section>
+    <section class="node-section" id="intermediario-05-policies-x-arguments-e-permissoes" data-level="intermediario" data-node-id="intermediario/05-policies-x-arguments-e-permissoes" data-node-slug="05-policies-x-arguments-e-permissoes">
+      <h2>Node 05 - Policies, x-arguments e permissões</h2>
+      <p><strong>Level:</strong> <code>intermediario</code> | <strong>Node ID:</strong> <code>intermediario/05-policies-x-arguments-e-permissoes</code> | <strong>Slug:</strong> <code>05-policies-x-arguments-e-permissoes</code> | <strong>Ordem local:</strong> 5</p>
+      <div class="callout"><strong>Papel na corrente local e no conjunto tri-level:</strong> Mostra como configurações de exchange e fila devem ser governadas para evitar redeploy e conflitos de autoridade.</div>
+      <div class="two-col">
+        <div>
+          <h3>Pré-requisitos herdados</h3>
+<ul>
+          <li>Entender AE, DLX e argumentos opcionais como configurações de topologia.</li>
+        </ul>
+          <h3>O que introduz pela primeira vez</h3>
+<ul>
+          <li>Policies</li>
+          <li>Operator policies</li>
+          <li>`x-arguments`</li>
+          <li>Precedência</li>
+          <li>Permissões configure/write/read</li>
+          <li>Virtual host</li>
+        </ul>
+          <h3>O que deve cobrir</h3>
+<ul>
+          <li>Explicar por que policies servem para parâmetros que podem mudar em runtime.</li>
+          <li>Comparar policy versus argumento hardcoded na declaração por cliente.</li>
+          <li>Descrever precedência entre argumentos, policies e operator policies em nível conceitual.</li>
+          <li>Relacionar permissões de configure, write e read à declaração, publicação, binding e DLX.</li>
+          <li>Mostrar vhost como fronteira de isolamento de topologia.</li>
+        </ul>
+          <h3>O que não deve cobrir</h3>
+<ul>
+          <li>Não virar guia completo de segurança.</li>
+          <li>Não reensinar DLX/AE; usar como exemplos de configuração.</li>
+          <li>Não tratar policies como solução para qualquer propriedade imutável.</li>
+        </ul>
+        </div>
+        <div>
+          <h3>Perguntas de checagem</h3>
+<ul>
+          <li>Por que hardcoded x-arguments dificultam mudança de DLX?</li>
+          <li>Que permissão o publisher precisa para publicar em uma exchange?</li>
+          <li>Como vhost e permission regex protegem domínios de eventos?</li>
+        </ul>
+          <h3>Vocabulário conceitual</h3>
+<ul>
+          <li>policy</li>
+          <li>operator policy</li>
+          <li>`x-argument`</li>
+          <li>runtime parameter</li>
+          <li>vhost</li>
+          <li>configure permission</li>
+          <li>write permission</li>
+          <li>read permission</li>
+        </ul>
+          <h3>Exemplos conceituais ou diagramas permitidos</h3>
+<ul>
+          <li>Cenário conceitual de policy aplicando DLX a um grupo de filas `orders.*`.</li>
+          <li>Matriz de ownership: app declara fila, plataforma aplica policy, publisher escreve em exchange.</li>
+        </ul>
+          <h3>Armadilhas e erros comuns</h3>
+<ul>
+          <li>Embedar configuração operacional em código quando policy seria mais flexível.</li>
+          <li>Achar que policy muda qualquer argumento a qualquer momento.</li>
+          <li>Dar write amplo demais em exchanges de outros domínios.</li>
+        </ul>
+        </div>
+      </div>
+      <h3>Critério de domínio</h3>
+      <p>Consegue diferenciar configuração declarada pela aplicação, policy operacional e permissão necessária para publicar ou configurar topologia.</p>
+      <h3>Handoff</h3>
+      <p>Com governança local clara, o próximo node mostra composição de topologias com exchange-to-exchange bindings.</p>
+      <h3>Referências específicas</h3>
+      <table>
+        <tr><th>Fonte</th><th>URL</th><th>Por que usar neste node</th></tr>
+          <tr>
+            <td><code>F10</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/policies">https://www.rabbitmq.com/docs/policies</a></td>
+            <td>Policies como mecanismo declarativo por vhost.</td>
+          </tr>
+          <tr>
+            <td><code>F11</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/access-control">https://www.rabbitmq.com/docs/access-control</a></td>
+            <td>Autorização, vhosts e permissões.</td>
+          </tr>
+          <tr>
+            <td><code>F1</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/exchanges">https://www.rabbitmq.com/docs/exchanges</a></td>
+            <td>Precedência de argumentos e policies em exchanges.</td>
+          </tr>
+          <tr>
+            <td><code>F7</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/dlx">https://www.rabbitmq.com/docs/dlx</a></td>
+            <td>Recomendação de policies para DLX.</td>
+          </tr>
+      </table>
+    </section>
+    <section class="node-section" id="intermediario-06-exchange-to-exchange-bindings" data-level="intermediario" data-node-id="intermediario/06-exchange-to-exchange-bindings" data-node-slug="06-exchange-to-exchange-bindings">
+      <h2>Node 06 - Exchange-to-exchange bindings</h2>
+      <p><strong>Level:</strong> <code>intermediario</code> | <strong>Node ID:</strong> <code>intermediario/06-exchange-to-exchange-bindings</code> | <strong>Slug:</strong> <code>06-exchange-to-exchange-bindings</code> | <strong>Ordem local:</strong> 6</p>
+      <div class="callout"><strong>Papel na corrente local e no conjunto tri-level:</strong> Apresenta composição de roteamento dentro do RabbitMQ sem tratar a mensagem como republicada por aplicação.</div>
+      <div class="two-col">
+        <div>
+          <h3>Pré-requisitos herdados</h3>
+<ul>
+          <li>Entender bindings de exchange para queue e contrato de topologia.</li>
+        </ul>
+          <h3>O que introduz pela primeira vez</h3>
+<ul>
+          <li>Exchange-to-exchange binding</li>
+          <li>Source exchange</li>
+          <li>Destination exchange</li>
+          <li>Ciclos eliminados</li>
+          <li>Roteamento transitivo</li>
+        </ul>
+          <h3>O que deve cobrir</h3>
+<ul>
+          <li>Explicar a direção source -&gt; destination em E2E.</li>
+          <li>Mostrar que binding keys e tipos continuam operando normalmente.</li>
+          <li>Distinguir E2E de republicação manual por consumidor intermediário.</li>
+          <li>Registrar que RabbitMQ elimina ciclos e entrega uma cópia por fila em topologias transitivas.</li>
+          <li>Indicar impacto em métricas de ingress da exchange destino.</li>
+        </ul>
+          <h3>O que não deve cobrir</h3>
+<ul>
+          <li>Não cobrir federation ou multi-cluster; isso fica no avançado.</li>
+          <li>Não usar E2E como substituto automático de contrato simples.</li>
+          <li>Não repetir fundamentos de binding já cobertos.</li>
+        </ul>
+        </div>
+        <div>
+          <h3>Perguntas de checagem</h3>
+<ul>
+          <li>E2E republica a mensagem ou estende o roteamento?</li>
+          <li>Como evitar topologia difícil de operar quando há muitas exchanges encadeadas?</li>
+          <li>Por que uma fila deve receber uma única cópia mesmo por rotas transitivas?</li>
+        </ul>
+          <h3>Vocabulário conceitual</h3>
+<ul>
+          <li>E2E binding</li>
+          <li>`exchange.bind`</li>
+          <li>source</li>
+          <li>destination</li>
+          <li>transitive topology</li>
+          <li>cycle detection</li>
+        </ul>
+          <h3>Exemplos conceituais ou diagramas permitidos</h3>
+<ul>
+          <li>Cenário conceitual de `events.public` roteando para `orders.internal` e `audit.internal`.</li>
+          <li>Mapa HTML/CSS de exchange fonte ligada a exchanges de domínio.</li>
+        </ul>
+          <h3>Armadilhas e erros comuns</h3>
+<ul>
+          <li>Usar E2E para esconder contrato mal definido.</li>
+          <li>Criar grafos difíceis de diagnosticar.</li>
+          <li>Interpretar métricas da exchange destino como se houvesse nova publicação.</li>
+        </ul>
+        </div>
+      </div>
+      <h3>Critério de domínio</h3>
+      <p>Consegue explicar E2E como uma extensão de roteamento e identificar quando ela simplifica ou complica a topologia.</p>
+      <h3>Handoff</h3>
+      <p>O próximo node separa confirmação de publicação de processamento no consumidor.</p>
+      <h3>Referências específicas</h3>
+      <table>
+        <tr><th>Fonte</th><th>URL</th><th>Por que usar neste node</th></tr>
+          <tr>
+            <td><code>F9</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/e2e">https://www.rabbitmq.com/docs/e2e</a></td>
+            <td>Semântica oficial de exchange-to-exchange bindings.</td>
+          </tr>
+          <tr>
+            <td><code>F1</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/exchanges">https://www.rabbitmq.com/docs/exchanges</a></td>
+            <td>Resumo de E2E na documentação de exchanges.</td>
+          </tr>
+      </table>
+    </section>
+    <section class="node-section" id="intermediario-07-publisher-confirms-e-confiabilidade" data-level="intermediario" data-node-id="intermediario/07-publisher-confirms-e-confiabilidade" data-node-slug="07-publisher-confirms-e-confiabilidade">
+      <h2>Node 07 - Publisher confirms e confiabilidade</h2>
+      <p><strong>Level:</strong> <code>intermediario</code> | <strong>Node ID:</strong> <code>intermediario/07-publisher-confirms-e-confiabilidade</code> | <strong>Slug:</strong> <code>07-publisher-confirms-e-confiabilidade</code> | <strong>Ordem local:</strong> 7</p>
+      <div class="callout"><strong>Papel na corrente local e no conjunto tri-level:</strong> Fecha o intermediário separando aceitação pelo broker, roteamento e processamento pelo consumidor.</div>
+      <div class="two-col">
+        <div>
+          <h3>Pré-requisitos herdados</h3>
+<ul>
+          <li>Entender fila, consumer ack, unroutable e DLX.</li>
+        </ul>
+          <h3>O que introduz pela primeira vez</h3>
+<ul>
+          <li>Publisher confirms</li>
+          <li>Consumer acknowledgements</li>
+          <li>Channel error</li>
+          <li>Returned message</li>
+          <li>Mensagem persistente</li>
+        </ul>
+          <h3>O que deve cobrir</h3>
+<ul>
+          <li>Explicar que publisher confirms são confirmação broker-&gt;publisher, não consumer-&gt;broker.</li>
+          <li>Descrever quando o broker confirma mensagens roteáveis e não roteáveis.</li>
+          <li>Relacionar exchange inexistente a erro de canal.</li>
+          <li>Diferenciar durabilidade de exchange/fila de persistência da mensagem.</li>
+          <li>Mostrar como confirms, mandatory e retornos formam sinais diferentes para o publisher.</li>
+        </ul>
+          <h3>O que não deve cobrir</h3>
+<ul>
+          <li>Não aprofundar tuning de throughput ou batch confirms.</li>
+          <li>Não discutir todos os detalhes de persistência em filas.</li>
+          <li>Não prometer exatamente-once; manter fronteira de segurança realista.</li>
+        </ul>
+        </div>
+        <div>
+          <h3>Perguntas de checagem</h3>
+<ul>
+          <li>Confirm prova que um consumidor processou a mensagem?</li>
+          <li>O que muda entre publicar em exchange inexistente e publicar sem rota?</li>
+          <li>Por que durable exchange não basta para proteger payload?</li>
+        </ul>
+          <h3>Vocabulário conceitual</h3>
+<ul>
+          <li>publisher confirm</li>
+          <li>consumer ack</li>
+          <li>channel-level exception</li>
+          <li>persistent message</li>
+          <li>durable exchange</li>
+          <li>returned message</li>
+        </ul>
+          <h3>Exemplos conceituais ou diagramas permitidos</h3>
+<ul>
+          <li>Tabela conceitual: publish aceito, unroutable retornado, consumer ack e nack.</li>
+          <li>Cenário de publisher crítico que precisa distinguir rota ausente de processamento falho.</li>
+        </ul>
+          <h3>Armadilhas e erros comuns</h3>
+<ul>
+          <li>Confundir confirm com ack do consumidor.</li>
+          <li>Tratar durable topology como persistência de mensagem.</li>
+          <li>Ignorar channel error após exchange inexistente.</li>
+        </ul>
+        </div>
+      </div>
+      <h3>Critério de domínio</h3>
+      <p>Consegue explicar que confiabilidade envolve sinais diferentes em pontos diferentes do fluxo, sem reduzir tudo a um único ack.</p>
+      <h3>Handoff</h3>
+      <p>O avançado usa essa base para discutir limites, plugins, quorum queues, federation e governança multidomínio.</p>
+      <h3>Referências específicas</h3>
+      <table>
+        <tr><th>Fonte</th><th>URL</th><th>Por que usar neste node</th></tr>
+          <tr>
+            <td><code>F6</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/confirms">https://www.rabbitmq.com/docs/confirms</a></td>
+            <td>Publisher confirms e acknowledgements.</td>
+          </tr>
+          <tr>
+            <td><code>F3</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/publishers">https://www.rabbitmq.com/docs/publishers</a></td>
+            <td>Erros de publicação e unroutable.</td>
+          </tr>
+          <tr>
+            <td><code>F1</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/exchanges">https://www.rabbitmq.com/docs/exchanges</a></td>
+            <td>Durabilidade e propriedades de exchange.</td>
+          </tr>
+      </table>
+    </section>
+    <h2>Nodes completos - Avançado</h2>
+    <section class="node-section" id="avancado-01-diagnostico-de-roteamento-e-observabilidade" data-level="avancado" data-node-id="avancado/01-diagnostico-de-roteamento-e-observabilidade" data-node-slug="01-diagnostico-de-roteamento-e-observabilidade">
+      <h2>Node 01 - Diagnóstico de roteamento e observabilidade</h2>
+      <p><strong>Level:</strong> <code>avancado</code> | <strong>Node ID:</strong> <code>avancado/01-diagnostico-de-roteamento-e-observabilidade</code> | <strong>Slug:</strong> <code>01-diagnostico-de-roteamento-e-observabilidade</code> | <strong>Ordem local:</strong> 1</p>
+      <div class="callout"><strong>Papel na corrente local e no conjunto tri-level:</strong> Ensina a raciocinar sobre incidentes de routing sem reabrir fundamentos: exchange, bindings, filas, returns e métricas contam histórias diferentes.</div>
+      <div class="two-col">
+        <div>
+          <h3>Pré-requisitos herdados</h3>
+<ul>
+          <li>Dominar contrato de topologia, unroutable, AE, DLX e confirms.</li>
+        </ul>
+          <h3>O que introduz pela primeira vez</h3>
+<ul>
+          <li>Diagnóstico por topologia</li>
+          <li>Métricas de unroutable</li>
+          <li>Inspeção de bindings</li>
+          <li>Sinais de publisher e consumer</li>
+        </ul>
+          <h3>O que deve cobrir</h3>
+<ul>
+          <li>Diferenciar sintomas de exchange inexistente, exchange sem bindings, routing key errada, fila sem consumer e consumer lento.</li>
+          <li>Relacionar returned messages, confirms, consumer capacity e filas acumulando mensagens.</li>
+          <li>Mostrar como AE e DLX podem servir como evidência sem mascarar o problema raiz.</li>
+          <li>Criar critérios de leitura de topologia antes de alterar código.</li>
+        </ul>
+          <h3>O que não deve cobrir</h3>
+<ul>
+          <li>Não listar comandos operacionais como roteiro.</li>
+          <li>Não explicar novamente os tipos de exchange.</li>
+          <li>Não transformar observabilidade em ferramenta externa específica.</li>
+        </ul>
+        </div>
+        <div>
+          <h3>Perguntas de checagem</h3>
+<ul>
+          <li>Quais sinais indicam que o problema está no publisher e não no consumer?</li>
+          <li>Como distinguir mensagem sem rota de fila sem consumer?</li>
+          <li>O que uma DLX cheia diz sobre processamento versus roteamento inicial?</li>
+        </ul>
+          <h3>Vocabulário conceitual</h3>
+<ul>
+          <li>unroutable metric</li>
+          <li>returned message</li>
+          <li>binding inspection</li>
+          <li>queue depth</li>
+          <li>consumer capacity</li>
+          <li>dead-lettered message</li>
+        </ul>
+          <h3>Exemplos conceituais ou diagramas permitidos</h3>
+<ul>
+          <li>Matriz de sintomas: publish falha, mensagem retorna, fila cresce, DLX cresce.</li>
+          <li>Cenário de deploy que altera routing key e derruba o consumo aparente.</li>
+        </ul>
+          <h3>Armadilhas e erros comuns</h3>
+<ul>
+          <li>Corrigir consumer quando a routing key está errada.</li>
+          <li>Esvaziar DLX sem corrigir causa raiz.</li>
+          <li>Ignorar AE como sinal de contrato quebrado.</li>
+        </ul>
+        </div>
+      </div>
+      <h3>Critério de domínio</h3>
+      <p>Consegue diagnosticar em qual trecho do fluxo a mensagem parou ou mudou de caminho antes de propor alteração.</p>
+      <h3>Handoff</h3>
+      <p>Com diagnóstico avançado, o próximo node avalia quando tipos especializados de exchange entram no desenho.</p>
+      <h3>Referências específicas</h3>
+      <table>
+        <tr><th>Fonte</th><th>URL</th><th>Por que usar neste node</th></tr>
+          <tr>
+            <td><code>F3</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/publishers">https://www.rabbitmq.com/docs/publishers</a></td>
+            <td>Comportamento de publicação e mensagens sem rota.</td>
+          </tr>
+          <tr>
+            <td><code>F5</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/consumers">https://www.rabbitmq.com/docs/consumers</a></td>
+            <td>Consumer capacity e consumo.</td>
+          </tr>
+          <tr>
+            <td><code>F7</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/dlx">https://www.rabbitmq.com/docs/dlx</a></td>
+            <td>DLX como evidência de eventos posteriores na fila.</td>
+          </tr>
+          <tr>
+            <td><code>F8</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/ae">https://www.rabbitmq.com/docs/ae</a></td>
+            <td>AE para mensagens sem rota.</td>
+          </tr>
+      </table>
+    </section>
+    <section class="node-section" id="avancado-02-tipos-especializados-e-plugins" data-level="avancado" data-node-id="avancado/02-tipos-especializados-e-plugins" data-node-slug="02-tipos-especializados-e-plugins">
+      <h2>Node 02 - Tipos especializados e plugins</h2>
+      <p><strong>Level:</strong> <code>avancado</code> | <strong>Node ID:</strong> <code>avancado/02-tipos-especializados-e-plugins</code> | <strong>Slug:</strong> <code>02-tipos-especializados-e-plugins</code> | <strong>Ordem local:</strong> 2</p>
+      <div class="callout"><strong>Papel na corrente local e no conjunto tri-level:</strong> Mostra quando sair dos tipos clássicos e qual critério usar antes de adotar comportamento especializado.</div>
+      <div class="two-col">
+        <div>
+          <h3>Pré-requisitos herdados</h3>
+<ul>
+          <li>Dominar direct, fanout, topic, headers e os limites de topologia simples.</li>
+        </ul>
+          <h3>O que introduz pela primeira vez</h3>
+<ul>
+          <li>Local Random Exchange</li>
+          <li>`x-modulus-hash`</li>
+          <li>Plugins de exchange</li>
+          <li>Roteamento estável por chave</li>
+          <li>Localidade por nó</li>
+        </ul>
+          <h3>O que deve cobrir</h3>
+<ul>
+          <li>Apresentar Local Random para request-reply de baixa latência com filas locais.</li>
+          <li>Apresentar `x-modulus-hash` para particionamento por hash da routing key e ordenação por entidade.</li>
+          <li>Explicar que tipos extras podem ser built-in ou fornecidos por plugins.</li>
+          <li>Definir critérios de adoção: semântica documentada, suporte operacional, métricas, fallback e efeito ao mudar bindings.</li>
+          <li>Comparar especialização com manter direct/topic e filas por domínio.</li>
+        </ul>
+          <h3>O que não deve cobrir</h3>
+<ul>
+          <li>Não substituir o estudo de direct/topic por plugins.</li>
+          <li>Não cobrir cada plugin de terceiros.</li>
+          <li>Não prometer ordering global; tratar ordenação por chave e fila.</li>
+        </ul>
+        </div>
+        <div>
+          <h3>Perguntas de checagem</h3>
+<ul>
+          <li>Que problema específico justifica sair dos tipos clássicos?</li>
+          <li>Como `x-modulus-hash` preserva destino enquanto bindings não mudam?</li>
+          <li>Por que Local Random exige cuidado com filas locais por nó?</li>
+        </ul>
+          <h3>Vocabulário conceitual</h3>
+<ul>
+          <li>local random exchange</li>
+          <li>`x-modulus-hash`</li>
+          <li>stable routing</li>
+          <li>routing key hash</li>
+          <li>exclusive queue</li>
+          <li>plugin-provided exchange</li>
+        </ul>
+          <h3>Exemplos conceituais ou diagramas permitidos</h3>
+<ul>
+          <li>Cenário de eventos por `order_id` preservando ordem por entidade com múltiplas filas.</li>
+          <li>Cenário de RPC interno em cluster usando fila local para latência menor.</li>
+        </ul>
+          <h3>Armadilhas e erros comuns</h3>
+<ul>
+          <li>Adotar plugin por novidade sem necessidade de semântica.</li>
+          <li>Confundir particionamento por chave com roteamento por categoria.</li>
+          <li>Ignorar o que acontece quando a quantidade de destinos muda.</li>
+        </ul>
+        </div>
+      </div>
+      <h3>Critério de domínio</h3>
+      <p>Consegue avaliar se um tipo especializado resolve uma limitação real ou apenas complica uma topologia que direct/topic já resolveria.</p>
+      <h3>Handoff</h3>
+      <p>O próximo node conecta DLX e retries a quorum queues, onde há comportamentos específicos recentes.</p>
+      <h3>Referências específicas</h3>
+      <table>
+        <tr><th>Fonte</th><th>URL</th><th>Por que usar neste node</th></tr>
+          <tr>
+            <td><code>F13</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/local-random-exchange">https://www.rabbitmq.com/docs/local-random-exchange</a></td>
+            <td>Local Random Exchange em RabbitMQ 4.3.</td>
+          </tr>
+          <tr>
+            <td><code>F14</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/modulus-hash-exchange">https://www.rabbitmq.com/docs/modulus-hash-exchange</a></td>
+            <td>Modulus Hash Exchange e roteamento estável.</td>
+          </tr>
+          <tr>
+            <td><code>F1</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/exchanges">https://www.rabbitmq.com/docs/exchanges</a></td>
+            <td>Tipos de exchange e plugins listados na documentação.</td>
+          </tr>
+      </table>
+    </section>
+    <section class="node-section" id="avancado-03-quorum-queues-dlx-e-redelivery-limits" data-level="avancado" data-node-id="avancado/03-quorum-queues-dlx-e-redelivery-limits" data-node-slug="03-quorum-queues-dlx-e-redelivery-limits">
+      <h2>Node 03 - Quorum queues, DLX e limites de redelivery</h2>
+      <p><strong>Level:</strong> <code>avancado</code> | <strong>Node ID:</strong> <code>avancado/03-quorum-queues-dlx-e-redelivery-limits</code> | <strong>Slug:</strong> <code>03-quorum-queues-dlx-e-redelivery-limits</code> | <strong>Ordem local:</strong> 3</p>
+      <div class="callout"><strong>Papel na corrente local e no conjunto tri-level:</strong> Aprofunda o ponto em que decisão de fila altera a estratégia de DLX e retry, sem deslocar o foco de exchanges.</div>
+      <div class="two-col">
+        <div>
+          <h3>Pré-requisitos herdados</h3>
+<ul>
+          <li>Entender DLX, nack, requeue e publisher confirms.</li>
+        </ul>
+          <h3>O que introduz pela primeira vez</h3>
+<ul>
+          <li>Quorum queue</li>
+          <li>Delivery limit</li>
+          <li>Repeated requeue loop</li>
+          <li>At-least-once dead-lettering</li>
+          <li>Delayed retry</li>
+        </ul>
+          <h3>O que deve cobrir</h3>
+<ul>
+          <li>Explicar por que loops de requeue podem ser problema operacional.</li>
+          <li>Mostrar delivery-limit e dead-lettering como proteção contra redelivery infinito em quorum queues.</li>
+          <li>Distinguir at-most-once e at-least-once dead-lettering em nível de garantia.</li>
+          <li>Registrar delayed retry em RabbitMQ 4.3 como recurso específico de quorum queues.</li>
+          <li>Relacionar essas escolhas à exchange DLX e às filas destino.</li>
+        </ul>
+          <h3>O que não deve cobrir</h3>
+<ul>
+          <li>Não fazer guia de configuração de quorum queue.</li>
+          <li>Não generalizar recursos de quorum para classic queues.</li>
+          <li>Não reensinar DLX básico; usar como pré-requisito.</li>
+        </ul>
+        </div>
+        <div>
+          <h3>Perguntas de checagem</h3>
+<ul>
+          <li>Por que `requeue=true` repetido pode ser pior que dead-lettering?</li>
+          <li>Quando uma DLX com quorum queue precisa de garantia at-least-once?</li>
+          <li>Que parte é decisão da fila e que parte é decisão da exchange?</li>
+        </ul>
+          <h3>Vocabulário conceitual</h3>
+<ul>
+          <li>quorum queue</li>
+          <li>delivery-limit</li>
+          <li>redelivery count</li>
+          <li>at-least-once dead-lettering</li>
+          <li>delayed retry</li>
+          <li>poison message</li>
+        </ul>
+          <h3>Exemplos conceituais ou diagramas permitidos</h3>
+<ul>
+          <li>Cenário de mensagem venenosa separada após limite de redelivery.</li>
+          <li>Fluxo conceitual de retry com atraso versus requeue imediato.</li>
+        </ul>
+          <h3>Armadilhas e erros comuns</h3>
+<ul>
+          <li>Aplicar comportamento de quorum queues a classic queues sem verificar.</li>
+          <li>Criar redelivery loop que consome CPU e disco.</li>
+          <li>Ignorar duplicatas possíveis em dead-lettering at-least-once.</li>
+        </ul>
+        </div>
+      </div>
+      <h3>Critério de domínio</h3>
+      <p>Consegue explicar como o tipo de fila e suas políticas mudam a segurança e o comportamento de DLX/retry.</p>
+      <h3>Handoff</h3>
+      <p>Depois das filas quorum, o próximo node amplia o escopo para exchanges entre clusters e regiões.</p>
+      <h3>Referências específicas</h3>
+      <table>
+        <tr><th>Fonte</th><th>URL</th><th>Por que usar neste node</th></tr>
+          <tr>
+            <td><code>F12</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/quorum-queues">https://www.rabbitmq.com/docs/quorum-queues</a></td>
+            <td>Quorum queues, delivery-limit, delayed retry e dead-lettering.</td>
+          </tr>
+          <tr>
+            <td><code>F7</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/dlx">https://www.rabbitmq.com/docs/dlx</a></td>
+            <td>DLX como exchange normal para dead-lettered messages.</td>
+          </tr>
+          <tr>
+            <td><code>F6</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/confirms">https://www.rabbitmq.com/docs/confirms</a></td>
+            <td>Nack, requeue e acknowledgements.</td>
+          </tr>
+      </table>
+    </section>
+    <section class="node-section" id="avancado-04-federated-exchanges-e-wan" data-level="avancado" data-node-id="avancado/04-federated-exchanges-e-wan" data-node-slug="04-federated-exchanges-e-wan">
+      <h2>Node 04 - Federated exchanges e WAN</h2>
+      <p><strong>Level:</strong> <code>avancado</code> | <strong>Node ID:</strong> <code>avancado/04-federated-exchanges-e-wan</code> | <strong>Slug:</strong> <code>04-federated-exchanges-e-wan</code> | <strong>Ordem local:</strong> 4</p>
+      <div class="callout"><strong>Papel na corrente local e no conjunto tri-level:</strong> Explica quando exchanges deixam de ser topologia local e passam a participar de replicação assíncrona entre brokers ou regiões.</div>
+      <div class="two-col">
+        <div>
+          <h3>Pré-requisitos herdados</h3>
+<ul>
+          <li>Entender E2E dentro de um broker e contratos de routing.</li>
+        </ul>
+          <h3>O que introduz pela primeira vez</h3>
+<ul>
+          <li>Federated exchange</li>
+          <li>Upstream</li>
+          <li>Downstream</li>
+          <li>Replicação assíncrona</li>
+          <li>WAN</li>
+          <li>Federation plugin</li>
+        </ul>
+          <h3>O que deve cobrir</h3>
+<ul>
+          <li>Definir federated exchanges como mecanismo de copiar fluxo de uma exchange upstream para downstreams independentes.</li>
+          <li>Diferenciar federation de E2E local.</li>
+          <li>Apresentar casos de uso como eventos entre regiões, warm standby e distribuição geográfica.</li>
+          <li>Explicar riscos de latência, conectividade, eventualidade e loops.</li>
+          <li>Registrar que federation depende de plugin e configuração próprios.</li>
+        </ul>
+          <h3>O que não deve cobrir</h3>
+<ul>
+          <li>Não cobrir shovel ou federation reference em profundidade.</li>
+          <li>Não tratar federation como substituto simples de clustering.</li>
+          <li>Não reensinar fanout global sem falar de conectividade e atraso.</li>
+        </ul>
+        </div>
+        <div>
+          <h3>Perguntas de checagem</h3>
+<ul>
+          <li>Por que federation não é a mesma coisa que E2E binding?</li>
+          <li>Que garantias mudam quando há WAN?</li>
+          <li>Quando replicar eventos entre regiões complica mais do que ajuda?</li>
+        </ul>
+          <h3>Vocabulário conceitual</h3>
+<ul>
+          <li>federated exchange</li>
+          <li>upstream</li>
+          <li>downstream</li>
+          <li>federation plugin</li>
+          <li>WAN</li>
+          <li>asynchronous replication</li>
+        </ul>
+          <h3>Exemplos conceituais ou diagramas permitidos</h3>
+<ul>
+          <li>Cenário conceitual de eventos de auditoria replicados para região secundária.</li>
+          <li>Mapa de fronteira entre broker local, upstream e downstream.</li>
+        </ul>
+          <h3>Armadilhas e erros comuns</h3>
+<ul>
+          <li>Usar federation para mascarar domínio mal separado.</li>
+          <li>Ignorar atraso e falha de conectividade.</li>
+          <li>Misturar tipos de exchange sem contrato claro de routing.</li>
+        </ul>
+        </div>
+      </div>
+      <h3>Critério de domínio</h3>
+      <p>Consegue explicar federation como integração assíncrona entre brokers e avaliar os riscos de operar exchanges além do vhost local.</p>
+      <h3>Handoff</h3>
+      <p>O próximo node fecha com governança de contratos e limites de complexidade.</p>
+      <h3>Referências específicas</h3>
+      <table>
+        <tr><th>Fonte</th><th>URL</th><th>Por que usar neste node</th></tr>
+          <tr>
+            <td><code>F15</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/federated-exchanges">https://www.rabbitmq.com/docs/federated-exchanges</a></td>
+            <td>Federated exchanges e limites do Federation plugin.</td>
+          </tr>
+          <tr>
+            <td><code>F9</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/e2e">https://www.rabbitmq.com/docs/e2e</a></td>
+            <td>Contraste com E2E bindings locais.</td>
+          </tr>
+          <tr>
+            <td><code>F10</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/policies">https://www.rabbitmq.com/docs/policies</a></td>
+            <td>Policies e runtime parameters usados em plugins como federation.</td>
+          </tr>
+      </table>
+    </section>
+    <section class="node-section" id="avancado-05-governanca-e-limites-de-complexidade" data-level="avancado" data-node-id="avancado/05-governanca-e-limites-de-complexidade" data-node-slug="05-governanca-e-limites-de-complexidade">
+      <h2>Node 05 - Governança e limites de complexidade</h2>
+      <p><strong>Level:</strong> <code>avancado</code> | <strong>Node ID:</strong> <code>avancado/05-governanca-e-limites-de-complexidade</code> | <strong>Slug:</strong> <code>05-governanca-e-limites-de-complexidade</code> | <strong>Ordem local:</strong> 5</p>
+      <div class="callout"><strong>Papel na corrente local e no conjunto tri-level:</strong> Consolida critérios de especialista: uma topologia boa é compreensível, rastreável, segura e evolutiva.</div>
+      <div class="two-col">
+        <div>
+          <h3>Pré-requisitos herdados</h3>
+<ul>
+          <li>Entender contratos, policies, permissões, E2E, plugins e federation.</li>
+        </ul>
+          <h3>O que introduz pela primeira vez</h3>
+<ul>
+          <li>Governança de eventos</li>
+          <li>Fronteiras por vhost</li>
+          <li>Permissões por domínio</li>
+          <li>Matriz anti-acoplamento</li>
+          <li>Complexidade operável</li>
+        </ul>
+          <h3>O que deve cobrir</h3>
+<ul>
+          <li>Definir ownership de exchanges e routing keys por domínio.</li>
+          <li>Separar vhosts quando há fronteiras reais de acesso ou ambiente.</li>
+          <li>Aplicar permissões para limitar publicação indevida em exchanges críticas.</li>
+          <li>Criar critérios para revisar topologias com muitas exchanges, bindings e plugins.</li>
+          <li>Estabelecer quando simplificar para direct/topic em vez de compor camadas.</li>
+          <li>Conectar anti-padrões: exchange que vira fila mental, fanout amplo, topic sem contrato, DLX sem destino, federation sem necessidade.</li>
+        </ul>
+          <h3>O que não deve cobrir</h3>
+<ul>
+          <li>Não criar política organizacional completa.</li>
+          <li>Não substituir documentação operacional detalhada.</li>
+          <li>Não reabrir explicações básicas de cada tipo.</li>
+        </ul>
+        </div>
+        <div>
+          <h3>Perguntas de checagem</h3>
+<ul>
+          <li>Quem é dono de uma exchange de domínio?</li>
+          <li>Como impedir publicação no domínio errado sem acoplar consumidores?</li>
+          <li>Quando uma topologia deixa de ser compreensível para incidentes?</li>
+          <li>Que anti-padrão indica que a exchange está sendo usada como fila mental?</li>
+        </ul>
+          <h3>Vocabulário conceitual</h3>
+<ul>
+          <li>event governance</li>
+          <li>vhost boundary</li>
+          <li>resource permission</li>
+          <li>routing ownership</li>
+          <li>operable topology</li>
+          <li>anti-pattern</li>
+        </ul>
+          <h3>Exemplos conceituais ou diagramas permitidos</h3>
+<ul>
+          <li>Checklist conceitual de revisão de topologia antes de produção.</li>
+          <li>Cenário de broker compartilhado por múltiplos produtos e domínios.</li>
+        </ul>
+          <h3>Armadilhas e erros comuns</h3>
+<ul>
+          <li>Permitir write amplo demais em exchanges compartilhadas.</li>
+          <li>Criar topic keys sem versionamento ou ownership.</li>
+          <li>Usar E2E, plugins e federation para compensar contrato fraco.</li>
+          <li>Não monitorar rotas órfãs e dead-lettered messages.</li>
+        </ul>
+        </div>
+      </div>
+      <h3>Critério de domínio</h3>
+      <p>Consegue revisar uma topologia de RabbitMQ e justificar se ela é simples, segura, rastreável e adequada ao problema.</p>
+      <h3>Handoff</h3>
+      <p>Este node encerra o roadmap: a próxima etapa natural é gerar páginas profundas para nodes específicos conforme necessidade.</p>
+      <h3>Referências específicas</h3>
+      <table>
+        <tr><th>Fonte</th><th>URL</th><th>Por que usar neste node</th></tr>
+          <tr>
+            <td><code>F11</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/access-control">https://www.rabbitmq.com/docs/access-control</a></td>
+            <td>Access control e vhosts.</td>
+          </tr>
+          <tr>
+            <td><code>F10</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/policies">https://www.rabbitmq.com/docs/policies</a></td>
+            <td>Policies e operator policies.</td>
+          </tr>
+          <tr>
+            <td><code>F1</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/exchanges">https://www.rabbitmq.com/docs/exchanges</a></td>
+            <td>Propriedades e limites de exchanges.</td>
+          </tr>
+          <tr>
+            <td><code>F15</code></td>
+            <td><a href="https://www.rabbitmq.com/docs/federated-exchanges">https://www.rabbitmq.com/docs/federated-exchanges</a></td>
+            <td>Federation como limite avançado de complexidade.</td>
+          </tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Checklist final</h2>
+      <ul>
+        <li>Explicar por que a exchange existe e por que ela não substitui a fila.</li>
+        <li>Diferenciar publisher, exchange, binding, routing key, queue e consumer.</li>
+        <li>Escolher entre default, direct, fanout, topic e headers com critério de roteamento.</li>
+        <li>Distinguir broadcast para múltiplas filas de consumidores competindo na mesma fila.</li>
+        <li>Explicar mensagens sem rota, mandatory, Alternate Exchange, DLX e retry conceitual.</li>
+        <li>Reconhecer limites de confiabilidade, confirms, acks, policies, plugins, federation e governança.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Referências consolidadas</h2>
+      <table>
+        <tr><th>ID</th><th>URL</th><th>Tipo</th><th>Motivo</th><th>Nodes sustentados</th><th>Limite</th></tr>
+        <tr>
+          <td><code>F1</code></td>
+          <td><a href="https://www.rabbitmq.com/docs/exchanges">https://www.rabbitmq.com/docs/exchanges</a></td>
+          <td>documentação oficial RabbitMQ 4.3</td>
+          <td>Define exchanges, tipos, bindings, exchange padrão, propriedades, E2E e alternate exchanges na documentação corrente.</td>
+          <td>básico/01-modelo-amqp-e-papel-da-exchange, básico/02-exchange-padrão-e-publicação-direta-aparente, básico/03-bindings-routing-key-e-destinos, básico/04-direct-fanout-e-topic, básico/05-headers-e-metadados-de-roteamento, intermediário/01-contrato-de-topologia-e-roteamento, intermediário/02-broadcast-vs-consumidores-competindo, intermediário/03-unroutable-mandatory-e-alternate-exchange, intermediário/05-policies-x-arguments-e-permissões, intermediário/06-exchange-to-exchange-bindings, intermediário/07-publisher-confirms-e-confiabilidade, avançado/02-tipos-especializados-e-plugins, avançado/05-governança-e-limites-de-complexidade</td>
+          <td>Documento da versão 4.3; tipos de exchange fornecidos por plugins devem ser conferidos na página própria do tipo ou plugin.</td>
+        </tr>
+        <tr>
+          <td><code>F2</code></td>
+          <td><a href="https://www.rabbitmq.com/tutorials/amqp-concepts">https://www.rabbitmq.com/tutorials/amqp-concepts</a></td>
+          <td>guia oficial RabbitMQ 4.3</td>
+          <td>Explica o modelo AMQP 0-9-1: publishers, exchanges, bindings, queues, consumers e os quatro tipos clássicos.</td>
+          <td>básico/01-modelo-amqp-e-papel-da-exchange, básico/02-exchange-padrão-e-publicação-direta-aparente, básico/03-bindings-routing-key-e-destinos, básico/04-direct-fanout-e-topic, básico/05-headers-e-metadados-de-roteamento</td>
+          <td>É um guia conceitual; detalhes de operação e falhas usam páginas específicas.</td>
+        </tr>
+        <tr>
+          <td><code>F3</code></td>
+          <td><a href="https://www.rabbitmq.com/docs/publishers">https://www.rabbitmq.com/docs/publishers</a></td>
+          <td>documentação oficial RabbitMQ 4.3</td>
+          <td>Explica publicação em exchanges, mensagens sem rota, mandatory flag, alternate exchange e erro ao publicar em exchange inexistente.</td>
+          <td>intermediário/01-contrato-de-topologia-e-roteamento, intermediário/03-unroutable-mandatory-e-alternate-exchange, intermediário/07-publisher-confirms-e-confiabilidade, avançado/01-diagnóstico-de-roteamento-e-observabilidade</td>
+          <td>Foca publicadores; consumo e fila entram por fontes específicas.</td>
+        </tr>
+        <tr>
+          <td><code>F4</code></td>
+          <td><a href="https://www.rabbitmq.com/docs/queues">https://www.rabbitmq.com/docs/queues</a></td>
+          <td>documentação oficial RabbitMQ 4.3</td>
+          <td>Define filas como coleção ordenada que armazena mensagens e entrega para consumidores.</td>
+          <td>básico/06-filas-consumidores-e-entrega, intermediário/02-broadcast-vs-consumidores-competindo</td>
+          <td>Cobertura ampla de filas; o roadmap usa apenas o que esclarece a relação com exchanges.</td>
+        </tr>
+        <tr>
+          <td><code>F5</code></td>
+          <td><a href="https://www.rabbitmq.com/docs/consumers">https://www.rabbitmq.com/docs/consumers</a></td>
+          <td>documentação oficial RabbitMQ 4.3</td>
+          <td>Define consumidores como aplicações ou subscriptions que consomem e reconhecem mensagens a partir de filas.</td>
+          <td>básico/06-filas-consumidores-e-entrega, intermediário/02-broadcast-vs-consumidores-competindo, avançado/01-diagnóstico-de-roteamento-e-observabilidade</td>
+          <td>Não é um guia de consumers completo neste roadmap; usado para separar fila, consumidor e exchange.</td>
+        </tr>
+        <tr>
+          <td><code>F6</code></td>
+          <td><a href="https://www.rabbitmq.com/docs/confirms">https://www.rabbitmq.com/docs/confirms</a></td>
+          <td>documentação oficial RabbitMQ 4.3</td>
+          <td>Distingue acknowledgements de consumidores, negative acknowledgements, requeue, dead-letter e publisher confirms.</td>
+          <td>básico/06-filas-consumidores-e-entrega, intermediário/02-broadcast-vs-consumidores-competindo, intermediário/04-dead-letter-exchanges-e-retry-conceitual, intermediário/07-publisher-confirms-e-confiabilidade, avançado/03-quorum-queues-dlx-e-redelivery-limits</td>
+          <td>Confirms provam aceitação pelo broker segundo as regras descritas, não processamento final pelo consumidor.</td>
+        </tr>
+        <tr>
+          <td><code>F7</code></td>
+          <td><a href="https://www.rabbitmq.com/docs/dlx">https://www.rabbitmq.com/docs/dlx</a></td>
+          <td>documentação oficial RabbitMQ 4.3</td>
+          <td>Define Dead Letter Exchanges, eventos de dead-lettering, policy keys e recomendações contra x-arguments rígidos.</td>
+          <td>intermediário/04-dead-letter-exchanges-e-retry-conceitual, intermediário/05-policies-x-arguments-e-permissões, avançado/01-diagnóstico-de-roteamento-e-observabilidade, avançado/03-quorum-queues-dlx-e-redelivery-limits</td>
+          <td>DLX é exchange normal usada por filas; garantias mais fortes com quorum queues dependem de configuração específica.</td>
+        </tr>
+        <tr>
+          <td><code>F8</code></td>
+          <td><a href="https://www.rabbitmq.com/docs/ae">https://www.rabbitmq.com/docs/ae</a></td>
+          <td>documentação oficial RabbitMQ 4.3</td>
+          <td>Explica Alternate Exchanges para mensagens que a exchange principal não conseguiu rotear e ressalva a exchange padrão.</td>
+          <td>intermediário/03-unroutable-mandatory-e-alternate-exchange, avançado/01-diagnóstico-de-roteamento-e-observabilidade</td>
+          <td>AE não se aplica à exchange padrão em versões modernas segundo a documentação.</td>
+        </tr>
+        <tr>
+          <td><code>F9</code></td>
+          <td><a href="https://www.rabbitmq.com/docs/e2e">https://www.rabbitmq.com/docs/e2e</a></td>
+          <td>documentação oficial RabbitMQ 4.3</td>
+          <td>Explica bindings exchange-to-exchange, direção source -&gt; destination, ciclos e uma cópia por fila em topologias transitivas.</td>
+          <td>intermediário/06-exchange-to-exchange-bindings, avançado/04-federated-exchanges-e-wan</td>
+          <td>É uma extensão RabbitMQ para AMQP 0-9-1; não trate como republicação comum.</td>
+        </tr>
+        <tr>
+          <td><code>F10</code></td>
+          <td><a href="https://www.rabbitmq.com/docs/policies">https://www.rabbitmq.com/docs/policies</a></td>
+          <td>documentação oficial RabbitMQ 4.3</td>
+          <td>Define policies como mecanismo declarativo por vhost para parâmetros de queues, streams, exchanges e plugins que mudam em runtime.</td>
+          <td>intermediário/05-policies-x-arguments-e-permissões, avançado/04-federated-exchanges-e-wan, avançado/05-governança-e-limites-de-complexidade</td>
+          <td>Nem todo argumento pode ser policy; queue type, por exemplo, é decidido na declaração.</td>
+        </tr>
+        <tr>
+          <td><code>F11</code></td>
+          <td><a href="https://www.rabbitmq.com/docs/access-control">https://www.rabbitmq.com/docs/access-control</a></td>
+          <td>documentação oficial RabbitMQ 4.3</td>
+          <td>Sustenta separação de vhosts, autenticação, autorização e permissões de recursos.</td>
+          <td>intermediário/05-policies-x-arguments-e-permissões, avançado/05-governança-e-limites-de-complexidade</td>
+          <td>Usada para governança e fronteiras de publicação, não como guia completo de segurança.</td>
+        </tr>
+        <tr>
+          <td><code>F12</code></td>
+          <td><a href="https://www.rabbitmq.com/docs/quorum-queues">https://www.rabbitmq.com/docs/quorum-queues</a></td>
+          <td>documentação oficial RabbitMQ 4.3</td>
+          <td>Cobre delivery-limit, redelivery loops, delayed retry e dead-lettering em quorum queues.</td>
+          <td>intermediário/04-dead-letter-exchanges-e-retry-conceitual, avançado/03-quorum-queues-dlx-e-redelivery-limits</td>
+          <td>Aplicável quando a fila é quorum; não generalize para todos os tipos de fila sem verificar.</td>
+        </tr>
+        <tr>
+          <td><code>F13</code></td>
+          <td><a href="https://www.rabbitmq.com/docs/local-random-exchange">https://www.rabbitmq.com/docs/local-random-exchange</a></td>
+          <td>documentação oficial RabbitMQ 4.3</td>
+          <td>Define Local Random Exchange para request-reply de baixa latência com filas locais e exclusivas.</td>
+          <td>avançado/02-tipos-especializados-e-plugins</td>
+          <td>Tipo introduzido no RabbitMQ 4.0; mensagens podem ser descartadas se não houver fila local ligada.</td>
+        </tr>
+        <tr>
+          <td><code>F14</code></td>
+          <td><a href="https://www.rabbitmq.com/docs/modulus-hash-exchange">https://www.rabbitmq.com/docs/modulus-hash-exchange</a></td>
+          <td>documentação oficial RabbitMQ 4.3</td>
+          <td>Define x-modulus-hash como tipo built-in para distribuir mensagens por hash da routing key com roteamento estável.</td>
+          <td>avançado/02-tipos-especializados-e-plugins</td>
+          <td>Estabilidade depende de bindings constantes; mudanças no número de destinos alteram a distribuição.</td>
+        </tr>
+        <tr>
+          <td><code>F15</code></td>
+          <td><a href="https://www.rabbitmq.com/docs/federated-exchanges">https://www.rabbitmq.com/docs/federated-exchanges</a></td>
+          <td>documentação oficial RabbitMQ 4.3</td>
+          <td>Explica federation de exchanges para replicação assíncrona entre nós, clusters ou regiões.</td>
+          <td>avançado/04-federated-exchanges-e-wan, avançado/05-governança-e-limites-de-complexidade</td>
+          <td>Depende do Federation plugin e envolve semântica assíncrona de WAN.</td>
+        </tr>
+        <tr>
+          <td><code>F16</code></td>
+          <td><a href="https://www.rabbitmq.com/assets/files/amqp0-9-1-43a54a005e97180a4fbe6e567a125d84.pdf">https://www.rabbitmq.com/assets/files/amqp0-9-1-43a54a005e97180a4fbe6e567a125d84.pdf</a></td>
+          <td>especificação AMQP 0-9-1</td>
+          <td>Fonte primária do protocolo AMQP 0-9-1 para o papel de exchanges, queues e routing keys.</td>
+          <td>básico/01-modelo-amqp-e-papel-da-exchange</td>
+          <td>Especificação do protocolo; RabbitMQ adiciona extensões e comportamento próprio em páginas de documentação.</td>
+        </tr>
+      </table>
+    </section>
+  </main>
+</body>
+</html>

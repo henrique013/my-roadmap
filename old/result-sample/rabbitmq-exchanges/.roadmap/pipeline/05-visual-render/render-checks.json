@@ -1,0 +1,5097 @@
+{
+  "status": "passa",
+  "generatedAt": "2026-06-09T15:03:57.829Z",
+  "html": "/home/henri/my-projects/my-roadmap/.tmp/roadmaps/rabbitmq-exchanges/roadmap.html",
+  "viewports": [
+    {
+      "viewport": {
+        "name": "desktop",
+        "width": 1280,
+        "height": 900,
+        "isMobile": false
+      },
+      "screenshotPath": "/home/henri/my-projects/my-roadmap/.tmp/roadmaps/rabbitmq-exchanges/.roadmap/pipeline/05-visual-render/playwright/desktop.png",
+      "title": "Roadmap - Exchanges no RabbitMQ",
+      "theme": {
+        "marker": "notion-dark",
+        "colorScheme": "dark",
+        "surfaceSamples": [
+          {
+            "selector": "body",
+            "index": 0,
+            "text": "Roadmap - Exchanges no RabbitMQ\n    Trilha tri-level para reaprender exchanges c",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": "main",
+            "index": 0,
+            "text": "Roadmap - Exchanges no RabbitMQ\n    Trilha tri-level para reaprender exchanges c",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".card",
+            "index": 0,
+            "text": "PerfilPessoa com conhecimento básico a intermediário, experiência real anterior ",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".card",
+            "index": 1,
+            "text": "CompreensãoAo final, você deve explicar o papel da exchange, escolher tipos adeq",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".card",
+            "index": 2,
+            "text": "FocoO roadmap cobre conceitos e critérios de domínio. Configuração por linguagem",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".card",
+            "index": 3,
+            "text": "BásicoFundamentos, vocabulário indispensável e modelos mentais para separar exch",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".card",
+            "index": 4,
+            "text": "IntermediárioArquitetura, contratos, falhas de roteamento, AE, DLX, policies, E2",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".card",
+            "index": 5,
+            "text": "AvançadoDiagnóstico, tipos especializados, quorum queues, federation e governanç",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".callout",
+            "index": 0,
+            "text": "Compreensão final esperada: Ao final, a pessoa deve conseguir explicar qual prob",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".callout",
+            "index": 1,
+            "text": "Papel na corrente local e no conjunto tri-level: Cria o modelo mental central: p",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".callout",
+            "index": 2,
+            "text": "Papel na corrente local e no conjunto tri-level: Remove a principal ambiguidade ",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".callout",
+            "index": 3,
+            "text": "Papel na corrente local e no conjunto tri-level: Transforma exchange de conceito",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".callout",
+            "index": 4,
+            "text": "Papel na corrente local e no conjunto tri-level: Apresenta os três tipos que res",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".callout",
+            "index": 5,
+            "text": "Papel na corrente local e no conjunto tri-level: Completa os tipos clássicos com",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".callout",
+            "index": 6,
+            "text": "Papel na corrente local e no conjunto tri-level: Fecha a base separando o que pe",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".callout",
+            "index": 7,
+            "text": "Papel na corrente local e no conjunto tri-level: Ensina a escolher exchanges com",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list a",
+            "index": 0,
+            "text": "Modelo AMQP e papel da exchange",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list a",
+            "index": 1,
+            "text": "Abrir página",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list a",
+            "index": 2,
+            "text": "Exchange padrão e publicação direta aparente",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list a",
+            "index": 3,
+            "text": "Abrir página",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list a",
+            "index": 4,
+            "text": "Bindings, routing key e destinos",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list a",
+            "index": 5,
+            "text": "Abrir página",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list a",
+            "index": 6,
+            "text": "Direct, fanout e topic",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list a",
+            "index": 7,
+            "text": "Abrir página",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list .node-list-item",
+            "index": 0,
+            "text": "01\n          \n            Modelo AMQP e papel da exchange\n            basico/01-",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list .node-list-item",
+            "index": 1,
+            "text": "02\n          \n            Exchange padrão e publicação direta aparente\n         ",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list .node-list-item",
+            "index": 2,
+            "text": "03\n          \n            Bindings, routing key e destinos\n            basico/03",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list .node-list-item",
+            "index": 3,
+            "text": "04\n          \n            Direct, fanout e topic\n            basico/04-direct-fa",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list .node-list-item",
+            "index": 4,
+            "text": "05\n          \n            Headers exchange e metadados de roteamento\n           ",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 0,
+            "text": "Tipo",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 1,
+            "text": "Declaração",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 2,
+            "text": "Conceito",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 3,
+            "text": "Primeira introdução",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 4,
+            "text": "Retomadas permitidas",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 5,
+            "text": "Retomadas bloqueadas",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 6,
+            "text": "Motivo da fronteira",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 7,
+            "text": "Fonte",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 0,
+            "text": "Premissa",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 1,
+            "text": "O recorte principal usa RabbitMQ 4.3 e o modelo AMQP 0-9-1, porque o tema pedido",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 2,
+            "text": "Premissa",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 3,
+            "text": "A pessoa já conhece noções de mensageria; por isso o básico é conceitual e diret",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 4,
+            "text": "Premissa",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 5,
+            "text": "Pedidos de validação foram convertidos em perguntas de checagem, critérios de do",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 6,
+            "text": "Limite",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 7,
+            "text": "Não cobre implementação por linguagem, comandos operacionais, setup local, UI de",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 0,
+            "text": "roadmap.html",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 1,
+            "text": "node.html",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 2,
+            "text": "basico/01-modelo-amqp-e-papel-da-exchange",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 3,
+            "text": "01-modelo-amqp-e-papel-da-exchange",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 4,
+            "text": "basico/02-exchange-padrao-e-publicacao-direta-aparente",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 5,
+            "text": "02-exchange-padrao-e-publicacao-direta-aparente",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 6,
+            "text": "basico/03-bindings-routing-key-e-destinos",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 7,
+            "text": "03-bindings-routing-key-e-destinos",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 0,
+            "text": "Perfil",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 1,
+            "text": "Compreensão",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 2,
+            "text": "Foco",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 3,
+            "text": "Básico",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 4,
+            "text": "Intermediário",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 5,
+            "text": "Avançado",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "isDark": true
+          }
+        ]
+      },
+      "overflow": {
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "hasGlobalOverflow": false
+      },
+      "contentWidths": [
+        {
+          "index": 0,
+          "selector": ".lead",
+          "text": "Trilha tri-level para reaprender exchanges com precisão: primeiro o modelo mental, depois decisões de topologia e, por f",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 1,
+          "selector": "p",
+          "text": "Pesquisa: 2026-06-08. Base principal: documentação oficial RabbitMQ 4.3 e especificação AMQP 0-9-1.",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 2,
+          "selector": ".callout",
+          "text": "Compreensão final esperada: Ao final, a pessoa deve conseguir explicar qual problema uma exchange resolve, como produtor",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 3,
+          "selector": "p",
+          "text": "Cada item aponta para o contrato completo do node neste próprio roadmap.html. Nodes documentados também exibem um link r",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 4,
+          "selector": "p",
+          "text": "fundamentos, vocabulário indispensável e modelos mentais. Esta corrente tem 6 nodes, definidos por densidade semântica d",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 5,
+          "selector": "p",
+          "text": "arquitetura, relações, decisões e trade-offs. Esta corrente tem 7 nodes, definidos por densidade semântica do tema.",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 6,
+          "selector": "p",
+          "text": "limites, casos de borda, falhas, comportamento avançado e critérios de especialista. Esta corrente tem 5 nodes, definido",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 7,
+          "selector": "p",
+          "text": "Level: basico | Node ID: basico/01-modelo-amqp-e-papel-da-exchange | Slug: 01-modelo-amqp-e-papel-da-exchange | Ordem lo",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 8,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Cria o modelo mental central: produtores publicam em exchanges, exchang",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 9,
+          "selector": "ul",
+          "text": "Noção de mensagem, produtor, consumidor e comunicação assíncrona.",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 10,
+          "selector": "ul",
+          "text": "Exchange como entidade de roteamento\n          Fluxo publisher -> exchange -> binding -> fila -> consumer\n          Dife",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 11,
+          "selector": "ul",
+          "text": "Explicar por que a exchange é o ponto de publicação no AMQP 0-9-1.\n          Mostrar que uma mensagem pode ir para zero,",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 12,
+          "selector": "ul",
+          "text": "Não detalhar direct, fanout, topic e headers; isso fica em nodes posteriores.\n          Não entrar em DLX, AE, confirms ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 13,
+          "selector": "ul",
+          "text": "Qual problema a exchange resolve entre produtores e consumidores?\n          Por que dizer que a exchange armazena mensag",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 14,
+          "selector": "ul",
+          "text": "publisher\n          producer\n          broker\n          exchange\n          queue\n          binding\n          consumer\n  ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 15,
+          "selector": "ul",
+          "text": "Diagrama HTML/CSS do caminho publisher -> exchange -> bindings -> queues -> consumers.\n          Cenário conceitual de e",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 16,
+          "selector": "ul",
+          "text": "Confundir exchange com fila.\n          Achar que consumidor assina exchange diretamente.\n          Achar que existe semp",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 17,
+          "selector": "p",
+          "text": "Consegue desenhar o fluxo de uma mensagem e explicar onde ocorre roteamento, onde ocorre armazenamento e onde ocorre con",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 18,
+          "selector": "p",
+          "text": "Com esse fluxo claro, o próximo node apresenta a exchange padrão, que cria a aparência de publicação direta em fila.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 19,
+          "selector": "p",
+          "text": "Level: basico | Node ID: basico/02-exchange-padrao-e-publicacao-direta-aparente | Slug: 02-exchange-padrao-e-publicacao-",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 20,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Remove a principal ambiguidade inicial: publicar com exchange vazia par",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 21,
+          "selector": "ul",
+          "text": "Entender o fluxo básico publisher -> exchange -> fila.",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 22,
+          "selector": "ul",
+          "text": "Default exchange\n          Nome vazio da exchange em AMQP 0-9-1\n          Binding automático pelo nome da fila",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 23,
+          "selector": "ul",
+          "text": "Explicar que a default exchange sempre existe e usa nome vazio na publicação AMQP 0-9-1.\n          Mostrar o binding aut",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 24,
+          "selector": "ul",
+          "text": "Não reensinar direct exchange comum em profundidade; isso fica no node de tipos.\n          Não apresentar a default exch",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 25,
+          "selector": "ul",
+          "text": "Por que `exchange=\"\"` não significa ausência de exchange?\n          Quando uma direct exchange própria é mais clara do q",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 26,
+          "selector": "ul",
+          "text": "default exchange\n          amq.default\n          empty string exchange name\n          routing key como nome da fila\n    ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 27,
+          "selector": "ul",
+          "text": "Comparação visual entre publicação na default exchange e publicação em uma exchange `orders.direct`.\n          Cenário c",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 28,
+          "selector": "ul",
+          "text": "Dizer que RabbitMQ permite publicar diretamente no consumidor.\n          Usar a default exchange como se fosse uma excha",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 29,
+          "selector": "p",
+          "text": "Consegue explicar por que a publicação direta em fila é uma conveniência da default exchange, não uma exceção ao modelo ",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 30,
+          "selector": "p",
+          "text": "Depois da exchange padrão, o próximo node detalha bindings e routing keys como regras que fazem o roteamento acontecer.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 31,
+          "selector": "p",
+          "text": "Level: basico | Node ID: basico/03-bindings-routing-key-e-destinos | Slug: 03-bindings-routing-key-e-destinos | Ordem lo",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 32,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Transforma exchange de conceito abstrato em tabela de roteamento: bindi",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 33,
+          "selector": "ul",
+          "text": "Entender que exchanges recebem publicações e roteiam para destinos.",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 34,
+          "selector": "ul",
+          "text": "Binding como regra de roteamento\n          Routing key da publicação\n          Binding key como critério de ligação\n    ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 35,
+          "selector": "ul",
+          "text": "Definir source, destination, destination type e argumentos de binding.\n          Explicar zero, uma ou várias rotas poss",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 36,
+          "selector": "ul",
+          "text": "Não detalhar comportamento por tipo de exchange além do necessário para preparar o próximo node.\n          Não cobrir E2",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 37,
+          "selector": "ul",
+          "text": "O que muda entre uma exchange vazia e uma fila vazia?\n          Quem define a routing key e quem define o binding?\n     ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 38,
+          "selector": "ul",
+          "text": "binding\n          binding key\n          routing key\n          source exchange\n          destination queue\n          dest",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 39,
+          "selector": "ul",
+          "text": "Mapa HTML/CSS de uma exchange com três bindings e destinos diferentes.\n          Cenário de `orders.created` indo para f",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 40,
+          "selector": "ul",
+          "text": "Tratar binding key e routing key como sinônimos fora de contexto.\n          Esperar que uma exchange sem bindings guarde",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 41,
+          "selector": "p",
+          "text": "Consegue ler uma topologia simples e prever quais filas recebem a mensagem a partir dos bindings.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 42,
+          "selector": "p",
+          "text": "Com bindings e routing keys definidos, o próximo node compara os tipos principais de exchange.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 43,
+          "selector": "p",
+          "text": "Level: basico | Node ID: basico/04-direct-fanout-e-topic | Slug: 04-direct-fanout-e-topic | Ordem local: 4",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 44,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Apresenta os três tipos que resolvem a maioria dos desenhos: match exat",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 45,
+          "selector": "ul",
+          "text": "Entender binding, routing key e múltiplos destinos.",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 46,
+          "selector": "ul",
+          "text": "Direct exchange\n          Fanout exchange\n          Topic exchange\n          Wildcard `*`\n          Wildcard `#`",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 47,
+          "selector": "ul",
+          "text": "Comparar direct como igualdade exata entre routing key e binding key.\n          Explicar fanout como cópia para todos os",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 48,
+          "selector": "ul",
+          "text": "Não cobrir headers exchange; fica no próximo node.\n          Não discutir DLX, AE, policies ou plugins.\n          Não ap",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 49,
+          "selector": "ul",
+          "text": "Quando direct é suficiente?\n          Por que fanout não é o mesmo que vários consumidores na mesma fila?\n          Quan",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 50,
+          "selector": "ul",
+          "text": "direct\n          fanout\n          topic\n          routing pattern\n          `*` wildcard\n          `#` wildcard\n        ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 51,
+          "selector": "ul",
+          "text": "Tabela comparando `orders.created`, `logs.error` e `audit.user.login` em direct/fanout/topic.\n          Cenário de notif",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 52,
+          "selector": "ul",
+          "text": "Usar fanout quando se queria filtro por categoria.\n          Usar topic sem convenção estável de routing keys.\n         ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 53,
+          "selector": "p",
+          "text": "Consegue escolher entre direct, fanout e topic a partir da intenção de roteamento e explicar a consequência para cada fi",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 54,
+          "selector": "p",
+          "text": "Depois dos tipos baseados em key textual, o próximo node cobre headers exchange para critérios por atributos.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 55,
+          "selector": "p",
+          "text": "Level: basico | Node ID: basico/05-headers-e-metadados-de-roteamento | Slug: 05-headers-e-metadados-de-roteamento | Orde",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 56,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Completa os tipos clássicos com roteamento por atributos, útil quando u",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 57,
+          "selector": "ul",
+          "text": "Entender direct, fanout e topic como roteamento por key ou padrão.",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 58,
+          "selector": "ul",
+          "text": "Headers exchange\n          `x-match`\n          Roteamento por headers\n          Payload opaco para o broker",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 59,
+          "selector": "ul",
+          "text": "Explicar que headers exchange ignora routing key e avalia headers da mensagem.\n          Diferenciar `x-match=all`, `x-m",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 60,
+          "selector": "ul",
+          "text": "Não tratar headers como substituto automático de topic.\n          Não cobrir serializers ou payload schema.\n          Nã",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 61,
+          "selector": "ul",
+          "text": "Por que headers exchange ignora routing key?\n          Quando `topic` é mais legível que headers?\n          Que risco ap",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 62,
+          "selector": "ul",
+          "text": "headers exchange\n          message headers\n          `x-match`\n          all\n          any\n          routing by attribut",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 63,
+          "selector": "ul",
+          "text": "Cenário conceitual de mensagens com `tenant=acme`, `format=pdf`, `priority=high`.\n          Tabela de escolha entre topi",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 64,
+          "selector": "ul",
+          "text": "Criar muitos headers de roteamento sem contrato.\n          Misturar dados de negócio sensíveis em headers usados só para",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 65,
+          "selector": "p",
+          "text": "Consegue explicar headers exchange sem confundir headers de mensagem com corpo da mensagem ou com routing key textual.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 66,
+          "selector": "p",
+          "text": "Com os tipos clássicos cobertos, o próximo node separa definitivamente fila, consumidor, ack e distribuição de trabalho.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 67,
+          "selector": "p",
+          "text": "Level: basico | Node ID: basico/06-filas-consumidores-e-entrega | Slug: 06-filas-consumidores-e-entrega | Ordem local: 6",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 68,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Fecha a base separando o que pertence à exchange do que pertence à fila",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 69,
+          "selector": "ul",
+          "text": "Entender exchanges, bindings, routing keys e tipos clássicos.",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 70,
+          "selector": "ul",
+          "text": "Fila como armazenamento ordenado\n          Consumer como subscription de entrega\n          Acknowledgement de consumidor",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 71,
+          "selector": "ul",
+          "text": "Explicar que filas armazenam mensagens prontas e entregues mas ainda não reconhecidas.\n          Mostrar que consumidore",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 72,
+          "selector": "ul",
+          "text": "Não aprofundar prefetch, retries, redelivery loops ou confirms.\n          Não discutir quorum queues ainda.\n          Nã",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 73,
+          "selector": "ul",
+          "text": "Onde a mensagem fica se não houver consumidor online?\n          O que muda quando dois consumidores estão na mesma fila?",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 74,
+          "selector": "ul",
+          "text": "ready message\n          delivered message\n          consumer\n          subscription\n          acknowledgement\n          ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 75,
+          "selector": "ul",
+          "text": "Cenário conceitual de uma fila `emails` com três workers competindo por mensagens.\n          Contraste visual entre uma ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 76,
+          "selector": "ul",
+          "text": "Achar que fanout para uma fila com três consumers entrega três cópias.\n          Confundir ack do consumidor com confirm",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 77,
+          "selector": "p",
+          "text": "Consegue explicar a diferença entre broadcast para filas e distribuição de carga entre consumidores da mesma fila.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 78,
+          "selector": "p",
+          "text": "A base está completa; o intermediário passa a tratar escolhas de topologia, falhas de roteamento e desenho operacional.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 79,
+          "selector": "p",
+          "text": "Level: intermediario | Node ID: intermediario/01-contrato-de-topologia-e-roteamento | Slug: 01-contrato-de-topologia-e-r",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 80,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Ensina a escolher exchanges como contrato entre produtores e topologia,",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 81,
+          "selector": "ul",
+          "text": "Dominar o vocabulário básico e os tipos clássicos.",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 82,
+          "selector": "ul",
+          "text": "Contrato de routing key\n          Ownership de exchange\n          Fronteira publisher-topology-consumer",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 83,
+          "selector": "ul",
+          "text": "Definir quando o produtor deve conhecer uma routing key, mas não a fila final.\n          Estabelecer convenções de nomes",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 84,
+          "selector": "ul",
+          "text": "Não reexplicar tipos básicos; use-os como pré-requisito.\n          Não discutir permissões e policies em profundidade; i",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 85,
+          "selector": "ul",
+          "text": "Que parte do contrato pertence ao publisher?\n          Como adicionar um novo consumidor sem mudar o produtor?\n         ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 86,
+          "selector": "ul",
+          "text": "topology contract\n          event contract\n          exchange ownership\n          routing key convention\n          consu",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 87,
+          "selector": "ul",
+          "text": "Matriz de decisão com domínio `orders`, routing keys `orders.created` e filas internas por serviço.\n          Cenário de",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 88,
+          "selector": "ul",
+          "text": "Nomear fila como routing key pública quando a fila é detalhe interno.\n          Criar uma exchange por consumidor em vez",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 89,
+          "selector": "p",
+          "text": "Consegue propor uma topologia onde producers conhecem o contrato de publicação, mas não os nomes das filas consumidoras.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 90,
+          "selector": "p",
+          "text": "Com contrato definido, o próximo node aprofunda a decisão entre broadcast e competição por fila.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 91,
+          "selector": "p",
+          "text": "Level: intermediario | Node ID: intermediario/02-broadcast-vs-consumidores-competindo | Slug: 02-broadcast-vs-consumidor",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 92,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Isola a decisão arquitetural que mais causa erro: cópia por fila é dife",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 93,
+          "selector": "ul",
+          "text": "Entender filas e consumidores como destino de entrega, não como tipo de exchange.",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 94,
+          "selector": "ul",
+          "text": "Broadcast para várias filas\n          Competing consumers\n          Multicast por direct/topic\n          Distribuição po",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 95,
+          "selector": "ul",
+          "text": "Explicar broadcast como múltiplas filas recebendo cópias da mesma publicação.\n          Explicar load balancing como con",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 96,
+          "selector": "ul",
+          "text": "Não repetir detalhes de fanout/direct/topic além do necessário.\n          Não transformar prefetch em guia operacional.\n",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 97,
+          "selector": "ul",
+          "text": "Se três serviços precisam processar o mesmo evento, quantas filas são necessárias?\n          Se três workers dividem tra",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 98,
+          "selector": "ul",
+          "text": "broadcast\n          copy per queue\n          competing consumers\n          consumer capacity\n          prefetch\n        ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 99,
+          "selector": "ul",
+          "text": "Contraste visual com uma exchange ligada a três filas versus uma fila ligada a três consumers.\n          Cenário de e-ma",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 100,
+          "selector": "ul",
+          "text": "Usar fanout esperando balanceamento.\n          Criar uma fila por worker quando a intenção é dividir trabalho.\n         ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 101,
+          "selector": "p",
+          "text": "Consegue decidir se um cenário exige cópias independentes em filas separadas ou concorrência dentro de uma única fila.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 102,
+          "selector": "p",
+          "text": "Depois da distribuição planejada, o próximo node trata a publicação que não encontra rota.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 103,
+          "selector": "p",
+          "text": "Level: intermediario | Node ID: intermediario/03-unroutable-mandatory-e-alternate-exchange | Slug: 03-unroutable-mandato",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 104,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Cobre o que acontece quando a exchange não encontra binding compatível ",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 105,
+          "selector": "ul",
+          "text": "Entender bindings e contrato de routing.",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 106,
+          "selector": "ul",
+          "text": "Unroutable message\n          `mandatory` flag\n          `basic.return`\n          Alternate Exchange\n          Fallback d",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 107,
+          "selector": "ul",
+          "text": "Explicar descarte padrão ou republish para AE quando `mandatory=false` e não há rota.\n          Explicar retorno ao publ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 108,
+          "selector": "ul",
+          "text": "Não confundir AE com DLX; DLX fica no próximo node.\n          Não afirmar que mandatory garante entrega ao consumidor.\n ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 109,
+          "selector": "ul",
+          "text": "O que acontece com uma mensagem sem binding compatível?\n          Quando AE é melhor que depender só de retorno ao publi",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 110,
+          "selector": "ul",
+          "text": "unroutable\n          `mandatory`\n          `basic.return`\n          alternate exchange\n          fallback routing\n      ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 111,
+          "selector": "ul",
+          "text": "Cenário conceitual de migração de `orders.created.v1` para `orders.created.v2` com AE capturando órfãs.\n          Tabela",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 112,
+          "selector": "ul",
+          "text": "Usar AE para mensagens rejeitadas pelo consumer.\n          Não configurar handler de retorno ao usar mandatory.\n        ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 113,
+          "selector": "p",
+          "text": "Consegue explicar os três destinos possíveis de uma publicação sem rota: descarte, retorno ao publisher ou roteamento pa",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 114,
+          "selector": "p",
+          "text": "Com falha de roteamento inicial clara, o próximo node trata mensagens que saem de filas por eventos posteriores.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 115,
+          "selector": "p",
+          "text": "Level: intermediario | Node ID: intermediario/04-dead-letter-exchanges-e-retry-conceitual | Slug: 04-dead-letter-exchang",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 116,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Separa DLX de AE e mostra como filas republiquem mensagens para uma exc",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 117,
+          "selector": "ul",
+          "text": "Entender unroutable e AE como falha de roteamento na entrada.",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 118,
+          "selector": "ul",
+          "text": "Dead Letter Exchange\n          Negative acknowledgement\n          `requeue=false`\n          TTL\n          Queue length l",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 119,
+          "selector": "ul",
+          "text": "Definir DLX como exchange normal configurada em filas.\n          Listar os eventos que levam uma mensagem a dead-letteri",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 120,
+          "selector": "ul",
+          "text": "Não desenhar passo a passo de implementação.\n          Não aprofundar quorum queues e delivery-limit além da fronteira c",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 121,
+          "selector": "ul",
+          "text": "Por que DLX não é um tipo especial de exchange?\n          Quais eventos fazem a mensagem sair da fila para dead-letterin",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 122,
+          "selector": "ul",
+          "text": "DLX\n          dead-lettering\n          `basic.nack`\n          `basic.reject`\n          TTL\n          delivery-limit\n    ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 123,
+          "selector": "ul",
+          "text": "Fluxo conceitual: fila principal -> DLX -> fila de análise ou espera -> exchange principal.\n          Cenário de mensage",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 124,
+          "selector": "ul",
+          "text": "Chamar DLX de fila.\n          Declarar DLX no papel e não garantir que a exchange destino exista.\n          Criar loops ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 125,
+          "selector": "p",
+          "text": "Consegue explicar quando a mensagem é dead-lettered e como a DLX participa sem armazenar a mensagem por si mesma.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 126,
+          "selector": "p",
+          "text": "Depois de DLX, o próximo node trata policies, x-arguments e permissões que governam essas configurações.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 127,
+          "selector": "p",
+          "text": "Level: intermediario | Node ID: intermediario/05-policies-x-arguments-e-permissoes | Slug: 05-policies-x-arguments-e-per",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 128,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Mostra como configurações de exchange e fila devem ser governadas para ",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 129,
+          "selector": "ul",
+          "text": "Entender AE, DLX e argumentos opcionais como configurações de topologia.",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 130,
+          "selector": "ul",
+          "text": "Policies\n          Operator policies\n          `x-arguments`\n          Precedência\n          Permissões configure/write/",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 131,
+          "selector": "ul",
+          "text": "Explicar por que policies servem para parâmetros que podem mudar em runtime.\n          Comparar policy versus argumento ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 132,
+          "selector": "ul",
+          "text": "Não virar guia completo de segurança.\n          Não reensinar DLX/AE; usar como exemplos de configuração.\n          Não ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 133,
+          "selector": "ul",
+          "text": "Por que hardcoded x-arguments dificultam mudança de DLX?\n          Que permissão o publisher precisa para publicar em um",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 134,
+          "selector": "ul",
+          "text": "policy\n          operator policy\n          `x-argument`\n          runtime parameter\n          vhost\n          configure ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 135,
+          "selector": "ul",
+          "text": "Cenário conceitual de policy aplicando DLX a um grupo de filas `orders.*`.\n          Matriz de ownership: app declara fi",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 136,
+          "selector": "ul",
+          "text": "Embedar configuração operacional em código quando policy seria mais flexível.\n          Achar que policy muda qualquer a",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 137,
+          "selector": "p",
+          "text": "Consegue diferenciar configuração declarada pela aplicação, policy operacional e permissão necessária para publicar ou c",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 138,
+          "selector": "p",
+          "text": "Com governança local clara, o próximo node mostra composição de topologias com exchange-to-exchange bindings.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 139,
+          "selector": "p",
+          "text": "Level: intermediario | Node ID: intermediario/06-exchange-to-exchange-bindings | Slug: 06-exchange-to-exchange-bindings ",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 140,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Apresenta composição de roteamento dentro do RabbitMQ sem tratar a mens",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 141,
+          "selector": "ul",
+          "text": "Entender bindings de exchange para queue e contrato de topologia.",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 142,
+          "selector": "ul",
+          "text": "Exchange-to-exchange binding\n          Source exchange\n          Destination exchange\n          Ciclos eliminados\n      ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 143,
+          "selector": "ul",
+          "text": "Explicar a direção source -> destination em E2E.\n          Mostrar que binding keys e tipos continuam operando normalmen",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 144,
+          "selector": "ul",
+          "text": "Não cobrir federation ou multi-cluster; isso fica no avançado.\n          Não usar E2E como substituto automático de cont",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 145,
+          "selector": "ul",
+          "text": "E2E republica a mensagem ou estende o roteamento?\n          Como evitar topologia difícil de operar quando há muitas exc",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 146,
+          "selector": "ul",
+          "text": "E2E binding\n          `exchange.bind`\n          source\n          destination\n          transitive topology\n          cyc",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 147,
+          "selector": "ul",
+          "text": "Cenário conceitual de `events.public` roteando para `orders.internal` e `audit.internal`.\n          Mapa HTML/CSS de exc",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 148,
+          "selector": "ul",
+          "text": "Usar E2E para esconder contrato mal definido.\n          Criar grafos difíceis de diagnosticar.\n          Interpretar mét",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 149,
+          "selector": "p",
+          "text": "Consegue explicar E2E como uma extensão de roteamento e identificar quando ela simplifica ou complica a topologia.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 150,
+          "selector": "p",
+          "text": "O próximo node separa confirmação de publicação de processamento no consumidor.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 151,
+          "selector": "p",
+          "text": "Level: intermediario | Node ID: intermediario/07-publisher-confirms-e-confiabilidade | Slug: 07-publisher-confirms-e-con",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 152,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Fecha o intermediário separando aceitação pelo broker, roteamento e pro",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 153,
+          "selector": "ul",
+          "text": "Entender fila, consumer ack, unroutable e DLX.",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 154,
+          "selector": "ul",
+          "text": "Publisher confirms\n          Consumer acknowledgements\n          Channel error\n          Returned message\n          Mens",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 155,
+          "selector": "ul",
+          "text": "Explicar que publisher confirms são confirmação broker->publisher, não consumer->broker.\n          Descrever quando o br",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 156,
+          "selector": "ul",
+          "text": "Não aprofundar tuning de throughput ou batch confirms.\n          Não discutir todos os detalhes de persistência em filas",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 157,
+          "selector": "ul",
+          "text": "Confirm prova que um consumidor processou a mensagem?\n          O que muda entre publicar em exchange inexistente e publ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 158,
+          "selector": "ul",
+          "text": "publisher confirm\n          consumer ack\n          channel-level exception\n          persistent message\n          durabl",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 159,
+          "selector": "ul",
+          "text": "Tabela conceitual: publish aceito, unroutable retornado, consumer ack e nack.\n          Cenário de publisher crítico que",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 160,
+          "selector": "ul",
+          "text": "Confundir confirm com ack do consumidor.\n          Tratar durable topology como persistência de mensagem.\n          Igno",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 161,
+          "selector": "p",
+          "text": "Consegue explicar que confiabilidade envolve sinais diferentes em pontos diferentes do fluxo, sem reduzir tudo a um únic",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 162,
+          "selector": "p",
+          "text": "O avançado usa essa base para discutir limites, plugins, quorum queues, federation e governança multidomínio.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 163,
+          "selector": "p",
+          "text": "Level: avancado | Node ID: avancado/01-diagnostico-de-roteamento-e-observabilidade | Slug: 01-diagnostico-de-roteamento-",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 164,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Ensina a raciocinar sobre incidentes de routing sem reabrir fundamentos",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 165,
+          "selector": "ul",
+          "text": "Dominar contrato de topologia, unroutable, AE, DLX e confirms.",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 166,
+          "selector": "ul",
+          "text": "Diagnóstico por topologia\n          Métricas de unroutable\n          Inspeção de bindings\n          Sinais de publisher ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 167,
+          "selector": "ul",
+          "text": "Diferenciar sintomas de exchange inexistente, exchange sem bindings, routing key errada, fila sem consumer e consumer le",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 168,
+          "selector": "ul",
+          "text": "Não listar comandos operacionais como roteiro.\n          Não explicar novamente os tipos de exchange.\n          Não tran",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 169,
+          "selector": "ul",
+          "text": "Quais sinais indicam que o problema está no publisher e não no consumer?\n          Como distinguir mensagem sem rota de ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 170,
+          "selector": "ul",
+          "text": "unroutable metric\n          returned message\n          binding inspection\n          queue depth\n          consumer capac",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 171,
+          "selector": "ul",
+          "text": "Matriz de sintomas: publish falha, mensagem retorna, fila cresce, DLX cresce.\n          Cenário de deploy que altera rou",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 172,
+          "selector": "ul",
+          "text": "Corrigir consumer quando a routing key está errada.\n          Esvaziar DLX sem corrigir causa raiz.\n          Ignorar AE",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 173,
+          "selector": "p",
+          "text": "Consegue diagnosticar em qual trecho do fluxo a mensagem parou ou mudou de caminho antes de propor alteração.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 174,
+          "selector": "p",
+          "text": "Com diagnóstico avançado, o próximo node avalia quando tipos especializados de exchange entram no desenho.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 175,
+          "selector": "p",
+          "text": "Level: avancado | Node ID: avancado/02-tipos-especializados-e-plugins | Slug: 02-tipos-especializados-e-plugins | Ordem ",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 176,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Mostra quando sair dos tipos clássicos e qual critério usar antes de ad",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 177,
+          "selector": "ul",
+          "text": "Dominar direct, fanout, topic, headers e os limites de topologia simples.",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 178,
+          "selector": "ul",
+          "text": "Local Random Exchange\n          `x-modulus-hash`\n          Plugins de exchange\n          Roteamento estável por chave\n  ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 179,
+          "selector": "ul",
+          "text": "Apresentar Local Random para request-reply de baixa latência com filas locais.\n          Apresentar `x-modulus-hash` par",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 180,
+          "selector": "ul",
+          "text": "Não substituir o estudo de direct/topic por plugins.\n          Não cobrir cada plugin de terceiros.\n          Não promet",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 181,
+          "selector": "ul",
+          "text": "Que problema específico justifica sair dos tipos clássicos?\n          Como `x-modulus-hash` preserva destino enquanto bi",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 182,
+          "selector": "ul",
+          "text": "local random exchange\n          `x-modulus-hash`\n          stable routing\n          routing key hash\n          exclusive",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 183,
+          "selector": "ul",
+          "text": "Cenário de eventos por `order_id` preservando ordem por entidade com múltiplas filas.\n          Cenário de RPC interno e",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 184,
+          "selector": "ul",
+          "text": "Adotar plugin por novidade sem necessidade de semântica.\n          Confundir particionamento por chave com roteamento po",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 185,
+          "selector": "p",
+          "text": "Consegue avaliar se um tipo especializado resolve uma limitação real ou apenas complica uma topologia que direct/topic j",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 186,
+          "selector": "p",
+          "text": "O próximo node conecta DLX e retries a quorum queues, onde há comportamentos específicos recentes.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 187,
+          "selector": "p",
+          "text": "Level: avancado | Node ID: avancado/03-quorum-queues-dlx-e-redelivery-limits | Slug: 03-quorum-queues-dlx-e-redelivery-l",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 188,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Aprofunda o ponto em que decisão de fila altera a estratégia de DLX e r",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 189,
+          "selector": "ul",
+          "text": "Entender DLX, nack, requeue e publisher confirms.",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 190,
+          "selector": "ul",
+          "text": "Quorum queue\n          Delivery limit\n          Repeated requeue loop\n          At-least-once dead-lettering\n          D",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 191,
+          "selector": "ul",
+          "text": "Explicar por que loops de requeue podem ser problema operacional.\n          Mostrar delivery-limit e dead-lettering como",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 192,
+          "selector": "ul",
+          "text": "Não fazer guia de configuração de quorum queue.\n          Não generalizar recursos de quorum para classic queues.\n      ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 193,
+          "selector": "ul",
+          "text": "Por que `requeue=true` repetido pode ser pior que dead-lettering?\n          Quando uma DLX com quorum queue precisa de g",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 194,
+          "selector": "ul",
+          "text": "quorum queue\n          delivery-limit\n          redelivery count\n          at-least-once dead-lettering\n          delaye",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 195,
+          "selector": "ul",
+          "text": "Cenário de mensagem venenosa separada após limite de redelivery.\n          Fluxo conceitual de retry com atraso versus r",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 196,
+          "selector": "ul",
+          "text": "Aplicar comportamento de quorum queues a classic queues sem verificar.\n          Criar redelivery loop que consome CPU e",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 197,
+          "selector": "p",
+          "text": "Consegue explicar como o tipo de fila e suas políticas mudam a segurança e o comportamento de DLX/retry.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 198,
+          "selector": "p",
+          "text": "Depois das filas quorum, o próximo node amplia o escopo para exchanges entre clusters e regiões.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 199,
+          "selector": "p",
+          "text": "Level: avancado | Node ID: avancado/04-federated-exchanges-e-wan | Slug: 04-federated-exchanges-e-wan | Ordem local: 4",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 200,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Explica quando exchanges deixam de ser topologia local e passam a parti",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 201,
+          "selector": "ul",
+          "text": "Entender E2E dentro de um broker e contratos de routing.",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 202,
+          "selector": "ul",
+          "text": "Federated exchange\n          Upstream\n          Downstream\n          Replicação assíncrona\n          WAN\n          Feder",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 203,
+          "selector": "ul",
+          "text": "Definir federated exchanges como mecanismo de copiar fluxo de uma exchange upstream para downstreams independentes.\n    ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 204,
+          "selector": "ul",
+          "text": "Não cobrir shovel ou federation reference em profundidade.\n          Não tratar federation como substituto simples de cl",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 205,
+          "selector": "ul",
+          "text": "Por que federation não é a mesma coisa que E2E binding?\n          Que garantias mudam quando há WAN?\n          Quando re",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 206,
+          "selector": "ul",
+          "text": "federated exchange\n          upstream\n          downstream\n          federation plugin\n          WAN\n          asynchron",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 207,
+          "selector": "ul",
+          "text": "Cenário conceitual de eventos de auditoria replicados para região secundária.\n          Mapa de fronteira entre broker l",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 208,
+          "selector": "ul",
+          "text": "Usar federation para mascarar domínio mal separado.\n          Ignorar atraso e falha de conectividade.\n          Mistura",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 209,
+          "selector": "p",
+          "text": "Consegue explicar federation como integração assíncrona entre brokers e avaliar os riscos de operar exchanges além do vh",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 210,
+          "selector": "p",
+          "text": "O próximo node fecha com governança de contratos e limites de complexidade.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 211,
+          "selector": "p",
+          "text": "Level: avancado | Node ID: avancado/05-governanca-e-limites-de-complexidade | Slug: 05-governanca-e-limites-de-complexid",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 212,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Consolida critérios de especialista: uma topologia boa é compreensível,",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 213,
+          "selector": "ul",
+          "text": "Entender contratos, policies, permissões, E2E, plugins e federation.",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 214,
+          "selector": "ul",
+          "text": "Governança de eventos\n          Fronteiras por vhost\n          Permissões por domínio\n          Matriz anti-acoplamento\n",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 215,
+          "selector": "ul",
+          "text": "Definir ownership de exchanges e routing keys por domínio.\n          Separar vhosts quando há fronteiras reais de acesso",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 216,
+          "selector": "ul",
+          "text": "Não criar política organizacional completa.\n          Não substituir documentação operacional detalhada.\n          Não r",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 217,
+          "selector": "ul",
+          "text": "Quem é dono de uma exchange de domínio?\n          Como impedir publicação no domínio errado sem acoplar consumidores?\n  ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 218,
+          "selector": "ul",
+          "text": "event governance\n          vhost boundary\n          resource permission\n          routing ownership\n          operable t",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 219,
+          "selector": "ul",
+          "text": "Checklist conceitual de revisão de topologia antes de produção.\n          Cenário de broker compartilhado por múltiplos ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 220,
+          "selector": "ul",
+          "text": "Permitir write amplo demais em exchanges compartilhadas.\n          Criar topic keys sem versionamento ou ownership.\n    ",
+          "width": 1144,
+          "mainWidth": 1260,
+          "ratio": 0.908
+        },
+        {
+          "index": 221,
+          "selector": "p",
+          "text": "Consegue revisar uma topologia de RabbitMQ e justificar se ela é simples, segura, rastreável e adequada ao problema.",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 222,
+          "selector": "p",
+          "text": "Este node encerra o roadmap: a próxima etapa natural é gerar páginas profundas para nodes específicos conforme necessida",
+          "width": 1166,
+          "mainWidth": 1260,
+          "ratio": 0.925
+        },
+        {
+          "index": 223,
+          "selector": "ul",
+          "text": "Explicar por que a exchange existe e por que ela não substitui a fila.\n        Diferenciar publisher, exchange, binding,",
+          "width": 1182,
+          "mainWidth": 1260,
+          "ratio": 0.938
+        }
+      ],
+      "contrastSamples": [
+        {
+          "label": "body",
+          "text": "Roadmap - Exchanges no RabbitMQ\n    Trilha tri-level para reaprender exchanges c",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "parágrafo",
+          "text": "Trilha tri-level para reaprender exchanges com precisão: primeiro o modelo menta",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 6.97
+        },
+        {
+          "label": "parágrafo",
+          "text": "Pesquisa: 2026-06-08. Base principal: documentação oficial RabbitMQ 4.3 e especi",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 6.97
+        },
+        {
+          "label": "parágrafo",
+          "text": "Pessoa com conhecimento básico a intermediário, experiência real anterior e nece",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "parágrafo",
+          "text": "Ao final, você deve explicar o papel da exchange, escolher tipos adequados e pre",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "parágrafo",
+          "text": "O roadmap cobre conceitos e critérios de domínio. Configuração por linguagem, co",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "parágrafo",
+          "text": "Fundamentos, vocabulário indispensável e modelos mentais para separar exchange, ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "parágrafo",
+          "text": "Arquitetura, contratos, falhas de roteamento, AE, DLX, policies, E2E e confiabil",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "parágrafo",
+          "text": "Diagnóstico, tipos especializados, quorum queues, federation e governança de top",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "link",
+          "text": "Modelo AMQP e papel da exchange",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Abrir página",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "link",
+          "text": "Exchange padrão e publicação direta aparente",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Abrir página",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "link",
+          "text": "Bindings, routing key e destinos",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Abrir página",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "link",
+          "text": "Direct, fanout e topic",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Abrir página",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "inline code",
+          "text": "roadmap.html",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "node.html",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "basico/01-modelo-amqp-e-papel-da-exchange",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "01-modelo-amqp-e-papel-da-exchange",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "basico/02-exchange-padrao-e-publicacao-direta-aparente",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "02-exchange-padrao-e-publicacao-direta-aparente",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "basico/03-bindings-routing-key-e-destinos",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "03-bindings-routing-key-e-destinos",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "tag",
+          "text": "Perfil",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "Compreensão",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(31, 43, 63)",
+          "ratio": 7.95
+        },
+        {
+          "label": "tag",
+          "text": "Foco",
+          "color": "rgb(255, 220, 73)",
+          "backgroundColor": "rgb(52, 47, 25)",
+          "ratio": 9.95
+        },
+        {
+          "label": "tag",
+          "text": "Básico",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "Intermediário",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(31, 43, 63)",
+          "ratio": 7.95
+        },
+        {
+          "label": "tag",
+          "text": "Avançado",
+          "color": "rgb(255, 220, 73)",
+          "backgroundColor": "rgb(52, 47, 25)",
+          "ratio": 9.95
+        },
+        {
+          "label": "route-label",
+          "text": "Publisher",
+          "color": "rgb(242, 242, 242)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 14.55
+        },
+        {
+          "label": "route-label",
+          "text": "Exchange",
+          "color": "rgb(242, 242, 242)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 14.55
+        },
+        {
+          "label": "route-label",
+          "text": "Bindings",
+          "color": "rgb(242, 242, 242)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 14.55
+        },
+        {
+          "label": "route-label",
+          "text": "Queues",
+          "color": "rgb(242, 242, 242)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 14.55
+        },
+        {
+          "label": "route-label",
+          "text": "Consumers",
+          "color": "rgb(242, 242, 242)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 14.55
+        },
+        {
+          "label": "node-list",
+          "text": "Modelo AMQP e papel da exchange",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "node-list",
+          "text": "Abrir página",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "node-list",
+          "text": "Exchange padrão e publicação direta aparente",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "node-list",
+          "text": "Abrir página",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "node-list",
+          "text": "Bindings, routing key e destinos",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "node-list",
+          "text": "Abrir página",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "node-list",
+          "text": "Direct, fanout e topic",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "node-list",
+          "text": "Abrir página",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        }
+      ],
+      "preBlocks": [],
+      "preCodeStyles": []
+    },
+    {
+      "viewport": {
+        "name": "mobile",
+        "width": 390,
+        "height": 844,
+        "isMobile": true
+      },
+      "screenshotPath": "/home/henri/my-projects/my-roadmap/.tmp/roadmaps/rabbitmq-exchanges/.roadmap/pipeline/05-visual-render/playwright/mobile.png",
+      "title": "Roadmap - Exchanges no RabbitMQ",
+      "theme": {
+        "marker": "notion-dark",
+        "colorScheme": "dark",
+        "surfaceSamples": [
+          {
+            "selector": "body",
+            "index": 0,
+            "text": "Roadmap - Exchanges no RabbitMQ\n    Trilha tri-level para reaprender exchanges c",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": "main",
+            "index": 0,
+            "text": "Roadmap - Exchanges no RabbitMQ\n    Trilha tri-level para reaprender exchanges c",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".card",
+            "index": 0,
+            "text": "PerfilPessoa com conhecimento básico a intermediário, experiência real anterior ",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".card",
+            "index": 1,
+            "text": "CompreensãoAo final, você deve explicar o papel da exchange, escolher tipos adeq",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".card",
+            "index": 2,
+            "text": "FocoO roadmap cobre conceitos e critérios de domínio. Configuração por linguagem",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".card",
+            "index": 3,
+            "text": "BásicoFundamentos, vocabulário indispensável e modelos mentais para separar exch",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".card",
+            "index": 4,
+            "text": "IntermediárioArquitetura, contratos, falhas de roteamento, AE, DLX, policies, E2",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".card",
+            "index": 5,
+            "text": "AvançadoDiagnóstico, tipos especializados, quorum queues, federation e governanç",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".callout",
+            "index": 0,
+            "text": "Compreensão final esperada: Ao final, a pessoa deve conseguir explicar qual prob",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".callout",
+            "index": 1,
+            "text": "Papel na corrente local e no conjunto tri-level: Cria o modelo mental central: p",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".callout",
+            "index": 2,
+            "text": "Papel na corrente local e no conjunto tri-level: Remove a principal ambiguidade ",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".callout",
+            "index": 3,
+            "text": "Papel na corrente local e no conjunto tri-level: Transforma exchange de conceito",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".callout",
+            "index": 4,
+            "text": "Papel na corrente local e no conjunto tri-level: Apresenta os três tipos que res",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".callout",
+            "index": 5,
+            "text": "Papel na corrente local e no conjunto tri-level: Completa os tipos clássicos com",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".callout",
+            "index": 6,
+            "text": "Papel na corrente local e no conjunto tri-level: Fecha a base separando o que pe",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".callout",
+            "index": 7,
+            "text": "Papel na corrente local e no conjunto tri-level: Ensina a escolher exchanges com",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list a",
+            "index": 0,
+            "text": "Modelo AMQP e papel da exchange",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list a",
+            "index": 1,
+            "text": "Abrir página",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list a",
+            "index": 2,
+            "text": "Exchange padrão e publicação direta aparente",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list a",
+            "index": 3,
+            "text": "Abrir página",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list a",
+            "index": 4,
+            "text": "Bindings, routing key e destinos",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list a",
+            "index": 5,
+            "text": "Abrir página",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list a",
+            "index": 6,
+            "text": "Direct, fanout e topic",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list a",
+            "index": 7,
+            "text": "Abrir página",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list .node-list-item",
+            "index": 0,
+            "text": "01\n          \n            Modelo AMQP e papel da exchange\n            basico/01-",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list .node-list-item",
+            "index": 1,
+            "text": "02\n          \n            Exchange padrão e publicação direta aparente\n         ",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list .node-list-item",
+            "index": 2,
+            "text": "03\n          \n            Bindings, routing key e destinos\n            basico/03",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list .node-list-item",
+            "index": 3,
+            "text": "04\n          \n            Direct, fanout e topic\n            basico/04-direct-fa",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-list .node-list-item",
+            "index": 4,
+            "text": "05\n          \n            Headers exchange e metadados de roteamento\n           ",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 0,
+            "text": "Tipo",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 1,
+            "text": "Declaração",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 2,
+            "text": "Conceito",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 3,
+            "text": "Primeira introdução",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 4,
+            "text": "Retomadas permitidas",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 5,
+            "text": "Retomadas bloqueadas",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 6,
+            "text": "Motivo da fronteira",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 7,
+            "text": "Fonte",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 0,
+            "text": "Premissa",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 1,
+            "text": "O recorte principal usa RabbitMQ 4.3 e o modelo AMQP 0-9-1, porque o tema pedido",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 2,
+            "text": "Premissa",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 3,
+            "text": "A pessoa já conhece noções de mensageria; por isso o básico é conceitual e diret",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 4,
+            "text": "Premissa",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 5,
+            "text": "Pedidos de validação foram convertidos em perguntas de checagem, critérios de do",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 6,
+            "text": "Limite",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 7,
+            "text": "Não cobre implementação por linguagem, comandos operacionais, setup local, UI de",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 0,
+            "text": "roadmap.html",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 1,
+            "text": "node.html",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 2,
+            "text": "basico/01-modelo-amqp-e-papel-da-exchange",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 3,
+            "text": "01-modelo-amqp-e-papel-da-exchange",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 4,
+            "text": "basico/02-exchange-padrao-e-publicacao-direta-aparente",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 5,
+            "text": "02-exchange-padrao-e-publicacao-direta-aparente",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 6,
+            "text": "basico/03-bindings-routing-key-e-destinos",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": "inline code",
+            "index": 7,
+            "text": "03-bindings-routing-key-e-destinos",
+            "backgroundColor": "rgb(47, 52, 55)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 0,
+            "text": "Perfil",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 1,
+            "text": "Compreensão",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 2,
+            "text": "Foco",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 3,
+            "text": "Básico",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 4,
+            "text": "Intermediário",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 5,
+            "text": "Avançado",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "isDark": true
+          }
+        ]
+      },
+      "overflow": {
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "hasGlobalOverflow": false
+      },
+      "contentWidths": [
+        {
+          "index": 0,
+          "selector": ".lead",
+          "text": "Trilha tri-level para reaprender exchanges com precisão: primeiro o modelo mental, depois decisões de topologia e, por f",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 1,
+          "selector": "p",
+          "text": "Pesquisa: 2026-06-08. Base principal: documentação oficial RabbitMQ 4.3 e especificação AMQP 0-9-1.",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 2,
+          "selector": ".callout",
+          "text": "Compreensão final esperada: Ao final, a pessoa deve conseguir explicar qual problema uma exchange resolve, como produtor",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 3,
+          "selector": "p",
+          "text": "Cada item aponta para o contrato completo do node neste próprio roadmap.html. Nodes documentados também exibem um link r",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 4,
+          "selector": "p",
+          "text": "fundamentos, vocabulário indispensável e modelos mentais. Esta corrente tem 6 nodes, definidos por densidade semântica d",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 5,
+          "selector": "p",
+          "text": "arquitetura, relações, decisões e trade-offs. Esta corrente tem 7 nodes, definidos por densidade semântica do tema.",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 6,
+          "selector": "p",
+          "text": "limites, casos de borda, falhas, comportamento avançado e critérios de especialista. Esta corrente tem 5 nodes, definido",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 7,
+          "selector": "p",
+          "text": "Level: basico | Node ID: basico/01-modelo-amqp-e-papel-da-exchange | Slug: 01-modelo-amqp-e-papel-da-exchange | Ordem lo",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 8,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Cria o modelo mental central: produtores publicam em exchanges, exchang",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 9,
+          "selector": "ul",
+          "text": "Noção de mensagem, produtor, consumidor e comunicação assíncrona.",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 10,
+          "selector": "ul",
+          "text": "Exchange como entidade de roteamento\n          Fluxo publisher -> exchange -> binding -> fila -> consumer\n          Dife",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 11,
+          "selector": "ul",
+          "text": "Explicar por que a exchange é o ponto de publicação no AMQP 0-9-1.\n          Mostrar que uma mensagem pode ir para zero,",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 12,
+          "selector": "ul",
+          "text": "Não detalhar direct, fanout, topic e headers; isso fica em nodes posteriores.\n          Não entrar em DLX, AE, confirms ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 13,
+          "selector": "ul",
+          "text": "Qual problema a exchange resolve entre produtores e consumidores?\n          Por que dizer que a exchange armazena mensag",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 14,
+          "selector": "ul",
+          "text": "publisher\n          producer\n          broker\n          exchange\n          queue\n          binding\n          consumer\n  ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 15,
+          "selector": "ul",
+          "text": "Diagrama HTML/CSS do caminho publisher -> exchange -> bindings -> queues -> consumers.\n          Cenário conceitual de e",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 16,
+          "selector": "ul",
+          "text": "Confundir exchange com fila.\n          Achar que consumidor assina exchange diretamente.\n          Achar que existe semp",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 17,
+          "selector": "p",
+          "text": "Consegue desenhar o fluxo de uma mensagem e explicar onde ocorre roteamento, onde ocorre armazenamento e onde ocorre con",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 18,
+          "selector": "p",
+          "text": "Com esse fluxo claro, o próximo node apresenta a exchange padrão, que cria a aparência de publicação direta em fila.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 19,
+          "selector": "p",
+          "text": "Level: basico | Node ID: basico/02-exchange-padrao-e-publicacao-direta-aparente | Slug: 02-exchange-padrao-e-publicacao-",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 20,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Remove a principal ambiguidade inicial: publicar com exchange vazia par",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 21,
+          "selector": "ul",
+          "text": "Entender o fluxo básico publisher -> exchange -> fila.",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 22,
+          "selector": "ul",
+          "text": "Default exchange\n          Nome vazio da exchange em AMQP 0-9-1\n          Binding automático pelo nome da fila",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 23,
+          "selector": "ul",
+          "text": "Explicar que a default exchange sempre existe e usa nome vazio na publicação AMQP 0-9-1.\n          Mostrar o binding aut",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 24,
+          "selector": "ul",
+          "text": "Não reensinar direct exchange comum em profundidade; isso fica no node de tipos.\n          Não apresentar a default exch",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 25,
+          "selector": "ul",
+          "text": "Por que `exchange=\"\"` não significa ausência de exchange?\n          Quando uma direct exchange própria é mais clara do q",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 26,
+          "selector": "ul",
+          "text": "default exchange\n          amq.default\n          empty string exchange name\n          routing key como nome da fila\n    ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 27,
+          "selector": "ul",
+          "text": "Comparação visual entre publicação na default exchange e publicação em uma exchange `orders.direct`.\n          Cenário c",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 28,
+          "selector": "ul",
+          "text": "Dizer que RabbitMQ permite publicar diretamente no consumidor.\n          Usar a default exchange como se fosse uma excha",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 29,
+          "selector": "p",
+          "text": "Consegue explicar por que a publicação direta em fila é uma conveniência da default exchange, não uma exceção ao modelo ",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 30,
+          "selector": "p",
+          "text": "Depois da exchange padrão, o próximo node detalha bindings e routing keys como regras que fazem o roteamento acontecer.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 31,
+          "selector": "p",
+          "text": "Level: basico | Node ID: basico/03-bindings-routing-key-e-destinos | Slug: 03-bindings-routing-key-e-destinos | Ordem lo",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 32,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Transforma exchange de conceito abstrato em tabela de roteamento: bindi",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 33,
+          "selector": "ul",
+          "text": "Entender que exchanges recebem publicações e roteiam para destinos.",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 34,
+          "selector": "ul",
+          "text": "Binding como regra de roteamento\n          Routing key da publicação\n          Binding key como critério de ligação\n    ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 35,
+          "selector": "ul",
+          "text": "Definir source, destination, destination type e argumentos de binding.\n          Explicar zero, uma ou várias rotas poss",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 36,
+          "selector": "ul",
+          "text": "Não detalhar comportamento por tipo de exchange além do necessário para preparar o próximo node.\n          Não cobrir E2",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 37,
+          "selector": "ul",
+          "text": "O que muda entre uma exchange vazia e uma fila vazia?\n          Quem define a routing key e quem define o binding?\n     ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 38,
+          "selector": "ul",
+          "text": "binding\n          binding key\n          routing key\n          source exchange\n          destination queue\n          dest",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 39,
+          "selector": "ul",
+          "text": "Mapa HTML/CSS de uma exchange com três bindings e destinos diferentes.\n          Cenário de `orders.created` indo para f",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 40,
+          "selector": "ul",
+          "text": "Tratar binding key e routing key como sinônimos fora de contexto.\n          Esperar que uma exchange sem bindings guarde",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 41,
+          "selector": "p",
+          "text": "Consegue ler uma topologia simples e prever quais filas recebem a mensagem a partir dos bindings.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 42,
+          "selector": "p",
+          "text": "Com bindings e routing keys definidos, o próximo node compara os tipos principais de exchange.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 43,
+          "selector": "p",
+          "text": "Level: basico | Node ID: basico/04-direct-fanout-e-topic | Slug: 04-direct-fanout-e-topic | Ordem local: 4",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 44,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Apresenta os três tipos que resolvem a maioria dos desenhos: match exat",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 45,
+          "selector": "ul",
+          "text": "Entender binding, routing key e múltiplos destinos.",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 46,
+          "selector": "ul",
+          "text": "Direct exchange\n          Fanout exchange\n          Topic exchange\n          Wildcard `*`\n          Wildcard `#`",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 47,
+          "selector": "ul",
+          "text": "Comparar direct como igualdade exata entre routing key e binding key.\n          Explicar fanout como cópia para todos os",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 48,
+          "selector": "ul",
+          "text": "Não cobrir headers exchange; fica no próximo node.\n          Não discutir DLX, AE, policies ou plugins.\n          Não ap",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 49,
+          "selector": "ul",
+          "text": "Quando direct é suficiente?\n          Por que fanout não é o mesmo que vários consumidores na mesma fila?\n          Quan",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 50,
+          "selector": "ul",
+          "text": "direct\n          fanout\n          topic\n          routing pattern\n          `*` wildcard\n          `#` wildcard\n        ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 51,
+          "selector": "ul",
+          "text": "Tabela comparando `orders.created`, `logs.error` e `audit.user.login` em direct/fanout/topic.\n          Cenário de notif",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 52,
+          "selector": "ul",
+          "text": "Usar fanout quando se queria filtro por categoria.\n          Usar topic sem convenção estável de routing keys.\n         ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 53,
+          "selector": "p",
+          "text": "Consegue escolher entre direct, fanout e topic a partir da intenção de roteamento e explicar a consequência para cada fi",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 54,
+          "selector": "p",
+          "text": "Depois dos tipos baseados em key textual, o próximo node cobre headers exchange para critérios por atributos.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 55,
+          "selector": "p",
+          "text": "Level: basico | Node ID: basico/05-headers-e-metadados-de-roteamento | Slug: 05-headers-e-metadados-de-roteamento | Orde",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 56,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Completa os tipos clássicos com roteamento por atributos, útil quando u",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 57,
+          "selector": "ul",
+          "text": "Entender direct, fanout e topic como roteamento por key ou padrão.",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 58,
+          "selector": "ul",
+          "text": "Headers exchange\n          `x-match`\n          Roteamento por headers\n          Payload opaco para o broker",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 59,
+          "selector": "ul",
+          "text": "Explicar que headers exchange ignora routing key e avalia headers da mensagem.\n          Diferenciar `x-match=all`, `x-m",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 60,
+          "selector": "ul",
+          "text": "Não tratar headers como substituto automático de topic.\n          Não cobrir serializers ou payload schema.\n          Nã",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 61,
+          "selector": "ul",
+          "text": "Por que headers exchange ignora routing key?\n          Quando `topic` é mais legível que headers?\n          Que risco ap",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 62,
+          "selector": "ul",
+          "text": "headers exchange\n          message headers\n          `x-match`\n          all\n          any\n          routing by attribut",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 63,
+          "selector": "ul",
+          "text": "Cenário conceitual de mensagens com `tenant=acme`, `format=pdf`, `priority=high`.\n          Tabela de escolha entre topi",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 64,
+          "selector": "ul",
+          "text": "Criar muitos headers de roteamento sem contrato.\n          Misturar dados de negócio sensíveis em headers usados só para",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 65,
+          "selector": "p",
+          "text": "Consegue explicar headers exchange sem confundir headers de mensagem com corpo da mensagem ou com routing key textual.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 66,
+          "selector": "p",
+          "text": "Com os tipos clássicos cobertos, o próximo node separa definitivamente fila, consumidor, ack e distribuição de trabalho.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 67,
+          "selector": "p",
+          "text": "Level: basico | Node ID: basico/06-filas-consumidores-e-entrega | Slug: 06-filas-consumidores-e-entrega | Ordem local: 6",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 68,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Fecha a base separando o que pertence à exchange do que pertence à fila",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 69,
+          "selector": "ul",
+          "text": "Entender exchanges, bindings, routing keys e tipos clássicos.",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 70,
+          "selector": "ul",
+          "text": "Fila como armazenamento ordenado\n          Consumer como subscription de entrega\n          Acknowledgement de consumidor",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 71,
+          "selector": "ul",
+          "text": "Explicar que filas armazenam mensagens prontas e entregues mas ainda não reconhecidas.\n          Mostrar que consumidore",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 72,
+          "selector": "ul",
+          "text": "Não aprofundar prefetch, retries, redelivery loops ou confirms.\n          Não discutir quorum queues ainda.\n          Nã",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 73,
+          "selector": "ul",
+          "text": "Onde a mensagem fica se não houver consumidor online?\n          O que muda quando dois consumidores estão na mesma fila?",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 74,
+          "selector": "ul",
+          "text": "ready message\n          delivered message\n          consumer\n          subscription\n          acknowledgement\n          ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 75,
+          "selector": "ul",
+          "text": "Cenário conceitual de uma fila `emails` com três workers competindo por mensagens.\n          Contraste visual entre uma ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 76,
+          "selector": "ul",
+          "text": "Achar que fanout para uma fila com três consumers entrega três cópias.\n          Confundir ack do consumidor com confirm",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 77,
+          "selector": "p",
+          "text": "Consegue explicar a diferença entre broadcast para filas e distribuição de carga entre consumidores da mesma fila.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 78,
+          "selector": "p",
+          "text": "A base está completa; o intermediário passa a tratar escolhas de topologia, falhas de roteamento e desenho operacional.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 79,
+          "selector": "p",
+          "text": "Level: intermediario | Node ID: intermediario/01-contrato-de-topologia-e-roteamento | Slug: 01-contrato-de-topologia-e-r",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 80,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Ensina a escolher exchanges como contrato entre produtores e topologia,",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 81,
+          "selector": "ul",
+          "text": "Dominar o vocabulário básico e os tipos clássicos.",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 82,
+          "selector": "ul",
+          "text": "Contrato de routing key\n          Ownership de exchange\n          Fronteira publisher-topology-consumer",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 83,
+          "selector": "ul",
+          "text": "Definir quando o produtor deve conhecer uma routing key, mas não a fila final.\n          Estabelecer convenções de nomes",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 84,
+          "selector": "ul",
+          "text": "Não reexplicar tipos básicos; use-os como pré-requisito.\n          Não discutir permissões e policies em profundidade; i",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 85,
+          "selector": "ul",
+          "text": "Que parte do contrato pertence ao publisher?\n          Como adicionar um novo consumidor sem mudar o produtor?\n         ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 86,
+          "selector": "ul",
+          "text": "topology contract\n          event contract\n          exchange ownership\n          routing key convention\n          consu",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 87,
+          "selector": "ul",
+          "text": "Matriz de decisão com domínio `orders`, routing keys `orders.created` e filas internas por serviço.\n          Cenário de",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 88,
+          "selector": "ul",
+          "text": "Nomear fila como routing key pública quando a fila é detalhe interno.\n          Criar uma exchange por consumidor em vez",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 89,
+          "selector": "p",
+          "text": "Consegue propor uma topologia onde producers conhecem o contrato de publicação, mas não os nomes das filas consumidoras.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 90,
+          "selector": "p",
+          "text": "Com contrato definido, o próximo node aprofunda a decisão entre broadcast e competição por fila.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 91,
+          "selector": "p",
+          "text": "Level: intermediario | Node ID: intermediario/02-broadcast-vs-consumidores-competindo | Slug: 02-broadcast-vs-consumidor",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 92,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Isola a decisão arquitetural que mais causa erro: cópia por fila é dife",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 93,
+          "selector": "ul",
+          "text": "Entender filas e consumidores como destino de entrega, não como tipo de exchange.",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 94,
+          "selector": "ul",
+          "text": "Broadcast para várias filas\n          Competing consumers\n          Multicast por direct/topic\n          Distribuição po",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 95,
+          "selector": "ul",
+          "text": "Explicar broadcast como múltiplas filas recebendo cópias da mesma publicação.\n          Explicar load balancing como con",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 96,
+          "selector": "ul",
+          "text": "Não repetir detalhes de fanout/direct/topic além do necessário.\n          Não transformar prefetch em guia operacional.\n",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 97,
+          "selector": "ul",
+          "text": "Se três serviços precisam processar o mesmo evento, quantas filas são necessárias?\n          Se três workers dividem tra",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 98,
+          "selector": "ul",
+          "text": "broadcast\n          copy per queue\n          competing consumers\n          consumer capacity\n          prefetch\n        ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 99,
+          "selector": "ul",
+          "text": "Contraste visual com uma exchange ligada a três filas versus uma fila ligada a três consumers.\n          Cenário de e-ma",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 100,
+          "selector": "ul",
+          "text": "Usar fanout esperando balanceamento.\n          Criar uma fila por worker quando a intenção é dividir trabalho.\n         ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 101,
+          "selector": "p",
+          "text": "Consegue decidir se um cenário exige cópias independentes em filas separadas ou concorrência dentro de uma única fila.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 102,
+          "selector": "p",
+          "text": "Depois da distribuição planejada, o próximo node trata a publicação que não encontra rota.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 103,
+          "selector": "p",
+          "text": "Level: intermediario | Node ID: intermediario/03-unroutable-mandatory-e-alternate-exchange | Slug: 03-unroutable-mandato",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 104,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Cobre o que acontece quando a exchange não encontra binding compatível ",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 105,
+          "selector": "ul",
+          "text": "Entender bindings e contrato de routing.",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 106,
+          "selector": "ul",
+          "text": "Unroutable message\n          `mandatory` flag\n          `basic.return`\n          Alternate Exchange\n          Fallback d",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 107,
+          "selector": "ul",
+          "text": "Explicar descarte padrão ou republish para AE quando `mandatory=false` e não há rota.\n          Explicar retorno ao publ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 108,
+          "selector": "ul",
+          "text": "Não confundir AE com DLX; DLX fica no próximo node.\n          Não afirmar que mandatory garante entrega ao consumidor.\n ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 109,
+          "selector": "ul",
+          "text": "O que acontece com uma mensagem sem binding compatível?\n          Quando AE é melhor que depender só de retorno ao publi",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 110,
+          "selector": "ul",
+          "text": "unroutable\n          `mandatory`\n          `basic.return`\n          alternate exchange\n          fallback routing\n      ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 111,
+          "selector": "ul",
+          "text": "Cenário conceitual de migração de `orders.created.v1` para `orders.created.v2` com AE capturando órfãs.\n          Tabela",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 112,
+          "selector": "ul",
+          "text": "Usar AE para mensagens rejeitadas pelo consumer.\n          Não configurar handler de retorno ao usar mandatory.\n        ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 113,
+          "selector": "p",
+          "text": "Consegue explicar os três destinos possíveis de uma publicação sem rota: descarte, retorno ao publisher ou roteamento pa",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 114,
+          "selector": "p",
+          "text": "Com falha de roteamento inicial clara, o próximo node trata mensagens que saem de filas por eventos posteriores.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 115,
+          "selector": "p",
+          "text": "Level: intermediario | Node ID: intermediario/04-dead-letter-exchanges-e-retry-conceitual | Slug: 04-dead-letter-exchang",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 116,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Separa DLX de AE e mostra como filas republiquem mensagens para uma exc",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 117,
+          "selector": "ul",
+          "text": "Entender unroutable e AE como falha de roteamento na entrada.",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 118,
+          "selector": "ul",
+          "text": "Dead Letter Exchange\n          Negative acknowledgement\n          `requeue=false`\n          TTL\n          Queue length l",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 119,
+          "selector": "ul",
+          "text": "Definir DLX como exchange normal configurada em filas.\n          Listar os eventos que levam uma mensagem a dead-letteri",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 120,
+          "selector": "ul",
+          "text": "Não desenhar passo a passo de implementação.\n          Não aprofundar quorum queues e delivery-limit além da fronteira c",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 121,
+          "selector": "ul",
+          "text": "Por que DLX não é um tipo especial de exchange?\n          Quais eventos fazem a mensagem sair da fila para dead-letterin",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 122,
+          "selector": "ul",
+          "text": "DLX\n          dead-lettering\n          `basic.nack`\n          `basic.reject`\n          TTL\n          delivery-limit\n    ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 123,
+          "selector": "ul",
+          "text": "Fluxo conceitual: fila principal -> DLX -> fila de análise ou espera -> exchange principal.\n          Cenário de mensage",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 124,
+          "selector": "ul",
+          "text": "Chamar DLX de fila.\n          Declarar DLX no papel e não garantir que a exchange destino exista.\n          Criar loops ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 125,
+          "selector": "p",
+          "text": "Consegue explicar quando a mensagem é dead-lettered e como a DLX participa sem armazenar a mensagem por si mesma.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 126,
+          "selector": "p",
+          "text": "Depois de DLX, o próximo node trata policies, x-arguments e permissões que governam essas configurações.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 127,
+          "selector": "p",
+          "text": "Level: intermediario | Node ID: intermediario/05-policies-x-arguments-e-permissoes | Slug: 05-policies-x-arguments-e-per",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 128,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Mostra como configurações de exchange e fila devem ser governadas para ",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 129,
+          "selector": "ul",
+          "text": "Entender AE, DLX e argumentos opcionais como configurações de topologia.",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 130,
+          "selector": "ul",
+          "text": "Policies\n          Operator policies\n          `x-arguments`\n          Precedência\n          Permissões configure/write/",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 131,
+          "selector": "ul",
+          "text": "Explicar por que policies servem para parâmetros que podem mudar em runtime.\n          Comparar policy versus argumento ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 132,
+          "selector": "ul",
+          "text": "Não virar guia completo de segurança.\n          Não reensinar DLX/AE; usar como exemplos de configuração.\n          Não ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 133,
+          "selector": "ul",
+          "text": "Por que hardcoded x-arguments dificultam mudança de DLX?\n          Que permissão o publisher precisa para publicar em um",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 134,
+          "selector": "ul",
+          "text": "policy\n          operator policy\n          `x-argument`\n          runtime parameter\n          vhost\n          configure ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 135,
+          "selector": "ul",
+          "text": "Cenário conceitual de policy aplicando DLX a um grupo de filas `orders.*`.\n          Matriz de ownership: app declara fi",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 136,
+          "selector": "ul",
+          "text": "Embedar configuração operacional em código quando policy seria mais flexível.\n          Achar que policy muda qualquer a",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 137,
+          "selector": "p",
+          "text": "Consegue diferenciar configuração declarada pela aplicação, policy operacional e permissão necessária para publicar ou c",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 138,
+          "selector": "p",
+          "text": "Com governança local clara, o próximo node mostra composição de topologias com exchange-to-exchange bindings.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 139,
+          "selector": "p",
+          "text": "Level: intermediario | Node ID: intermediario/06-exchange-to-exchange-bindings | Slug: 06-exchange-to-exchange-bindings ",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 140,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Apresenta composição de roteamento dentro do RabbitMQ sem tratar a mens",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 141,
+          "selector": "ul",
+          "text": "Entender bindings de exchange para queue e contrato de topologia.",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 142,
+          "selector": "ul",
+          "text": "Exchange-to-exchange binding\n          Source exchange\n          Destination exchange\n          Ciclos eliminados\n      ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 143,
+          "selector": "ul",
+          "text": "Explicar a direção source -> destination em E2E.\n          Mostrar que binding keys e tipos continuam operando normalmen",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 144,
+          "selector": "ul",
+          "text": "Não cobrir federation ou multi-cluster; isso fica no avançado.\n          Não usar E2E como substituto automático de cont",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 145,
+          "selector": "ul",
+          "text": "E2E republica a mensagem ou estende o roteamento?\n          Como evitar topologia difícil de operar quando há muitas exc",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 146,
+          "selector": "ul",
+          "text": "E2E binding\n          `exchange.bind`\n          source\n          destination\n          transitive topology\n          cyc",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 147,
+          "selector": "ul",
+          "text": "Cenário conceitual de `events.public` roteando para `orders.internal` e `audit.internal`.\n          Mapa HTML/CSS de exc",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 148,
+          "selector": "ul",
+          "text": "Usar E2E para esconder contrato mal definido.\n          Criar grafos difíceis de diagnosticar.\n          Interpretar mét",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 149,
+          "selector": "p",
+          "text": "Consegue explicar E2E como uma extensão de roteamento e identificar quando ela simplifica ou complica a topologia.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 150,
+          "selector": "p",
+          "text": "O próximo node separa confirmação de publicação de processamento no consumidor.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 151,
+          "selector": "p",
+          "text": "Level: intermediario | Node ID: intermediario/07-publisher-confirms-e-confiabilidade | Slug: 07-publisher-confirms-e-con",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 152,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Fecha o intermediário separando aceitação pelo broker, roteamento e pro",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 153,
+          "selector": "ul",
+          "text": "Entender fila, consumer ack, unroutable e DLX.",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 154,
+          "selector": "ul",
+          "text": "Publisher confirms\n          Consumer acknowledgements\n          Channel error\n          Returned message\n          Mens",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 155,
+          "selector": "ul",
+          "text": "Explicar que publisher confirms são confirmação broker->publisher, não consumer->broker.\n          Descrever quando o br",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 156,
+          "selector": "ul",
+          "text": "Não aprofundar tuning de throughput ou batch confirms.\n          Não discutir todos os detalhes de persistência em filas",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 157,
+          "selector": "ul",
+          "text": "Confirm prova que um consumidor processou a mensagem?\n          O que muda entre publicar em exchange inexistente e publ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 158,
+          "selector": "ul",
+          "text": "publisher confirm\n          consumer ack\n          channel-level exception\n          persistent message\n          durabl",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 159,
+          "selector": "ul",
+          "text": "Tabela conceitual: publish aceito, unroutable retornado, consumer ack e nack.\n          Cenário de publisher crítico que",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 160,
+          "selector": "ul",
+          "text": "Confundir confirm com ack do consumidor.\n          Tratar durable topology como persistência de mensagem.\n          Igno",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 161,
+          "selector": "p",
+          "text": "Consegue explicar que confiabilidade envolve sinais diferentes em pontos diferentes do fluxo, sem reduzir tudo a um únic",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 162,
+          "selector": "p",
+          "text": "O avançado usa essa base para discutir limites, plugins, quorum queues, federation e governança multidomínio.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 163,
+          "selector": "p",
+          "text": "Level: avancado | Node ID: avancado/01-diagnostico-de-roteamento-e-observabilidade | Slug: 01-diagnostico-de-roteamento-",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 164,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Ensina a raciocinar sobre incidentes de routing sem reabrir fundamentos",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 165,
+          "selector": "ul",
+          "text": "Dominar contrato de topologia, unroutable, AE, DLX e confirms.",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 166,
+          "selector": "ul",
+          "text": "Diagnóstico por topologia\n          Métricas de unroutable\n          Inspeção de bindings\n          Sinais de publisher ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 167,
+          "selector": "ul",
+          "text": "Diferenciar sintomas de exchange inexistente, exchange sem bindings, routing key errada, fila sem consumer e consumer le",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 168,
+          "selector": "ul",
+          "text": "Não listar comandos operacionais como roteiro.\n          Não explicar novamente os tipos de exchange.\n          Não tran",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 169,
+          "selector": "ul",
+          "text": "Quais sinais indicam que o problema está no publisher e não no consumer?\n          Como distinguir mensagem sem rota de ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 170,
+          "selector": "ul",
+          "text": "unroutable metric\n          returned message\n          binding inspection\n          queue depth\n          consumer capac",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 171,
+          "selector": "ul",
+          "text": "Matriz de sintomas: publish falha, mensagem retorna, fila cresce, DLX cresce.\n          Cenário de deploy que altera rou",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 172,
+          "selector": "ul",
+          "text": "Corrigir consumer quando a routing key está errada.\n          Esvaziar DLX sem corrigir causa raiz.\n          Ignorar AE",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 173,
+          "selector": "p",
+          "text": "Consegue diagnosticar em qual trecho do fluxo a mensagem parou ou mudou de caminho antes de propor alteração.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 174,
+          "selector": "p",
+          "text": "Com diagnóstico avançado, o próximo node avalia quando tipos especializados de exchange entram no desenho.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 175,
+          "selector": "p",
+          "text": "Level: avancado | Node ID: avancado/02-tipos-especializados-e-plugins | Slug: 02-tipos-especializados-e-plugins | Ordem ",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 176,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Mostra quando sair dos tipos clássicos e qual critério usar antes de ad",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 177,
+          "selector": "ul",
+          "text": "Dominar direct, fanout, topic, headers e os limites de topologia simples.",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 178,
+          "selector": "ul",
+          "text": "Local Random Exchange\n          `x-modulus-hash`\n          Plugins de exchange\n          Roteamento estável por chave\n  ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 179,
+          "selector": "ul",
+          "text": "Apresentar Local Random para request-reply de baixa latência com filas locais.\n          Apresentar `x-modulus-hash` par",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 180,
+          "selector": "ul",
+          "text": "Não substituir o estudo de direct/topic por plugins.\n          Não cobrir cada plugin de terceiros.\n          Não promet",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 181,
+          "selector": "ul",
+          "text": "Que problema específico justifica sair dos tipos clássicos?\n          Como `x-modulus-hash` preserva destino enquanto bi",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 182,
+          "selector": "ul",
+          "text": "local random exchange\n          `x-modulus-hash`\n          stable routing\n          routing key hash\n          exclusive",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 183,
+          "selector": "ul",
+          "text": "Cenário de eventos por `order_id` preservando ordem por entidade com múltiplas filas.\n          Cenário de RPC interno e",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 184,
+          "selector": "ul",
+          "text": "Adotar plugin por novidade sem necessidade de semântica.\n          Confundir particionamento por chave com roteamento po",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 185,
+          "selector": "p",
+          "text": "Consegue avaliar se um tipo especializado resolve uma limitação real ou apenas complica uma topologia que direct/topic j",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 186,
+          "selector": "p",
+          "text": "O próximo node conecta DLX e retries a quorum queues, onde há comportamentos específicos recentes.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 187,
+          "selector": "p",
+          "text": "Level: avancado | Node ID: avancado/03-quorum-queues-dlx-e-redelivery-limits | Slug: 03-quorum-queues-dlx-e-redelivery-l",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 188,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Aprofunda o ponto em que decisão de fila altera a estratégia de DLX e r",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 189,
+          "selector": "ul",
+          "text": "Entender DLX, nack, requeue e publisher confirms.",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 190,
+          "selector": "ul",
+          "text": "Quorum queue\n          Delivery limit\n          Repeated requeue loop\n          At-least-once dead-lettering\n          D",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 191,
+          "selector": "ul",
+          "text": "Explicar por que loops de requeue podem ser problema operacional.\n          Mostrar delivery-limit e dead-lettering como",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 192,
+          "selector": "ul",
+          "text": "Não fazer guia de configuração de quorum queue.\n          Não generalizar recursos de quorum para classic queues.\n      ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 193,
+          "selector": "ul",
+          "text": "Por que `requeue=true` repetido pode ser pior que dead-lettering?\n          Quando uma DLX com quorum queue precisa de g",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 194,
+          "selector": "ul",
+          "text": "quorum queue\n          delivery-limit\n          redelivery count\n          at-least-once dead-lettering\n          delaye",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 195,
+          "selector": "ul",
+          "text": "Cenário de mensagem venenosa separada após limite de redelivery.\n          Fluxo conceitual de retry com atraso versus r",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 196,
+          "selector": "ul",
+          "text": "Aplicar comportamento de quorum queues a classic queues sem verificar.\n          Criar redelivery loop que consome CPU e",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 197,
+          "selector": "p",
+          "text": "Consegue explicar como o tipo de fila e suas políticas mudam a segurança e o comportamento de DLX/retry.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 198,
+          "selector": "p",
+          "text": "Depois das filas quorum, o próximo node amplia o escopo para exchanges entre clusters e regiões.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 199,
+          "selector": "p",
+          "text": "Level: avancado | Node ID: avancado/04-federated-exchanges-e-wan | Slug: 04-federated-exchanges-e-wan | Ordem local: 4",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 200,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Explica quando exchanges deixam de ser topologia local e passam a parti",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 201,
+          "selector": "ul",
+          "text": "Entender E2E dentro de um broker e contratos de routing.",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 202,
+          "selector": "ul",
+          "text": "Federated exchange\n          Upstream\n          Downstream\n          Replicação assíncrona\n          WAN\n          Feder",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 203,
+          "selector": "ul",
+          "text": "Definir federated exchanges como mecanismo de copiar fluxo de uma exchange upstream para downstreams independentes.\n    ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 204,
+          "selector": "ul",
+          "text": "Não cobrir shovel ou federation reference em profundidade.\n          Não tratar federation como substituto simples de cl",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 205,
+          "selector": "ul",
+          "text": "Por que federation não é a mesma coisa que E2E binding?\n          Que garantias mudam quando há WAN?\n          Quando re",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 206,
+          "selector": "ul",
+          "text": "federated exchange\n          upstream\n          downstream\n          federation plugin\n          WAN\n          asynchron",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 207,
+          "selector": "ul",
+          "text": "Cenário conceitual de eventos de auditoria replicados para região secundária.\n          Mapa de fronteira entre broker l",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 208,
+          "selector": "ul",
+          "text": "Usar federation para mascarar domínio mal separado.\n          Ignorar atraso e falha de conectividade.\n          Mistura",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 209,
+          "selector": "p",
+          "text": "Consegue explicar federation como integração assíncrona entre brokers e avaliar os riscos de operar exchanges além do vh",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 210,
+          "selector": "p",
+          "text": "O próximo node fecha com governança de contratos e limites de complexidade.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 211,
+          "selector": "p",
+          "text": "Level: avancado | Node ID: avancado/05-governanca-e-limites-de-complexidade | Slug: 05-governanca-e-limites-de-complexid",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 212,
+          "selector": ".callout",
+          "text": "Papel na corrente local e no conjunto tri-level: Consolida critérios de especialista: uma topologia boa é compreensível,",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 213,
+          "selector": "ul",
+          "text": "Entender contratos, policies, permissões, E2E, plugins e federation.",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 214,
+          "selector": "ul",
+          "text": "Governança de eventos\n          Fronteiras por vhost\n          Permissões por domínio\n          Matriz anti-acoplamento\n",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 215,
+          "selector": "ul",
+          "text": "Definir ownership de exchanges e routing keys por domínio.\n          Separar vhosts quando há fronteiras reais de acesso",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 216,
+          "selector": "ul",
+          "text": "Não criar política organizacional completa.\n          Não substituir documentação operacional detalhada.\n          Não r",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 217,
+          "selector": "ul",
+          "text": "Quem é dono de uma exchange de domínio?\n          Como impedir publicação no domínio errado sem acoplar consumidores?\n  ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 218,
+          "selector": "ul",
+          "text": "event governance\n          vhost boundary\n          resource permission\n          routing ownership\n          operable t",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 219,
+          "selector": "ul",
+          "text": "Checklist conceitual de revisão de topologia antes de produção.\n          Cenário de broker compartilhado por múltiplos ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 220,
+          "selector": "ul",
+          "text": "Permitir write amplo demais em exchanges compartilhadas.\n          Criar topic keys sem versionamento ou ownership.\n    ",
+          "width": 298,
+          "mainWidth": 390,
+          "ratio": 0.764
+        },
+        {
+          "index": 221,
+          "selector": "p",
+          "text": "Consegue revisar uma topologia de RabbitMQ e justificar se ela é simples, segura, rastreável e adequada ao problema.",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 222,
+          "selector": "p",
+          "text": "Este node encerra o roadmap: a próxima etapa natural é gerar páginas profundas para nodes específicos conforme necessida",
+          "width": 320,
+          "mainWidth": 390,
+          "ratio": 0.821
+        },
+        {
+          "index": 223,
+          "selector": "ul",
+          "text": "Explicar por que a exchange existe e por que ela não substitui a fila.\n        Diferenciar publisher, exchange, binding,",
+          "width": 336,
+          "mainWidth": 390,
+          "ratio": 0.862
+        }
+      ],
+      "contrastSamples": [
+        {
+          "label": "body",
+          "text": "Roadmap - Exchanges no RabbitMQ\n    Trilha tri-level para reaprender exchanges c",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "parágrafo",
+          "text": "Trilha tri-level para reaprender exchanges com precisão: primeiro o modelo menta",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 6.97
+        },
+        {
+          "label": "parágrafo",
+          "text": "Pesquisa: 2026-06-08. Base principal: documentação oficial RabbitMQ 4.3 e especi",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 6.97
+        },
+        {
+          "label": "parágrafo",
+          "text": "Pessoa com conhecimento básico a intermediário, experiência real anterior e nece",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "parágrafo",
+          "text": "Ao final, você deve explicar o papel da exchange, escolher tipos adequados e pre",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "parágrafo",
+          "text": "O roadmap cobre conceitos e critérios de domínio. Configuração por linguagem, co",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "parágrafo",
+          "text": "Fundamentos, vocabulário indispensável e modelos mentais para separar exchange, ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "parágrafo",
+          "text": "Arquitetura, contratos, falhas de roteamento, AE, DLX, policies, E2E e confiabil",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "parágrafo",
+          "text": "Diagnóstico, tipos especializados, quorum queues, federation e governança de top",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "link",
+          "text": "Modelo AMQP e papel da exchange",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Abrir página",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "link",
+          "text": "Exchange padrão e publicação direta aparente",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Abrir página",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "link",
+          "text": "Bindings, routing key e destinos",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Abrir página",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "link",
+          "text": "Direct, fanout e topic",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Abrir página",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "inline code",
+          "text": "roadmap.html",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "node.html",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "basico/01-modelo-amqp-e-papel-da-exchange",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "01-modelo-amqp-e-papel-da-exchange",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "basico/02-exchange-padrao-e-publicacao-direta-aparente",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "02-exchange-padrao-e-publicacao-direta-aparente",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "basico/03-bindings-routing-key-e-destinos",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "inline code",
+          "text": "03-bindings-routing-key-e-destinos",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(47, 52, 55)",
+          "ratio": 10.09
+        },
+        {
+          "label": "tag",
+          "text": "Perfil",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "Compreensão",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(31, 43, 63)",
+          "ratio": 7.95
+        },
+        {
+          "label": "tag",
+          "text": "Foco",
+          "color": "rgb(255, 220, 73)",
+          "backgroundColor": "rgb(52, 47, 25)",
+          "ratio": 9.95
+        },
+        {
+          "label": "tag",
+          "text": "Básico",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "Intermediário",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(31, 43, 63)",
+          "ratio": 7.95
+        },
+        {
+          "label": "tag",
+          "text": "Avançado",
+          "color": "rgb(255, 220, 73)",
+          "backgroundColor": "rgb(52, 47, 25)",
+          "ratio": 9.95
+        },
+        {
+          "label": "route-label",
+          "text": "Publisher",
+          "color": "rgb(242, 242, 242)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 14.55
+        },
+        {
+          "label": "route-label",
+          "text": "Exchange",
+          "color": "rgb(242, 242, 242)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 14.55
+        },
+        {
+          "label": "route-label",
+          "text": "Bindings",
+          "color": "rgb(242, 242, 242)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 14.55
+        },
+        {
+          "label": "route-label",
+          "text": "Queues",
+          "color": "rgb(242, 242, 242)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 14.55
+        },
+        {
+          "label": "route-label",
+          "text": "Consumers",
+          "color": "rgb(242, 242, 242)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 14.55
+        },
+        {
+          "label": "node-list",
+          "text": "Modelo AMQP e papel da exchange",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "node-list",
+          "text": "Abrir página",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "node-list",
+          "text": "Exchange padrão e publicação direta aparente",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "node-list",
+          "text": "Abrir página",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "node-list",
+          "text": "Bindings, routing key e destinos",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "node-list",
+          "text": "Abrir página",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "node-list",
+          "text": "Direct, fanout e topic",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "node-list",
+          "text": "Abrir página",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        }
+      ],
+      "preBlocks": [],
+      "preCodeStyles": []
+    }
+  ],
+  "failures": {
+    "theme": [],
+    "preCodeChip": [],
+    "highlight": [],
+    "overflow": [],
+    "contentWidth": [],
+    "contrast": [],
+    "externalRequests": [],
+    "conceptualPre": []
+  }
+}

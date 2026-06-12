@@ -1,0 +1,738 @@
+<!doctype html>
+<html lang="pt-BR" data-visual-theme="notion-dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quando a mensagem sai da fila</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --page: #191919;
+      --surface: #202020;
+      --surface-hover: #2a2a2a;
+      --soft: #242424;
+      --soft-2: #2a2a2a;
+      --text: #e6e6e6;
+      --strong: #f2f2f2;
+      --heading: #f2f2f2;
+      --muted: #a3a3a3;
+      --border: #333333;
+      --border-strong: #4a4a4a;
+      --accent: #6aaed6;
+      --accent-2: #8cc7ff;
+      --warn: #ffdc49;
+      --code: #e6e6e6;
+      --code-bg: #2f3437;
+      --tag-bg: #243831;
+      --tag-text: #7ad9c5;
+      --tag-border: #335f54;
+      --blue-soft: #1f2b3f;
+      --blue-text: #8cc7ff;
+      --blue-border: #365f93;
+      --warn-soft: #342f19;
+      --warn-border: #5f4f18;
+      --success-soft: #1f332b;
+      --success-text: #8be6c1;
+      --success-border: #2f6b57;
+      --purple-soft: #2b2342;
+      --purple-text: #c8b6ff;
+      --purple-border: #574582;
+      --risk-soft: #3a2028;
+      --risk-text: #ff9ab3;
+      --risk-border: #7a3a4d;
+      --pre-bg: #111111;
+      --pre-text: #d4d4d4;
+      --focus: #6aaed6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      color-scheme: dark;
+      margin: 0;
+      color: var(--text);
+      background: var(--page);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif;
+      font-size: 18px;
+      line-height: 1.55;
+    }
+
+    main {
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 32px 28px 56px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: var(--heading);
+      line-height: 1.2;
+      letter-spacing: 0;
+      margin: 0 0 12px;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 26px;
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+      margin-top: 32px;
+    }
+
+    h3 {
+      font-size: 20px;
+      margin-top: 22px;
+    }
+
+    p,
+    ul,
+    ol,
+    .lead,
+    .callout {
+      max-width: none;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    ul {
+      margin: 8px 0 16px 22px;
+      padding: 0;
+    }
+
+    li {
+      margin: 4px 0;
+    }
+
+    table,
+    pre,
+    .content-grid,
+    .visual-block {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin: 14px 0 22px;
+      table-layout: fixed;
+      background: var(--surface);
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+      background: var(--surface);
+    }
+
+    th {
+      background: var(--soft-2);
+      text-align: left;
+      font-weight: 700;
+    }
+
+    code {
+      color: var(--code);
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 4px;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 0.92em;
+    }
+
+    pre {
+      margin: 12px 0 22px;
+      padding: 14px 16px;
+      color: var(--pre-text);
+      background: var(--pre-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: auto;
+      max-width: 100%;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 16px;
+      line-height: 1.45;
+      white-space: pre;
+    }
+
+    pre code {
+      color: inherit;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+      font: inherit;
+    }
+
+    .syntax-key {
+      color: var(--accent-2);
+      font-weight: 700;
+    }
+
+    .syntax-op {
+      color: var(--purple-text);
+    }
+
+    .syntax-value {
+      color: var(--success-text);
+    }
+
+    .syntax-comment {
+      color: var(--muted);
+    }
+
+    .syntax-risk {
+      color: var(--warn);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    a:hover {
+      color: var(--accent-2);
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .backlink {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 19px;
+    }
+
+    .node-context {
+      display: grid;
+      gap: 6px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      background: var(--soft);
+      margin: 0 0 18px;
+      width: 100%;
+    }
+
+    .node-context p {
+      margin: 0;
+    }
+
+    .node-context strong {
+      color: var(--heading);
+    }
+
+    .node-context a {
+      color: var(--accent);
+      font-weight: 400;
+      text-decoration-line: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    .node-context a:hover {
+      color: var(--accent-2);
+    }
+
+    .callout {
+      padding: 13px 15px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      background: var(--soft);
+      margin: 16px 0 22px;
+      border-radius: 6px;
+    }
+
+    .callout.warning {
+      border-left-color: var(--warn);
+      background: var(--warn-soft);
+      border-color: var(--warn-border);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-self: start;
+      align-self: start;
+      width: fit-content;
+      max-width: 100%;
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 700;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border: 1px solid var(--tag-border);
+      overflow-wrap: anywhere;
+    }
+
+    .tag.blue {
+      color: var(--blue-text);
+      background: var(--blue-soft);
+      border-color: var(--blue-border);
+    }
+
+    .tag.warn {
+      color: var(--warn);
+      background: var(--warn-soft);
+      border-color: var(--warn-border);
+    }
+
+    .tag.risk {
+      color: var(--risk-text);
+      background: var(--risk-soft);
+      border-color: var(--risk-border);
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .visual-block {
+      margin: 16px 0 22px;
+    }
+
+    .boundary-grid,
+    .trigger-grid,
+    .destination-grid,
+    .retry-grid {
+      display: grid;
+      gap: 12px;
+      margin: 16px 0 22px;
+    }
+
+    .boundary-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .trigger-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .destination-grid,
+    .retry-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .state-card,
+    .trigger-card,
+    .destination-card,
+    .retry-card,
+    .route-step {
+      display: grid;
+      gap: 8px;
+      align-content: start;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface);
+    }
+
+    .state-card.active,
+    .trigger-card.reject {
+      background: var(--blue-soft);
+      border-color: var(--blue-border);
+    }
+
+    .state-card.boundary,
+    .trigger-card.limit {
+      background: var(--warn-soft);
+      border-color: var(--warn-border);
+    }
+
+    .trigger-card.ttl,
+    .destination-card.retry,
+    .retry-card.wait {
+      background: var(--purple-soft);
+      border-color: var(--purple-border);
+    }
+
+    .trigger-card.length,
+    .destination-card.quarantine,
+    .retry-card.done {
+      background: var(--success-soft);
+      border-color: var(--success-border);
+    }
+
+    .destination-card.risk,
+    .retry-card.hot {
+      background: var(--risk-soft);
+      border-color: var(--risk-border);
+    }
+
+    .flow-line {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin: 16px 0 22px;
+    }
+
+    .route-step {
+      position: relative;
+      min-height: 126px;
+      border-left: 4px solid var(--accent);
+    }
+
+    .route-step::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -10px;
+      width: 10px;
+      height: 1px;
+      background: var(--border-strong);
+    }
+
+    .route-step:last-child::after {
+      content: none;
+    }
+
+    .step-title {
+      color: var(--heading);
+      font-weight: 800;
+    }
+
+    .node-footer {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+    }
+
+    .node-footer h2 {
+      margin-top: 32px;
+    }
+
+    .reference-list {
+      display: grid;
+      gap: 8px;
+      margin: 8px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .reference-item {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface);
+    }
+
+    .reference-item a,
+    .node-footer a {
+      color: var(--accent);
+      font-weight: 400;
+      text-decoration-line: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    .reference-note {
+      color: var(--text);
+    }
+
+    @media (max-width: 980px) {
+      .trigger-grid,
+      .flow-line {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .route-step::after {
+        content: none;
+      }
+    }
+
+    @media (max-width: 860px) {
+      main {
+        padding: 22px 16px 40px;
+      }
+
+      .boundary-grid,
+      .trigger-grid,
+      .destination-grid,
+      .retry-grid,
+      .flow-line,
+      .reference-item {
+        grid-template-columns: 1fr;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+        table-layout: auto;
+      }
+
+      th,
+      td {
+        min-width: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="backlink" href="../../roadmap.html">Voltar ao roadmap</a>
+    <div
+      class="node-context"
+      data-node-position="true"
+      data-level="intermediario"
+      data-node-order="4"
+      data-node-count="7"
+      data-roadmap-slug="rabbitmq-exchanges">
+      <p><strong>Intermediário · 04 de 07</strong></p>
+      <p>Roadmap: Exchanges no RabbitMQ</p>
+      <p>Node atual: Dead Letter Exchanges e retry conceitual</p>
+      <p>Anterior: <a href="../03-unroutable-mandatory-e-alternate-exchange/node.html">Unroutable, mandatory e Alternate Exchange</a> · Próximo: <a href="../05-policies-x-arguments-e-permissoes/node.html">Policies, x-arguments e permissões</a></p>
+    </div>
+    <h1>Quando a mensagem sai da fila</h1>
+    <p class="lead">No node anterior, a mensagem ainda não tinha encontrado uma rota de entrada. Aqui a situação mudou: ela já chegou a uma fila, foi entregue ou ficou aguardando, e algum evento precisa tirá-la desse lugar sem transformar retry em repetição sem fim.</p>
+
+    <section>
+      <h2>A fronteira muda depois que a fila recebeu a mensagem</h2>
+      <p>Imagine uma mensagem de pedido em uma fila de trabalho. A exchange já fez seu papel: encontrou um binding, colocou a mensagem no destino certo e agora a fila controla a entrega para consumidores. Se o processamento falha nesse ponto, a pergunta técnica não é mais "por que a exchange não achou caminho?". A pergunta passa a ser "o que a fila deve fazer com uma mensagem que não pode continuar como se nada tivesse acontecido?".</p>
+      <p>Essa diferença protege a separação entre Alternate Exchange e Dead Letter Exchange. A AE aparece antes da fila, quando a exchange principal não consegue rotear uma publicação. A DLX aparece depois da fila, quando a mensagem já estava sob responsabilidade da fila e sai por uma condição específica.</p>
+      <div class="visual-block" aria-label="Fronteira entre Alternate Exchange e Dead Letter Exchange">
+        <div class="boundary-grid">
+          <div class="state-card boundary">
+            <span class="tag warn">Antes da fila</span>
+            <strong>Falha de rota inicial</strong>
+            <p>A exchange não encontra binding compatível. A saída possível é descarte, retorno ao publisher ou Alternate Exchange.</p>
+          </div>
+          <div class="state-card active">
+            <span class="tag blue">Depois da fila</span>
+            <strong>Saída posterior da fila</strong>
+            <p>A mensagem já está em uma fila. Rejeição, expiração ou limite podem levar a fila a republicar a mensagem para uma DLX.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>O consumer decide entre devolver e deixar sair</h2>
+      <p>Quando um consumer recebe uma entrega, ele só deveria reconhecer positivamente depois de assumir o processamento. Se não consegue fazer isso, ele pode enviar um negative acknowledgement. Nesse ponto, o parâmetro `requeue` carrega uma decisão importante: voltar a mensagem para a mesma fila ou deixar que ela siga para outro destino configurado.</p>
+      <p>Com `requeue=true`, a mensagem volta para a fila e pode ser entregue de novo. Isso faz sentido quando outra instância pode processá-la agora, mas vira problema quando a causa continua presente. Com `requeue=false`, a mensagem não volta para a mesma fila; se a fila tiver uma Dead Letter Exchange configurada, o broker a republica para essa exchange. Esse movimento é o dead-lettering.</p>
+      <table>
+        <tr>
+          <th>Decisão do consumer</th>
+          <th>Movimento imediato</th>
+          <th>Leitura conceitual</th>
+        </tr>
+        <tr>
+          <td>`basic.nack` ou `basic.reject` com `requeue=true`</td>
+          <td>A mensagem volta para a fila.</td>
+          <td>É uma nova tentativa rápida, não uma estratégia completa de retry.</td>
+        </tr>
+        <tr>
+          <td>`basic.nack` ou `basic.reject` com `requeue=false`</td>
+          <td>A mensagem sai da fila; com DLX configurada, é republicada para ela.</td>
+          <td>A fila decidiu que a mensagem precisa de outro caminho.</td>
+        </tr>
+      </table>
+      <div class="callout warning">
+        `requeue=true` repetido pode virar um ciclo quente: a mesma mensagem ocupa consumer, rede e broker sem avançar. Dead-lettering planejado existe para tirar a mensagem desse circuito e tornar a próxima decisão explícita.
+      </div>
+    </section>
+
+    <section>
+      <h2>A DLX é exchange normal, apontada pela fila</h2>
+      <p>O nome Dead Letter Exchange pode sugerir um mecanismo especial, mas a peça continua sendo uma exchange comum. O que muda é quem a usa: uma fila aponta para essa exchange como destino das mensagens que saem por dead-lettering. Depois da republicação, a DLX roteia por bindings como qualquer outra exchange.</p>
+      <pre class="code-block language-conf" aria-label="Recorte conceitual de fila apontando para uma DLX">
+<code><span class="syntax-comment"># recorte conceitual, não executável</span>
+<span class="syntax-key">fila_principal</span> <span class="syntax-op">=</span> <span class="syntax-value">orders.work</span>
+<span class="syntax-key">fila_principal.dead_letter_exchange</span> <span class="syntax-op">=</span> <span class="syntax-value">orders.dlx</span>
+<span class="syntax-key">dlx_exchange</span> <span class="syntax-op">=</span> <span class="syntax-value">orders.dlx</span>
+<span class="syntax-key">destino_pos_saida</span> <span class="syntax-op">=</span> <span class="syntax-value">fila_de_quarentena_ou_espera</span></code></pre>
+      <p>O recorte mostra a posição do mecanismo sem transformar isso em passo de configuração. A fila principal não vira DLX. A fila de quarentena também não é DLX. A DLX é a exchange que recebe a republicação e decide, pelos seus bindings, para onde a mensagem vai.</p>
+    </section>
+
+    <section>
+      <h2>Quatro gatilhos levam ao mesmo ponto de saída</h2>
+      <p>Rejeição do consumer é só um dos caminhos. A documentação de RabbitMQ lista outras condições que também podem levar a mensagem a ser dead-lettered. Elas têm causas diferentes, mas convergem no mesmo modelo: a fila tem uma mensagem que precisa sair e, se houver DLX, a republica para essa exchange.</p>
+      <div class="visual-block" aria-label="Gatilhos de dead-lettering em RabbitMQ">
+        <div class="trigger-grid">
+          <div class="trigger-card reject">
+            <span class="tag blue">Consumer</span>
+            <strong>Rejeição sem retorno</strong>
+            <p>`basic.reject` ou `basic.nack` com `requeue=false` tira a mensagem da fila.</p>
+          </div>
+          <div class="trigger-card ttl">
+            <span class="tag">Tempo</span>
+            <strong>TTL expirado</strong>
+            <p>A mensagem ultrapassa seu tempo de vida e pode ser dead-lettered por expiração.</p>
+          </div>
+          <div class="trigger-card length">
+            <span class="tag">Capacidade</span>
+            <strong>Limite de fila</strong>
+            <p>Quando a fila excede limite de tamanho ou quantidade, mensagens podem sair por política de overflow.</p>
+          </div>
+          <div class="trigger-card limit">
+            <span class="tag warn">Quorum queues</span>
+            <strong>Delivery limit</strong>
+            <p>Em quorum queues, uma mensagem que excede o limite de entregas pode ser removida ou dead-lettered.</p>
+          </div>
+        </div>
+      </div>
+      <p>A lista é importante porque evita reduzir DLX a "erro do consumer". A fila pode dead-letter mensagens por uma decisão explícita do consumo, por expiração, por limite de acúmulo ou por uma proteção de tipo de fila. Em todos os casos, a DLX continua sendo o destino de republicação, não a causa em si.</p>
+    </section>
+
+    <section>
+      <h2>Quarentena e espera são destinos diferentes</h2>
+      <p>Depois que a DLX recebe a mensagem, a topologia precisa declarar uma intenção. Uma mensagem inválida pode ir para uma fila de quarentena, onde fica separada para análise. Uma falha transitória pode ir para uma retry queue, que segura a mensagem por algum tempo antes de uma nova tentativa. Os dois destinos usam DLX, mas respondem a problemas diferentes.</p>
+      <div class="visual-block" aria-label="Destinos conceituais depois da DLX">
+        <div class="destination-grid">
+          <div class="destination-card quarantine">
+            <span class="tag">Isolar</span>
+            <strong>Quarantine queue</strong>
+            <p>Boa para mensagem inválida, contrato inesperado ou caso que exige inspeção antes de voltar ao fluxo.</p>
+          </div>
+          <div class="destination-card retry">
+            <span class="tag">Esperar</span>
+            <strong>Retry queue</strong>
+            <p>Boa para falha transitória, desde que exista limite de tentativas e visibilidade do que está acumulando.</p>
+          </div>
+          <div class="destination-card risk">
+            <span class="tag risk">Evitar</span>
+            <strong>Loop sem dono</strong>
+            <p>Ruim quando a mensagem circula entre filas sem critério de parada, sem atraso real ou sem sinal operacional.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Retry com atraso muda o ritmo da falha</h2>
+      <p>Um retry conceitual precisa de mais do que "tentar de novo". Ele precisa reduzir pressão, dar tempo para uma dependência voltar e decidir quando parar. Um desenho básico com DLX e TTL usa uma fila de espera: a mensagem sai da fila principal, entra na fila de retry, expira depois do tempo configurado e volta para uma exchange de trabalho.</p>
+      <div class="visual-block" aria-label="Fluxo conceitual de retry com atraso usando DLX e TTL">
+        <div class="flow-line">
+          <div class="route-step">
+            <span class="tag blue">1</span>
+            <span class="step-title">Fila principal</span>
+            <p>A mensagem está pronta para consumo e foi entregue a um consumer.</p>
+          </div>
+          <div class="route-step">
+            <span class="tag blue">2</span>
+            <span class="step-title">Saída planejada</span>
+            <p>O consumer rejeita sem recolocar imediatamente na mesma fila.</p>
+          </div>
+          <div class="route-step">
+            <span class="tag">3</span>
+            <span class="step-title">DLX</span>
+            <p>A fila republica a mensagem para uma exchange de dead-letter.</p>
+          </div>
+          <div class="route-step">
+            <span class="tag">4</span>
+            <span class="step-title">Fila de espera</span>
+            <p>A mensagem permanece em uma retry queue até o TTL expirar.</p>
+          </div>
+          <div class="route-step">
+            <span class="tag">5</span>
+            <span class="step-title">Nova tentativa</span>
+            <p>Ao expirar, a mensagem pode ser roteada de volta ao fluxo de trabalho.</p>
+          </div>
+        </div>
+      </div>
+      <p>TTL ajuda a criar espera, mas não deve ser lido como agenda precisa. A documentação de RabbitMQ descreve caveats de expiração, incluindo situações em que mensagens expiradas só são removidas quando chegam ao início da fila ou quando outro evento força a avaliação. Para este node, a ideia importante é o ritmo: retry planejado desacelera a repetição e cria um lugar observável entre uma tentativa e outra.</p>
+    </section>
+
+    <section>
+      <h2>O desenho precisa de um ponto de parada</h2>
+      <p>A DLX não decide sozinha se a mensagem merece nova tentativa ou isolamento. Essa decisão vem do desenho da topologia e da leitura do consumer. Um erro transitório pode usar uma fila de espera; um erro definitivo deveria sair para quarentena; uma mensagem que já tentou demais precisa parar de pressionar a fila principal.</p>
+      <div class="retry-grid">
+        <div class="retry-card visual-card hot">
+          <span class="tag risk">Requeue imediato</span>
+          <strong>Mesma causa, mesma fila</strong>
+          <p>A mensagem volta rápido, encontra o mesmo problema e pode consumir capacidade sem progresso.</p>
+        </div>
+        <div class="retry-card visual-card wait">
+          <span class="tag">Retry planejado</span>
+          <strong>Espera antes de tentar</strong>
+          <p>A mensagem sai do circuito quente, aguarda e retorna com uma chance mais real de sucesso.</p>
+        </div>
+        <div class="retry-card visual-card done">
+          <span class="tag">Quarentena</span>
+          <strong>Sem retorno automático</strong>
+          <p>A mensagem fica separada quando a próxima tentativa só repetiria uma falha conhecida.</p>
+        </div>
+      </div>
+      <p>Esse ponto de parada é o que torna retry diferente de repetição. Sem limite, cada volta parece uma ação, mas a arquitetura não aprende nada. Com uma saída explícita para análise, a mensagem deixa de competir com trabalho saudável.</p>
+    </section>
+
+    <section>
+      <h2>Configuração rígida vira dívida operacional</h2>
+      <p>Como DLX, TTL e limites são parâmetros de filas, a forma de aplicá-los importa. A documentação de RabbitMQ recomenda policies quando aplicável, porque elas permitem mudar parâmetros de grupos de filas em runtime. Colocar tudo como x-arguments fixos na declaração acopla a decisão ao código e torna mudanças de produção mais pesadas.</p>
+      <p>Este node só precisa dessa leitura: DLX é uma configuração de fila que aponta para uma exchange normal, e configurações desse tipo costumam precisar de governança. O próximo node aprofunda como policies, x-arguments e permissões definem quem pode mudar esses parâmetros e quais efeitos essa escolha traz.</p>
+    </section>
+
+    <section class="node-closing">
+      <h2>A mensagem mudou de jurisdição</h2>
+      <p>Quando uma mensagem não encontra rota, o problema pertence à exchange de entrada. Quando ela já está em uma fila e sai por rejeição, expiração ou limite, o problema pertence à fila e à política de saída desenhada para ela.</p>
+      <p>Dominar DLX é enxergar essa mudança de jurisdição: a fila decide que a mensagem não deve continuar no mesmo lugar, a DLX roteia a republicação, e a arquitetura escolhe se o próximo destino é análise, espera ou parada definitiva.</p>
+    </section>
+    <footer class="node-footer">
+      <h2>Referências</h2>
+      <ul class="reference-list">
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/dlx">Documentação de Dead Letter Exchanges</a>
+          <span class="reference-note">Uso neste node: sustenta DLX como exchange normal, eventos de dead-lettering e recomendação contra x-arguments rígidos.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/confirms">Documentação sobre acknowledgements de consumidor</a>
+          <span class="reference-note">Uso neste node: sustenta `basic.nack`, `basic.reject`, `requeue` e a diferença entre voltar para a fila ou sair dela.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/ttl">Documentação de TTL e expiração</a>
+          <span class="reference-note">Uso neste node: sustenta expiração de mensagens, relação com DLX e limites de precisão do TTL.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/maxlength">Documentação de limite de fila</a>
+          <span class="reference-note">Uso neste node: sustenta queue length limit como causa de remoção ou dead-lettering.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/policies">Documentação de policies</a>
+          <span class="reference-note">Uso neste node: sustenta a preferência por policies quando parâmetros de filas precisam mudar operacionalmente.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/publishers">Documentação de publishers</a>
+          <span class="reference-note">Uso neste node: sustenta a fronteira com publicações sem rota e Alternate Exchange.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/quorum-queues">Documentação de quorum queues</a>
+          <span class="reference-note">Uso neste node: sustenta delivery limit como causa específica, sem aprofundar o comportamento avançado.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/reliability">Guia de confiabilidade</a>
+          <span class="reference-note">Uso neste node: sustenta a leitura de acknowledgements como transferência de responsabilidade e a necessidade de lidar com redelivery.</span>
+        </li>
+      </ul>
+    </footer>
+  </main>
+</body>
+</html>

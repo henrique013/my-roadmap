@@ -1,0 +1,2024 @@
+<!doctype html>
+<html lang="pt-BR" data-visual-theme="notion-dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modelo AMQP e papel da exchange</title>
+  <style>
+    :root {
+          color-scheme: dark;
+          --page: #191919;
+          --surface: #202020;
+          --surface-hover: #2a2a2a;
+          --soft: #242424;
+          --soft-2: #2a2a2a;
+          --text: #e6e6e6;
+          --strong: #f2f2f2;
+          --heading: #f2f2f2;
+          --muted: #a3a3a3;
+          --border: #333333;
+          --border-strong: #4a4a4a;
+          --accent: #6aaed6;
+          --accent-2: #8cc7ff;
+          --warn: #ffdc49;
+          --code: #e6e6e6;
+          --code-bg: #2f3437;
+          --tag-bg: #243831;
+          --tag-text: #7ad9c5;
+          --tag-border: #335f54;
+          --blue-soft: #1f2b3f;
+          --blue-text: #8cc7ff;
+          --blue-border: #365f93;
+          --warn-soft: #342f19;
+          --warn-border: #5f4f18;
+          --success-soft: #1f332b;
+          --success-text: #8be6c1;
+          --success-border: #2f6b57;
+          --purple-soft: #2b2342;
+          --purple-text: #c8b6ff;
+          --purple-border: #574582;
+          --risk-soft: #3a2028;
+          --risk-text: #ff9ab3;
+          --risk-border: #7a3a4d;
+          --pre-bg: #111111;
+          --pre-text: #d4d4d4;
+          --focus: #6aaed6;
+        }
+    * {
+                  box-sizing: border-box;
+                }
+            
+                body {
+                  color-scheme: dark;
+                  margin: 0;
+                  color: var(--text);
+                  background: var(--page);
+                  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif;
+                  font-size: 18px;
+                  line-height: 1.55;
+                }
+            
+                main {
+                  max-width: 1260px;
+                  margin: 0 auto;
+                  padding: 32px 28px 56px;
+                }
+            
+                h1,
+                h2,
+                h3 {
+                  color: var(--heading);
+                  line-height: 1.2;
+                  margin: 0 0 12px;
+                  letter-spacing: 0;
+                }
+            
+                h1 {
+                  font-size: 36px;
+                  margin-bottom: 10px;
+                }
+            
+                h2 {
+                  font-size: 26px;
+                  border-top: 1px solid var(--border);
+                  padding-top: 28px;
+                  margin-top: 34px;
+                }
+            
+                h3 {
+                  font-size: 20px;
+                  margin-top: 22px;
+                }
+            
+                p,
+                ul,
+                ol,
+                .lead,
+                .callout {
+                  max-width: none;
+                }
+            
+                p {
+                  margin: 0 0 12px;
+                }
+            
+                ul {
+                  margin: 8px 0 16px 22px;
+                  padding: 0;
+                }
+            
+                li {
+                  margin: 4px 0;
+                }
+            
+                table,
+                pre,
+                .content-grid,
+                .visual-block {
+                  width: 100%;
+                  max-width: 100%;
+                }
+            
+                table {
+                  border-collapse: collapse;
+                  margin: 14px 0 22px;
+                  table-layout: fixed;
+                  background: var(--surface);
+                }
+            
+                th,
+                td {
+                  border: 1px solid var(--border);
+                  padding: 9px 10px;
+                  vertical-align: top;
+                  overflow-wrap: anywhere;
+                  background: var(--surface);
+                }
+            
+                th {
+                  background: var(--soft-2);
+                  text-align: left;
+                  font-weight: 700;
+                  color: var(--heading);
+                }
+            
+                code {
+                  color: var(--code);
+                  background: var(--code-bg);
+                  border: 1px solid var(--border);
+                  border-radius: 4px;
+                  padding: 1px 4px;
+                  font-family: Consolas, Monaco, "Courier New", monospace;
+                  font-size: 0.92em;
+                }
+            
+                pre {
+                  margin: 12px 0 22px;
+                  padding: 14px 16px;
+                  color: var(--pre-text);
+                  background: var(--pre-bg);
+                  border: 1px solid var(--border);
+                  border-radius: 6px;
+                  overflow: auto;
+                  max-width: 100%;
+                  font-family: Consolas, Monaco, "Courier New", monospace;
+                  font-size: 16px;
+                  line-height: 1.45;
+                  white-space: pre;
+                }
+            
+                pre code {
+                  color: inherit;
+                  background: transparent;
+                  border: 0;
+                  border-radius: 0;
+                  padding: 0;
+                  font: inherit;
+                }
+            
+                a {
+                  color: var(--accent);
+                  text-decoration-thickness: 1px;
+                  text-underline-offset: 2px;
+                }
+            
+                a:hover {
+                  color: var(--accent-2);
+                }
+            
+                a:focus-visible {
+                  outline: 2px solid var(--focus);
+                  outline-offset: 3px;
+                  border-radius: 4px;
+                }
+            
+                .backlink {
+                  display: inline-flex;
+                  align-items: center;
+                  margin-bottom: 18px;
+                  font-weight: 700;
+                }
+            
+                .lead {
+                  color: var(--muted);
+                  font-size: 19px;
+                }
+            
+                .meta {
+                  color: var(--muted);
+                  margin-bottom: 24px;
+                }
+            
+                .node-context {
+                  display: grid;
+                  gap: 6px;
+                  padding: 12px 14px;
+                  border: 1px solid var(--border);
+                  border-left: 4px solid var(--accent);
+                  border-radius: 6px;
+                  background: var(--soft);
+                  margin: 0 0 18px;
+                }
+            
+                .node-context p {
+                  margin: 0;
+                }
+            
+                .node-context strong {
+                  color: var(--heading);
+                }
+            
+                .callout {
+                  padding: 13px 15px;
+                  border: 1px solid var(--border);
+                  border-left: 4px solid var(--accent);
+                  background: var(--soft);
+                  margin: 16px 0 22px;
+                  border-radius: 6px;
+                }
+            
+                .callout.boundary {
+                  border-left-color: var(--warn);
+                  background: var(--warn-soft);
+                  border-color: var(--warn-border);
+                }
+            
+                .tag {
+                  display: inline-block;
+                  padding: 2px 7px;
+                  border-radius: 999px;
+                  font-size: 15px;
+                  font-weight: 700;
+                  background: var(--tag-bg);
+                  color: var(--tag-text);
+                  border: 1px solid var(--tag-border);
+                }
+            
+                .tag.blue {
+                  color: var(--blue-text);
+                  background: var(--blue-soft);
+                  border-color: var(--blue-border);
+                }
+            
+                .tag.warn {
+                  color: var(--warn);
+                  background: var(--warn-soft);
+                  border-color: var(--warn-border);
+                }
+            
+                .small {
+                  color: var(--muted);
+                  font-size: 16px;
+                }
+            
+                .content-grid {
+                  display: grid;
+                  grid-template-columns: repeat(3, minmax(0, 1fr));
+                  gap: 14px;
+                  margin: 16px 0 22px;
+                }
+            
+                .card,
+                .concept-card,
+                .flow-step,
+                .handoff-card,
+                .result-card,
+                .queue-card,
+                .consumer-card {
+                  color: var(--text);
+                  background: var(--surface);
+                  border: 1px solid var(--border);
+                  border-radius: 6px;
+                  padding: 14px;
+                }
+            
+                .card strong,
+                .concept-card strong,
+                .flow-step strong,
+                .handoff-card strong,
+                .result-card strong,
+                .queue-card strong,
+                .consumer-card strong {
+                  color: var(--heading);
+                }
+            
+                .path-diagram {
+                  display: grid;
+                  gap: 12px;
+                  margin: 18px 0 24px;
+                  padding: 14px;
+                  border: 1px solid var(--border);
+                  border-radius: 6px;
+                  background: var(--soft);
+                }
+            
+                .flow-row {
+                  display: grid;
+                  grid-template-columns: minmax(160px, 1fr) minmax(180px, 1fr) minmax(180px, 1fr);
+                  gap: 12px;
+                  align-items: stretch;
+                }
+            
+                .flow-step {
+                  display: grid;
+                  gap: 6px;
+                  min-height: 132px;
+                }
+            
+                .flow-step.publisher {
+                  background: var(--blue-soft);
+                  border-color: var(--blue-border);
+                }
+            
+                .flow-step.exchange {
+                  background: var(--success-soft);
+                  border-color: var(--success-border);
+                }
+            
+                .flow-step.binding {
+                  background: var(--purple-soft);
+                  border-color: var(--purple-border);
+                }
+            
+                .queue-lane {
+                  display: grid;
+                  grid-template-columns: repeat(2, minmax(0, 1fr));
+                  gap: 12px;
+                }
+            
+                .queue-card {
+                  background: var(--surface);
+                }
+            
+                .consumer-card {
+                  margin-top: 10px;
+                  background: var(--soft);
+                  border-color: var(--border-strong);
+                }
+            
+                .route-label {
+                  color: var(--heading);
+                  font-weight: 700;
+                }
+            
+                .responsibility-map {
+                  display: grid;
+                  grid-template-columns: repeat(3, minmax(0, 1fr));
+                  gap: 14px;
+                  margin: 16px 0 22px;
+                }
+            
+                .concept-card.router {
+                  background: var(--success-soft);
+                  border-color: var(--success-border);
+                }
+            
+                .concept-card.store {
+                  background: var(--blue-soft);
+                  border-color: var(--blue-border);
+                }
+            
+                .concept-card.consume {
+                  background: var(--purple-soft);
+                  border-color: var(--purple-border);
+                }
+            
+                .result-grid {
+                  display: grid;
+                  grid-template-columns: repeat(3, minmax(0, 1fr));
+                  gap: 14px;
+                  margin: 16px 0 22px;
+                }
+            
+                .result-card.none {
+                  background: var(--warn-soft);
+                  border-color: var(--warn-border);
+                }
+            
+                .result-card.one {
+                  background: var(--blue-soft);
+                  border-color: var(--blue-border);
+                }
+            
+                .result-card.many {
+                  background: var(--success-soft);
+                  border-color: var(--success-border);
+                }
+            
+                @media (max-width: 920px) {
+                  main {
+                    padding: 22px 16px 40px;
+                  }
+            
+                  .content-grid,
+                  .responsibility-map,
+                  .result-grid,
+                  .flow-row,
+                  .queue-lane {
+                    grid-template-columns: 1fr;
+                  }
+            
+                  table {
+                    display: block;
+                    overflow-x: auto;
+                    table-layout: auto;
+                  }
+            
+                  th,
+                  td {
+                    min-width: 150px;
+                  }
+                }
+            .node-context {
+              display: grid;
+              gap: 6px;
+              padding: 12px 14px;
+              border: 1px solid var(--border);
+              border-left: 4px solid var(--accent);
+              border-radius: 6px;
+              background: var(--soft);
+              margin: 0 0 18px;
+              width: 100%;
+            }
+            .node-context p { margin: 0; }
+            .node-context strong { color: var(--heading); }
+            .node-context a {
+              color: var(--accent);
+              font-weight: 400;
+              text-decoration-line: underline;
+              text-decoration-thickness: 1px;
+              text-underline-offset: 2px;
+            }
+            .node-footer {
+              margin: 0;
+              padding: 0;
+              border: 0;
+              background: transparent;
+            }
+            .node-footer h2 { margin-top: 32px; }
+            .reference-list {
+              display: grid;
+              gap: 8px;
+              margin: 8px 0 0;
+              padding: 0;
+              list-style: none;
+            }
+            .reference-item {
+              display: grid;
+              grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr);
+              gap: 10px;
+              align-items: start;
+              padding: 10px 12px;
+              border: 1px solid var(--border);
+              border-radius: 6px;
+              background: var(--surface);
+            }
+            .reference-item a,
+            .node-footer a {
+              color: var(--accent);
+              font-weight: 400;
+              text-decoration-line: underline;
+              text-decoration-thickness: 1px;
+              text-underline-offset: 2px;
+            }
+            .reference-note { color: var(--text); }
+            @media (max-width: 860px) {
+              .reference-item { grid-template-columns: 1fr; }
+            }
+        * {
+              box-sizing: border-box;
+            }
+        
+            body {
+              color-scheme: dark;
+              margin: 0;
+              color: var(--text);
+              background: var(--page);
+              font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif;
+              font-size: 18px;
+              line-height: 1.55;
+            }
+        
+            main {
+              max-width: 1260px;
+              margin: 0 auto;
+              padding: 32px 28px 56px;
+            }
+        
+            h1,
+            h2,
+            h3 {
+              color: var(--heading);
+              line-height: 1.2;
+              margin: 0 0 12px;
+            }
+        
+            h1 {
+              font-size: 36px;
+              margin-bottom: 8px;
+            }
+        
+            h2 {
+              font-size: 26px;
+              border-top: 1px solid var(--border);
+              padding-top: 28px;
+              margin-top: 32px;
+            }
+        
+            h3 {
+              font-size: 20px;
+              margin-top: 22px;
+            }
+        
+            p,
+            ul,
+            ol,
+            .lead,
+            .callout {
+              max-width: none;
+            }
+        
+            p {
+              margin: 0 0 12px;
+            }
+        
+            ul {
+              margin: 8px 0 16px 22px;
+              padding: 0;
+            }
+        
+            li {
+              margin: 4px 0;
+            }
+        
+            table,
+            pre,
+            .content-grid,
+            .visual-block {
+              width: 100%;
+              max-width: 100%;
+            }
+        
+            table {
+              border-collapse: collapse;
+              margin: 14px 0 22px;
+              table-layout: fixed;
+              background: var(--surface);
+            }
+        
+            th,
+            td {
+              border: 1px solid var(--border);
+              padding: 9px 10px;
+              vertical-align: top;
+              overflow-wrap: anywhere;
+              background: var(--surface);
+            }
+        
+            th {
+              background: var(--soft-2);
+              text-align: left;
+              font-weight: 700;
+            }
+        
+            code {
+              color: var(--code);
+              background: var(--code-bg);
+              border: 1px solid var(--border);
+              border-radius: 4px;
+              padding: 1px 4px;
+              font-family: Consolas, Monaco, "Courier New", monospace;
+              font-size: 0.92em;
+            }
+        
+            pre {
+              margin: 12px 0 22px;
+              padding: 14px 16px;
+              color: var(--pre-text);
+              background: var(--pre-bg);
+              border: 1px solid var(--border);
+              border-radius: 6px;
+              overflow: auto;
+              max-width: 100%;
+              font-family: Consolas, Monaco, "Courier New", monospace;
+              font-size: 16px;
+              line-height: 1.45;
+              white-space: pre;
+            }
+        
+            pre code {
+              color: inherit;
+              background: transparent;
+              border: 0;
+              border-radius: 0;
+              padding: 0;
+              font: inherit;
+            }
+        
+            .syntax-key {
+              color: #8cc7ff;
+              font-weight: 700;
+            }
+        
+            .syntax-op {
+              color: #c8b6ff;
+            }
+        
+            .syntax-value {
+              color: #a8e6cf;
+            }
+        
+            .syntax-comment {
+              color: #a3a3a3;
+            }
+        
+            .syntax-risk {
+              color: #ffe27a;
+            }
+        
+            a {
+              color: var(--accent);
+              text-decoration-thickness: 1px;
+              text-underline-offset: 2px;
+            }
+        
+            a:hover {
+              color: #8cc7ff;
+            }
+        
+            a:focus-visible {
+              outline: 2px solid var(--focus);
+              outline-offset: 3px;
+              border-radius: 4px;
+            }
+        
+            .backlink {
+              display: inline-flex;
+              align-items: center;
+              margin-bottom: 18px;
+              font-weight: 700;
+            }
+        
+            .lead {
+              color: var(--muted);
+              font-size: 19px;
+            }
+        
+            .meta {
+              color: var(--muted);
+              margin-bottom: 24px;
+            }
+        
+            .node-context {
+              display: grid;
+              gap: 6px;
+              padding: 12px 14px;
+              border: 1px solid var(--border);
+              border-left: 4px solid var(--accent);
+              border-radius: 6px;
+              background: var(--soft);
+              margin: 0 0 18px;
+              width: 100%;
+            }
+        
+            .node-context p {
+              margin: 0;
+            }
+        
+            .node-context strong {
+              color: var(--heading);
+            }
+        
+            .node-context a {
+              color: var(--accent);
+              font-weight: 400;
+              text-decoration-line: underline;
+              text-decoration-thickness: 1px;
+              text-underline-offset: 2px;
+            }
+        
+            .node-context a:hover {
+              color: var(--accent-2);
+            }
+        
+            .node-footer {
+              margin: 0;
+              padding: 0;
+              border: 0;
+              background: transparent;
+            }
+        
+            .node-footer h2 {
+              margin-top: 32px;
+            }
+        
+            .reference-list {
+              display: grid;
+              gap: 8px;
+              margin: 8px 0 0;
+              padding: 0;
+              list-style: none;
+            }
+        
+            .reference-item {
+              display: grid;
+              grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr);
+              gap: 10px;
+              align-items: start;
+              padding: 10px 12px;
+              border: 1px solid var(--border);
+              border-radius: 6px;
+              background: var(--surface);
+            }
+        
+            .reference-item a,
+            .node-footer a {
+              color: var(--accent);
+              font-weight: 400;
+              text-decoration-line: underline;
+              text-decoration-thickness: 1px;
+              text-underline-offset: 2px;
+            }
+        
+            .reference-note {
+              color: var(--text);
+            }
+        
+            .callout {
+              padding: 13px 15px;
+              border: 1px solid var(--border);
+              border-left: 4px solid var(--accent);
+              background: var(--soft);
+              margin: 16px 0 22px;
+              border-radius: 6px;
+            }
+        
+            .warning {
+              border-left-color: var(--warn);
+              background: var(--warn-soft);
+            }
+        
+            .callout.boundary,
+            .callout.warning {
+              border-left-color: var(--warn);
+              background: var(--warn-soft);
+              border-color: var(--warn-border);
+            }
+        
+            .grid {
+              display: grid;
+              grid-template-columns: repeat(3, minmax(0, 1fr));
+              gap: 14px;
+              margin: 16px 0 22px;
+            }
+        
+            .card {
+              border: 1px solid var(--border);
+              border-radius: 6px;
+              padding: 14px;
+              background: var(--surface);
+            }
+        
+            .tag {
+              display: inline-block;
+              padding: 2px 7px;
+              border-radius: 999px;
+              font-size: 15px;
+              font-weight: 700;
+              background: var(--tag-bg);
+              color: var(--tag-text);
+              border: 1px solid var(--tag-border);
+            }
+        
+            .tag.blue {
+              color: var(--blue-text);
+              background: var(--blue-soft);
+              border-color: var(--blue-border);
+            }
+        
+            .tag.warn {
+              color: var(--warn);
+              background: var(--warn-soft);
+              border-color: var(--warn-border);
+            }
+        
+            .small {
+              color: var(--muted);
+              font-size: 16px;
+            }
+        
+            .timeline {
+              display: grid;
+              gap: 10px;
+              margin: 16px 0 22px;
+            }
+        
+            .timeline-step {
+              display: grid;
+              grid-template-columns: 72px 1fr;
+              gap: 12px;
+              align-items: start;
+              border: 1px solid var(--border);
+              border-radius: 6px;
+              padding: 10px 12px;
+              background: var(--surface);
+            }
+        
+            .flow-steps {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 8px;
+              align-items: center;
+              margin: 16px 0 22px;
+            }
+        
+            .flow-steps span {
+              border: 1px solid var(--border);
+              border-radius: 6px;
+              padding: 8px 10px;
+              background: var(--soft);
+            }
+        
+            .state-grid {
+              display: grid;
+              grid-template-columns: repeat(2, minmax(0, 1fr));
+              gap: 14px;
+              margin: 16px 0 22px;
+            }
+        
+            .topology,
+            .lane-map {
+              display: grid;
+              gap: 10px;
+              margin: 16px 0 22px;
+            }
+        
+            .topology-node,
+            .lane {
+              border: 1px solid var(--border);
+              border-radius: 6px;
+              padding: 10px 12px;
+              background: var(--surface);
+            }
+        
+            :where(
+              .visual-surface,
+              .timeline-step,
+              .flow-step,
+              .step,
+              .risk-step,
+              .position-strip,
+              .contract-map,
+              .state-card,
+              .stream-card,
+              .event-card,
+              .group-card,
+              .tool-card,
+              .part,
+              .group-shell,
+              .umbrella-map,
+              .topology-node,
+              .lane,
+              .process-card,
+              .visual-card,
+              .concept-card,
+              .path-card,
+              .decision-card,
+              .stage,
+              .segment,
+              .panel,
+              .box,
+              .map-card,
+              .layer,
+              .node-card,
+              .mini-card,
+              .boundary-card,
+              .handoff-card,
+              .flow-mini > *
+            ) {
+              color: var(--text);
+              background: var(--surface);
+              border-color: var(--border);
+            }
+        
+            :where(
+              .visual-surface,
+              .timeline-step,
+              .flow-step,
+              .step,
+              .risk-step,
+              .position-strip,
+              .contract-map,
+              .state-card,
+              .stream-card,
+              .event-card,
+              .group-card,
+              .tool-card,
+              .part,
+              .group-shell,
+              .umbrella-map,
+              .topology-node,
+              .lane,
+              .process-card,
+              .visual-card,
+              .concept-card,
+              .path-card,
+              .decision-card,
+              .stage,
+              .segment,
+              .panel,
+              .box,
+              .map-card,
+              .layer,
+              .node-card,
+              .mini-card,
+              .boundary-card,
+              .handoff-card,
+              .flow-mini > *
+            ) strong {
+              color: var(--heading);
+            }
+        
+            .route-label {
+              color: var(--heading);
+            }
+        
+            :where(.info, .context, .app, .stream) {
+              background: var(--blue-soft);
+              border-color: var(--blue-border);
+            }
+        
+            :where(.success, .focus, .ecs, .group, .expire) {
+              background: var(--success-soft);
+              border-color: var(--success-border);
+            }
+        
+            :where(.secondary, .event, .search) {
+              background: var(--purple-soft);
+              border-color: var(--purple-border);
+            }
+        
+            :where(.warn, .warning, .risk, .danger, .logs, .aside, .keep) {
+              background: var(--warn-soft);
+              border-color: var(--warn-border);
+            }
+        
+            :where(.danger, .risk, .search) {
+              color: var(--text);
+            }
+        
+            .step,
+            .stream-card,
+            .stream-card.process,
+            .stream-card.out,
+            .stream-card.err,
+            .umbrella-map,
+            .group-shell,
+            .part.focus,
+            .part.context,
+            .event-card,
+            .event-card:nth-child(1),
+            .event-card:nth-child(2),
+            .event-card:nth-child(3),
+            .event-card:nth-child(4),
+            .group-card.group,
+            .group-card.stream,
+            .group-card.event,
+            .state-card.keep,
+            .state-card.expire,
+            .tool-card.search,
+            .tool-card.live,
+            .tool-card.metric,
+            .flow-step.app,
+            .flow-step.stream,
+            .flow-step.ecs,
+            .flow-step.logs,
+            .flow-step.search,
+            .handoff-card,
+            .handoff-card.transport,
+            .handoff-card.meaning,
+            .lane.main,
+            .lane.aside,
+            .boundary-card.project,
+            .boundary-card.runtime {
+              color: var(--text);
+              background: var(--surface);
+              border-color: var(--border);
+            }
+        
+            .stream-card.process,
+            .part.context,
+            .event-card:nth-child(1),
+            .group-card.stream,
+            .tool-card.live,
+            .flow-step.app,
+            .flow-step.stream,
+            .handoff-card.transport {
+              background: var(--blue-soft);
+              border-color: var(--blue-border);
+            }
+        
+            .stream-card.out,
+            .part.focus,
+            .event-card:nth-child(2),
+            .group-card.group,
+            .state-card.expire,
+            .tool-card.metric,
+            .flow-step.ecs,
+            .lane.main,
+            .boundary-card.runtime {
+              background: var(--success-soft);
+              border-color: var(--success-border);
+            }
+        
+            .event-card:nth-child(3),
+            .group-card.event,
+            .tool-card.search,
+            .flow-step.search,
+            .handoff-card.meaning,
+            .boundary-card.project {
+              background: var(--purple-soft);
+              border-color: var(--purple-border);
+            }
+        
+            .stream-card.err,
+            .event-card:nth-child(4),
+            .state-card.keep,
+            .flow-step.logs,
+            .lane.aside {
+              background: var(--warn-soft);
+              border-color: var(--warn-border);
+            }
+        
+            @media (max-width: 860px) {
+              main {
+                padding: 22px 16px 40px;
+              }
+        
+              .grid {
+                grid-template-columns: 1fr;
+              }
+        
+              .timeline-step,
+              .state-grid,
+              .reference-item {
+                grid-template-columns: 1fr;
+              }
+        
+              table {
+                display: block;
+                overflow-x: auto;
+                table-layout: auto;
+              }
+        
+              th,
+              td {
+                min-width: 150px;
+              }
+            }
+        .node-context {
+          display: grid;
+          gap: 6px;
+          padding: 12px 14px;
+          border: 1px solid var(--border);
+          border-left: 4px solid var(--accent);
+          border-radius: 6px;
+          background: var(--soft);
+          margin: 0 0 18px;
+          width: 100%;
+        }
+        .node-context p { margin: 0; }
+        .node-context strong { color: var(--heading); }
+        .node-context a {
+          color: var(--accent);
+          font-weight: 400;
+          text-decoration-line: underline;
+          text-decoration-thickness: 1px;
+          text-underline-offset: 2px;
+        }
+        .node-footer {
+          margin: 0;
+          padding: 0;
+          border: 0;
+          background: transparent;
+        }
+        .node-footer h2 { margin-top: 32px; }
+        .reference-list {
+          display: grid;
+          gap: 8px;
+          margin: 8px 0 0;
+          padding: 0;
+          list-style: none;
+        }
+        .reference-item {
+          display: grid;
+          grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr);
+          gap: 10px;
+          align-items: start;
+          padding: 10px 12px;
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          background: var(--surface);
+        }
+        .reference-item a,
+        .node-footer a {
+          color: var(--accent);
+          font-weight: 400;
+          text-decoration-line: underline;
+          text-decoration-thickness: 1px;
+          text-underline-offset: 2px;
+        }
+        .reference-note { color: var(--text); }
+        @media (max-width: 860px) {
+          .reference-item { grid-template-columns: 1fr; }
+        }
+    * {
+          box-sizing: border-box;
+        }
+    
+        body {
+          color-scheme: dark;
+          margin: 0;
+          color: var(--text);
+          background: var(--page);
+          font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif;
+          font-size: 18px;
+          line-height: 1.55;
+        }
+    
+        main {
+          max-width: 1260px;
+          margin: 0 auto;
+          padding: 32px 28px 56px;
+        }
+    
+        h1,
+        h2,
+        h3 {
+          color: var(--heading);
+          line-height: 1.2;
+          margin: 0 0 12px;
+        }
+    
+        h1 {
+          font-size: 36px;
+          margin-bottom: 8px;
+        }
+    
+        h2 {
+          font-size: 26px;
+          border-top: 1px solid var(--border);
+          padding-top: 28px;
+          margin-top: 32px;
+        }
+    
+        h3 {
+          font-size: 20px;
+          margin-top: 22px;
+        }
+    
+        p,
+        ul,
+        ol,
+        .lead,
+        .callout {
+          max-width: none;
+        }
+    
+        p {
+          margin: 0 0 12px;
+        }
+    
+        ul {
+          margin: 8px 0 16px 22px;
+          padding: 0;
+        }
+    
+        li {
+          margin: 4px 0;
+        }
+    
+        table,
+        pre,
+        .content-grid,
+        .visual-block {
+          width: 100%;
+          max-width: 100%;
+        }
+    
+        table {
+          border-collapse: collapse;
+          margin: 14px 0 22px;
+          table-layout: fixed;
+          background: var(--surface);
+        }
+    
+        th,
+        td {
+          border: 1px solid var(--border);
+          padding: 9px 10px;
+          vertical-align: top;
+          overflow-wrap: anywhere;
+          background: var(--surface);
+        }
+    
+        th {
+          background: var(--soft-2);
+          text-align: left;
+          font-weight: 700;
+        }
+    
+        code {
+          color: var(--code);
+          background: var(--code-bg);
+          border: 1px solid var(--border);
+          border-radius: 4px;
+          padding: 1px 4px;
+          font-family: Consolas, Monaco, "Courier New", monospace;
+          font-size: 0.92em;
+        }
+    
+        pre {
+          margin: 12px 0 22px;
+          padding: 14px 16px;
+          color: var(--pre-text);
+          background: var(--pre-bg);
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          overflow: auto;
+          max-width: 100%;
+          font-family: Consolas, Monaco, "Courier New", monospace;
+          font-size: 16px;
+          line-height: 1.45;
+          white-space: pre;
+        }
+    
+        pre code {
+          color: inherit;
+          background: transparent;
+          border: 0;
+          border-radius: 0;
+          padding: 0;
+          font: inherit;
+        }
+    
+        .syntax-key {
+          color: #8cc7ff;
+          font-weight: 700;
+        }
+    
+        .syntax-op {
+          color: #c8b6ff;
+        }
+    
+        .syntax-value {
+          color: #a8e6cf;
+        }
+    
+        .syntax-comment {
+          color: #a3a3a3;
+        }
+    
+        .syntax-risk {
+          color: #ffe27a;
+        }
+    
+        a {
+          color: var(--accent);
+          text-decoration-thickness: 1px;
+          text-underline-offset: 2px;
+        }
+    
+        a:hover {
+          color: #8cc7ff;
+        }
+    
+        a:focus-visible {
+          outline: 2px solid var(--focus);
+          outline-offset: 3px;
+          border-radius: 4px;
+        }
+    
+        .backlink {
+          display: inline-flex;
+          align-items: center;
+          margin-bottom: 18px;
+          font-weight: 700;
+        }
+    
+        .lead {
+          color: var(--muted);
+          font-size: 19px;
+        }
+    
+        .meta {
+          color: var(--muted);
+          margin-bottom: 24px;
+        }
+    
+        .node-context {
+          display: grid;
+          gap: 6px;
+          padding: 12px 14px;
+          border: 1px solid var(--border);
+          border-left: 4px solid var(--accent);
+          border-radius: 6px;
+          background: var(--soft);
+          margin: 0 0 18px;
+          width: 100%;
+        }
+    
+        .node-context p {
+          margin: 0;
+        }
+    
+        .node-context strong {
+          color: var(--heading);
+        }
+    
+        .node-context a {
+          color: var(--accent);
+          font-weight: 400;
+          text-decoration-line: underline;
+          text-decoration-thickness: 1px;
+          text-underline-offset: 2px;
+        }
+    
+        .node-context a:hover {
+          color: var(--accent-2);
+        }
+    
+        .node-footer {
+          margin: 0;
+          padding: 0;
+          border: 0;
+          background: transparent;
+        }
+    
+        .node-footer h2 {
+          margin-top: 32px;
+        }
+    
+        .reference-list {
+          display: grid;
+          gap: 8px;
+          margin: 8px 0 0;
+          padding: 0;
+          list-style: none;
+        }
+    
+        .reference-item {
+          display: grid;
+          grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr);
+          gap: 10px;
+          align-items: start;
+          padding: 10px 12px;
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          background: var(--surface);
+        }
+    
+        .reference-item a,
+        .node-footer a {
+          color: var(--accent);
+          font-weight: 400;
+          text-decoration-line: underline;
+          text-decoration-thickness: 1px;
+          text-underline-offset: 2px;
+        }
+    
+        .reference-note {
+          color: var(--text);
+        }
+    
+        .callout {
+          padding: 13px 15px;
+          border: 1px solid var(--border);
+          border-left: 4px solid var(--accent);
+          background: var(--soft);
+          margin: 16px 0 22px;
+          border-radius: 6px;
+        }
+    
+        .warning {
+          border-left-color: var(--warn);
+          background: var(--warn-soft);
+        }
+    
+        .callout.boundary,
+        .callout.warning {
+          border-left-color: var(--warn);
+          background: var(--warn-soft);
+          border-color: var(--warn-border);
+        }
+    
+        .grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 14px;
+          margin: 16px 0 22px;
+        }
+    
+        .card {
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          padding: 14px;
+          background: var(--surface);
+        }
+    
+        .tag {
+          display: inline-block;
+          padding: 2px 7px;
+          border-radius: 999px;
+          font-size: 15px;
+          font-weight: 700;
+          background: var(--tag-bg);
+          color: var(--tag-text);
+          border: 1px solid var(--tag-border);
+        }
+    
+        .tag.blue {
+          color: var(--blue-text);
+          background: var(--blue-soft);
+          border-color: var(--blue-border);
+        }
+    
+        .tag.warn {
+          color: var(--warn);
+          background: var(--warn-soft);
+          border-color: var(--warn-border);
+        }
+    
+        .small {
+          color: var(--muted);
+          font-size: 16px;
+        }
+    
+        .timeline {
+          display: grid;
+          gap: 10px;
+          margin: 16px 0 22px;
+        }
+    
+        .timeline-step {
+          display: grid;
+          grid-template-columns: 72px 1fr;
+          gap: 12px;
+          align-items: start;
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          padding: 10px 12px;
+          background: var(--surface);
+        }
+    
+        .flow-steps {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          align-items: center;
+          margin: 16px 0 22px;
+        }
+    
+        .flow-steps span {
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          padding: 8px 10px;
+          background: var(--soft);
+        }
+    
+        .state-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 14px;
+          margin: 16px 0 22px;
+        }
+    
+        .topology,
+        .lane-map {
+          display: grid;
+          gap: 10px;
+          margin: 16px 0 22px;
+        }
+    
+        .topology-node,
+        .lane {
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          padding: 10px 12px;
+          background: var(--surface);
+        }
+    
+        :where(
+          .visual-surface,
+          .timeline-step,
+          .flow-step,
+          .step,
+          .risk-step,
+          .position-strip,
+          .contract-map,
+          .state-card,
+          .stream-card,
+          .event-card,
+          .group-card,
+          .tool-card,
+          .part,
+          .group-shell,
+          .umbrella-map,
+          .topology-node,
+          .lane,
+          .process-card,
+          .visual-card,
+          .concept-card,
+          .path-card,
+          .decision-card,
+          .stage,
+          .segment,
+          .panel,
+          .box,
+          .map-card,
+          .layer,
+          .node-card,
+          .mini-card,
+          .boundary-card,
+          .handoff-card,
+          .flow-mini > *
+        ) {
+          color: var(--text);
+          background: var(--surface);
+          border-color: var(--border);
+        }
+    
+        :where(
+          .visual-surface,
+          .timeline-step,
+          .flow-step,
+          .step,
+          .risk-step,
+          .position-strip,
+          .contract-map,
+          .state-card,
+          .stream-card,
+          .event-card,
+          .group-card,
+          .tool-card,
+          .part,
+          .group-shell,
+          .umbrella-map,
+          .topology-node,
+          .lane,
+          .process-card,
+          .visual-card,
+          .concept-card,
+          .path-card,
+          .decision-card,
+          .stage,
+          .segment,
+          .panel,
+          .box,
+          .map-card,
+          .layer,
+          .node-card,
+          .mini-card,
+          .boundary-card,
+          .handoff-card,
+          .flow-mini > *
+        ) strong {
+          color: var(--heading);
+        }
+    
+        .route-label {
+          color: var(--heading);
+        }
+    
+        :where(.info, .context, .app, .stream) {
+          background: var(--blue-soft);
+          border-color: var(--blue-border);
+        }
+    
+        :where(.success, .focus, .ecs, .group, .expire) {
+          background: var(--success-soft);
+          border-color: var(--success-border);
+        }
+    
+        :where(.secondary, .event, .search) {
+          background: var(--purple-soft);
+          border-color: var(--purple-border);
+        }
+    
+        :where(.warn, .warning, .risk, .danger, .logs, .aside, .keep) {
+          background: var(--warn-soft);
+          border-color: var(--warn-border);
+        }
+    
+        :where(.danger, .risk, .search) {
+          color: var(--text);
+        }
+    
+        .step,
+        .stream-card,
+        .stream-card.process,
+        .stream-card.out,
+        .stream-card.err,
+        .umbrella-map,
+        .group-shell,
+        .part.focus,
+        .part.context,
+        .event-card,
+        .event-card:nth-child(1),
+        .event-card:nth-child(2),
+        .event-card:nth-child(3),
+        .event-card:nth-child(4),
+        .group-card.group,
+        .group-card.stream,
+        .group-card.event,
+        .state-card.keep,
+        .state-card.expire,
+        .tool-card.search,
+        .tool-card.live,
+        .tool-card.metric,
+        .flow-step.app,
+        .flow-step.stream,
+        .flow-step.ecs,
+        .flow-step.logs,
+        .flow-step.search,
+        .handoff-card,
+        .handoff-card.transport,
+        .handoff-card.meaning,
+        .lane.main,
+        .lane.aside,
+        .boundary-card.project,
+        .boundary-card.runtime {
+          color: var(--text);
+          background: var(--surface);
+          border-color: var(--border);
+        }
+    
+        .stream-card.process,
+        .part.context,
+        .event-card:nth-child(1),
+        .group-card.stream,
+        .tool-card.live,
+        .flow-step.app,
+        .flow-step.stream,
+        .handoff-card.transport {
+          background: var(--blue-soft);
+          border-color: var(--blue-border);
+        }
+    
+        .stream-card.out,
+        .part.focus,
+        .event-card:nth-child(2),
+        .group-card.group,
+        .state-card.expire,
+        .tool-card.metric,
+        .flow-step.ecs,
+        .lane.main,
+        .boundary-card.runtime {
+          background: var(--success-soft);
+          border-color: var(--success-border);
+        }
+    
+        .event-card:nth-child(3),
+        .group-card.event,
+        .tool-card.search,
+        .flow-step.search,
+        .handoff-card.meaning,
+        .boundary-card.project {
+          background: var(--purple-soft);
+          border-color: var(--purple-border);
+        }
+    
+        .stream-card.err,
+        .event-card:nth-child(4),
+        .state-card.keep,
+        .flow-step.logs,
+        .lane.aside {
+          background: var(--warn-soft);
+          border-color: var(--warn-border);
+        }
+    
+        @media (max-width: 860px) {
+          main {
+            padding: 22px 16px 40px;
+          }
+    
+          .grid {
+            grid-template-columns: 1fr;
+          }
+    
+          .timeline-step,
+          .state-grid,
+          .reference-item {
+            grid-template-columns: 1fr;
+          }
+    
+          table {
+            display: block;
+            overflow-x: auto;
+            table-layout: auto;
+          }
+    
+          th,
+          td {
+            min-width: 150px;
+          }
+        }
+    .node-context {
+      display: grid;
+      gap: 6px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      background: var(--soft);
+      margin: 0 0 18px;
+      width: 100%;
+    }
+    .node-context p { margin: 0; }
+    .node-context strong { color: var(--heading); }
+    .node-context a {
+      color: var(--accent);
+      font-weight: 400;
+      text-decoration-line: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+    .node-footer {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+    }
+    .node-footer h2 { margin-top: 32px; }
+    .reference-list {
+      display: grid;
+      gap: 8px;
+      margin: 8px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .reference-item {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface);
+    }
+    .reference-item a,
+    .node-footer a {
+      color: var(--accent);
+      font-weight: 400;
+      text-decoration-line: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+    .reference-note { color: var(--text); }
+    @media (max-width: 860px) {
+      .reference-item { grid-template-columns: 1fr; }
+    }
+    /* Fixed visual invariants backported from the hardened templates. */
+    .tag,
+    .card > .tag,
+    .route-card > .tag,
+    .flow-step > .tag,
+    .flow-steps > .tag,
+    .flow-steps .flow-step > .tag,
+    .flow-steps .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-self: start;
+      align-self: start;
+      width: fit-content;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+
+    .flow-steps > .flow-step {
+      min-width: 0;
+      flex: 1 1 180px;
+    }
+
+    .flow-steps > .flow-step::after {
+      content: none;
+      display: none;
+    }
+
+    @media (max-width: 900px) {
+      table {
+        display: block;
+        overflow-x: auto;
+        table-layout: auto;
+      }
+
+      th,
+      td {
+        min-width: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="backlink" href="../../roadmap.html">Voltar ao roadmap</a>
+    <div
+      class="node-context"
+      data-node-position="true"
+      data-level="basico"
+      data-node-order="1"
+      data-node-count="6"
+      data-roadmap-slug="rabbitmq-exchanges">
+      <p><strong>Básico · 01 de 06</strong></p>
+      <p>Roadmap: Exchanges no RabbitMQ</p>
+      <p>Node atual: Modelo AMQP e papel da exchange</p>
+      <p>Anterior: início do roadmap · Próximo: <a href="../02-exchange-padrao-e-publicacao-direta-aparente/node.html">Exchange padrão e publicação direta aparente</a></p>
+    </div>
+
+    <h1>Modelo AMQP e papel da exchange</h1>
+    <p class="lead">
+      Uma aplicação publica uma mensagem no RabbitMQ para que outras partes do sistema reajam depois. O ponto decisivo do modelo AMQP 0-9-1 é que essa publicação entra em uma exchange, e a exchange decide quais filas podem receber a mensagem.
+    </p>
+    <p class="meta">Pesquisa consultada em 2026-06-08: documentação oficial RabbitMQ 4.3 e especificação AMQP 0-9-1.</p>
+
+    <section>
+      <h2>Antes do nome, a necessidade</h2>
+      <p>
+        Imagine uma aplicação de pedidos publicando o fato <code>pedido.criado</code>. Faturamento talvez precise criar uma cobrança; notificação talvez precise avisar o cliente. Se a aplicação de pedidos tivesse que conhecer cada aplicação consumidora, ela carregaria uma lista de destinos que muda com o tempo.
+      </p>
+      <p>
+        O broker RabbitMQ coloca uma peça entre quem publica e as filas que receberão mensagens. Essa peça é a <strong>exchange</strong>: o ponto de publicação que recebe a mensagem e faz roteamento para filas conforme as ligações configuradas.
+      </p>
+      <div class="callout">
+        <strong>Modelo mental:</strong> o publisher entrega a mensagem para uma exchange; a exchange roteia; a fila armazena; o consumer recebe a partir da fila.
+      </div>
+    </section>
+
+    <section>
+      <h2>O caminho que a mensagem percorre</h2>
+      <p>
+        O fluxo fica mais simples quando cada parte tem uma responsabilidade única. O publisher inicia a publicação. A exchange decide o caminho. O binding é a ligação que coloca uma fila ao alcance da exchange. A fila mantém a mensagem até a entrega. O consumer aparece no fim, ligado à fila.
+      </p>
+
+      <div class="path-diagram visual-block" aria-label="Caminho conceitual de uma mensagem no modelo AMQP 0-9-1">
+        <div class="flow-row">
+          <div class="flow-step publisher">
+            <span class="tag blue">1</span>
+            <strong>Publisher</strong>
+            <span>Aplicação de pedidos publica <code>pedido.criado</code> no broker.</span>
+          </div>
+          <div class="flow-step exchange">
+            <span class="tag">2</span>
+            <strong>Exchange</strong>
+            <span>Recebe a publicação e aplica roteamento. Ela não é a fila da mensagem.</span>
+          </div>
+          <div class="flow-step binding">
+            <span class="tag">3</span>
+            <strong>Bindings</strong>
+            <span>Ligações configuradas indicam quais filas estão ao alcance dessa exchange.</span>
+          </div>
+        </div>
+        <div class="queue-lane">
+          <div class="queue-card">
+            <span class="route-label">Fila de faturamento</span>
+            <p>Recebe uma cópia para o fluxo de cobrança.</p>
+            <div class="consumer-card">
+              <strong>Consumer de faturamento</strong>
+              <p>Processa a mensagem a partir da fila.</p>
+            </div>
+          </div>
+          <div class="queue-card">
+            <span class="route-label">Fila de notificação</span>
+            <p>Recebe outra cópia para o aviso ao cliente.</p>
+            <div class="consumer-card">
+              <strong>Consumer de notificação</strong>
+              <p>Também processa a partir da sua fila.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p>
+        O desenho evita uma leitura enganosa: o consumer não se registra na exchange como destino final. Ele recebe da fila. A exchange participa antes, no momento em que o broker decide para quais filas a publicação deve seguir.
+      </p>
+    </section>
+
+    <section>
+      <h2>Roteamento não é armazenamento</h2>
+      <p>
+        A diferença mais importante deste node é a fronteira entre <strong>rotear</strong> e <strong>armazenar</strong>. A exchange existe para decidir o caminho da mensagem. A fila existe para guardar mensagens que já foram roteadas e entregá-las aos consumers.
+      </p>
+
+      <div class="responsibility-map visual-block" aria-label="Responsabilidades de exchange, fila e consumer">
+        <div class="concept-card router">
+          <span class="tag">Exchange</span>
+          <p><strong>Responsabilidade:</strong> roteamento.</p>
+          <p>Ela recebe a publicação e avalia as ligações existentes para alcançar filas.</p>
+        </div>
+        <div class="concept-card store">
+          <span class="tag blue">Fila</span>
+          <p><strong>Responsabilidade:</strong> armazenamento e entrega.</p>
+          <p>Ela mantém a mensagem até que um consumer a receba.</p>
+        </div>
+        <div class="concept-card consume">
+          <span class="tag">Consumer</span>
+          <p><strong>Responsabilidade:</strong> processamento.</p>
+          <p>Ele trabalha a partir de uma fila, não a partir da exchange.</p>
+        </div>
+      </div>
+
+      <p>
+        Quando alguém diz que uma exchange "tem mensagens esperando", o modelo mental já saiu do trilho. O que pode ficar esperando no recorte básico é a mensagem em uma fila. A exchange pode até não encontrar nenhuma fila aplicável, mas isso não a transforma em armazenamento.
+      </p>
+    </section>
+
+    <section>
+      <h2>Uma publicação, três resultados possíveis</h2>
+      <p>
+        Publicar em uma exchange não significa escolher exatamente uma fila. O resultado depende das ligações que existem naquele momento. Para o exemplo do pedido, pense em três estados possíveis da topologia:
+      </p>
+
+      <div class="result-grid visual-block" aria-label="Resultados possíveis de uma publicação em uma exchange">
+        <div class="result-card none">
+          <span class="tag warn">Zero filas</span>
+          <p>Nenhuma ligação aplicável alcança uma fila. A exchange não guarda a mensagem para tentar de novo como se fosse uma fila.</p>
+        </div>
+        <div class="result-card one">
+          <span class="tag blue">Uma fila</span>
+          <p>A publicação alcança uma fila, que passa a manter a mensagem para um consumer daquela fila.</p>
+        </div>
+        <div class="result-card many">
+          <span class="tag">Várias filas</span>
+          <p>Mais de uma fila é alcançada. Cada fila recebe uma cópia independente para seu próprio fluxo.</p>
+        </div>
+      </div>
+
+      <p>
+        Essa é a razão de a exchange existir como peça própria: o produtor publica um fato uma vez, e o broker usa a topologia para decidir o alcance dessa publicação. A aplicação de pedidos não precisa saber se hoje só faturamento escuta, se amanhã notificação também escuta, ou se nenhuma fila foi ligada ainda.
+      </p>
+    </section>
+
+    <section>
+      <h2>Como ler a topologia sem misturar papéis</h2>
+      <p>
+        Ao olhar para um desenho de RabbitMQ, leia da esquerda para a direita e pergunte qual responsabilidade aparece em cada ponto. Se a pergunta é "quem publica?", você está falando do publisher. Se é "onde a decisão de caminho acontece?", é a exchange. Se é "onde a mensagem fica até alguém receber?", é a fila. Se é "quem processa?", é o consumer.
+      </p>
+
+      <table>
+        <tr>
+          <th>Pergunta que você faz</th>
+          <th>Peça do modelo</th>
+          <th>Resposta segura neste node</th>
+        </tr>
+        <tr>
+          <td>Quem colocou a mensagem no broker?</td>
+          <td><code>publisher</code> ou <code>producer</code></td>
+          <td>A aplicação que publica o fato.</td>
+        </tr>
+        <tr>
+          <td>Onde a publicação entra para ser direcionada?</td>
+          <td><code>exchange</code></td>
+          <td>No ponto de roteamento do broker.</td>
+        </tr>
+        <tr>
+          <td>Que relação permite uma fila ser alcançada?</td>
+          <td><code>binding</code></td>
+          <td>Uma ligação configurada entre exchange e fila.</td>
+        </tr>
+        <tr>
+          <td>Onde a mensagem fica até a entrega?</td>
+          <td><code>queue</code> / fila</td>
+          <td>Na fila que recebeu a mensagem roteada.</td>
+        </tr>
+        <tr>
+          <td>Quem recebe para processar?</td>
+          <td><code>consumer</code></td>
+          <td>A aplicação consumidora ligada à fila.</td>
+        </tr>
+      </table>
+
+      <p>
+        Esse vocabulário já é suficiente para desenhar o fluxo básico de uma mensagem. O próximo passo é entender o caso que parece quebrar essa regra: a exchange padrão, que cria a aparência de publicação direta em fila sem abandonar o modelo de exchanges.
+      </p>
+    </section>
+    <footer class="node-footer">
+      <h2>Referências</h2>
+      <ul class="reference-list">
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/exchanges">F1 - documentação oficial RabbitMQ 4.3</a>
+          <span class="reference-note">Uso neste node: Define exchanges, tipos, bindings, exchange padrão, propriedades, E2E e alternate exchanges na documentação corrente.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/tutorials/amqp-concepts">F2 - guia oficial RabbitMQ 4.3</a>
+          <span class="reference-note">Uso neste node: Explica o modelo AMQP 0-9-1: publishers, exchanges, bindings, queues, consumers e os quatro tipos clássicos.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/assets/files/amqp0-9-1-43a54a005e97180a4fbe6e567a125d84.pdf">F16 - especificação AMQP 0-9-1</a>
+          <span class="reference-note">Uso neste node: Fonte primária do protocolo AMQP 0-9-1 para o papel de exchanges, queues e routing keys.</span>
+        </li>
+      </ul>
+    </footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="pt-BR" data-visual-theme="notion-dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quem governa a configuração da topologia</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --page: #191919;
+      --surface: #202020;
+      --surface-hover: #2a2a2a;
+      --soft: #242424;
+      --soft-2: #2a2a2a;
+      --text: #e6e6e6;
+      --strong: #f2f2f2;
+      --heading: #f2f2f2;
+      --muted: #a3a3a3;
+      --border: #333333;
+      --border-strong: #4a4a4a;
+      --accent: #6aaed6;
+      --accent-2: #8cc7ff;
+      --warn: #ffdc49;
+      --code: #e6e6e6;
+      --code-bg: #2f3437;
+      --tag-bg: #243831;
+      --tag-text: #7ad9c5;
+      --tag-border: #335f54;
+      --blue-soft: #1f2b3f;
+      --blue-text: #8cc7ff;
+      --blue-border: #365f93;
+      --warn-soft: #342f19;
+      --warn-border: #5f4f18;
+      --success-soft: #1f332b;
+      --success-text: #8be6c1;
+      --success-border: #2f6b57;
+      --purple-soft: #2b2342;
+      --purple-text: #c8b6ff;
+      --purple-border: #574582;
+      --risk-soft: #3a2028;
+      --risk-text: #ff9ab3;
+      --risk-border: #7a3a4d;
+      --pre-bg: #111111;
+      --pre-text: #d4d4d4;
+      --focus: #6aaed6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      color-scheme: dark;
+      margin: 0;
+      color: var(--text);
+      background: var(--page);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif;
+      font-size: 18px;
+      line-height: 1.55;
+    }
+
+    main {
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 32px 28px 56px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: var(--heading);
+      line-height: 1.2;
+      letter-spacing: 0;
+      margin: 0 0 12px;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 26px;
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+      margin-top: 32px;
+    }
+
+    h3 {
+      font-size: 20px;
+      margin-top: 22px;
+    }
+
+    p,
+    ul,
+    ol,
+    .lead,
+    .callout {
+      max-width: none;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    ul {
+      margin: 8px 0 16px 22px;
+      padding: 0;
+    }
+
+    li {
+      margin: 4px 0;
+    }
+
+    table,
+    pre,
+    .content-grid,
+    .visual-block {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin: 14px 0 22px;
+      table-layout: fixed;
+      background: var(--surface);
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+      background: var(--surface);
+    }
+
+    th {
+      background: var(--soft-2);
+      text-align: left;
+      font-weight: 700;
+    }
+
+    code {
+      color: var(--code);
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 4px;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 0.92em;
+    }
+
+    pre {
+      margin: 12px 0 22px;
+      padding: 14px 16px;
+      color: var(--pre-text);
+      background: var(--pre-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: auto;
+      max-width: 100%;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 16px;
+      line-height: 1.45;
+      white-space: pre;
+    }
+
+    pre code {
+      color: inherit;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+      font: inherit;
+    }
+
+    .syntax-key {
+      color: var(--accent-2);
+      font-weight: 700;
+    }
+
+    .syntax-op {
+      color: var(--purple-text);
+    }
+
+    .syntax-value {
+      color: var(--success-text);
+    }
+
+    .syntax-comment {
+      color: var(--muted);
+    }
+
+    .syntax-risk {
+      color: var(--warn);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    a:hover {
+      color: var(--accent-2);
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .backlink {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+
+    .node-context {
+      display: grid;
+      gap: 6px;
+      margin: 0 0 18px;
+      padding: 12px 14px;
+      background: var(--soft);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      color: var(--text);
+    }
+
+    .node-context p {
+      margin: 0;
+    }
+
+    .node-context a {
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .lead {
+      margin: 0 0 22px;
+      color: var(--strong);
+      font-size: 20px;
+    }
+
+    .callout {
+      margin: 18px 0 24px;
+      padding: 16px 18px;
+      background: var(--soft);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--warn);
+      border-radius: 6px;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin: 16px 0 24px;
+    }
+
+    .info-card,
+    .flow-step,
+    .authority-card,
+    .boundary-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px;
+    }
+
+    .info-card h3,
+    .flow-step h3,
+    .authority-card h3,
+    .boundary-box h3 {
+      margin-top: 0;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 18px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-self: start;
+      align-self: start;
+      min-height: 28px;
+      padding: 3px 8px;
+      color: var(--tag-text);
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      border-radius: 999px;
+      font-size: 0.88em;
+    }
+
+    .visual-block {
+      margin: 18px 0 26px;
+      padding: 16px;
+      background: var(--soft);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+
+    .flow-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin: 14px 0 10px;
+    }
+
+    .flow-step {
+      position: relative;
+      min-height: 140px;
+    }
+
+    .flow-step strong {
+      color: var(--strong);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .flow-step .step-label {
+      display: inline-flex;
+      margin-bottom: 10px;
+      color: var(--blue-text);
+      background: var(--blue-soft);
+      border: 1px solid var(--blue-border);
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 0.86em;
+    }
+
+    .authority-map {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px;
+      margin: 14px 0 10px;
+    }
+
+    .authority-card {
+      border-left: 4px solid var(--purple-border);
+    }
+
+    .authority-card[data-kind="app"] {
+      border-left-color: var(--blue-border);
+    }
+
+    .authority-card[data-kind="platform"] {
+      border-left-color: var(--success-border);
+    }
+
+    .authority-card[data-kind="operator"] {
+      border-left-color: var(--warn-border);
+    }
+
+    .authority-card[data-kind="permission"] {
+      border-left-color: var(--risk-border);
+    }
+
+    .boundary-map {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      margin: 14px 0 10px;
+    }
+
+    .boundary-box {
+      background: var(--surface);
+    }
+
+    .boundary-box .box-title {
+      display: block;
+      color: var(--strong);
+      margin-bottom: 8px;
+    }
+
+    .note {
+      color: var(--muted);
+    }
+
+    .node-closing {
+      margin-top: 34px;
+      padding: 16px 18px;
+      background: var(--success-soft);
+      color: var(--text);
+      border-right: 1px solid var(--success-border);
+      border-bottom: 1px solid var(--success-border);
+      border-left: 4px solid var(--success-text);
+      border-radius: 6px;
+    }
+
+    .node-footer {
+      margin-top: 34px;
+      color: var(--text);
+      background: transparent;
+      padding: 0;
+    }
+
+    .reference-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .reference-item {
+      margin: 0 0 12px;
+      padding: 12px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+
+    .reference-item a {
+      font-weight: 400;
+    }
+
+    .reference-note {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 680px) {
+      main {
+        padding: 22px 16px 42px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      h2 {
+        font-size: 23px;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+        table-layout: auto;
+      }
+
+      th,
+      td {
+        min-width: 190px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="backlink" href="../../roadmap.html">Voltar ao roadmap</a>
+    <div
+      class="node-context"
+      data-node-position="true"
+      data-level="intermediario"
+      data-node-order="5"
+      data-node-count="7"
+      data-roadmap-slug="rabbitmq-exchanges">
+      <p><strong>Intermediário · 05 de 07</strong></p>
+      <p>Roadmap: Exchanges no RabbitMQ</p>
+      <p>Node atual: Policies, x-arguments e permissões</p>
+      <p>Anterior: <a href="../04-dead-letter-exchanges-e-retry-conceitual/node.html">Dead Letter Exchanges e retry conceitual</a> · Próximo: <a href="../06-exchange-to-exchange-bindings/node.html">Exchange-to-exchange bindings</a></p>
+    </div>
+
+    <h1>Quem governa a configuração da topologia</h1>
+    <p class="lead">Depois que DLX, AE e TTL já são peças conhecidas, a dúvida muda de lugar: não é mais o que essas configurações fazem, mas quem pode defini-las, alterá-las e limitá-las dentro de um domínio RabbitMQ.</p>
+
+    <p>Imagine que várias filas do domínio de pedidos usam a mesma exchange de dead-letter. Se cada aplicação declara sua fila com o destino escrito no próprio código, uma troca de rota operacional vira uma rodada de mudanças de aplicação. A configuração está tecnicamente correta, mas está presa ao ciclo de vida errado.</p>
+
+    <p>O modelo útil começa separando três coisas que costumam aparecer misturadas: a declaração que cria o recurso, a regra operacional que ajusta um grupo de recursos e a autorização que diz quem pode tocar cada peça.</p>
+
+    <div class="tag-row" aria-label="Camadas que serão separadas neste node">
+      <span class="tag">declaração da aplicação</span>
+      <span class="tag">regra operacional</span>
+      <span class="tag">guardrail do operador</span>
+      <span class="tag">permissão por recurso</span>
+      <span class="tag">fronteira lógica</span>
+    </div>
+
+    <h2>Quando a configuração fica presa ao cliente</h2>
+    <p>Uma fila pode nascer com argumentos opcionais enviados pelo cliente no momento da declaração. No vocabulário da documentação, esses argumentos são `x-arguments`. Eles são úteis quando o valor pertence ao próprio nascimento do recurso, mas ficam rígidos quando representam uma decisão operacional que pode mudar depois.</p>
+
+    <p>O problema aparece com clareza em um grupo de filas `orders.*`. A aplicação sabe declarar sua fila, mas talvez não deva carregar no código a escolha atual da DLX, do TTL ou de outro parâmetro que a plataforma ajusta com o tempo.</p>
+
+    <pre class="code-block language-yaml" aria-label="Recorte conceitual de configuração hardcoded em declaração de fila"><code><span class="syntax-comment"># Forma conceitual, não roteiro de execução</span>
+<span class="syntax-key">queue</span><span class="syntax-op">:</span> <span class="syntax-value">orders.created</span>
+<span class="syntax-key">declared_by</span><span class="syntax-op">:</span> <span class="syntax-value">orders-api</span>
+<span class="syntax-key">x-arguments</span><span class="syntax-op">:</span>
+  <span class="syntax-key">dead-letter-exchange</span><span class="syntax-op">:</span> <span class="syntax-value">orders.dlx.v1</span>
+  <span class="syntax-key">message-ttl</span><span class="syntax-op">:</span> <span class="syntax-value">60000</span></code></pre>
+
+    <p>A leitura importante não é a sintaxe. A leitura é a autoridade: nesse desenho, o cliente que declara a fila também escolhe valores que talvez precisem mudar em produção. Quando a mesma escolha precisa valer para muitas filas, esse acoplamento vira custo.</p>
+
+    <div class="visual-block" aria-label="Contraste entre argumento hardcoded e policy por grupo">
+      <p>O contraste fica mais claro quando a mesma decisão sai da declaração individual e passa a ser aplicada por grupo.</p>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <span class="step-label">Antes</span>
+          <strong>Cada fila carrega seu valor</strong>
+          <p>`orders.created`, `orders.billing` e `orders.audit` podem nascer com o mesmo argumento repetido em declarações diferentes.</p>
+        </div>
+        <div class="flow-step">
+          <span class="step-label">Mudança</span>
+          <strong>A regra casa nomes</strong>
+          <p>Uma policy usa um padrão como `orders.*` e aplica uma definição comum às filas que combinam com esse padrão.</p>
+        </div>
+        <div class="flow-step">
+          <span class="step-label">Depois</span>
+          <strong>O valor muda no broker</strong>
+          <p>A atualização da regra é operacional. As aplicações continuam declarando recursos com nomes previsíveis.</p>
+        </div>
+      </div>
+      <p class="note">A policy não elimina a declaração da aplicação. Ela tira da aplicação o que pertence a uma regra operacional compartilhada.</p>
+    </div>
+
+    <h2>A policy muda o lugar da decisão</h2>
+    <p>Uma policy é uma regra declarativa, escopada por vhost, que casa nomes de filas, exchanges ou streams e injeta uma definição de argumentos opcionais nos recursos correspondentes. Ela é um exemplo de runtime parameter: um valor mantido pelo broker para coisas que podem precisar mudar em operação.</p>
+
+    <p>Essa flexibilidade tem limites. A policy serve para parâmetros que o RabbitMQ permite ajustar dessa forma. Ela não transforma uma propriedade fixa de declaração em algo mutável. O tipo de fila, por exemplo, nasce com o recurso; não é o tipo de decisão que uma policy deve tentar trocar depois.</p>
+
+    <div class="content-grid">
+      <div class="info-card">
+        <h3>Aplicação</h3>
+        <p>Declara recursos com nomes e contratos previsíveis. Ela deve conhecer o que precisa para existir, não todo ajuste operacional possível.</p>
+      </div>
+      <div class="info-card">
+        <h3>Policy</h3>
+        <p>Aplica parâmetros compatíveis a um grupo de recursos. O foco é mudar comportamento comum sem redesenhar cada aplicação.</p>
+      </div>
+      <div class="info-card">
+        <h3>Limite</h3>
+        <p>Nem toda chave cabe em policy. Quando o valor é parte estrutural da criação do recurso, a policy não deve ser vendida como saída mágica.</p>
+      </div>
+    </div>
+
+    <p>Esse ponto é decisivo para não trocar uma rigidez por outra. Uma boa policy deixa explícito o padrão de nomes, o tipo de recurso atingido e o motivo da definição. Uma policy ampla demais pode afetar recursos que só parecem pertencer ao mesmo grupo.</p>
+
+    <h2>Quando três camadas disputam a mesma chave</h2>
+    <p>Depois que existe declaração da aplicação e policy operacional, surge outra pergunta: se os dois lados definem a mesma chave, qual valor vale? Essa é a regra de precedência. Em RabbitMQ, quando uma chave vem tanto de `x-arguments` do cliente quanto de policy comum, o argumento fornecido pelo cliente prevalece.</p>
+
+    <p>Isso explica por que valores hardcoded são mais do que uma preferência de estilo. Se a aplicação fixa uma chave que a plataforma queria controlar por policy, a policy pode não produzir o valor esperado para aquele recurso.</p>
+
+    <div class="visual-block" aria-label="Camadas de autoridade para valor efetivo">
+      <p>Uma operator policy adiciona uma camada de guardrail: ela protege limites definidos pelo operador e pode restringir valores escolhidos pela aplicação ou pela policy comum.</p>
+      <div class="authority-map">
+        <div class="authority-card" data-kind="app">
+          <h3>1. Declaração do cliente</h3>
+          <p>Fornece `x-arguments`. Para uma mesma chave, pode vencer a policy comum.</p>
+        </div>
+        <div class="authority-card" data-kind="platform">
+          <h3>2. Policy comum</h3>
+          <p>Aplica definição por grupo de recursos dentro do vhost, desde que a chave seja compatível.</p>
+        </div>
+        <div class="authority-card" data-kind="operator">
+          <h3>3. Operator policy</h3>
+          <p>Age como guardrail. Para valores numéricos de limite, a documentação orienta o valor efetivo para o teto mais restritivo.</p>
+        </div>
+      </div>
+      <p class="note">A conclusão prática: não basta ter policy. É preciso saber se a aplicação já colocou a mesma chave na declaração e se existe guardrail acima das duas camadas.</p>
+    </div>
+
+    <p>A operator policy não é apenas uma policy com nome mais forte. Ela representa uma autoridade diferente: o operador do ambiente pode impor limites para proteger uso de recursos e consistência operacional. A aplicação ainda pode escolher valores dentro desse limite, mas não deve conseguir ultrapassá-lo.</p>
+
+    <h2>A configuração também cruza permissões</h2>
+    <p>Governar topologia não é só decidir onde o valor fica. É decidir quem pode executar cada ação. Dentro de um vhost, RabbitMQ distingue três permissões de recurso: `configure`, `write` e `read`. Em linguagem simples, configure altera ou cria recurso, write injeta mensagens em recurso e read recupera mensagens de recurso.</p>
+
+    <p>Essa separação impede que um publisher precise controlar topologia inteira só para publicar. O publisher que envia eventos para uma exchange do domínio precisa de `write` naquela exchange. Ele não precisa, por esse motivo, de permissão para declarar filas consumidoras.</p>
+
+    <table aria-label="Permissões conceituais por papel">
+      <thead>
+        <tr>
+          <th>Papel no desenho</th>
+          <th>Ação relevante</th>
+          <th>Recurso tocado</th>
+          <th>Permissão que sustenta a ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Aplicação que declara topologia própria</td>
+          <td>Cria ou altera fila</td>
+          <td>Fila declarada</td>
+          <td>`configure` na fila</td>
+        </tr>
+        <tr>
+          <td>Publisher do domínio</td>
+          <td>Publica mensagem</td>
+          <td>Exchange de entrada</td>
+          <td>`write` na exchange</td>
+        </tr>
+        <tr>
+          <td>Consumer</td>
+          <td>Consome mensagem</td>
+          <td>Fila do serviço</td>
+          <td>`read` na fila</td>
+        </tr>
+        <tr>
+          <td>Fila com DLX configurada</td>
+          <td>Declara referência para a DLX</td>
+          <td>Fila e exchange de DLX</td>
+          <td>`configure` e `read` na fila, `write` na DLX</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>O último caso é a ponte com o node anterior. A DLX continua sendo uma exchange normal, mas configurar uma fila para dead-lettering aponta para outro recurso. Por isso a declaração da fila precisa ser autorizada também em relação à exchange de destino.</p>
+
+    <div class="callout">
+      <p>Uma permissão ampla demais pode mascarar um desenho ruim. Se tudo tem `write` em tudo, a publicação passa, mas o domínio perde fronteira. O objetivo não é bloquear o sistema; é fazer cada papel ter autoridade suficiente para a ação que realmente executa.</p>
+    </div>
+
+    <h2>O vhost é a fronteira onde esses nomes valem</h2>
+    <p>Até aqui, a explicação falou em filas, exchanges, policies e permissões como se houvesse um único espaço de nomes. No RabbitMQ, esses recursos pertencem a um virtual host, ou vhost. Ele é uma fronteira lógica: a mesma exchange name em dois vhosts representa recursos diferentes, com policies e permissões diferentes.</p>
+
+    <div class="visual-block" aria-label="Vhost como fronteira lógica para recursos e permissões">
+      <p>O vhost ajuda a manter domínios separados sem fingir que isso é isolamento físico completo.</p>
+      <div class="boundary-map">
+        <div class="boundary-box">
+          <span class="box-title">vhost `prod.orders`</span>
+          <p>Exchange `events`, filas `orders.*`, policy de DLX do domínio e permissões dos serviços de pedidos.</p>
+        </div>
+        <div class="boundary-box">
+          <span class="box-title">vhost `prod.payments`</span>
+          <p>Outra exchange `events`, outras filas, outra policy e outro conjunto de permissões.</p>
+        </div>
+      </div>
+      <p class="note">O nome pode repetir; a autoridade não atravessa automaticamente a fronteira do vhost.</p>
+    </div>
+
+    <p>Essa fronteira fecha a pergunta inicial. Uma policy de `orders.*` só faz sentido dentro do vhost em que esses recursos vivem. Uma permissão de `write` também deve ser lida dentro desse vhost. Sem essa referência, "pode publicar em events" é uma frase incompleta.</p>
+
+    <h2>O desenho fica legível quando cada camada tem dono</h2>
+    <p>A matriz abaixo junta a linha de raciocínio. Ela não é uma lista de cargos; é uma forma de testar se a topologia tem autoridade clara.</p>
+
+    <table aria-label="Matriz de ownership para configuração e permissões">
+      <thead>
+        <tr>
+          <th>Camada</th>
+          <th>Responsabilidade</th>
+          <th>Exemplo no domínio `orders`</th>
+          <th>Limite saudável</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Aplicação</td>
+          <td>Declarar recurso que pertence ao serviço</td>
+          <td>Fila `orders.created` com nome estável</td>
+          <td>Não carregar ajuste operacional compartilhado sem necessidade</td>
+        </tr>
+        <tr>
+          <td>Plataforma</td>
+          <td>Aplicar policy por grupo</td>
+          <td>DLX comum para `orders.*`</td>
+          <td>Não afetar recursos fora do pattern pretendido</td>
+        </tr>
+        <tr>
+          <td>Operador</td>
+          <td>Impor guardrail</td>
+          <td>Teto para valores de uso de recurso</td>
+          <td>Não substituir o contrato de domínio por limite genérico</td>
+        </tr>
+        <tr>
+          <td>Publisher</td>
+          <td>Enviar eventos</td>
+          <td>`write` na exchange de entrada</td>
+          <td>Não receber `configure` só para conseguir publicar</td>
+        </tr>
+        <tr>
+          <td>Consumer</td>
+          <td>Ler sua fila</td>
+          <td>`read` na fila do serviço</td>
+          <td>Não ganhar acesso de leitura a filas de outro domínio</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Quando essa divisão está clara, mudar a DLX de um conjunto de filas deixa de ser uma caça por valores repetidos em código. A plataforma altera a regra certa, o operador mantém limites, e as aplicações continuam usando contratos previsíveis.</p>
+
+    <section class="node-closing">
+      <p>O critério para dominar este node é simples de testar: dado um comportamento de topologia, você consegue dizer se ele deveria nascer na declaração da aplicação, numa policy, num guardrail de operador ou numa permissão de recurso dentro de um vhost. O próximo node usa essa governança local como base para compor exchanges entre si sem transformar a topologia em um grafo opaco.</p>
+    </section>
+
+    <footer class="node-footer">
+      <h2>Referências</h2>
+      <ul class="reference-list">
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/policies">RabbitMQ - policies</a>
+          <span class="reference-note">Uso neste node: base para policy comum, operator policy, prioridade, apply-to e limites de uso em runtime.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/access-control">RabbitMQ - permissões de recursos</a>
+          <span class="reference-note">Uso neste node: separação de configure, write e read e permissões AMQP 0-9-1 para declarar, publicar, bindar e consumir.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/exchanges">RabbitMQ - exchanges e precedência de argumentos</a>
+          <span class="reference-note">Uso neste node: regra de precedência entre argumentos do cliente, policy comum e operator policy.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/dlx">RabbitMQ - configuração de DLX</a>
+          <span class="reference-note">Uso neste node: exemplo de DLX configurada por policy e permissões verificadas ao declarar a fila.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/parameters">RabbitMQ - runtime parameters</a>
+          <span class="reference-note">Uso neste node: contexto para entender policy como configuração mantida pelo broker e alterável em operação.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/vhosts">RabbitMQ - virtual hosts</a>
+          <span class="reference-note">Uso neste node: vhost como fronteira lógica de recursos, permissões e policies.</span>
+        </li>
+      </ul>
+    </footer>
+  </main>
+</body>
+</html>

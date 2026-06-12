@@ -1,0 +1,3884 @@
+{
+  "status": "passa",
+  "generatedAt": "2026-06-10T13:15:14.495Z",
+  "html": "/home/henri/my-projects/my-roadmap/.tmp/roadmaps/rabbitmq-exchanges/intermediario/03-unroutable-mandatory-e-alternate-exchange/node.html",
+  "viewports": [
+    {
+      "viewport": {
+        "name": "desktop",
+        "width": 1280,
+        "height": 900,
+        "isMobile": false
+      },
+      "screenshotPath": "/home/henri/my-projects/my-roadmap/.tmp/roadmaps/rabbitmq-exchanges/intermediario/03-unroutable-mandatory-e-alternate-exchange/.editorial/pipeline/05-visual-render/playwright/desktop.png",
+      "title": "Quando a exchange não encontra caminho",
+      "theme": {
+        "marker": "notion-dark",
+        "colorScheme": "dark",
+        "surfaceSamples": [
+          {
+            "selector": "body",
+            "index": 0,
+            "text": "Voltar ao roadmap\n    \n      Intermediário · 03 de 07\n      Roadmap: Exchanges n",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": "main",
+            "index": 0,
+            "text": "Voltar ao roadmap\n    \n      Intermediário · 03 de 07\n      Roadmap: Exchanges n",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-context",
+            "index": 0,
+            "text": "Intermediário · 03 de 07\n      Roadmap: Exchanges no RabbitMQ\n      Node atual: ",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-footer",
+            "index": 0,
+            "text": "Referências\n      \n        \n          Documentação de publishers\n          Uso n",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 0,
+            "text": "Documentação de publishers\n          Uso neste node: sustenta mensagens sem rota",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 1,
+            "text": "Documentação de Alternate Exchanges\n          Uso neste node: sustenta AE como f",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 2,
+            "text": "Documentação de exchanges\n          Uso neste node: sustenta exchange como ponto",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 3,
+            "text": "Referência AMQP 0-9-1\n          Uso neste node: sustenta a semântica de `basic.p",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 4,
+            "text": "Documentação sobre acknowledgements e confirmações\n          Uso neste node: sus",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".callout",
+            "index": 0,
+            "text": "A diferença importa porque este não é um problema de quantidade de consumers. Ne",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".visual-block",
+            "index": 0,
+            "text": "Tentativa inicial\n            Exchange de pedidos\n            Recebe `orders.cre",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".state-card",
+            "index": 0,
+            "text": "Neste node\n          A exchange não achou destino\n          A publicação ainda n",
+            "backgroundColor": "rgb(31, 51, 43)",
+            "isDark": true
+          },
+          {
+            "selector": ".state-card",
+            "index": 1,
+            "text": "Próximo passo\n          A mensagem já estava em uma fila\n          Rejeição, exp",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 0,
+            "text": "Mecanismo",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 1,
+            "text": "Quem recebe o sinal",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 2,
+            "text": "O que acontece com a mensagem",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 3,
+            "text": "Risco se for mal lido",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 0,
+            "text": "`mandatory=true`",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 1,
+            "text": "Publisher",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 2,
+            "text": "Sem rota, a mensagem é retornada ao lado que publicou.",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 3,
+            "text": "Tratar retorno como prova de processamento ou esquecer o handler de retorno.",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 4,
+            "text": "Alternate Exchange",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 5,
+            "text": "Topologia de fallback",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 6,
+            "text": "Sem rota na exchange principal, a mensagem é republicada para a AE.",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 7,
+            "text": "Transformar fallback em lixeira invisível e esconder quebra de contrato.",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "pre",
+            "index": 0,
+            "text": "# recorte conceitual, não executável\npublicacao.exchange = orders.events\npublica",
+            "backgroundColor": "rgb(17, 17, 17)",
+            "isDark": true
+          },
+          {
+            "selector": "pre",
+            "index": 1,
+            "text": "# recorte conceitual, não executável\nexchange.principal = orders.events\nexchange",
+            "backgroundColor": "rgb(17, 17, 17)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 0,
+            "text": "Tentativa inicial",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 1,
+            "text": "Sem pedido de retorno",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 2,
+            "text": "Pedido de retorno",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 3,
+            "text": "Rota alternativa",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 4,
+            "text": "Neste node",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 5,
+            "text": "Próximo passo",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "isDark": true
+          }
+        ]
+      },
+      "preBlocks": [
+        {
+          "index": 0,
+          "text": "# recorte conceitual, não executável\npublicacao.exchange = orders.events\npublicacao.routing_key = orders.created.v2\npublicacao.mandatory = true\npublisher.on_ret",
+          "hasCode": true,
+          "hasHighlight": true,
+          "isConceptualVisual": false,
+          "hasAsciiException": false,
+          "asciiReason": "",
+          "looksTechnical": true,
+          "className": "code-block language-conf",
+          "ariaLabel": "Recorte conceitual de publicação com retorno"
+        },
+        {
+          "index": 1,
+          "text": "# recorte conceitual, não executável\nexchange.principal = orders.events\nexchange.principal.alternate-exchange = orders.unrouted\nexchange.fallback = orders.unrou",
+          "hasCode": true,
+          "hasHighlight": true,
+          "isConceptualVisual": false,
+          "hasAsciiException": false,
+          "asciiReason": "",
+          "looksTechnical": true,
+          "className": "code-block language-conf",
+          "ariaLabel": "Recorte conceitual de exchange com fallback"
+        }
+      ],
+      "preCodeStyles": [
+        {
+          "index": 0,
+          "text": "# recorte conceitual, não executável\npublicacao.exchange = orders.events\npublicacao.routing_key = orders.created.v2\npubl",
+          "color": "rgb(212, 212, 212)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "effectiveBackgroundColor": "rgb(17, 17, 17)",
+          "borderWidths": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderStyles": [
+            "none",
+            "none",
+            "none",
+            "none"
+          ],
+          "paddings": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 451.31,
+          "heightPx": 110.75,
+          "parentWidthPx": 1204
+        },
+        {
+          "index": 1,
+          "text": "# recorte conceitual, não executável\nexchange.principal = orders.events\nexchange.principal.alternate-exchange = orders.u",
+          "color": "rgb(212, 212, 212)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "effectiveBackgroundColor": "rgb(17, 17, 17)",
+          "borderWidths": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderStyles": [
+            "none",
+            "none",
+            "none",
+            "none"
+          ],
+          "paddings": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 528.13,
+          "heightPx": 110.75,
+          "parentWidthPx": 1204
+        }
+      ],
+      "inlineCodeStyles": [],
+      "componentStyles": {
+        "nodeContext": [
+          {
+            "index": 0,
+            "text": "Intermediário · 03 de 07\n      Roadmap: Exchanges no RabbitMQ\n      Node atual: Unroutable, mandatory e Alternate Exchan",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "effectiveBackgroundColor": "rgb(36, 36, 36)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "4px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "12px",
+              "14px",
+              "12px",
+              "14px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "18px",
+              "0px"
+            ],
+            "borderRadii": [
+              "6px",
+              "6px",
+              "6px",
+              "6px"
+            ],
+            "display": "grid",
+            "gap": "6px",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "1204px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 1204,
+            "heightPx": 155.56,
+            "parentWidthPx": 1260
+          }
+        ],
+        "nodeContextLinks": [
+          {
+            "index": 0,
+            "text": "Broadcast vs consumidores competindo",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(36, 36, 36)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "inline",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "auto",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 319.17,
+            "heightPx": 20,
+            "parentWidthPx": 1171
+          }
+        ],
+        "nodeFooter": [
+          {
+            "index": 0,
+            "text": "Referências\n      \n        \n          Documentação de publishers\n          Uso neste node: sustenta mensagens sem rota, ",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(25, 25, 25)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "1204px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 1204,
+            "heightPx": 449.42,
+            "parentWidthPx": 1260
+          }
+        ],
+        "nodeFooterLinks": [
+          {
+            "index": 0,
+            "text": "Documentação de publishers",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "345.453px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 345.45,
+            "heightPx": 27.89,
+            "parentWidthPx": 1204
+          },
+          {
+            "index": 1,
+            "text": "Documentação de Alternate Exchanges",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "345.453px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 345.45,
+            "heightPx": 27.89,
+            "parentWidthPx": 1204
+          },
+          {
+            "index": 2,
+            "text": "Documentação de exchanges",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "345.453px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 345.45,
+            "heightPx": 27.89,
+            "parentWidthPx": 1204
+          },
+          {
+            "index": 3,
+            "text": "Referência AMQP 0-9-1",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "345.453px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 345.45,
+            "heightPx": 27.89,
+            "parentWidthPx": 1204
+          },
+          {
+            "index": 4,
+            "text": "Documentação sobre acknowledgements e confirmações",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "345.453px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 345.45,
+            "heightPx": 55.78,
+            "parentWidthPx": 1204
+          }
+        ],
+        "terminalDividerCandidates": [
+          {
+            "index": 0,
+            "text": "A pergunta certa fica no ponto de roteamento\n      Quando uma publicação não aparece em nenhuma fila, a primeira pergunt",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(25, 25, 25)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "1204px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 1204,
+            "heightPx": 223.64,
+            "parentWidthPx": 1260
+          },
+          {
+            "index": 1,
+            "text": "Referências\n      \n        \n          Documentação de publishers\n          Uso neste node: sustenta mensagens sem rota, ",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(25, 25, 25)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "1204px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 1204,
+            "heightPx": 449.42,
+            "parentWidthPx": 1260
+          }
+        ]
+      },
+      "visualPrimitives": {
+        "tags": [
+          {
+            "index": 0,
+            "text": "Tentativa inicial",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "127.438px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 127.44,
+            "heightPx": 29.25,
+            "parentWidthPx": 366.77
+          },
+          {
+            "index": 1,
+            "text": "Sem pedido de retorno",
+            "color": "rgb(255, 220, 73)",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "effectiveBackgroundColor": "rgb(52, 47, 25)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "179.359px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 179.36,
+            "heightPx": 29.25,
+            "parentWidthPx": 825.23
+          },
+          {
+            "index": 2,
+            "text": "Pedido de retorno",
+            "color": "rgb(140, 199, 255)",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "effectiveBackgroundColor": "rgb(31, 43, 63)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "144.344px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 144.34,
+            "heightPx": 29.25,
+            "parentWidthPx": 825.23
+          },
+          {
+            "index": 3,
+            "text": "Rota alternativa",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "128.547px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 128.55,
+            "heightPx": 29.25,
+            "parentWidthPx": 825.23
+          },
+          {
+            "index": 4,
+            "text": "Neste node",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "96.8594px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 96.86,
+            "heightPx": 29.25,
+            "parentWidthPx": 595
+          },
+          {
+            "index": 5,
+            "text": "Próximo passo",
+            "color": "rgb(255, 220, 73)",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "effectiveBackgroundColor": "rgb(52, 47, 25)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "123.547px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 123.55,
+            "heightPx": 29.25,
+            "parentWidthPx": 595
+          }
+        ],
+        "flowStepAfter": []
+      },
+      "contrastSamples": [
+        {
+          "label": "body",
+          "text": "Voltar ao roadmap\n    \n      Intermediário · 03 de 07\n      Roadmap: Exchanges n",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "parágrafo",
+          "text": "Intermediário · 03 de 07",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Roadmap: Exchanges no RabbitMQ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Node atual: Unroutable, mandatory e Alternate Exchange",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Anterior: Broadcast vs consumidores competindo · Próximo: Dead Letter Exchanges ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Uma publicação pode chegar à exchange certa e ainda assim não entrar em nenhuma ",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 6.97
+        },
+        {
+          "label": "parágrafo",
+          "text": "Imagine uma migração pequena: o producer de pedidos deixou de publicar `orders.c",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "parágrafo",
+          "text": "Nesse instante, a exchange tenta aplicar a regra de routing que já vinha dos nod",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "parágrafo",
+          "text": "Depois que a exchange não encontra destino, o desenho pode escolher entre silênc",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação de publishers\n          Uso neste node: sustenta mensagens sem rota",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação de Alternate Exchanges\n          Uso neste node: sustenta AE como f",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação de exchanges\n          Uso neste node: sustenta exchange como ponto",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Referência AMQP 0-9-1\n          Uso neste node: sustenta a semântica de `basic.p",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação sobre acknowledgements e confirmações\n          Uso neste node: sus",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "`mandatory=true`",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Publisher",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Sem rota, a mensagem é retornada ao lado que publicou.",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Tratar retorno como prova de processamento ou esquecer o handler de retorno.",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Alternate Exchange",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Topologia de fallback",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Sem rota na exchange principal, a mensagem é republicada para a AE.",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Transformar fallback em lixeira invisível e esconder quebra de contrato.",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Mecanismo",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 11.5
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Quem recebe o sinal",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 11.5
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "O que acontece com a mensagem",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 11.5
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Risco se for mal lido",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 11.5
+        },
+        {
+          "label": "link",
+          "text": "Voltar ao roadmap",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 7.23
+        },
+        {
+          "label": "link",
+          "text": "Broadcast vs consumidores competindo",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "link",
+          "text": "Documentação de publishers",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Documentação de Alternate Exchanges",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Documentação de exchanges",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Referência AMQP 0-9-1",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Documentação sobre acknowledgements e confirmações",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "bloco de código",
+          "text": "# recorte conceitual, não executável\npublicacao.exchange = orders.events\npublica",
+          "color": "rgb(212, 212, 212)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.74
+        },
+        {
+          "label": "bloco de código",
+          "text": "# recorte conceitual, não executável\nexchange.principal = orders.events\nexchange",
+          "color": "rgb(212, 212, 212)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.74
+        },
+        {
+          "label": "conteúdo de bloco de código",
+          "text": "# recorte conceitual, não executável\npublicacao.exchange = orders.events\npublica",
+          "color": "rgb(212, 212, 212)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.74
+        },
+        {
+          "label": "conteúdo de bloco de código",
+          "text": "# recorte conceitual, não executável\nexchange.principal = orders.events\nexchange",
+          "color": "rgb(212, 212, 212)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.74
+        },
+        {
+          "label": "tag",
+          "text": "Tentativa inicial",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "Sem pedido de retorno",
+          "color": "rgb(255, 220, 73)",
+          "backgroundColor": "rgb(52, 47, 25)",
+          "ratio": 9.95
+        },
+        {
+          "label": "tag",
+          "text": "Pedido de retorno",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(31, 43, 63)",
+          "ratio": 7.95
+        },
+        {
+          "label": "tag",
+          "text": "Rota alternativa",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "Neste node",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "Próximo passo",
+          "color": "rgb(255, 220, 73)",
+          "backgroundColor": "rgb(52, 47, 25)",
+          "ratio": 9.95
+        },
+        {
+          "label": "contexto de node",
+          "text": "Intermediário · 03 de 07\n      Roadmap: Exchanges no RabbitMQ\n      Node atual: ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "link do contexto de node",
+          "text": "Broadcast vs consumidores competindo",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "rodapé de referências",
+          "text": "Referências\n      \n        \n          Documentação de publishers\n          Uso n",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação de publishers",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação de Alternate Exchanges",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação de exchanges",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Referência AMQP 0-9-1",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação sobre acknowledgements e confirmações",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "visual customizado",
+          "text": "Neste node\n          A exchange não achou destino\n          A publicação ainda n",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(31, 51, 43)",
+          "ratio": 10.74
+        },
+        {
+          "label": "visual customizado",
+          "text": "Próximo passo\n          A mensagem já estava em uma fila\n          Rejeição, exp",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(52, 47, 25)",
+          "ratio": 10.74
+        },
+        {
+          "label": "syntax-key",
+          "text": "publicacao.exchange",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "publicacao.routing_key",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "publicacao.mandatory",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "publisher.on_return",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "exchange.principal",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "exchange.principal.alternate-exchange",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "exchange.fallback",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "fila.de_inspecao",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "<-",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-value",
+          "text": "orders.events",
+          "color": "rgb(139, 230, 193)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.76
+        },
+        {
+          "label": "syntax-value",
+          "text": "orders.created.v2",
+          "color": "rgb(139, 230, 193)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.76
+        },
+        {
+          "label": "syntax-value",
+          "text": "true",
+          "color": "rgb(139, 230, 193)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.76
+        },
+        {
+          "label": "syntax-value",
+          "text": "registrar_e_corrigir_rota",
+          "color": "rgb(139, 230, 193)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.76
+        },
+        {
+          "label": "syntax-value",
+          "text": "orders.events",
+          "color": "rgb(139, 230, 193)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.76
+        },
+        {
+          "label": "syntax-value",
+          "text": "orders.unrouted",
+          "color": "rgb(139, 230, 193)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.76
+        },
+        {
+          "label": "syntax-value",
+          "text": "orders.unrouted",
+          "color": "rgb(139, 230, 193)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.76
+        },
+        {
+          "label": "syntax-value",
+          "text": "orders.unrouted",
+          "color": "rgb(139, 230, 193)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.76
+        },
+        {
+          "label": "syntax-comment",
+          "text": "# recorte conceitual, não executável",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 7.49
+        },
+        {
+          "label": "syntax-comment",
+          "text": "# recorte conceitual, não executável",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 7.49
+        }
+      ],
+      "contentWidths": [
+        {
+          "index": 0,
+          "selector": "p",
+          "text": "Intermediário · 03 de 07",
+          "width": 1171,
+          "mainWidth": 1260,
+          "ratio": 0.929
+        },
+        {
+          "index": 1,
+          "selector": "p",
+          "text": "Roadmap: Exchanges no RabbitMQ",
+          "width": 1171,
+          "mainWidth": 1260,
+          "ratio": 0.929
+        },
+        {
+          "index": 2,
+          "selector": "p",
+          "text": "Node atual: Unroutable, mandatory e Alternate Exchange",
+          "width": 1171,
+          "mainWidth": 1260,
+          "ratio": 0.929
+        },
+        {
+          "index": 3,
+          "selector": "p",
+          "text": "Anterior: Broadcast vs consumidores competindo · Próximo: Dead Letter Exchanges e retry conceitual",
+          "width": 1171,
+          "mainWidth": 1260,
+          "ratio": 0.929
+        },
+        {
+          "index": 4,
+          "selector": ".lead",
+          "text": "Uma publicação pode chegar à exchange certa e ainda assim não entrar em nenhuma fila. Esse ponto do fluxo decide se a me",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 5,
+          "selector": "p",
+          "text": "Imagine uma migração pequena: o producer de pedidos deixou de publicar `orders.created.v1` e passou a publicar `orders.c",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 6,
+          "selector": "p",
+          "text": "Nesse instante, a exchange tenta aplicar a regra de routing que já vinha dos nodes anteriores. Ela olha para a routing k",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 7,
+          "selector": ".callout",
+          "text": "A diferença importa porque este não é um problema de quantidade de consumers. Nenhum worker está competindo e nenhuma fi",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 8,
+          "selector": "p",
+          "text": "Depois que a exchange não encontra destino, o desenho pode escolher entre silêncio, sinal ao publisher ou fallback de to",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 9,
+          "selector": "p",
+          "text": "O primeiro caminho é perigoso quando a equipe espera descobrir o problema pela aplicação. O segundo transforma a falha d",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 10,
+          "selector": "p",
+          "text": "O parâmetro `mandatory` pertence à publicação. Ele não muda o tipo da exchange nem cria uma fila. Ele apenas diz: se est",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 11,
+          "selector": "p",
+          "text": "Em AMQP 0-9-1, esse retorno aparece como `basic.return`. A mensagem volta com informação suficiente para a aplicação ent",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 12,
+          "selector": "p",
+          "text": "Esse recorte mostra a posição do mecanismo: o publisher pediu um retorno para aquela publicação. Ele ainda não sabe se u",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 13,
+          "selector": "p",
+          "text": "Quando a intenção não é apenas avisar o publisher, mas preservar a publicação em um caminho controlado, a topologia pode",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 14,
+          "selector": "p",
+          "text": "No exemplo da migração, a exchange `orders.events` pode ter uma AE ligada a uma fila de órfãs. As mensagens com `orders.",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 15,
+          "selector": "p",
+          "text": "A diferença em relação ao retorno é estrutural. `mandatory` conversa com o publisher. A AE conversa com a topologia. Qua",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 16,
+          "selector": "p",
+          "text": "A decisão não precisa ser binária. Em muitos desenhos, `mandatory` ajuda a aplicação publicadora a saber que algo saiu d",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 17,
+          "selector": "p",
+          "text": "Quando a rota principal é parte de um contrato de domínio, o fallback precisa ser observável. Uma AE que captura tudo se",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 18,
+          "selector": "p",
+          "text": "Este node termina no momento em que a exchange decidiu o destino inicial da publicação. Se a mensagem entrou em uma fila",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 19,
+          "selector": "p",
+          "text": "Quando uma publicação não aparece em nenhuma fila, a primeira pergunta não é quantos consumers estão online. A pergunta ",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 20,
+          "selector": "p",
+          "text": "Se a resposta for não, há três leituras estáveis: sem pedido de retorno e sem fallback, a mensagem pode sumir do caminho",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        },
+        {
+          "index": 21,
+          "selector": "ul",
+          "text": "Documentação de publishers\n          Uso neste node: sustenta mensagens sem rota, `mandatory`, retorno ao publisher e mé",
+          "width": 1204,
+          "mainWidth": 1260,
+          "ratio": 0.956
+        }
+      ],
+      "overflow": {
+        "clientWidth": 1280,
+        "scrollWidth": 1280,
+        "hasGlobalOverflow": false
+      }
+    },
+    {
+      "viewport": {
+        "name": "mobile",
+        "width": 390,
+        "height": 844,
+        "isMobile": true
+      },
+      "screenshotPath": "/home/henri/my-projects/my-roadmap/.tmp/roadmaps/rabbitmq-exchanges/intermediario/03-unroutable-mandatory-e-alternate-exchange/.editorial/pipeline/05-visual-render/playwright/mobile.png",
+      "title": "Quando a exchange não encontra caminho",
+      "theme": {
+        "marker": "notion-dark",
+        "colorScheme": "dark",
+        "surfaceSamples": [
+          {
+            "selector": "body",
+            "index": 0,
+            "text": "Voltar ao roadmap\n    \n      Intermediário · 03 de 07\n      Roadmap: Exchanges n",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": "main",
+            "index": 0,
+            "text": "Voltar ao roadmap\n    \n      Intermediário · 03 de 07\n      Roadmap: Exchanges n",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-context",
+            "index": 0,
+            "text": "Intermediário · 03 de 07\n      Roadmap: Exchanges no RabbitMQ\n      Node atual: ",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".node-footer",
+            "index": 0,
+            "text": "Referências\n      \n        \n          Documentação de publishers\n          Uso n",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 0,
+            "text": "Documentação de publishers\n          Uso neste node: sustenta mensagens sem rota",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 1,
+            "text": "Documentação de Alternate Exchanges\n          Uso neste node: sustenta AE como f",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 2,
+            "text": "Documentação de exchanges\n          Uso neste node: sustenta exchange como ponto",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 3,
+            "text": "Referência AMQP 0-9-1\n          Uso neste node: sustenta a semântica de `basic.p",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".reference-item",
+            "index": 4,
+            "text": "Documentação sobre acknowledgements e confirmações\n          Uso neste node: sus",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": ".callout",
+            "index": 0,
+            "text": "A diferença importa porque este não é um problema de quantidade de consumers. Ne",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "isDark": true
+          },
+          {
+            "selector": ".visual-block",
+            "index": 0,
+            "text": "Tentativa inicial\n            Exchange de pedidos\n            Recebe `orders.cre",
+            "backgroundColor": "rgb(25, 25, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".state-card",
+            "index": 0,
+            "text": "Neste node\n          A exchange não achou destino\n          A publicação ainda n",
+            "backgroundColor": "rgb(31, 51, 43)",
+            "isDark": true
+          },
+          {
+            "selector": ".state-card",
+            "index": 1,
+            "text": "Próximo passo\n          A mensagem já estava em uma fila\n          Rejeição, exp",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 0,
+            "text": "Mecanismo",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 1,
+            "text": "Quem recebe o sinal",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 2,
+            "text": "O que acontece com a mensagem",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "th",
+            "index": 3,
+            "text": "Risco se for mal lido",
+            "backgroundColor": "rgb(42, 42, 42)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 0,
+            "text": "`mandatory=true`",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 1,
+            "text": "Publisher",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 2,
+            "text": "Sem rota, a mensagem é retornada ao lado que publicou.",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 3,
+            "text": "Tratar retorno como prova de processamento ou esquecer o handler de retorno.",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 4,
+            "text": "Alternate Exchange",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 5,
+            "text": "Topologia de fallback",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 6,
+            "text": "Sem rota na exchange principal, a mensagem é republicada para a AE.",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "td",
+            "index": 7,
+            "text": "Transformar fallback em lixeira invisível e esconder quebra de contrato.",
+            "backgroundColor": "rgb(32, 32, 32)",
+            "isDark": true
+          },
+          {
+            "selector": "pre",
+            "index": 0,
+            "text": "# recorte conceitual, não executável\npublicacao.exchange = orders.events\npublica",
+            "backgroundColor": "rgb(17, 17, 17)",
+            "isDark": true
+          },
+          {
+            "selector": "pre",
+            "index": 1,
+            "text": "# recorte conceitual, não executável\nexchange.principal = orders.events\nexchange",
+            "backgroundColor": "rgb(17, 17, 17)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 0,
+            "text": "Tentativa inicial",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 1,
+            "text": "Sem pedido de retorno",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 2,
+            "text": "Pedido de retorno",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 3,
+            "text": "Rota alternativa",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 4,
+            "text": "Neste node",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "isDark": true
+          },
+          {
+            "selector": ".tag",
+            "index": 5,
+            "text": "Próximo passo",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "isDark": true
+          }
+        ]
+      },
+      "preBlocks": [
+        {
+          "index": 0,
+          "text": "# recorte conceitual, não executável\npublicacao.exchange = orders.events\npublicacao.routing_key = orders.created.v2\npublicacao.mandatory = true\npublisher.on_ret",
+          "hasCode": true,
+          "hasHighlight": true,
+          "isConceptualVisual": false,
+          "hasAsciiException": false,
+          "asciiReason": "",
+          "looksTechnical": true,
+          "className": "code-block language-conf",
+          "ariaLabel": "Recorte conceitual de publicação com retorno"
+        },
+        {
+          "index": 1,
+          "text": "# recorte conceitual, não executável\nexchange.principal = orders.events\nexchange.principal.alternate-exchange = orders.unrouted\nexchange.fallback = orders.unrou",
+          "hasCode": true,
+          "hasHighlight": true,
+          "isConceptualVisual": false,
+          "hasAsciiException": false,
+          "asciiReason": "",
+          "looksTechnical": true,
+          "className": "code-block language-conf",
+          "ariaLabel": "Recorte conceitual de exchange com fallback"
+        }
+      ],
+      "preCodeStyles": [
+        {
+          "index": 0,
+          "text": "# recorte conceitual, não executável\npublicacao.exchange = orders.events\npublicacao.routing_key = orders.created.v2\npubl",
+          "color": "rgb(212, 212, 212)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "effectiveBackgroundColor": "rgb(17, 17, 17)",
+          "borderWidths": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderStyles": [
+            "none",
+            "none",
+            "none",
+            "none"
+          ],
+          "paddings": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 451.31,
+          "heightPx": 110.75,
+          "parentWidthPx": 358
+        },
+        {
+          "index": 1,
+          "text": "# recorte conceitual, não executável\nexchange.principal = orders.events\nexchange.principal.alternate-exchange = orders.u",
+          "color": "rgb(212, 212, 212)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "effectiveBackgroundColor": "rgb(17, 17, 17)",
+          "borderWidths": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderStyles": [
+            "none",
+            "none",
+            "none",
+            "none"
+          ],
+          "paddings": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "margins": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "borderRadii": [
+            "0px",
+            "0px",
+            "0px",
+            "0px"
+          ],
+          "display": "inline",
+          "gap": "normal",
+          "fontWeight": "400",
+          "textDecorationLine": "none",
+          "fontFamily": "Consolas, Monaco, \"Courier New\", monospace",
+          "fontSize": "16px",
+          "width": "auto",
+          "maxWidth": "none",
+          "justifySelf": "auto",
+          "alignSelf": "auto",
+          "widthPx": 528.13,
+          "heightPx": 110.75,
+          "parentWidthPx": 358
+        }
+      ],
+      "inlineCodeStyles": [],
+      "componentStyles": {
+        "nodeContext": [
+          {
+            "index": 0,
+            "text": "Intermediário · 03 de 07\n      Roadmap: Exchanges no RabbitMQ\n      Node atual: Unroutable, mandatory e Alternate Exchan",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgb(36, 36, 36)",
+            "effectiveBackgroundColor": "rgb(36, 36, 36)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "4px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "12px",
+              "14px",
+              "12px",
+              "14px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "18px",
+              "0px"
+            ],
+            "borderRadii": [
+              "6px",
+              "6px",
+              "6px",
+              "6px"
+            ],
+            "display": "grid",
+            "gap": "6px",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "358px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 358,
+            "heightPx": 239.23,
+            "parentWidthPx": 390
+          }
+        ],
+        "nodeContextLinks": [
+          {
+            "index": 0,
+            "text": "Broadcast vs consumidores competindo",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(36, 36, 36)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "inline",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "auto",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 294.14,
+            "heightPx": 47.89,
+            "parentWidthPx": 325
+          }
+        ],
+        "nodeFooter": [
+          {
+            "index": 0,
+            "text": "Referências\n      \n        \n          Documentação de publishers\n          Uso neste node: sustenta mensagens sem rota, ",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(25, 25, 25)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "358px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 358,
+            "heightPx": 945.67,
+            "parentWidthPx": 390
+          }
+        ],
+        "nodeFooterLinks": [
+          {
+            "index": 0,
+            "text": "Documentação de publishers",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "332px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 332,
+            "heightPx": 27.89,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 1,
+            "text": "Documentação de Alternate Exchanges",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "332px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 332,
+            "heightPx": 27.89,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 2,
+            "text": "Documentação de exchanges",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "332px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 332,
+            "heightPx": 27.89,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 3,
+            "text": "Referência AMQP 0-9-1",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "332px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 332,
+            "heightPx": 27.89,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 4,
+            "text": "Documentação sobre acknowledgements e confirmações",
+            "color": "rgb(106, 174, 214)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(32, 32, 32)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "underline",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "332px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 332,
+            "heightPx": 55.78,
+            "parentWidthPx": 358
+          }
+        ],
+        "terminalDividerCandidates": [
+          {
+            "index": 0,
+            "text": "A pergunta certa fica no ponto de roteamento\n      Quando uma publicação não aparece em nenhuma fila, a primeira pergunt",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(25, 25, 25)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "358px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 358,
+            "heightPx": 477.95,
+            "parentWidthPx": 390
+          },
+          {
+            "index": 1,
+            "text": "Referências\n      \n        \n          Documentação de publishers\n          Uso neste node: sustenta mensagens sem rota, ",
+            "color": "rgb(230, 230, 230)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "effectiveBackgroundColor": "rgb(25, 25, 25)",
+            "borderWidths": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderStyles": [
+              "none",
+              "none",
+              "none",
+              "none"
+            ],
+            "paddings": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "display": "block",
+            "gap": "normal",
+            "fontWeight": "400",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "18px",
+            "width": "358px",
+            "maxWidth": "none",
+            "justifySelf": "auto",
+            "alignSelf": "auto",
+            "widthPx": 358,
+            "heightPx": 945.67,
+            "parentWidthPx": 390
+          }
+        ]
+      },
+      "visualPrimitives": {
+        "tags": [
+          {
+            "index": 0,
+            "text": "Tentativa inicial",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "127.438px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 127.44,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 1,
+            "text": "Sem pedido de retorno",
+            "color": "rgb(255, 220, 73)",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "effectiveBackgroundColor": "rgb(52, 47, 25)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "179.359px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 179.36,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 2,
+            "text": "Pedido de retorno",
+            "color": "rgb(140, 199, 255)",
+            "backgroundColor": "rgb(31, 43, 63)",
+            "effectiveBackgroundColor": "rgb(31, 43, 63)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "144.344px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 144.34,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 3,
+            "text": "Rota alternativa",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "128.547px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 128.55,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 4,
+            "text": "Neste node",
+            "color": "rgb(122, 217, 197)",
+            "backgroundColor": "rgb(36, 56, 49)",
+            "effectiveBackgroundColor": "rgb(36, 56, 49)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "96.8594px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 96.86,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          },
+          {
+            "index": 5,
+            "text": "Próximo passo",
+            "color": "rgb(255, 220, 73)",
+            "backgroundColor": "rgb(52, 47, 25)",
+            "effectiveBackgroundColor": "rgb(52, 47, 25)",
+            "borderWidths": [
+              "1px",
+              "1px",
+              "1px",
+              "1px"
+            ],
+            "borderStyles": [
+              "solid",
+              "solid",
+              "solid",
+              "solid"
+            ],
+            "paddings": [
+              "2px",
+              "7px",
+              "2px",
+              "7px"
+            ],
+            "margins": [
+              "0px",
+              "0px",
+              "0px",
+              "0px"
+            ],
+            "borderRadii": [
+              "999px",
+              "999px",
+              "999px",
+              "999px"
+            ],
+            "display": "flex",
+            "gap": "normal",
+            "fontWeight": "700",
+            "textDecorationLine": "none",
+            "fontFamily": "ui-sans-serif, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif",
+            "fontSize": "15px",
+            "width": "123.547px",
+            "maxWidth": "100%",
+            "justifySelf": "start",
+            "alignSelf": "start",
+            "widthPx": 123.55,
+            "heightPx": 29.25,
+            "parentWidthPx": 358
+          }
+        ],
+        "flowStepAfter": []
+      },
+      "contrastSamples": [
+        {
+          "label": "body",
+          "text": "Voltar ao roadmap\n    \n      Intermediário · 03 de 07\n      Roadmap: Exchanges n",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "parágrafo",
+          "text": "Intermediário · 03 de 07",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Roadmap: Exchanges no RabbitMQ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Node atual: Unroutable, mandatory e Alternate Exchange",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Anterior: Broadcast vs consumidores competindo · Próximo: Dead Letter Exchanges ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "parágrafo",
+          "text": "Uma publicação pode chegar à exchange certa e ainda assim não entrar em nenhuma ",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 6.97
+        },
+        {
+          "label": "parágrafo",
+          "text": "Imagine uma migração pequena: o producer de pedidos deixou de publicar `orders.c",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "parágrafo",
+          "text": "Nesse instante, a exchange tenta aplicar a regra de routing que já vinha dos nod",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "parágrafo",
+          "text": "Depois que a exchange não encontra destino, o desenho pode escolher entre silênc",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação de publishers\n          Uso neste node: sustenta mensagens sem rota",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação de Alternate Exchanges\n          Uso neste node: sustenta AE como f",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação de exchanges\n          Uso neste node: sustenta exchange como ponto",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Referência AMQP 0-9-1\n          Uso neste node: sustenta a semântica de `basic.p",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "item de lista",
+          "text": "Documentação sobre acknowledgements e confirmações\n          Uso neste node: sus",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "`mandatory=true`",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Publisher",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Sem rota, a mensagem é retornada ao lado que publicou.",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Tratar retorno como prova de processamento ou esquecer o handler de retorno.",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Alternate Exchange",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Topologia de fallback",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Sem rota na exchange principal, a mensagem é republicada para a AE.",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "célula de tabela",
+          "text": "Transformar fallback em lixeira invisível e esconder quebra de contrato.",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 13.05
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Mecanismo",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 11.5
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Quem recebe o sinal",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 11.5
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "O que acontece com a mensagem",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 11.5
+        },
+        {
+          "label": "cabeçalho de tabela",
+          "text": "Risco se for mal lido",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(42, 42, 42)",
+          "ratio": 11.5
+        },
+        {
+          "label": "link",
+          "text": "Voltar ao roadmap",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 7.23
+        },
+        {
+          "label": "link",
+          "text": "Broadcast vs consumidores competindo",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "link",
+          "text": "Documentação de publishers",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Documentação de Alternate Exchanges",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Documentação de exchanges",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Referência AMQP 0-9-1",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link",
+          "text": "Documentação sobre acknowledgements e confirmações",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "bloco de código",
+          "text": "# recorte conceitual, não executável\npublicacao.exchange = orders.events\npublica",
+          "color": "rgb(212, 212, 212)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.74
+        },
+        {
+          "label": "bloco de código",
+          "text": "# recorte conceitual, não executável\nexchange.principal = orders.events\nexchange",
+          "color": "rgb(212, 212, 212)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.74
+        },
+        {
+          "label": "conteúdo de bloco de código",
+          "text": "# recorte conceitual, não executável\npublicacao.exchange = orders.events\npublica",
+          "color": "rgb(212, 212, 212)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.74
+        },
+        {
+          "label": "conteúdo de bloco de código",
+          "text": "# recorte conceitual, não executável\nexchange.principal = orders.events\nexchange",
+          "color": "rgb(212, 212, 212)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.74
+        },
+        {
+          "label": "tag",
+          "text": "Tentativa inicial",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "Sem pedido de retorno",
+          "color": "rgb(255, 220, 73)",
+          "backgroundColor": "rgb(52, 47, 25)",
+          "ratio": 9.95
+        },
+        {
+          "label": "tag",
+          "text": "Pedido de retorno",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(31, 43, 63)",
+          "ratio": 7.95
+        },
+        {
+          "label": "tag",
+          "text": "Rota alternativa",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "Neste node",
+          "color": "rgb(122, 217, 197)",
+          "backgroundColor": "rgb(36, 56, 49)",
+          "ratio": 7.45
+        },
+        {
+          "label": "tag",
+          "text": "Próximo passo",
+          "color": "rgb(255, 220, 73)",
+          "backgroundColor": "rgb(52, 47, 25)",
+          "ratio": 9.95
+        },
+        {
+          "label": "contexto de node",
+          "text": "Intermediário · 03 de 07\n      Roadmap: Exchanges no RabbitMQ\n      Node atual: ",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 12.44
+        },
+        {
+          "label": "link do contexto de node",
+          "text": "Broadcast vs consumidores competindo",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(36, 36, 36)",
+          "ratio": 6.39
+        },
+        {
+          "label": "rodapé de referências",
+          "text": "Referências\n      \n        \n          Documentação de publishers\n          Uso n",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(25, 25, 25)",
+          "ratio": 14.09
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação de publishers",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação de Alternate Exchanges",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação de exchanges",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Referência AMQP 0-9-1",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "link do rodapé de referências",
+          "text": "Documentação sobre acknowledgements e confirmações",
+          "color": "rgb(106, 174, 214)",
+          "backgroundColor": "rgb(32, 32, 32)",
+          "ratio": 6.7
+        },
+        {
+          "label": "visual customizado",
+          "text": "Neste node\n          A exchange não achou destino\n          A publicação ainda n",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(31, 51, 43)",
+          "ratio": 10.74
+        },
+        {
+          "label": "visual customizado",
+          "text": "Próximo passo\n          A mensagem já estava em uma fila\n          Rejeição, exp",
+          "color": "rgb(230, 230, 230)",
+          "backgroundColor": "rgb(52, 47, 25)",
+          "ratio": 10.74
+        },
+        {
+          "label": "syntax-key",
+          "text": "publicacao.exchange",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "publicacao.routing_key",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "publicacao.mandatory",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "publisher.on_return",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "exchange.principal",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "exchange.principal.alternate-exchange",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "exchange.fallback",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-key",
+          "text": "fila.de_inspecao",
+          "color": "rgb(140, 199, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.55
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "=",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-op",
+          "text": "<-",
+          "color": "rgb(200, 182, 255)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 10.42
+        },
+        {
+          "label": "syntax-value",
+          "text": "orders.events",
+          "color": "rgb(139, 230, 193)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.76
+        },
+        {
+          "label": "syntax-value",
+          "text": "orders.created.v2",
+          "color": "rgb(139, 230, 193)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.76
+        },
+        {
+          "label": "syntax-value",
+          "text": "true",
+          "color": "rgb(139, 230, 193)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.76
+        },
+        {
+          "label": "syntax-value",
+          "text": "registrar_e_corrigir_rota",
+          "color": "rgb(139, 230, 193)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.76
+        },
+        {
+          "label": "syntax-value",
+          "text": "orders.events",
+          "color": "rgb(139, 230, 193)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.76
+        },
+        {
+          "label": "syntax-value",
+          "text": "orders.unrouted",
+          "color": "rgb(139, 230, 193)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.76
+        },
+        {
+          "label": "syntax-value",
+          "text": "orders.unrouted",
+          "color": "rgb(139, 230, 193)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.76
+        },
+        {
+          "label": "syntax-value",
+          "text": "orders.unrouted",
+          "color": "rgb(139, 230, 193)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 12.76
+        },
+        {
+          "label": "syntax-comment",
+          "text": "# recorte conceitual, não executável",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 7.49
+        },
+        {
+          "label": "syntax-comment",
+          "text": "# recorte conceitual, não executável",
+          "color": "rgb(163, 163, 163)",
+          "backgroundColor": "rgb(17, 17, 17)",
+          "ratio": 7.49
+        }
+      ],
+      "contentWidths": [
+        {
+          "index": 0,
+          "selector": "p",
+          "text": "Intermediário · 03 de 07",
+          "width": 325,
+          "mainWidth": 390,
+          "ratio": 0.833
+        },
+        {
+          "index": 1,
+          "selector": "p",
+          "text": "Roadmap: Exchanges no RabbitMQ",
+          "width": 325,
+          "mainWidth": 390,
+          "ratio": 0.833
+        },
+        {
+          "index": 2,
+          "selector": "p",
+          "text": "Node atual: Unroutable, mandatory e Alternate Exchange",
+          "width": 325,
+          "mainWidth": 390,
+          "ratio": 0.833
+        },
+        {
+          "index": 3,
+          "selector": "p",
+          "text": "Anterior: Broadcast vs consumidores competindo · Próximo: Dead Letter Exchanges e retry conceitual",
+          "width": 325,
+          "mainWidth": 390,
+          "ratio": 0.833
+        },
+        {
+          "index": 4,
+          "selector": ".lead",
+          "text": "Uma publicação pode chegar à exchange certa e ainda assim não entrar em nenhuma fila. Esse ponto do fluxo decide se a me",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 5,
+          "selector": "p",
+          "text": "Imagine uma migração pequena: o producer de pedidos deixou de publicar `orders.created.v1` e passou a publicar `orders.c",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 6,
+          "selector": "p",
+          "text": "Nesse instante, a exchange tenta aplicar a regra de routing que já vinha dos nodes anteriores. Ela olha para a routing k",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 7,
+          "selector": ".callout",
+          "text": "A diferença importa porque este não é um problema de quantidade de consumers. Nenhum worker está competindo e nenhuma fi",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 8,
+          "selector": "p",
+          "text": "Depois que a exchange não encontra destino, o desenho pode escolher entre silêncio, sinal ao publisher ou fallback de to",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 9,
+          "selector": "p",
+          "text": "O primeiro caminho é perigoso quando a equipe espera descobrir o problema pela aplicação. O segundo transforma a falha d",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 10,
+          "selector": "p",
+          "text": "O parâmetro `mandatory` pertence à publicação. Ele não muda o tipo da exchange nem cria uma fila. Ele apenas diz: se est",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 11,
+          "selector": "p",
+          "text": "Em AMQP 0-9-1, esse retorno aparece como `basic.return`. A mensagem volta com informação suficiente para a aplicação ent",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 12,
+          "selector": "p",
+          "text": "Esse recorte mostra a posição do mecanismo: o publisher pediu um retorno para aquela publicação. Ele ainda não sabe se u",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 13,
+          "selector": "p",
+          "text": "Quando a intenção não é apenas avisar o publisher, mas preservar a publicação em um caminho controlado, a topologia pode",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 14,
+          "selector": "p",
+          "text": "No exemplo da migração, a exchange `orders.events` pode ter uma AE ligada a uma fila de órfãs. As mensagens com `orders.",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 15,
+          "selector": "p",
+          "text": "A diferença em relação ao retorno é estrutural. `mandatory` conversa com o publisher. A AE conversa com a topologia. Qua",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 16,
+          "selector": "p",
+          "text": "A decisão não precisa ser binária. Em muitos desenhos, `mandatory` ajuda a aplicação publicadora a saber que algo saiu d",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 17,
+          "selector": "p",
+          "text": "Quando a rota principal é parte de um contrato de domínio, o fallback precisa ser observável. Uma AE que captura tudo se",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 18,
+          "selector": "p",
+          "text": "Este node termina no momento em que a exchange decidiu o destino inicial da publicação. Se a mensagem entrou em uma fila",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 19,
+          "selector": "p",
+          "text": "Quando uma publicação não aparece em nenhuma fila, a primeira pergunta não é quantos consumers estão online. A pergunta ",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 20,
+          "selector": "p",
+          "text": "Se a resposta for não, há três leituras estáveis: sem pedido de retorno e sem fallback, a mensagem pode sumir do caminho",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        },
+        {
+          "index": 21,
+          "selector": "ul",
+          "text": "Documentação de publishers\n          Uso neste node: sustenta mensagens sem rota, `mandatory`, retorno ao publisher e mé",
+          "width": 358,
+          "mainWidth": 390,
+          "ratio": 0.918
+        }
+      ],
+      "overflow": {
+        "clientWidth": 390,
+        "scrollWidth": 390,
+        "hasGlobalOverflow": false
+      }
+    }
+  ],
+  "failures": {
+    "theme": [],
+    "fixedComponent": [],
+    "terminalDivider": [],
+    "visualPrimitive": [],
+    "preCodeChip": [],
+    "highlight": [],
+    "conceptualPre": [],
+    "inlineCode": [],
+    "contrast": [],
+    "overflow": [],
+    "contentWidth": [],
+    "externalRequests": [],
+    "auditPlaceholder": []
+  }
+}

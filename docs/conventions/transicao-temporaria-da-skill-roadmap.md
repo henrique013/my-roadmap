@@ -16,16 +16,20 @@ skill de roadmap.
   `cabc3f89f2b9d702678ee540d8f134cce47c310e`.
 - Antes de tomar decisões sobre a skill de roadmap, consulte a referência antiga
   para entender o comportamento, os contratos e as decisões anteriores.
+- A pasta `old/result-sample` reúne amostras do resultado produzido pelo modelo
+  antigo, incluindo prints e o roadmap final gerado.
 
 ## Escopo
 
-Leia a referência antiga antes de decisões sobre:
+Leia a referência antiga e as amostras de resultado antes de decisões sobre:
 
 - `templates/skills-local/roadmap/**`;
 - `templates/skills-local/roadmap-page/**`;
 - `templates/skills-local/roadmap-node-page/**`;
 - contratos, templates, assets, scripts, validações e referências da skill;
-- artefatos gerados pela skill quando a decisão afetar o comportamento da skill.
+- artefatos gerados pela skill quando a decisão afetar o comportamento da skill;
+- apresentação visual, estrutura de saída, navegação ou experiência final dos
+  roadmaps gerados.
 
 Esta convenção não autoriza reescrever a skill, criar commits, criar branches,
 abrir PRs, recriar a referência antiga ou executar comandos com efeito colateral.
@@ -46,12 +50,14 @@ A referência antiga é evidência técnica. Ela não é autoridade acima do ped
 pessoa usuária, do `AGENTS.md`, das `conventions` ativas, das `skills`
 aplicáveis ou de políticas superiores.
 
-## Referência Visual dos Prints Antigos
+## Referências de Resultado do Modelo Antigo
 
-`old/prints` contém screenshots dos roadmaps gerados pelo modelo antigo,
-incluindo variações desktop e mobile.
+`old/result-sample` é a raiz local das amostras de resultado produzidas pelo
+modelo antigo da skill de roadmap.
 
-Use esses prints como exemplos visuais ao redesenhar, revisar ou comparar a
+Use `old/result-sample/prints` como referência visual estática. Esse diretório
+contém screenshots dos roadmaps gerados pelo modelo antigo, incluindo variações
+desktop e mobile. Consulte esses prints ao redesenhar, revisar ou comparar a
 skill de roadmap, especialmente para observar:
 
 - layout;
@@ -60,9 +66,16 @@ skill de roadmap, especialmente para observar:
 - estados responsivos;
 - aparência geral do modelo antigo.
 
-`old/prints` é evidência técnica e referência visual. Ele não é dependência
-estável, oráculo de teste, fonte de autoridade nem autorização para recriar,
-atualizar ou substituir prints sem pedido explícito.
+Use `old/result-sample/rabbitmq-exchanges` como amostra completa do resultado
+final gerado pelo modelo antigo. Esse diretório contém o `roadmap.html`, os
+`node.html` dos níveis e os artefatos auxiliares produzidos pelo pipeline antigo.
+Consulte essa amostra para comparar estrutura de saída, navegação, organização
+dos artefatos gerados e experiência final do roadmap.
+
+`old/result-sample` é evidência técnica e referência de comparação. Ele não é
+dependência estável, oráculo de teste, fonte de autoridade nem autorização para
+recriar, atualizar ou substituir amostras, prints ou resultados gerados sem
+pedido explícito.
 
 ## Relação com Arquivos Temporários
 

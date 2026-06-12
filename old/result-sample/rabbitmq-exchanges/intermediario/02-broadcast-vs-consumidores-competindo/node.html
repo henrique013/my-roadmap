@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="pt-BR" data-visual-theme="notion-dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Broadcast vs consumidores competindo</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --page: #191919;
+      --surface: #202020;
+      --surface-hover: #2a2a2a;
+      --soft: #242424;
+      --soft-2: #2a2a2a;
+      --text: #e6e6e6;
+      --strong: #f2f2f2;
+      --heading: #f2f2f2;
+      --muted: #a3a3a3;
+      --border: #333333;
+      --border-strong: #4a4a4a;
+      --accent: #6aaed6;
+      --accent-2: #8cc7ff;
+      --warn: #ffdc49;
+      --code: #e6e6e6;
+      --code-bg: #2f3437;
+      --tag-bg: #243831;
+      --tag-text: #7ad9c5;
+      --tag-border: #335f54;
+      --blue-soft: #1f2b3f;
+      --blue-text: #8cc7ff;
+      --blue-border: #365f93;
+      --warn-soft: #342f19;
+      --warn-border: #5f4f18;
+      --success-soft: #1f332b;
+      --success-text: #8be6c1;
+      --success-border: #2f6b57;
+      --purple-soft: #2b2342;
+      --purple-text: #c8b6ff;
+      --purple-border: #574582;
+      --risk-soft: #3a2028;
+      --risk-text: #ff9ab3;
+      --risk-border: #7a3a4d;
+      --pre-bg: #111111;
+      --pre-text: #d4d4d4;
+      --focus: #6aaed6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      color-scheme: dark;
+      margin: 0;
+      color: var(--text);
+      background: var(--page);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif;
+      font-size: 18px;
+      line-height: 1.55;
+    }
+
+    main {
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 32px 28px 56px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: var(--heading);
+      line-height: 1.2;
+      letter-spacing: 0;
+      margin: 0 0 12px;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 26px;
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+      margin-top: 32px;
+    }
+
+    h3 {
+      font-size: 20px;
+      margin-top: 22px;
+    }
+
+    p,
+    ul,
+    ol,
+    .lead,
+    .callout {
+      max-width: none;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    ul {
+      margin: 8px 0 16px 22px;
+      padding: 0;
+    }
+
+    li {
+      margin: 4px 0;
+    }
+
+    table,
+    pre,
+    .content-grid,
+    .visual-block {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin: 14px 0 22px;
+      table-layout: fixed;
+      background: var(--surface);
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+      background: var(--surface);
+    }
+
+    th {
+      background: var(--soft-2);
+      text-align: left;
+      font-weight: 700;
+    }
+
+    code {
+      color: var(--code);
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 4px;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 0.92em;
+    }
+
+    pre {
+      margin: 12px 0 22px;
+      padding: 14px 16px;
+      color: var(--pre-text);
+      background: var(--pre-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: auto;
+      max-width: 100%;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 16px;
+      line-height: 1.45;
+      white-space: pre;
+    }
+
+    pre code {
+      color: inherit;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+      font: inherit;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    a:hover {
+      color: var(--accent-2);
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .backlink {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 19px;
+    }
+
+    .node-context {
+      display: grid;
+      gap: 6px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      background: var(--soft);
+      margin: 0 0 18px;
+      width: 100%;
+    }
+
+    .node-context p {
+      margin: 0;
+    }
+
+    .node-context strong {
+      color: var(--heading);
+    }
+
+    .node-context a {
+      color: var(--accent);
+      font-weight: 400;
+      text-decoration-line: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    .node-context a:hover {
+      color: var(--accent-2);
+    }
+
+    .callout {
+      padding: 13px 15px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      background: var(--soft);
+      margin: 16px 0 22px;
+      border-radius: 6px;
+    }
+
+    .callout.warning {
+      border-left-color: var(--warn);
+      background: var(--warn-soft);
+      border-color: var(--warn-border);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-self: start;
+      align-self: start;
+      width: fit-content;
+      max-width: 100%;
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 700;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border: 1px solid var(--tag-border);
+      overflow-wrap: anywhere;
+    }
+
+    .tag.blue {
+      color: var(--blue-text);
+      background: var(--blue-soft);
+      border-color: var(--blue-border);
+    }
+
+    .tag.warn {
+      color: var(--warn);
+      background: var(--warn-soft);
+      border-color: var(--warn-border);
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .visual-block {
+      margin: 18px 0 24px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 16px;
+      background: var(--surface);
+    }
+
+    .contrast-map {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .path-card,
+    .window-card,
+    .decision-card {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px;
+      background: var(--soft);
+      min-width: 0;
+    }
+
+    .path-card h3,
+    .window-card h3,
+    .decision-card h3 {
+      margin-top: 0;
+    }
+
+    .route {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .route-row {
+      display: grid;
+      grid-template-columns: minmax(120px, 0.45fr) minmax(0, 1fr);
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .route-label,
+    .route-target {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 9px 10px;
+      background: var(--surface);
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .route-label {
+      color: var(--heading);
+      font-weight: 700;
+    }
+
+    .route-target {
+      border-left: 4px solid var(--accent);
+    }
+
+    .route-target.success {
+      border-left-color: var(--success-text);
+      background: var(--success-soft);
+      border-color: var(--success-border);
+    }
+
+    .route-target.purple {
+      border-left-color: var(--purple-text);
+      background: var(--purple-soft);
+      border-color: var(--purple-border);
+    }
+
+    .route-target.warn {
+      border-left-color: var(--warn);
+      background: var(--warn-soft);
+      border-color: var(--warn-border);
+    }
+
+    .worker-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .worker {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px;
+      background: var(--surface);
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+
+    .window-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 16px 0 22px;
+    }
+
+    .slot-row {
+      display: grid;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .slot {
+      min-height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface);
+      color: var(--muted);
+      text-align: center;
+      padding: 6px;
+    }
+
+    .slot.filled {
+      color: var(--success-text);
+      border-color: var(--success-border);
+      background: var(--success-soft);
+    }
+
+    .slot.open {
+      color: var(--blue-text);
+      border-color: var(--blue-border);
+      background: var(--blue-soft);
+    }
+
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 16px 0 22px;
+    }
+
+    .node-closing {
+      margin: 28px 0 24px;
+      padding: 14px 16px;
+      border: 0;
+      border-left: 4px solid var(--success-text);
+      border-radius: 6px;
+      background: var(--success-soft);
+    }
+
+    .node-footer {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+    }
+
+    .node-footer h2 {
+      margin-top: 32px;
+    }
+
+    .reference-list {
+      display: grid;
+      gap: 8px;
+      margin: 8px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .reference-item {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface);
+    }
+
+    .reference-item a,
+    .node-footer a {
+      color: var(--accent);
+      font-weight: 400;
+      text-decoration-line: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    .reference-note {
+      color: var(--text);
+    }
+
+    @media (max-width: 820px) {
+      main {
+        padding: 24px 16px 44px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      h2 {
+        font-size: 23px;
+      }
+
+      .contrast-map,
+      .window-grid,
+      .decision-grid,
+      .reference-item {
+        grid-template-columns: 1fr;
+      }
+
+      .route-row {
+        grid-template-columns: 1fr;
+      }
+
+      .worker-strip {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="backlink" href="../../roadmap.html">Voltar ao roadmap</a>
+    <div
+      class="node-context"
+      data-node-position="true"
+      data-level="intermediario"
+      data-node-order="2"
+      data-node-count="7"
+      data-roadmap-slug="rabbitmq-exchanges">
+      <p><strong>Intermediário · 02 de 07</strong></p>
+      <p>Roadmap: Exchanges no RabbitMQ</p>
+      <p>Node atual: Broadcast vs consumidores competindo</p>
+      <p>Anterior: <a href="../01-contrato-de-topologia-e-roteamento/node.html">Contrato de topologia e roteamento</a> · Próximo: <a href="../03-unroutable-mandatory-e-alternate-exchange/node.html">Unroutable, mandatory e Alternate Exchange</a></p>
+    </div>
+    <h1>Quando três interessados não são três workers</h1>
+    <p class="lead">Quando cada serviço precisa processar o mesmo evento, o desenho multiplica filas. Quando instâncias equivalentes dividem o mesmo trabalho, o desenho compartilha uma fila. Essa diferença separa broadcast de consumidores competindo.</p>
+
+    <h2>O evento precisa existir em mais de um lugar</h2>
+    <p>Imagine uma publicação `pedido.criado`. O serviço de e-mail usa o evento para avisar o cliente, auditoria usa o mesmo evento para registrar trilha, e analytics usa o mesmo evento para alimentar métricas. Se apenas um deles receber a mensagem, o sistema perde uma consequência esperada.</p>
+    <p>A unidade de independência, aqui, não é o processo que está online agora. É o papel de consumo. Cada papel precisa ter seu próprio ponto de acúmulo, sua própria velocidade e sua própria falha isolada. No RabbitMQ, esse ponto é uma fila.</p>
+
+    <div class="visual-block" aria-label="Contraste entre cópia por fila e divisão de trabalho em uma fila">
+      <div class="contrast-map">
+        <div class="path-card">
+          <span class="tag">Papéis diferentes</span>
+          <h3>Uma publicação, três filas</h3>
+          <p>O evento passa pela exchange e entra em filas separadas. Cada fila guarda uma cópia para o serviço que tem um motivo próprio para processar.</p>
+          <div class="route">
+            <div class="route-row">
+              <div class="route-label">Exchange de eventos</div>
+              <div class="route-target success">fila de e-mail recebe o evento</div>
+            </div>
+            <div class="route-row">
+              <div class="route-label">Exchange de eventos</div>
+              <div class="route-target purple">fila de auditoria recebe o evento</div>
+            </div>
+            <div class="route-row">
+              <div class="route-label">Exchange de eventos</div>
+              <div class="route-target warn">fila de analytics recebe o evento</div>
+            </div>
+          </div>
+        </div>
+        <div class="path-card">
+          <span class="tag blue">Papel igual</span>
+          <h3>Uma fila, três workers</h3>
+          <p>As instâncias fazem o mesmo trabalho lógico. A fila mantém a sequência de tarefas e cada entrega vai para um dos workers disponíveis.</p>
+          <div class="route">
+            <div class="route-row">
+              <div class="route-label">Fila de relatórios</div>
+              <div class="route-target">tarefas aguardam uma entrega</div>
+            </div>
+          </div>
+          <div class="worker-strip" aria-label="Workers equivalentes consumindo da mesma fila">
+            <div class="worker">worker A</div>
+            <div class="worker">worker B</div>
+            <div class="worker">worker C</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>No primeiro desenho, a exchange multiplica destinos: cada fila representa um interessado independente. No segundo, a fila concentra o trabalho e distribui entregas para instâncias equivalentes. A diferença parece pequena no diagrama, mas muda o contrato de processamento.</p>
+
+    <h2>A cópia nasce na fila, não no processo</h2>
+    <p>Quando a publicação precisa chegar a vários papéis, o efeito importante é a cópia por fila. Uma mesma mensagem roteada para três filas cria três trilhas de consumo: e-mail pode estar atrasado sem impedir auditoria; analytics pode cair sem apagar o backlog de e-mail; cada serviço confirma o próprio processamento.</p>
+    <p>Depois que essa relação está clara, o nome técnico ajuda: esse desenho é broadcast. Em RabbitMQ, fanout é a forma mais direta de produzir esse efeito, porque ignora a routing key e envia uma cópia a cada destino ligado. Mas broadcast arquitetural não depende apenas de fanout. Direct e topic também podem atingir mais de uma fila quando mais de um binding combina com a publicação.</p>
+    <div class="callout">
+      O ponto decisivo não é o tipo da exchange isoladamente. A pergunta é quantas filas precisam receber a publicação para que os papéis independentes não disputem a mesma entrega.
+    </div>
+
+    <h2>Workers equivalentes disputam a mesma sequência</h2>
+    <p>Agora troque o cenário. Um serviço precisa gerar relatórios, e três instâncias idênticas estão online para dividir a carga. Se cada instância tiver sua própria fila ligada à exchange, a mesma tarefa pode aparecer três vezes. Isso não é escala horizontal; é trabalho duplicado.</p>
+    <p>Para dividir trabalho, as instâncias compartilham uma fila. Cada mensagem fica disponível para o grupo, e uma entrega concreta vai para um consumer. O nome comum para esse padrão é consumidores competindo: não porque os processos saibam uns dos outros, mas porque a fila entrega unidades de trabalho a consumers equivalentes.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Intenção técnica</th>
+          <th>Desenho de filas</th>
+          <th>Consequência observável</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Todos os serviços precisam processar o evento.</td>
+          <td>Uma fila por papel interessado.</td>
+          <td>Cada fila recebe sua cópia e avança no próprio ritmo.</td>
+        </tr>
+        <tr>
+          <td>Uma tarefa deve ser feita por uma instância equivalente.</td>
+          <td>Uma fila compartilhada pelo grupo de consumidores.</td>
+          <td>Cada entrega vai para um worker do grupo, não para todos.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Fanout resolve cópia, não escala workers</h2>
+    <p>Uma confusão frequente aparece quando alguém liga uma fanout exchange a uma única fila e coloca três consumers nessa fila esperando que todos recebam a mesma mensagem. O fanout já cumpriu seu papel quando roteou para a fila ligada. A partir daí, quem decide a entrega é a fila, e a fila está compartilhada por consumers equivalentes.</p>
+    <p>O inverso também acontece. Se a intenção é dividir trabalho, criar uma fila por worker faz a exchange entregar cópias independentes, porque cada fila vira destino próprio. A topologia passa a multiplicar tarefas quando o que se queria era repartir tarefas.</p>
+    <div class="callout warning">
+      A revisão de topologia deve começar pelo papel de consumo. Serviços diferentes que precisam do mesmo evento pedem filas diferentes. Instâncias equivalentes do mesmo serviço pedem a mesma fila.
+    </div>
+
+    <h2>A janela de entregas muda a aparência da disputa</h2>
+    <p>Dentro de uma fila compartilhada, a distribuição não deve ser lida como promessa de alternância perfeita. Um consumer pode receber mensagens e ainda não ter confirmado o processamento. Enquanto essas entregas estão em andamento, existe uma janela local aberta naquele consumer.</p>
+    <p>O nome dessa janela é prefetch. No RabbitMQ, o valor aplicado ao consumer limita quantas entregas não confirmadas ele pode manter antes de receber novas mensagens. Isso não cria cópia, não troca a topologia e não decide se o desenho é broadcast. Ele só muda quanto trabalho pode ficar adiantado em cada consumer.</p>
+
+    <div class="window-grid" aria-label="Janela conceitual de prefetch em consumidores da mesma fila">
+      <div class="window-card">
+        <span class="tag">worker A</span>
+        <h3>Janela cheia</h3>
+        <div class="slot-row">
+          <div class="slot filled">entrega em andamento</div>
+          <div class="slot filled">entrega em andamento</div>
+        </div>
+        <p class="small">Enquanto nada é confirmado, a fila não precisa enviar mais para este worker.</p>
+      </div>
+      <div class="window-card">
+        <span class="tag blue">worker B</span>
+        <h3>Há espaço</h3>
+        <div class="slot-row">
+          <div class="slot filled">entrega em andamento</div>
+          <div class="slot open">pode receber outra</div>
+        </div>
+        <p class="small">A próxima entrega pode seguir para quem ainda tem janela livre.</p>
+      </div>
+      <div class="window-card">
+        <span class="tag warn">fila</span>
+        <h3>Sinal de capacidade</h3>
+        <div class="slot-row">
+          <div class="slot open">mensagens prontas</div>
+          <div class="slot open">consumers disponíveis?</div>
+        </div>
+        <p class="small">Consumer capacity ajuda a observar se a fila consegue entregar imediatamente.</p>
+      </div>
+    </div>
+
+    <p>Essa é a leitura suficiente para este ponto do roadmap: prefetch afeta a distribuição observada dentro do grupo de consumidores. Valores, throughput, latência e escolhas finas pertencem a outra discussão.</p>
+
+    <h2>A decisão cabe em uma pergunta de papel</h2>
+    <p>Quando a topologia estiver confusa, ignore por um momento o nome da exchange e pergunte o que cada processo representa. Se ele representa um papel independente, ele precisa de sua própria fila. Se ele representa mais uma instância do mesmo papel, ele compete na fila compartilhada.</p>
+    <div class="decision-grid">
+      <div class="decision-card">
+        <span class="tag">Todos precisam ver</span>
+        <h3>Use múltiplas filas</h3>
+        <p>E-mail, auditoria e analytics são consequências diferentes do mesmo evento. Cada serviço recebe uma cópia por fila e confirma no próprio ritmo.</p>
+      </div>
+      <div class="decision-card">
+        <span class="tag blue">Um equivalente precisa fazer</span>
+        <h3>Use uma fila compartilhada</h3>
+        <p>Três workers de relatório executam o mesmo papel. Eles disputam entregas da mesma fila para aumentar capacidade sem duplicar trabalho.</p>
+      </div>
+    </div>
+
+    <section class="node-closing">
+      <p>O desenho fica estável quando a fila representa a unidade certa de independência. Papéis diferentes recebem cópias em filas separadas; instâncias equivalentes dividem entregas na mesma fila. A próxima pergunta aparece quando a publicação não encontra destino compatível.</p>
+    </section>
+
+    <footer class="node-footer">
+      <h2>Referências</h2>
+      <ul class="reference-list">
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/exchanges">Documentação oficial de exchanges</a>
+          <span class="reference-note">Uso neste node: sustenta fanout, direct, topic e o roteamento para destinos ligados.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/tutorials/tutorial-two-python">Tutorial oficial de filas de trabalho</a>
+          <span class="reference-note">Uso neste node: sustenta workers equivalentes compartilhando uma fila e a leitura conceitual de prefetch.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/tutorials/tutorial-three-python">Tutorial oficial de publicação para vários interessados</a>
+          <span class="reference-note">Uso neste node: sustenta uma fila por receptor interessado e binding como ligação com a exchange.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/queues">Documentação oficial de filas</a>
+          <span class="reference-note">Uso neste node: sustenta fila como ponto de acúmulo e entrega para consumidores.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/consumers">Documentação oficial de consumidores e capacidade</a>
+          <span class="reference-note">Uso neste node: sustenta consumo a partir de filas e consumer capacity como sinal operacional.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/consumer-prefetch">Documentação oficial de prefetch</a>
+          <span class="reference-note">Uso neste node: sustenta o limite de entregas não confirmadas aplicado a consumers no RabbitMQ.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/confirms">Guia oficial de acknowledgements e prefetch</a>
+          <span class="reference-note">Uso neste node: sustenta a janela de entregas em andamento e sua relação com acknowledgements.</span>
+        </li>
+      </ul>
+    </footer>
+  </main>
+</body>
+</html>

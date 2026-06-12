@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="pt-BR" data-visual-theme="notion-dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contrato de topologia e roteamento</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --page: #191919;
+      --surface: #202020;
+      --surface-hover: #2a2a2a;
+      --soft: #242424;
+      --soft-2: #2a2a2a;
+      --text: #e6e6e6;
+      --strong: #f2f2f2;
+      --heading: #f2f2f2;
+      --muted: #a3a3a3;
+      --border: #333333;
+      --border-strong: #4a4a4a;
+      --accent: #6aaed6;
+      --accent-2: #8cc7ff;
+      --warn: #ffdc49;
+      --code: #e6e6e6;
+      --code-bg: #2f3437;
+      --tag-bg: #243831;
+      --tag-text: #7ad9c5;
+      --tag-border: #335f54;
+      --blue-soft: #1f2b3f;
+      --blue-text: #8cc7ff;
+      --blue-border: #365f93;
+      --warn-soft: #342f19;
+      --warn-border: #5f4f18;
+      --success-soft: #1f332b;
+      --success-text: #8be6c1;
+      --success-border: #2f6b57;
+      --purple-soft: #2b2342;
+      --purple-text: #c8b6ff;
+      --purple-border: #574582;
+      --risk-soft: #3a2028;
+      --risk-text: #ff9ab3;
+      --risk-border: #7a3a4d;
+      --pre-bg: #111111;
+      --pre-text: #d4d4d4;
+      --focus: #6aaed6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      color-scheme: dark;
+      margin: 0;
+      color: var(--text);
+      background: var(--page);
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif;
+      font-size: 18px;
+      line-height: 1.55;
+    }
+
+    main {
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 32px 28px 56px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: var(--heading);
+      line-height: 1.2;
+      letter-spacing: 0;
+      margin: 0 0 12px;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 26px;
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+      margin-top: 32px;
+    }
+
+    h3 {
+      font-size: 20px;
+      margin-top: 22px;
+    }
+
+    p,
+    ul,
+    ol,
+    .lead,
+    .callout {
+      max-width: none;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    ul {
+      margin: 8px 0 16px 22px;
+      padding: 0;
+    }
+
+    li {
+      margin: 4px 0;
+    }
+
+    table,
+    pre,
+    .content-grid,
+    .visual-block {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin: 14px 0 22px;
+      table-layout: fixed;
+      background: var(--surface);
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+      background: var(--surface);
+    }
+
+    th {
+      background: var(--soft-2);
+      text-align: left;
+      font-weight: 700;
+    }
+
+    code {
+      color: var(--code);
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 4px;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 0.92em;
+    }
+
+    pre {
+      margin: 12px 0 22px;
+      padding: 14px 16px;
+      color: var(--pre-text);
+      background: var(--pre-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: auto;
+      max-width: 100%;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 16px;
+      line-height: 1.45;
+      white-space: pre;
+    }
+
+    pre code {
+      color: inherit;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+      font: inherit;
+    }
+
+    .syntax-key {
+      color: #8cc7ff;
+      font-weight: 700;
+    }
+
+    .syntax-op {
+      color: #c8b6ff;
+    }
+
+    .syntax-value {
+      color: #a8e6cf;
+    }
+
+    .syntax-string {
+      color: #8be6c1;
+    }
+
+    .syntax-comment {
+      color: #a3a3a3;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    a:hover {
+      color: var(--accent-2);
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .backlink {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 19px;
+    }
+
+    .meta {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .node-context {
+      display: grid;
+      gap: 6px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      background: var(--soft);
+      margin: 0 0 18px;
+      width: 100%;
+    }
+
+    .node-context p {
+      margin: 0;
+    }
+
+    .node-context strong {
+      color: var(--heading);
+    }
+
+    .node-context a {
+      color: var(--accent);
+      font-weight: 400;
+      text-decoration-line: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    .node-context a:hover {
+      color: var(--accent-2);
+    }
+
+    .callout {
+      margin: 18px 0 22px;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      background: var(--soft);
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 16px 0 22px;
+    }
+
+    .card,
+    .topology-card,
+    .state-card {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface);
+      padding: 14px;
+    }
+
+    .card p,
+    .topology-card p,
+    .state-card p {
+      margin-bottom: 0;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-self: start;
+      align-self: start;
+      gap: 6px;
+      width: fit-content;
+      margin-bottom: 8px;
+      padding: 2px 8px;
+      color: var(--tag-text);
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .topology {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.8fr) minmax(220px, 1fr) minmax(320px, 1.6fr);
+      gap: 12px;
+      align-items: stretch;
+      margin: 16px 0 22px;
+    }
+
+    .topology-card.public {
+      border-color: var(--blue-border);
+      background: var(--blue-soft);
+    }
+
+    .topology-card.routing {
+      border-color: var(--purple-border);
+      background: var(--purple-soft);
+    }
+
+    .topology-card.internal {
+      border-color: var(--success-border);
+      background: var(--success-soft);
+    }
+
+    .topology-card strong {
+      display: block;
+      color: var(--strong);
+      margin-bottom: 6px;
+    }
+
+    .route-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .route {
+      display: grid;
+      grid-template-columns: minmax(110px, 0.55fr) minmax(180px, 1fr);
+      gap: 8px;
+      align-items: center;
+      padding: 8px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: rgba(25, 25, 25, 0.45);
+    }
+
+    .route-label {
+      color: var(--strong);
+      font-weight: 700;
+    }
+
+    .state-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 16px 0 22px;
+    }
+
+    .state-card.before {
+      border-color: var(--warn-border);
+      background: var(--warn-soft);
+    }
+
+    .state-card.after {
+      border-color: var(--success-border);
+      background: var(--success-soft);
+    }
+
+    .reference-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .reference-item {
+      display: grid;
+      grid-template-columns: minmax(220px, 0.55fr) minmax(260px, 1fr);
+      gap: 12px;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface);
+    }
+
+    .reference-note {
+      color: var(--muted);
+    }
+
+    @media (max-width: 920px) {
+      main {
+        padding: 22px 16px 40px;
+      }
+
+      .content-grid,
+      .topology,
+      .state-grid,
+      .reference-item {
+        grid-template-columns: 1fr;
+      }
+
+      .route {
+        grid-template-columns: 1fr;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+        table-layout: auto;
+      }
+
+      th,
+      td {
+        min-width: 170px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="backlink" href="../../roadmap.html">Voltar ao roadmap</a>
+    <div
+      class="node-context"
+      data-node-position="true"
+      data-level="intermediario"
+      data-node-order="1"
+      data-node-count="7"
+      data-roadmap-slug="rabbitmq-exchanges">
+      <p><strong>Intermediário · 01 de 07</strong></p>
+      <p>Roadmap: Exchanges no RabbitMQ</p>
+      <p>Node atual: Contrato de topologia e roteamento</p>
+      <p>Anterior: <a href="../../basico/06-filas-consumidores-e-entrega/node.html">Filas, consumidores e entrega</a> · Próximo: <a href="../02-broadcast-vs-consumidores-competindo/node.html">Broadcast vs consumidores competindo</a></p>
+    </div>
+    <h1>Contrato de topologia e roteamento</h1>
+    <p class="lead">Quando um serviço publica um acontecimento, ele precisa saber onde entregar a intenção de publicação, mas não deveria carregar no código a lista de filas que existem hoje.</p>
+    <p class="meta">Pesquisa: documentação oficial RabbitMQ 4.3 e especificação AMQP 0-9-1 consultadas em 2026-06-09.</p>
+
+    <section>
+      <h2>O producer conhece a porta, não os corredores</h2>
+      <p>Imagine uma API de pedidos publicando que um pedido foi criado. No primeiro desenho, só o faturamento precisa reagir. Depois, auditoria e notificações também passam a precisar desse mesmo acontecimento. Se a API publica usando o nome da fila do faturamento, cada novo destino tende a virar mudança no producer.</p>
+      <p>O modelo de exchange evita esse encaixe apertado. A API publica em uma exchange conhecida e envia uma routing key com significado de domínio, como <code>orders.created</code>. A partir daí, bindings decidem quais filas recebem a mensagem. Esse conjunto estável, exchange alvo mais significado da routing key, é o contrato de publicação.</p>
+      <div class="callout">
+        <strong>Ideia central:</strong> o producer participa do contrato de publicação; as filas consumidoras ficam atrás da topologia e podem evoluir por bindings.
+      </div>
+    </section>
+
+    <section>
+      <h2>Quem conhece quem na topologia</h2>
+      <p>A primeira leitura útil é separar a parte pública da parte interna. A exchange e a routing key precisam fazer sentido para quem publica. As filas precisam fazer sentido para quem consome. O binding é a costura entre essas duas responsabilidades.</p>
+      <div class="topology visual-block" aria-label="Topologia conceitual de publicação em pedidos">
+        <div class="topology-card public">
+          <span class="tag">Producer</span>
+          <strong><code>orders-api</code></strong>
+          <p>Conhece a exchange <code>orders.events</code> e publica a intenção <code>orders.created</code>.</p>
+        </div>
+        <div class="topology-card routing">
+          <span class="tag">Contrato</span>
+          <strong><code>orders.events</code></strong>
+          <p>Recebe publicações de pedidos e aplica bindings. A convenção de routing key diz qual acontecimento está sendo anunciado.</p>
+        </div>
+        <div class="topology-card internal">
+          <span class="tag">Destinos internos</span>
+          <strong>Filas consumidoras</strong>
+          <div class="route-list">
+            <div class="route">
+              <span class="route-label"><code>orders.created</code></span>
+              <span><code>billing.orders-created</code></span>
+            </div>
+            <div class="route">
+              <span class="route-label"><code>orders.*</code></span>
+              <span><code>audit.orders-events</code></span>
+            </div>
+            <div class="route">
+              <span class="route-label"><code>orders.created</code></span>
+              <span><code>email.order-notifications</code></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p>Nesse desenho, a fila <code>billing.orders-created</code> pode ser estável para o serviço de faturamento, mas não precisa virar vocabulário público da API de pedidos. O que a API promete é publicar o acontecimento em <code>orders.events</code> com uma key combinada.</p>
+    </section>
+
+    <section>
+      <h2>A routing key vira linguagem compartilhada</h2>
+      <p>Uma routing key é tecnicamente uma string enviada na publicação. No contrato de topologia, ela também vira linguagem compartilhada. <code>orders.created</code> fala sobre um acontecimento; <code>billing.orders-created</code> fala sobre uma fila de um serviço. A diferença muda quem fica acoplado a quem.</p>
+      <table>
+        <tr>
+          <th>Forma</th>
+          <th>O que ela expõe</th>
+          <th>Consequência</th>
+        </tr>
+        <tr>
+          <td><code>orders.created</code></td>
+          <td>Um acontecimento do domínio de pedidos.</td>
+          <td>Novos consumidores podem entrar por binding sem alterar a publicação original.</td>
+        </tr>
+        <tr>
+          <td><code>billing.orders-created</code></td>
+          <td>Um destino interno ligado ao faturamento.</td>
+          <td>O producer passa a carregar detalhe de consumo e a mudança de fila vira mudança pública.</td>
+        </tr>
+      </table>
+      <p>A convenção de routing key precisa ser pequena o bastante para ser lembrada e rígida o bastante para proteger compatibilidade. Quando a key começa a codificar nome de fila, tecnologia do consumidor ou uma regra temporária de deploy, ela deixa de ser uma intenção de publicação e vira dependência interna.</p>
+    </section>
+
+    <section>
+      <h2>A topologia pode mudar atrás do contrato</h2>
+      <p>O valor prático aparece quando um consumidor novo entra. Antes, a publicação <code>orders.created</code> chegava só ao faturamento. Depois, auditoria precisa observar pedidos criados e cancelados. Se a exchange e a convenção continuam as mesmas, a mudança fica na topologia: uma nova fila e um novo binding.</p>
+      <div class="state-grid visual-block" aria-label="Mudança de topologia sem alterar o producer">
+        <div class="state-card before">
+          <span class="tag">Antes</span>
+          <p><code>orders-api</code> publica em <code>orders.events</code> com <code>orders.created</code>.</p>
+          <p>O binding existente envia a mensagem para <code>billing.orders-created</code>.</p>
+        </div>
+        <div class="state-card after">
+          <span class="tag">Depois</span>
+          <p><code>orders-api</code> continua publicando do mesmo jeito.</p>
+          <p>A topologia adiciona <code>audit.orders-events</code> ligada ao padrão <code>orders.*</code>.</p>
+        </div>
+      </div>
+      <p>O producer não ficou ignorante sobre o domínio: ele ainda escolhe a exchange e a key correta. O que ele não sabe é a lista atual de filas consumidoras. Essa é a fronteira publisher-topology-consumer em ação.</p>
+    </section>
+
+    <section>
+      <h2>O recorte da exchange muda a responsabilidade</h2>
+      <p>RabbitMQ não impõe uma convenção única para nomes de exchanges. O modelo dá peças; o desenho do contrato vem da aplicação. Por isso, escolher o recorte da exchange é escolher onde a responsabilidade semântica vai morar.</p>
+      <table>
+        <tr>
+          <th>Recorte</th>
+          <th>Quando faz sentido</th>
+          <th>Cuidado principal</th>
+        </tr>
+        <tr>
+          <td>Por domínio</td>
+          <td><code>orders.events</code> reúne acontecimentos de pedidos e deixa a routing key carregar o evento específico.</td>
+          <td>O domínio precisa ter owner claro para evoluir keys sem quebrar publishers e consumers.</td>
+        </tr>
+        <tr>
+          <td>Por evento</td>
+          <td><code>orders.created</code> como exchange separa fortemente um acontecimento muito central.</td>
+          <td>Exchanges demais podem espalhar ownership e tornar a topologia difícil de revisar.</td>
+        </tr>
+        <tr>
+          <td>Por severidade</td>
+          <td><code>logs.severity</code> combina quando a categoria operacional é a intenção de roteamento.</td>
+          <td>Não serve bem quando a decisão real é de domínio, como pedido criado ou pagamento recusado.</td>
+        </tr>
+        <tr>
+          <td>Por tenant</td>
+          <td><code>tenant-a.events</code> pode isolar vocabulário por cliente em cenários que realmente pedem essa separação.</td>
+          <td>A cardinalidade cresce rápido; o tenant não deve substituir uma convenção de domínio quando o evento é o mesmo.</td>
+        </tr>
+      </table>
+      <p>Ownership de exchange, aqui, não é discussão administrativa pesada. É a pergunta simples: quem pode dizer que <code>orders.events</code> continua significando a mesma coisa quando uma equipe quer mudar nomes, padrões ou destinos?</p>
+    </section>
+
+    <section>
+      <h2>O contrato aparece nas relações, não nos comandos</h2>
+      <p>Como exchanges, filas e bindings são peças explícitas da topologia, é possível enxergar o contrato sem transformar a explicação em configuração. A forma mínima da relação é simples: uma exchange estável recebe a publicação; filas internas representam interesses de consumo; bindings unem os dois lados.</p>
+      <div class="content-grid visual-block" aria-label="Relações que materializam o contrato de topologia">
+        <div class="card">
+          <span class="tag">Exchange pública</span>
+          <p><code>orders.events</code> é o ponto que o producer conhece.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Filas internas</span>
+          <p><code>billing.orders-created</code> e <code>audit.orders-events</code> pertencem aos consumidores.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Bindings</span>
+          <p>As regras conectam <code>orders.created</code> ou <code>orders.*</code> aos destinos que precisam da cópia.</p>
+        </div>
+      </div>
+      <p>A leitura importante é que a publicação continua apontando para <code>orders.events</code>. O que cresce é a tabela de bindings. Quando essa separação fica clara, a evolução de consumidores deixa de empurrar detalhes internos para o producer.</p>
+    </section>
+
+    <section>
+      <h2>Quando a key ficou pública demais</h2>
+      <p>Depois que o modelo positivo está montado, a armadilha fica fácil de reconhecer: a routing key ficou pública demais quando ela revela o destino interno em vez da intenção de publicação. O sinal não é o tamanho da string; é a razão pela qual ela mudaria.</p>
+      <div class="content-grid">
+        <div class="card">
+          <span class="tag">Boa mudança</span>
+          <p>Adicionar <code>audit.orders-events</code> porque uma nova leitura precisa do mesmo acontecimento.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Mudança suspeita</span>
+          <p>Renomear a key pública só porque a fila de um serviço mudou de nome.</p>
+        </div>
+        <div class="card">
+          <span class="tag">Pergunta útil</span>
+          <p>Esta key descreve o que aconteceu ou descreve quem consome agora?</p>
+        </div>
+      </div>
+      <p>O contrato de topologia não elimina mudanças incompatíveis. Ele torna visível onde elas acontecem e quem precisa coordená-las. Esse é o ponto em que uma exchange deixa de ser apenas mecanismo de roteamento e passa a ser uma fronteira de arquitetura.</p>
+    </section>
+
+    <section class="node-closing">
+      <h2>A próxima decisão é sobre cópia e competição</h2>
+      <p>Com o contrato estável, ainda falta decidir como os consumidores se organizam atrás dele. Uma fila por serviço muda o significado de receber cópias; vários consumers na mesma fila mudam a forma de dividir trabalho. Essa diferença é o próximo passo da corrente.</p>
+    </section>
+
+    <footer class="node-footer">
+      <h2>Referências</h2>
+      <ul class="reference-list">
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/exchanges">Documentação oficial de exchanges</a>
+          <span class="reference-note">Uso neste node: base para exchange como ponto de publicação, bindings e roteamento.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/publishers">Guia oficial de publishers</a>
+          <span class="reference-note">Uso neste node: sustenta a posição do producer no fluxo AMQP 0-9-1.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/tutorials/amqp-concepts">Guia oficial do modelo AMQP 0-9-1</a>
+          <span class="reference-note">Uso neste node: reforça que aplicações definem entidades e esquemas de roteamento.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/queues">Documentação oficial de filas</a>
+          <span class="reference-note">Uso neste node: apoia a separação entre fila consumidora e contrato público.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/assets/files/amqp0-9-1-43a54a005e97180a4fbe6e567a125d84.pdf">Especificação AMQP 0-9-1</a>
+          <span class="reference-note">Uso neste node: base normativa para exchange, routing key e filas no modelo AMQP.</span>
+        </li>
+      </ul>
+    </footer>
+  </main>
+</body>
+</html>

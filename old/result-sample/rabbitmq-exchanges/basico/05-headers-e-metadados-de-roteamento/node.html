@@ -1,0 +1,2028 @@
+<!doctype html>
+<html lang="pt-BR" data-visual-theme="notion-dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Headers exchange e metadados de roteamento</title>
+  <style>
+    :root {
+          color-scheme: dark;
+          --page: #191919;
+          --surface: #202020;
+          --surface-hover: #2a2a2a;
+          --soft: #242424;
+          --soft-2: #2a2a2a;
+          --text: #e6e6e6;
+          --strong: #f2f2f2;
+          --heading: #f2f2f2;
+          --muted: #a3a3a3;
+          --border: #333333;
+          --border-strong: #4a4a4a;
+          --accent: #6aaed6;
+          --accent-2: #8cc7ff;
+          --warn: #ffdc49;
+          --code: #e6e6e6;
+          --code-bg: #2f3437;
+          --tag-bg: #243831;
+          --tag-text: #7ad9c5;
+          --tag-border: #335f54;
+          --blue-soft: #1f2b3f;
+          --blue-text: #8cc7ff;
+          --blue-border: #365f93;
+          --warn-soft: #342f19;
+          --warn-border: #5f4f18;
+          --success-soft: #1f332b;
+          --success-text: #8be6c1;
+          --success-border: #2f6b57;
+          --purple-soft: #2b2342;
+          --purple-text: #c8b6ff;
+          --purple-border: #574582;
+          --risk-soft: #3a2028;
+          --risk-text: #ff9ab3;
+          --risk-border: #7a3a4d;
+          --pre-bg: #111111;
+          --pre-text: #d4d4d4;
+          --focus: #6aaed6;
+        }
+    * {
+                  box-sizing: border-box;
+                }
+            
+                body {
+                  color-scheme: dark;
+                  margin: 0;
+                  color: var(--text);
+                  background: var(--page);
+                  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif;
+                  font-size: 18px;
+                  line-height: 1.55;
+                }
+            
+                main {
+                  max-width: 1260px;
+                  margin: 0 auto;
+                  padding: 32px 28px 56px;
+                }
+            
+                h1,
+                h2,
+                h3 {
+                  color: var(--heading);
+                  line-height: 1.2;
+                  letter-spacing: 0;
+                  margin: 0 0 12px;
+                }
+            
+                h1 {
+                  font-size: 36px;
+                  margin-bottom: 10px;
+                }
+            
+                h2 {
+                  font-size: 26px;
+                  border-top: 1px solid var(--border);
+                  padding-top: 28px;
+                  margin-top: 34px;
+                }
+            
+                h3 {
+                  font-size: 20px;
+                  margin-top: 22px;
+                }
+            
+                p,
+                ul,
+                ol,
+                .lead,
+                .callout {
+                  max-width: none;
+                }
+            
+                p {
+                  margin: 0 0 12px;
+                }
+            
+                ul {
+                  margin: 8px 0 16px 22px;
+                  padding: 0;
+                }
+            
+                li {
+                  margin: 4px 0;
+                }
+            
+                table,
+                pre,
+                .content-grid,
+                .visual-block {
+                  width: 100%;
+                  max-width: 100%;
+                }
+            
+                table {
+                  border-collapse: collapse;
+                  margin: 14px 0 22px;
+                  table-layout: fixed;
+                  background: var(--surface);
+                }
+            
+                th,
+                td {
+                  border: 1px solid var(--border);
+                  padding: 9px 10px;
+                  vertical-align: top;
+                  overflow-wrap: anywhere;
+                  background: var(--surface);
+                }
+            
+                th {
+                  background: var(--soft-2);
+                  text-align: left;
+                  font-weight: 700;
+                  color: var(--heading);
+                }
+            
+                code {
+                  color: var(--code);
+                  background: var(--code-bg);
+                  border: 1px solid var(--border);
+                  border-radius: 4px;
+                  padding: 1px 4px;
+                  font-family: Consolas, Monaco, "Courier New", monospace;
+                  font-size: 0.92em;
+                }
+            
+                pre {
+                  margin: 12px 0 22px;
+                  padding: 14px 16px;
+                  color: var(--pre-text);
+                  background: var(--pre-bg);
+                  border: 1px solid var(--border);
+                  border-radius: 6px;
+                  overflow: auto;
+                  max-width: 100%;
+                  font-family: Consolas, Monaco, "Courier New", monospace;
+                  font-size: 16px;
+                  line-height: 1.45;
+                  white-space: pre;
+                }
+            
+                pre code {
+                  color: inherit;
+                  background: transparent;
+                  border: 0;
+                  border-radius: 0;
+                  padding: 0;
+                  font: inherit;
+                }
+            
+                .syntax-key {
+                  color: #8cc7ff;
+                  font-weight: 700;
+                }
+            
+                .syntax-op {
+                  color: #c8b6ff;
+                }
+            
+                .syntax-value {
+                  color: #a8e6cf;
+                }
+            
+                .syntax-comment {
+                  color: #a3a3a3;
+                }
+            
+                .syntax-risk {
+                  color: #ffe27a;
+                }
+            
+                a {
+                  color: var(--accent);
+                  text-decoration-thickness: 1px;
+                  text-underline-offset: 2px;
+                }
+            
+                a:hover {
+                  color: var(--accent-2);
+                }
+            
+                a:focus-visible {
+                  outline: 2px solid var(--focus);
+                  outline-offset: 3px;
+                  border-radius: 4px;
+                }
+            
+                .backlink {
+                  display: inline-flex;
+                  align-items: center;
+                  margin-bottom: 18px;
+                  font-weight: 700;
+                }
+            
+                .lead {
+                  color: var(--muted);
+                  font-size: 19px;
+                }
+            
+                .meta {
+                  color: var(--muted);
+                  margin-bottom: 24px;
+                }
+            
+                .node-context {
+                  display: grid;
+                  gap: 6px;
+                  padding: 12px 14px;
+                  border: 1px solid var(--border);
+                  border-left: 4px solid var(--accent);
+                  border-radius: 6px;
+                  background: var(--soft);
+                  margin: 0 0 18px;
+                }
+            
+                .node-context p {
+                  margin: 0;
+                }
+            
+                .node-context strong {
+                  color: var(--heading);
+                }
+            
+                .callout {
+                  padding: 13px 15px;
+                  border: 1px solid var(--border);
+                  border-left: 4px solid var(--accent);
+                  background: var(--soft);
+                  margin: 16px 0 22px;
+                  border-radius: 6px;
+                }
+            
+                .callout.warning {
+                  border-left-color: var(--warn);
+                  background: var(--warn-soft);
+                  border-color: var(--warn-border);
+                }
+            
+                .tag {
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 6px;
+                  color: var(--tag-text);
+                  background: var(--tag-bg);
+                  border: 1px solid var(--tag-border);
+                  border-radius: 999px;
+                  padding: 2px 8px;
+                  font-size: 14px;
+                  font-weight: 700;
+                  margin: 0 6px 8px 0;
+                  white-space: nowrap;
+                }
+            
+                .tag.blue {
+                  color: var(--blue-text);
+                  background: var(--blue-soft);
+                  border-color: var(--blue-border);
+                }
+            
+                .tag.warn {
+                  color: var(--warn);
+                  background: var(--warn-soft);
+                  border-color: var(--warn-border);
+                }
+            
+                .tag.purple {
+                  color: var(--purple-text);
+                  background: var(--purple-soft);
+                  border-color: var(--purple-border);
+                }
+            
+                .content-grid {
+                  display: grid;
+                  grid-template-columns: repeat(3, minmax(0, 1fr));
+                  gap: 14px;
+                  margin: 16px 0 22px;
+                }
+            
+                .message-map {
+                  display: grid;
+                  grid-template-columns: minmax(240px, 0.9fr) minmax(300px, 1.1fr) minmax(240px, 0.9fr);
+                  gap: 14px;
+                  align-items: stretch;
+                  margin: 16px 0 22px;
+                }
+            
+                .message-card,
+                .decision-card,
+                .match-card,
+                .boundary-card {
+                  background: var(--surface);
+                  border: 1px solid var(--border);
+                  border-radius: 6px;
+                  padding: 14px;
+                }
+            
+                .message-card h3,
+                .decision-card h3,
+                .match-card h3,
+                .boundary-card h3 {
+                  margin-top: 0;
+                }
+            
+                .message-card.key {
+                  border-left: 4px solid var(--muted);
+                }
+            
+                .message-card.headers {
+                  border-left: 4px solid var(--accent);
+                }
+            
+                .message-card.payload {
+                  border-left: 4px solid var(--warn);
+                }
+            
+                .message-card p,
+                .decision-card p,
+                .match-card p,
+                .boundary-card p {
+                  color: var(--muted);
+                }
+            
+                .kv-list {
+                  display: grid;
+                  gap: 8px;
+                  margin-top: 10px;
+                }
+            
+                .kv {
+                  display: grid;
+                  grid-template-columns: minmax(90px, 0.75fr) minmax(120px, 1fr);
+                  gap: 8px;
+                  align-items: center;
+                  border: 1px solid var(--border-strong);
+                  border-radius: 6px;
+                  background: var(--soft);
+                  padding: 8px 10px;
+                  overflow-wrap: anywhere;
+                }
+            
+                .kv strong {
+                  color: var(--heading);
+                }
+            
+                .kv span {
+                  color: var(--muted);
+                }
+            
+                .match-flow {
+                  display: grid;
+                  grid-template-columns: minmax(260px, 1fr) minmax(260px, 1fr) minmax(220px, 0.8fr);
+                  gap: 14px;
+                  margin: 16px 0 22px;
+                }
+            
+                .match-card.hit {
+                  background: var(--success-soft);
+                  border-color: var(--success-border);
+                }
+            
+                .match-card.miss {
+                  background: var(--risk-soft);
+                  border-color: var(--risk-border);
+                }
+            
+                .compare-grid {
+                  display: grid;
+                  grid-template-columns: repeat(2, minmax(0, 1fr));
+                  gap: 14px;
+                  margin: 16px 0 22px;
+                }
+            
+                .boundary-card.topic {
+                  border-left: 4px solid var(--purple-text);
+                }
+            
+                .boundary-card.headers {
+                  border-left: 4px solid var(--accent);
+                }
+            
+                .small {
+                  color: var(--muted);
+                  font-size: 16px;
+                }
+            
+                @media (max-width: 900px) {
+                  main {
+                    padding: 24px 16px 42px;
+                  }
+            
+                  h1 {
+                    font-size: 30px;
+                  }
+            
+                  h2 {
+                    font-size: 23px;
+                  }
+            
+                  .content-grid,
+                  .message-map,
+                  .match-flow,
+                  .compare-grid {
+                    grid-template-columns: 1fr;
+                  }
+            
+                  table {
+                    display: block;
+                    overflow-x: auto;
+                    white-space: nowrap;
+                  }
+            
+                  th,
+                  td {
+                    min-width: 180px;
+                  }
+            
+                  .kv {
+                    grid-template-columns: 1fr;
+                  }
+                }
+            .node-context {
+              display: grid;
+              gap: 6px;
+              padding: 12px 14px;
+              border: 1px solid var(--border);
+              border-left: 4px solid var(--accent);
+              border-radius: 6px;
+              background: var(--soft);
+              margin: 0 0 18px;
+              width: 100%;
+            }
+            .node-context p { margin: 0; }
+            .node-context strong { color: var(--heading); }
+            .node-context a {
+              color: var(--accent);
+              font-weight: 400;
+              text-decoration-line: underline;
+              text-decoration-thickness: 1px;
+              text-underline-offset: 2px;
+            }
+            .node-footer {
+              margin: 0;
+              padding: 0;
+              border: 0;
+              background: transparent;
+            }
+            .node-footer h2 { margin-top: 32px; }
+            .reference-list {
+              display: grid;
+              gap: 8px;
+              margin: 8px 0 0;
+              padding: 0;
+              list-style: none;
+            }
+            .reference-item {
+              display: grid;
+              grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr);
+              gap: 10px;
+              align-items: start;
+              padding: 10px 12px;
+              border: 1px solid var(--border);
+              border-radius: 6px;
+              background: var(--surface);
+            }
+            .reference-item a,
+            .node-footer a {
+              color: var(--accent);
+              font-weight: 400;
+              text-decoration-line: underline;
+              text-decoration-thickness: 1px;
+              text-underline-offset: 2px;
+            }
+            .reference-note { color: var(--text); }
+            @media (max-width: 860px) {
+              .reference-item { grid-template-columns: 1fr; }
+            }
+        * {
+              box-sizing: border-box;
+            }
+        
+            body {
+              color-scheme: dark;
+              margin: 0;
+              color: var(--text);
+              background: var(--page);
+              font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif;
+              font-size: 18px;
+              line-height: 1.55;
+            }
+        
+            main {
+              max-width: 1260px;
+              margin: 0 auto;
+              padding: 32px 28px 56px;
+            }
+        
+            h1,
+            h2,
+            h3 {
+              color: var(--heading);
+              line-height: 1.2;
+              margin: 0 0 12px;
+            }
+        
+            h1 {
+              font-size: 36px;
+              margin-bottom: 8px;
+            }
+        
+            h2 {
+              font-size: 26px;
+              border-top: 1px solid var(--border);
+              padding-top: 28px;
+              margin-top: 32px;
+            }
+        
+            h3 {
+              font-size: 20px;
+              margin-top: 22px;
+            }
+        
+            p,
+            ul,
+            ol,
+            .lead,
+            .callout {
+              max-width: none;
+            }
+        
+            p {
+              margin: 0 0 12px;
+            }
+        
+            ul {
+              margin: 8px 0 16px 22px;
+              padding: 0;
+            }
+        
+            li {
+              margin: 4px 0;
+            }
+        
+            table,
+            pre,
+            .content-grid,
+            .visual-block {
+              width: 100%;
+              max-width: 100%;
+            }
+        
+            table {
+              border-collapse: collapse;
+              margin: 14px 0 22px;
+              table-layout: fixed;
+              background: var(--surface);
+            }
+        
+            th,
+            td {
+              border: 1px solid var(--border);
+              padding: 9px 10px;
+              vertical-align: top;
+              overflow-wrap: anywhere;
+              background: var(--surface);
+            }
+        
+            th {
+              background: var(--soft-2);
+              text-align: left;
+              font-weight: 700;
+            }
+        
+            code {
+              color: var(--code);
+              background: var(--code-bg);
+              border: 1px solid var(--border);
+              border-radius: 4px;
+              padding: 1px 4px;
+              font-family: Consolas, Monaco, "Courier New", monospace;
+              font-size: 0.92em;
+            }
+        
+            pre {
+              margin: 12px 0 22px;
+              padding: 14px 16px;
+              color: var(--pre-text);
+              background: var(--pre-bg);
+              border: 1px solid var(--border);
+              border-radius: 6px;
+              overflow: auto;
+              max-width: 100%;
+              font-family: Consolas, Monaco, "Courier New", monospace;
+              font-size: 16px;
+              line-height: 1.45;
+              white-space: pre;
+            }
+        
+            pre code {
+              color: inherit;
+              background: transparent;
+              border: 0;
+              border-radius: 0;
+              padding: 0;
+              font: inherit;
+            }
+        
+            .syntax-key {
+              color: #8cc7ff;
+              font-weight: 700;
+            }
+        
+            .syntax-op {
+              color: #c8b6ff;
+            }
+        
+            .syntax-value {
+              color: #a8e6cf;
+            }
+        
+            .syntax-comment {
+              color: #a3a3a3;
+            }
+        
+            .syntax-risk {
+              color: #ffe27a;
+            }
+        
+            a {
+              color: var(--accent);
+              text-decoration-thickness: 1px;
+              text-underline-offset: 2px;
+            }
+        
+            a:hover {
+              color: #8cc7ff;
+            }
+        
+            a:focus-visible {
+              outline: 2px solid var(--focus);
+              outline-offset: 3px;
+              border-radius: 4px;
+            }
+        
+            .backlink {
+              display: inline-flex;
+              align-items: center;
+              margin-bottom: 18px;
+              font-weight: 700;
+            }
+        
+            .lead {
+              color: var(--muted);
+              font-size: 19px;
+            }
+        
+            .meta {
+              color: var(--muted);
+              margin-bottom: 24px;
+            }
+        
+            .node-context {
+              display: grid;
+              gap: 6px;
+              padding: 12px 14px;
+              border: 1px solid var(--border);
+              border-left: 4px solid var(--accent);
+              border-radius: 6px;
+              background: var(--soft);
+              margin: 0 0 18px;
+              width: 100%;
+            }
+        
+            .node-context p {
+              margin: 0;
+            }
+        
+            .node-context strong {
+              color: var(--heading);
+            }
+        
+            .node-context a {
+              color: var(--accent);
+              font-weight: 400;
+              text-decoration-line: underline;
+              text-decoration-thickness: 1px;
+              text-underline-offset: 2px;
+            }
+        
+            .node-context a:hover {
+              color: var(--accent-2);
+            }
+        
+            .node-footer {
+              margin: 0;
+              padding: 0;
+              border: 0;
+              background: transparent;
+            }
+        
+            .node-footer h2 {
+              margin-top: 32px;
+            }
+        
+            .reference-list {
+              display: grid;
+              gap: 8px;
+              margin: 8px 0 0;
+              padding: 0;
+              list-style: none;
+            }
+        
+            .reference-item {
+              display: grid;
+              grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr);
+              gap: 10px;
+              align-items: start;
+              padding: 10px 12px;
+              border: 1px solid var(--border);
+              border-radius: 6px;
+              background: var(--surface);
+            }
+        
+            .reference-item a,
+            .node-footer a {
+              color: var(--accent);
+              font-weight: 400;
+              text-decoration-line: underline;
+              text-decoration-thickness: 1px;
+              text-underline-offset: 2px;
+            }
+        
+            .reference-note {
+              color: var(--text);
+            }
+        
+            .callout {
+              padding: 13px 15px;
+              border: 1px solid var(--border);
+              border-left: 4px solid var(--accent);
+              background: var(--soft);
+              margin: 16px 0 22px;
+              border-radius: 6px;
+            }
+        
+            .warning {
+              border-left-color: var(--warn);
+              background: var(--warn-soft);
+            }
+        
+            .callout.boundary,
+            .callout.warning {
+              border-left-color: var(--warn);
+              background: var(--warn-soft);
+              border-color: var(--warn-border);
+            }
+        
+            .grid {
+              display: grid;
+              grid-template-columns: repeat(3, minmax(0, 1fr));
+              gap: 14px;
+              margin: 16px 0 22px;
+            }
+        
+            .card {
+              border: 1px solid var(--border);
+              border-radius: 6px;
+              padding: 14px;
+              background: var(--surface);
+            }
+        
+            .tag {
+              display: inline-block;
+              padding: 2px 7px;
+              border-radius: 999px;
+              font-size: 15px;
+              font-weight: 700;
+              background: var(--tag-bg);
+              color: var(--tag-text);
+              border: 1px solid var(--tag-border);
+            }
+        
+            .tag.blue {
+              color: var(--blue-text);
+              background: var(--blue-soft);
+              border-color: var(--blue-border);
+            }
+        
+            .tag.warn {
+              color: var(--warn);
+              background: var(--warn-soft);
+              border-color: var(--warn-border);
+            }
+        
+            .small {
+              color: var(--muted);
+              font-size: 16px;
+            }
+        
+            .timeline {
+              display: grid;
+              gap: 10px;
+              margin: 16px 0 22px;
+            }
+        
+            .timeline-step {
+              display: grid;
+              grid-template-columns: 72px 1fr;
+              gap: 12px;
+              align-items: start;
+              border: 1px solid var(--border);
+              border-radius: 6px;
+              padding: 10px 12px;
+              background: var(--surface);
+            }
+        
+            .flow-steps {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 8px;
+              align-items: center;
+              margin: 16px 0 22px;
+            }
+        
+            .flow-steps span {
+              border: 1px solid var(--border);
+              border-radius: 6px;
+              padding: 8px 10px;
+              background: var(--soft);
+            }
+        
+            .state-grid {
+              display: grid;
+              grid-template-columns: repeat(2, minmax(0, 1fr));
+              gap: 14px;
+              margin: 16px 0 22px;
+            }
+        
+            .topology,
+            .lane-map {
+              display: grid;
+              gap: 10px;
+              margin: 16px 0 22px;
+            }
+        
+            .topology-node,
+            .lane {
+              border: 1px solid var(--border);
+              border-radius: 6px;
+              padding: 10px 12px;
+              background: var(--surface);
+            }
+        
+            :where(
+              .visual-surface,
+              .timeline-step,
+              .flow-step,
+              .step,
+              .risk-step,
+              .position-strip,
+              .contract-map,
+              .state-card,
+              .stream-card,
+              .event-card,
+              .group-card,
+              .tool-card,
+              .part,
+              .group-shell,
+              .umbrella-map,
+              .topology-node,
+              .lane,
+              .process-card,
+              .visual-card,
+              .concept-card,
+              .path-card,
+              .decision-card,
+              .stage,
+              .segment,
+              .panel,
+              .box,
+              .map-card,
+              .layer,
+              .node-card,
+              .mini-card,
+              .boundary-card,
+              .handoff-card,
+              .flow-mini > *
+            ) {
+              color: var(--text);
+              background: var(--surface);
+              border-color: var(--border);
+            }
+        
+            :where(
+              .visual-surface,
+              .timeline-step,
+              .flow-step,
+              .step,
+              .risk-step,
+              .position-strip,
+              .contract-map,
+              .state-card,
+              .stream-card,
+              .event-card,
+              .group-card,
+              .tool-card,
+              .part,
+              .group-shell,
+              .umbrella-map,
+              .topology-node,
+              .lane,
+              .process-card,
+              .visual-card,
+              .concept-card,
+              .path-card,
+              .decision-card,
+              .stage,
+              .segment,
+              .panel,
+              .box,
+              .map-card,
+              .layer,
+              .node-card,
+              .mini-card,
+              .boundary-card,
+              .handoff-card,
+              .flow-mini > *
+            ) strong {
+              color: var(--heading);
+            }
+        
+            .route-label {
+              color: var(--heading);
+            }
+        
+            :where(.info, .context, .app, .stream) {
+              background: var(--blue-soft);
+              border-color: var(--blue-border);
+            }
+        
+            :where(.success, .focus, .ecs, .group, .expire) {
+              background: var(--success-soft);
+              border-color: var(--success-border);
+            }
+        
+            :where(.secondary, .event, .search) {
+              background: var(--purple-soft);
+              border-color: var(--purple-border);
+            }
+        
+            :where(.warn, .warning, .risk, .danger, .logs, .aside, .keep) {
+              background: var(--warn-soft);
+              border-color: var(--warn-border);
+            }
+        
+            :where(.danger, .risk, .search) {
+              color: var(--text);
+            }
+        
+            .step,
+            .stream-card,
+            .stream-card.process,
+            .stream-card.out,
+            .stream-card.err,
+            .umbrella-map,
+            .group-shell,
+            .part.focus,
+            .part.context,
+            .event-card,
+            .event-card:nth-child(1),
+            .event-card:nth-child(2),
+            .event-card:nth-child(3),
+            .event-card:nth-child(4),
+            .group-card.group,
+            .group-card.stream,
+            .group-card.event,
+            .state-card.keep,
+            .state-card.expire,
+            .tool-card.search,
+            .tool-card.live,
+            .tool-card.metric,
+            .flow-step.app,
+            .flow-step.stream,
+            .flow-step.ecs,
+            .flow-step.logs,
+            .flow-step.search,
+            .handoff-card,
+            .handoff-card.transport,
+            .handoff-card.meaning,
+            .lane.main,
+            .lane.aside,
+            .boundary-card.project,
+            .boundary-card.runtime {
+              color: var(--text);
+              background: var(--surface);
+              border-color: var(--border);
+            }
+        
+            .stream-card.process,
+            .part.context,
+            .event-card:nth-child(1),
+            .group-card.stream,
+            .tool-card.live,
+            .flow-step.app,
+            .flow-step.stream,
+            .handoff-card.transport {
+              background: var(--blue-soft);
+              border-color: var(--blue-border);
+            }
+        
+            .stream-card.out,
+            .part.focus,
+            .event-card:nth-child(2),
+            .group-card.group,
+            .state-card.expire,
+            .tool-card.metric,
+            .flow-step.ecs,
+            .lane.main,
+            .boundary-card.runtime {
+              background: var(--success-soft);
+              border-color: var(--success-border);
+            }
+        
+            .event-card:nth-child(3),
+            .group-card.event,
+            .tool-card.search,
+            .flow-step.search,
+            .handoff-card.meaning,
+            .boundary-card.project {
+              background: var(--purple-soft);
+              border-color: var(--purple-border);
+            }
+        
+            .stream-card.err,
+            .event-card:nth-child(4),
+            .state-card.keep,
+            .flow-step.logs,
+            .lane.aside {
+              background: var(--warn-soft);
+              border-color: var(--warn-border);
+            }
+        
+            @media (max-width: 860px) {
+              main {
+                padding: 22px 16px 40px;
+              }
+        
+              .grid {
+                grid-template-columns: 1fr;
+              }
+        
+              .timeline-step,
+              .state-grid,
+              .reference-item {
+                grid-template-columns: 1fr;
+              }
+        
+              table {
+                display: block;
+                overflow-x: auto;
+                table-layout: auto;
+              }
+        
+              th,
+              td {
+                min-width: 150px;
+              }
+            }
+        .node-context {
+          display: grid;
+          gap: 6px;
+          padding: 12px 14px;
+          border: 1px solid var(--border);
+          border-left: 4px solid var(--accent);
+          border-radius: 6px;
+          background: var(--soft);
+          margin: 0 0 18px;
+          width: 100%;
+        }
+        .node-context p { margin: 0; }
+        .node-context strong { color: var(--heading); }
+        .node-context a {
+          color: var(--accent);
+          font-weight: 400;
+          text-decoration-line: underline;
+          text-decoration-thickness: 1px;
+          text-underline-offset: 2px;
+        }
+        .node-footer {
+          margin: 0;
+          padding: 0;
+          border: 0;
+          background: transparent;
+        }
+        .node-footer h2 { margin-top: 32px; }
+        .reference-list {
+          display: grid;
+          gap: 8px;
+          margin: 8px 0 0;
+          padding: 0;
+          list-style: none;
+        }
+        .reference-item {
+          display: grid;
+          grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr);
+          gap: 10px;
+          align-items: start;
+          padding: 10px 12px;
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          background: var(--surface);
+        }
+        .reference-item a,
+        .node-footer a {
+          color: var(--accent);
+          font-weight: 400;
+          text-decoration-line: underline;
+          text-decoration-thickness: 1px;
+          text-underline-offset: 2px;
+        }
+        .reference-note { color: var(--text); }
+        @media (max-width: 860px) {
+          .reference-item { grid-template-columns: 1fr; }
+        }
+    * {
+          box-sizing: border-box;
+        }
+    
+        body {
+          color-scheme: dark;
+          margin: 0;
+          color: var(--text);
+          background: var(--page);
+          font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif;
+          font-size: 18px;
+          line-height: 1.55;
+        }
+    
+        main {
+          max-width: 1260px;
+          margin: 0 auto;
+          padding: 32px 28px 56px;
+        }
+    
+        h1,
+        h2,
+        h3 {
+          color: var(--heading);
+          line-height: 1.2;
+          margin: 0 0 12px;
+        }
+    
+        h1 {
+          font-size: 36px;
+          margin-bottom: 8px;
+        }
+    
+        h2 {
+          font-size: 26px;
+          border-top: 1px solid var(--border);
+          padding-top: 28px;
+          margin-top: 32px;
+        }
+    
+        h3 {
+          font-size: 20px;
+          margin-top: 22px;
+        }
+    
+        p,
+        ul,
+        ol,
+        .lead,
+        .callout {
+          max-width: none;
+        }
+    
+        p {
+          margin: 0 0 12px;
+        }
+    
+        ul {
+          margin: 8px 0 16px 22px;
+          padding: 0;
+        }
+    
+        li {
+          margin: 4px 0;
+        }
+    
+        table,
+        pre,
+        .content-grid,
+        .visual-block {
+          width: 100%;
+          max-width: 100%;
+        }
+    
+        table {
+          border-collapse: collapse;
+          margin: 14px 0 22px;
+          table-layout: fixed;
+          background: var(--surface);
+        }
+    
+        th,
+        td {
+          border: 1px solid var(--border);
+          padding: 9px 10px;
+          vertical-align: top;
+          overflow-wrap: anywhere;
+          background: var(--surface);
+        }
+    
+        th {
+          background: var(--soft-2);
+          text-align: left;
+          font-weight: 700;
+        }
+    
+        code {
+          color: var(--code);
+          background: var(--code-bg);
+          border: 1px solid var(--border);
+          border-radius: 4px;
+          padding: 1px 4px;
+          font-family: Consolas, Monaco, "Courier New", monospace;
+          font-size: 0.92em;
+        }
+    
+        pre {
+          margin: 12px 0 22px;
+          padding: 14px 16px;
+          color: var(--pre-text);
+          background: var(--pre-bg);
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          overflow: auto;
+          max-width: 100%;
+          font-family: Consolas, Monaco, "Courier New", monospace;
+          font-size: 16px;
+          line-height: 1.45;
+          white-space: pre;
+        }
+    
+        pre code {
+          color: inherit;
+          background: transparent;
+          border: 0;
+          border-radius: 0;
+          padding: 0;
+          font: inherit;
+        }
+    
+        .syntax-key {
+          color: #8cc7ff;
+          font-weight: 700;
+        }
+    
+        .syntax-op {
+          color: #c8b6ff;
+        }
+    
+        .syntax-value {
+          color: #a8e6cf;
+        }
+    
+        .syntax-comment {
+          color: #a3a3a3;
+        }
+    
+        .syntax-risk {
+          color: #ffe27a;
+        }
+    
+        a {
+          color: var(--accent);
+          text-decoration-thickness: 1px;
+          text-underline-offset: 2px;
+        }
+    
+        a:hover {
+          color: #8cc7ff;
+        }
+    
+        a:focus-visible {
+          outline: 2px solid var(--focus);
+          outline-offset: 3px;
+          border-radius: 4px;
+        }
+    
+        .backlink {
+          display: inline-flex;
+          align-items: center;
+          margin-bottom: 18px;
+          font-weight: 700;
+        }
+    
+        .lead {
+          color: var(--muted);
+          font-size: 19px;
+        }
+    
+        .meta {
+          color: var(--muted);
+          margin-bottom: 24px;
+        }
+    
+        .node-context {
+          display: grid;
+          gap: 6px;
+          padding: 12px 14px;
+          border: 1px solid var(--border);
+          border-left: 4px solid var(--accent);
+          border-radius: 6px;
+          background: var(--soft);
+          margin: 0 0 18px;
+          width: 100%;
+        }
+    
+        .node-context p {
+          margin: 0;
+        }
+    
+        .node-context strong {
+          color: var(--heading);
+        }
+    
+        .node-context a {
+          color: var(--accent);
+          font-weight: 400;
+          text-decoration-line: underline;
+          text-decoration-thickness: 1px;
+          text-underline-offset: 2px;
+        }
+    
+        .node-context a:hover {
+          color: var(--accent-2);
+        }
+    
+        .node-footer {
+          margin: 0;
+          padding: 0;
+          border: 0;
+          background: transparent;
+        }
+    
+        .node-footer h2 {
+          margin-top: 32px;
+        }
+    
+        .reference-list {
+          display: grid;
+          gap: 8px;
+          margin: 8px 0 0;
+          padding: 0;
+          list-style: none;
+        }
+    
+        .reference-item {
+          display: grid;
+          grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr);
+          gap: 10px;
+          align-items: start;
+          padding: 10px 12px;
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          background: var(--surface);
+        }
+    
+        .reference-item a,
+        .node-footer a {
+          color: var(--accent);
+          font-weight: 400;
+          text-decoration-line: underline;
+          text-decoration-thickness: 1px;
+          text-underline-offset: 2px;
+        }
+    
+        .reference-note {
+          color: var(--text);
+        }
+    
+        .callout {
+          padding: 13px 15px;
+          border: 1px solid var(--border);
+          border-left: 4px solid var(--accent);
+          background: var(--soft);
+          margin: 16px 0 22px;
+          border-radius: 6px;
+        }
+    
+        .warning {
+          border-left-color: var(--warn);
+          background: var(--warn-soft);
+        }
+    
+        .callout.boundary,
+        .callout.warning {
+          border-left-color: var(--warn);
+          background: var(--warn-soft);
+          border-color: var(--warn-border);
+        }
+    
+        .grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 14px;
+          margin: 16px 0 22px;
+        }
+    
+        .card {
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          padding: 14px;
+          background: var(--surface);
+        }
+    
+        .tag {
+          display: inline-block;
+          padding: 2px 7px;
+          border-radius: 999px;
+          font-size: 15px;
+          font-weight: 700;
+          background: var(--tag-bg);
+          color: var(--tag-text);
+          border: 1px solid var(--tag-border);
+        }
+    
+        .tag.blue {
+          color: var(--blue-text);
+          background: var(--blue-soft);
+          border-color: var(--blue-border);
+        }
+    
+        .tag.warn {
+          color: var(--warn);
+          background: var(--warn-soft);
+          border-color: var(--warn-border);
+        }
+    
+        .small {
+          color: var(--muted);
+          font-size: 16px;
+        }
+    
+        .timeline {
+          display: grid;
+          gap: 10px;
+          margin: 16px 0 22px;
+        }
+    
+        .timeline-step {
+          display: grid;
+          grid-template-columns: 72px 1fr;
+          gap: 12px;
+          align-items: start;
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          padding: 10px 12px;
+          background: var(--surface);
+        }
+    
+        .flow-steps {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          align-items: center;
+          margin: 16px 0 22px;
+        }
+    
+        .flow-steps span {
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          padding: 8px 10px;
+          background: var(--soft);
+        }
+    
+        .state-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 14px;
+          margin: 16px 0 22px;
+        }
+    
+        .topology,
+        .lane-map {
+          display: grid;
+          gap: 10px;
+          margin: 16px 0 22px;
+        }
+    
+        .topology-node,
+        .lane {
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          padding: 10px 12px;
+          background: var(--surface);
+        }
+    
+        :where(
+          .visual-surface,
+          .timeline-step,
+          .flow-step,
+          .step,
+          .risk-step,
+          .position-strip,
+          .contract-map,
+          .state-card,
+          .stream-card,
+          .event-card,
+          .group-card,
+          .tool-card,
+          .part,
+          .group-shell,
+          .umbrella-map,
+          .topology-node,
+          .lane,
+          .process-card,
+          .visual-card,
+          .concept-card,
+          .path-card,
+          .decision-card,
+          .stage,
+          .segment,
+          .panel,
+          .box,
+          .map-card,
+          .layer,
+          .node-card,
+          .mini-card,
+          .boundary-card,
+          .handoff-card,
+          .flow-mini > *
+        ) {
+          color: var(--text);
+          background: var(--surface);
+          border-color: var(--border);
+        }
+    
+        :where(
+          .visual-surface,
+          .timeline-step,
+          .flow-step,
+          .step,
+          .risk-step,
+          .position-strip,
+          .contract-map,
+          .state-card,
+          .stream-card,
+          .event-card,
+          .group-card,
+          .tool-card,
+          .part,
+          .group-shell,
+          .umbrella-map,
+          .topology-node,
+          .lane,
+          .process-card,
+          .visual-card,
+          .concept-card,
+          .path-card,
+          .decision-card,
+          .stage,
+          .segment,
+          .panel,
+          .box,
+          .map-card,
+          .layer,
+          .node-card,
+          .mini-card,
+          .boundary-card,
+          .handoff-card,
+          .flow-mini > *
+        ) strong {
+          color: var(--heading);
+        }
+    
+        .route-label {
+          color: var(--heading);
+        }
+    
+        :where(.info, .context, .app, .stream) {
+          background: var(--blue-soft);
+          border-color: var(--blue-border);
+        }
+    
+        :where(.success, .focus, .ecs, .group, .expire) {
+          background: var(--success-soft);
+          border-color: var(--success-border);
+        }
+    
+        :where(.secondary, .event, .search) {
+          background: var(--purple-soft);
+          border-color: var(--purple-border);
+        }
+    
+        :where(.warn, .warning, .risk, .danger, .logs, .aside, .keep) {
+          background: var(--warn-soft);
+          border-color: var(--warn-border);
+        }
+    
+        :where(.danger, .risk, .search) {
+          color: var(--text);
+        }
+    
+        .step,
+        .stream-card,
+        .stream-card.process,
+        .stream-card.out,
+        .stream-card.err,
+        .umbrella-map,
+        .group-shell,
+        .part.focus,
+        .part.context,
+        .event-card,
+        .event-card:nth-child(1),
+        .event-card:nth-child(2),
+        .event-card:nth-child(3),
+        .event-card:nth-child(4),
+        .group-card.group,
+        .group-card.stream,
+        .group-card.event,
+        .state-card.keep,
+        .state-card.expire,
+        .tool-card.search,
+        .tool-card.live,
+        .tool-card.metric,
+        .flow-step.app,
+        .flow-step.stream,
+        .flow-step.ecs,
+        .flow-step.logs,
+        .flow-step.search,
+        .handoff-card,
+        .handoff-card.transport,
+        .handoff-card.meaning,
+        .lane.main,
+        .lane.aside,
+        .boundary-card.project,
+        .boundary-card.runtime {
+          color: var(--text);
+          background: var(--surface);
+          border-color: var(--border);
+        }
+    
+        .stream-card.process,
+        .part.context,
+        .event-card:nth-child(1),
+        .group-card.stream,
+        .tool-card.live,
+        .flow-step.app,
+        .flow-step.stream,
+        .handoff-card.transport {
+          background: var(--blue-soft);
+          border-color: var(--blue-border);
+        }
+    
+        .stream-card.out,
+        .part.focus,
+        .event-card:nth-child(2),
+        .group-card.group,
+        .state-card.expire,
+        .tool-card.metric,
+        .flow-step.ecs,
+        .lane.main,
+        .boundary-card.runtime {
+          background: var(--success-soft);
+          border-color: var(--success-border);
+        }
+    
+        .event-card:nth-child(3),
+        .group-card.event,
+        .tool-card.search,
+        .flow-step.search,
+        .handoff-card.meaning,
+        .boundary-card.project {
+          background: var(--purple-soft);
+          border-color: var(--purple-border);
+        }
+    
+        .stream-card.err,
+        .event-card:nth-child(4),
+        .state-card.keep,
+        .flow-step.logs,
+        .lane.aside {
+          background: var(--warn-soft);
+          border-color: var(--warn-border);
+        }
+    
+        @media (max-width: 860px) {
+          main {
+            padding: 22px 16px 40px;
+          }
+    
+          .grid {
+            grid-template-columns: 1fr;
+          }
+    
+          .timeline-step,
+          .state-grid,
+          .reference-item {
+            grid-template-columns: 1fr;
+          }
+    
+          table {
+            display: block;
+            overflow-x: auto;
+            table-layout: auto;
+          }
+    
+          th,
+          td {
+            min-width: 150px;
+          }
+        }
+    .node-context {
+      display: grid;
+      gap: 6px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+      background: var(--soft);
+      margin: 0 0 18px;
+      width: 100%;
+    }
+    .node-context p { margin: 0; }
+    .node-context strong { color: var(--heading); }
+    .node-context a {
+      color: var(--accent);
+      font-weight: 400;
+      text-decoration-line: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+    .node-footer {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+    }
+    .node-footer h2 { margin-top: 32px; }
+    .reference-list {
+      display: grid;
+      gap: 8px;
+      margin: 8px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .reference-item {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--surface);
+    }
+    .reference-item a,
+    .node-footer a {
+      color: var(--accent);
+      font-weight: 400;
+      text-decoration-line: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+    .reference-note { color: var(--text); }
+    @media (max-width: 860px) {
+      .reference-item { grid-template-columns: 1fr; }
+    }
+    /* Fixed visual invariants backported from the hardened templates. */
+    .tag,
+    .card > .tag,
+    .route-card > .tag,
+    .flow-step > .tag,
+    .flow-steps > .tag,
+    .flow-steps .flow-step > .tag,
+    .flow-steps .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-self: start;
+      align-self: start;
+      width: fit-content;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+
+    .flow-steps > .flow-step {
+      min-width: 0;
+      flex: 1 1 180px;
+    }
+
+    .flow-steps > .flow-step::after {
+      content: none;
+      display: none;
+    }
+
+    @media (max-width: 900px) {
+      table {
+        display: block;
+        overflow-x: auto;
+        table-layout: auto;
+      }
+
+      th,
+      td {
+        min-width: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="backlink" href="../../roadmap.html">Voltar ao roadmap</a>
+
+    <div
+      class="node-context"
+      data-node-position="true"
+      data-level="basico"
+      data-node-order="5"
+      data-node-count="6"
+      data-roadmap-slug="rabbitmq-exchanges">
+      <p><strong>Básico · 05 de 06</strong></p>
+      <p>Roadmap: Exchanges no RabbitMQ</p>
+      <p>Node atual: Headers exchange e metadados de roteamento</p>
+      <p>Anterior: <a href="../04-direct-fanout-e-topic/node.html">Direct, fanout e topic</a> · Próximo: <a href="../06-filas-consumidores-e-entrega/node.html">Filas, consumidores e entrega</a></p>
+    </div>
+
+    <h1>Headers exchange e metadados de roteamento</h1>
+    <p class="lead">Depois de direct, fanout e topic, aparece um caso em que a pergunta de roteamento não cabe bem em uma routing key textual: a mensagem precisa ser selecionada por atributos independentes.</p>
+    <p class="meta">Pesquisa consultada em 2026-06-08: documentação oficial RabbitMQ 4.3, guia oficial AMQP 0-9-1 e especificação AMQP 0-9-1.</p>
+
+    <h2>Quando uma key vira uma frase artificial</h2>
+    <p>Imagine uma publicação de relatório. A rota depende de três critérios: <code>tenant=acme</code>, <code>format=pdf</code> e <code>priority=high</code>. É possível espremer tudo em uma key como <code>acme.pdf.high</code>, mas essa string mistura três eixos que não formam uma hierarquia natural.</p>
+    <p>A mensagem AMQP também carrega um mapa de metadados separado do corpo. Esses metadados são os message headers. A headers exchange existe para ler esse mapa, comparar seus pares nome/valor com a regra do binding e decidir a rota sem depender da routing key.</p>
+
+    <div class="message-map visual-block" aria-label="Fronteira entre routing key, headers da mensagem e payload">
+      <div class="message-card key">
+        <span class="tag blue">Campo herdado</span>
+        <h3>Routing key</h3>
+        <p>Pode acompanhar a publicação, mas a headers exchange não usa esse campo para filtrar a mensagem.</p>
+      </div>
+      <div class="message-card headers">
+        <span class="tag">Metadados</span>
+        <h3>Headers da mensagem</h3>
+        <div class="kv-list">
+          <div class="kv"><strong>tenant</strong><span>acme</span></div>
+          <div class="kv"><strong>format</strong><span>pdf</span></div>
+          <div class="kv"><strong>priority</strong><span>high</span></div>
+        </div>
+      </div>
+      <div class="message-card payload">
+        <span class="tag warn">Fora da decisão</span>
+        <h3>Payload</h3>
+        <p>O corpo segue junto, mas permanece opaco para a exchange. A rota não depende de abrir JSON, XML ou binário.</p>
+      </div>
+    </div>
+
+    <p>O ponto importante é que a exchange continua sendo roteador. A lógica não saiu para o consumidor nem passou a ler o conteúdo do corpo; ela mudou o dado de entrada da decisão: de key textual para headers da mensagem.</p>
+
+    <h2>A regra fica no binding</h2>
+    <p>Uma headers exchange não olha para qualquer header solto e decide sozinha. A ligação entre exchange e destino registra argumentos do binding. Esses argumentos dizem quais pares nome/valor devem combinar com os headers da mensagem.</p>
+
+    <div class="match-flow visual-block" aria-label="Comparacao entre argumentos do binding e headers da mensagem">
+      <div class="match-card">
+        <span class="tag blue">Binding</span>
+        <h3>Regra registrada</h3>
+        <div class="kv-list">
+          <div class="kv"><strong>tenant</strong><span>acme</span></div>
+          <div class="kv"><strong>format</strong><span>pdf</span></div>
+          <div class="kv"><strong>priority</strong><span>high</span></div>
+        </div>
+      </div>
+      <div class="match-card">
+        <span class="tag">Mensagem</span>
+        <h3>Headers recebidos</h3>
+        <div class="kv-list">
+          <div class="kv"><strong>tenant</strong><span>acme</span></div>
+          <div class="kv"><strong>format</strong><span>pdf</span></div>
+          <div class="kv"><strong>priority</strong><span>high</span></div>
+        </div>
+      </div>
+      <div class="match-card hit">
+        <span class="tag">Resultado</span>
+        <h3>Combina</h3>
+        <p>Quando os pares exigidos batem com os headers relevantes, aquele destino entra na rota.</p>
+      </div>
+    </div>
+
+    <p>Se a mensagem viesse com <code>format=csv</code>, o par <code>format=pdf</code> deixaria de bater. A pergunta seguinte é inevitável: com três critérios, a exchange deve exigir todos ou aceitar que apenas um deles combine?</p>
+
+    <h2>O papel de <code>x-match</code></h2>
+    <p>Quando existe mais de um critério no binding, falta uma regra de combinação. O argumento especial <code>x-match</code> resolve essa ambiguidade: ele diz se a lista deve ser lida como "todos precisam bater" ou "qualquer um que bater já basta".</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Valor de <code>x-match</code></th>
+          <th>Como ler</th>
+          <th>Consequencia conceitual</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>all</code></td>
+          <td>Todos os pares relevantes do binding precisam combinar com os headers da mensagem.</td>
+          <td>Regra mais restritiva; boa quando a fila precisa exatamente daquele conjunto de atributos.</td>
+        </tr>
+        <tr>
+          <td><code>any</code></td>
+          <td>Um par relevante que combine já e suficiente.</td>
+          <td>Regra mais permissiva; a fila recebe mensagens que satisfazem ao menos um critério registrado.</td>
+        </tr>
+        <tr>
+          <td><code>all-with-x</code></td>
+          <td>Como <code>all</code>, mas também considera headers iniciados por <code>x-</code> na avaliacao.</td>
+          <td>Variante documentada no RabbitMQ atual para incluir esses headers no match.</td>
+        </tr>
+        <tr>
+          <td><code>any-with-x</code></td>
+          <td>Como <code>any</code>, mas também considera headers iniciados por <code>x-</code> na avaliacao.</td>
+          <td>Variante permissiva que inclui headers <code>x-</code> quando eles fazem parte da regra.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <pre class="code-block" aria-label="Exemplo conceitual de argumentos de binding para headers exchange"><code><span class="syntax-comment"># argumentos conceituais do binding</span>
+<span class="syntax-key">x-match</span><span class="syntax-op">: </span><span class="syntax-value">all</span>
+<span class="syntax-key">tenant</span><span class="syntax-op">: </span><span class="syntax-value">acme</span>
+<span class="syntax-key">format</span><span class="syntax-op">: </span><span class="syntax-value">pdf</span>
+<span class="syntax-key">priority</span><span class="syntax-op">: </span><span class="syntax-value">high</span></code></pre>
+
+    <p>Esse trecho não é um comando. Ele apenas mostra a forma da regra: <code>x-match</code> pertence ao binding, enquanto <code>tenant</code>, <code>format</code> e <code>priority</code> são os critérios que a exchange compara com os headers da mensagem.</p>
+
+    <h2>Headers não substitui topic automaticamente</h2>
+    <p>O node anterior mostrou que topic e bom quando uma routing key tem partes hierárquicas legíveis. Headers ficam mais claros quando a decisão depende de atributos independentes. A escolha deve preservar legibilidade da topologia.</p>
+
+    <div class="compare-grid visual-block" aria-label="Comparacao conceitual entre topic e headers">
+      <div class="boundary-card topic">
+        <span class="tag purple">Topic</span>
+        <h3>Quando a key tem forma de caminho</h3>
+        <p><code>audit.user.login</code> e legivel como familia, área e acao. O binding pode fixar partes e usar padroes sem criar vários campos paralelos.</p>
+      </div>
+      <div class="boundary-card headers">
+        <span class="tag">Headers</span>
+        <h3>Quando os critérios são eixos separados</h3>
+        <p><code>tenant=acme</code>, <code>format=pdf</code> e <code>priority=high</code> não precisam virar uma frase única. Cada atributo pode ser comparado pelo próprio nome.</p>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Se a regra parece...</th>
+          <th>Modelo mais legivel</th>
+          <th>Cuidado imediato</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Uma hierarquia textual curta, como <code>audit.user.login</code>.</td>
+          <td>Topic tende a ser mais simples.</td>
+          <td>Não trocar por headers só para evitar pensar na convenção da key.</td>
+        </tr>
+        <tr>
+          <td>Um conjunto de atributos independentes, como tenant, formato e prioridade.</td>
+          <td>Headers tende a expressar melhor a decisão.</td>
+          <td>Manter poucos atributos com significado claro.</td>
+        </tr>
+        <tr>
+          <td>Um critério que exige ler o corpo da mensagem.</td>
+          <td>Não é decisão de headers exchange.</td>
+          <td>O payload continua opaco para o broker no roteamento.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout warning">
+      <p><strong>Fronteira pratica.</strong> Headers são poderosos, mas headers mal padronizados tornam a topologia difícil de auditar. Também evite colocar dado sensível em header só porque ele facilita uma rota.</p>
+    </div>
+
+    <h2>O que precisa ficar claro ao sair deste node</h2>
+    <p>Headers exchange completa os tipos básicos porque muda a pergunta de roteamento: em vez de comparar uma key textual ou um padrão, a exchange compara pares nome/valor de metadados. A regra continua no binding, <code>x-match</code> controla a combinação dos critérios, e o corpo da mensagem não entra na decisão.</p>
+    <p>Com os tipos clássicos cobertos, o próximo node separa definitivamente o que acontece depois da rota: fila, consumidor e entrega.</p>
+    <footer class="node-footer">
+      <h2>Referências</h2>
+      <ul class="reference-list">
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/docs/exchanges">F1 - documentação oficial RabbitMQ 4.3</a>
+          <span class="reference-note">Uso neste node: Define exchanges, tipos, bindings, exchange padrão, propriedades, E2E e alternate exchanges na documentação corrente.</span>
+        </li>
+        <li class="reference-item">
+          <a href="https://www.rabbitmq.com/tutorials/amqp-concepts">F2 - guia oficial RabbitMQ 4.3</a>
+          <span class="reference-note">Uso neste node: Explica o modelo AMQP 0-9-1: publishers, exchanges, bindings, queues, consumers e os quatro tipos clássicos.</span>
+        </li>
+      </ul>
+    </footer>
+  </main>
+</body>
+</html>
