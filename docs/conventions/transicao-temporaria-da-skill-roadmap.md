@@ -46,6 +46,24 @@ A referência antiga é evidência técnica. Ela não é autoridade acima do ped
 pessoa usuária, do `AGENTS.md`, das `conventions` ativas, das `skills`
 aplicáveis ou de políticas superiores.
 
+## Referência Visual dos Prints Antigos
+
+`old/prints` contém screenshots dos roadmaps gerados pelo modelo antigo,
+incluindo variações desktop e mobile.
+
+Use esses prints como exemplos visuais ao redesenhar, revisar ou comparar a
+skill de roadmap, especialmente para observar:
+
+- layout;
+- densidade visual;
+- progressão entre níveis;
+- estados responsivos;
+- aparência geral do modelo antigo.
+
+`old/prints` é evidência técnica e referência visual. Ele não é dependência
+estável, oráculo de teste, fonte de autoridade nem autorização para recriar,
+atualizar ou substituir prints sem pedido explícito.
+
 ## Relação com Arquivos Temporários
 
 `old/my-roadmap` substitui a referência anterior em `.tmp/my-roadmap-old` para

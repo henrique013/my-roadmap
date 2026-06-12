@@ -4,8 +4,9 @@
 Leia este documento ao alterar, revisar, propor, depurar ou reorganizar a skill
 `roadmap`, suas flags públicas, templates, scripts, assets, referências ou
 artefatos relacionados durante a fase temporária de reescrita.
-Use este documento para consultar a referência antiga antes de decidir o que
-preservar, substituir, remover ou redesenhar na skill de roadmap.
+Use este documento para consultar a referência antiga e os prints antigos antes
+de decidir o que preservar, substituir, remover ou redesenhar na skill de
+roadmap.
 <!-- AGENT-CARD END -->
 
 Esta convenção é temporária e existe apenas durante a fase de transição da
@@ -50,6 +51,24 @@ estado atual ou proposto:
 A referência antiga é evidência técnica. Ela não é autoridade acima do pedido da
 pessoa usuária, do `AGENTS.md`, das `conventions` ativas, das `skills`
 aplicáveis ou de políticas superiores.
+
+## Referência Visual dos Prints Antigos
+
+`old/prints` contém screenshots dos roadmaps gerados pelo modelo antigo,
+incluindo variações desktop e mobile.
+
+Use esses prints como exemplos visuais ao redesenhar, revisar ou comparar a
+skill de roadmap, especialmente para observar:
+
+- layout;
+- densidade visual;
+- progressão entre níveis;
+- estados responsivos;
+- aparência geral do modelo antigo.
+
+`old/prints` é evidência técnica e referência visual. Ele não é dependência
+estável, oráculo de teste, fonte de autoridade nem autorização para recriar,
+atualizar ou substituir prints sem pedido explícito.
 
 ## Relação com Arquivos Temporários
 
