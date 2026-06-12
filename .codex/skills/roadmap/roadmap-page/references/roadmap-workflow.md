@@ -95,17 +95,12 @@ Use sempre:
 .tmp/roadmaps/<slug>/
 ```
 
-Antes de criar, recriar ou atualizar essa pasta, rode a partir da raiz do
-repositorio:
-
-```text
-docker version
-docker image inspect my-roadmap-roadmap-runtime:playwright-1.60.0
-```
-
-Se o Docker daemon nao responder ou a imagem runtime estiver ausente, responda
-`BLOQUEADO`, cite que o runtime Docker da skill nao esta pronto e nao gere
-arquivos. Quando a imagem estiver ausente, oriente:
+As validações mecânicas devem rodar via `docker/runtime/run`, que faz o
+preflight genérico de Docker daemon e imagem configurada antes de executar o
+comando na imagem runtime. Se o wrapper reportar que o Docker daemon nao
+responde ou que a imagem runtime esta ausente, responda `BLOQUEADO`, cite que o
+runtime Docker da skill nao esta pronto e nao declare que o pipeline passou.
+Quando a imagem padrao estiver ausente, oriente:
 
 ```text
 DOCKER_BUILDKIT=1 docker build --tag my-roadmap-roadmap-runtime:playwright-1.60.0 docker/runtime
@@ -502,14 +497,7 @@ Nao escreva secoes chamadas `Laboratorio`, `Exercicio`, `Projeto final`,
 
 ## 11. Validacao Final e Recuperacao
 
-Antes de qualquer validacao mecanica final, rode novamente:
-
-```text
-docker version
-docker image inspect my-roadmap-roadmap-runtime:playwright-1.60.0
-```
-
-Depois rode, nesta ordem:
+Rode, nesta ordem:
 
 ```text
 docker/runtime/run python3 <skill-dir>/roadmap-page/scripts/check_roadmap_html_shape.py --html <roadmap-dir>/roadmap.html

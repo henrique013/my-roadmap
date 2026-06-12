@@ -39,6 +39,8 @@ O wrapper deve:
 - criar `/tmp` efêmero com `tmpfs`;
 - usar rede `none` por padrão;
 - usar IPC `host` por padrão;
+- executar preflight genérico de Docker daemon e imagem configurada antes de
+  chamar `docker run`;
 - repassar o comando recebido sem interpretar flags de domínio.
 
 O wrapper não deve:
@@ -47,7 +49,7 @@ O wrapper não deve:
   `NODE`;
 - ter catálogo de targets;
 - ter modo de build;
-- ter modo de preflight;
+- expor modo de preflight separado como substituto do comando runtime normal;
 - construir imagem automaticamente;
 - esconder comandos de validação que pertencem às skills.
 
@@ -63,21 +65,25 @@ O wrapper não deve:
 | Rede | `ROADMAP_RUNTIME_NETWORK=none` por padrão |
 | IPC | `ROADMAP_RUNTIME_IPC=host` por padrão |
 | Imagem alternativa | `ROADMAP_RUNTIME_IMAGE=<imagem>` para imagem preparada com o mesmo contrato |
+| Preflight | checagem interna de Docker daemon e imagem configurada antes de `docker run` |
 
 Como o repositório é montado com escrita, qualquer comando executado pelo
 wrapper pode criar, alterar ou remover arquivos do workspace. Antes de rodar
 comandos que gerem artefatos, caches, relatórios, screenshots ou arquivos
 versionáveis, aplique a política de confirmação vigente.
 
-## Setup e diagnóstico explícitos
+## Setup e preflight automático
 
-Antes de depender da imagem runtime, o fluxo responsável deve declarar os
-comandos de diagnóstico que precisa. Para o runtime padrão:
+`docker/runtime/run` executa o diagnóstico genérico de Docker daemon e imagem
+configurada antes de chamar `docker run`. Quando um fluxo usa esse wrapper, o
+agente não precisa rodar manualmente `docker version` nem
+`docker image inspect` antes de cada uso do wrapper.
 
-```text
-docker version
-docker image inspect my-roadmap-roadmap-runtime:playwright-1.60.0
-```
+Se Docker não estiver pronto ou a imagem configurada não existir, o wrapper deve
+falhar antes de executar o comando na imagem runtime, com mensagem clara. Esse
+preflight é diagnóstico local e não autoriza pular a política de confirmação
+para comandos que possam gerar artefatos, caches, relatórios, screenshots ou
+arquivos versionáveis.
 
 Se a imagem precisar ser criada ou reconstruída, use Docker CLI explicitamente:
 

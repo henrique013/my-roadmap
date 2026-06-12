@@ -56,16 +56,12 @@ Não crie logs nem relatórios fora de `.editorial/`.
 
 ## Rodada Global
 
-Antes de criar ou atualizar artefatos do node, execute:
-
-```text
-docker version
-docker image inspect my-roadmap-roadmap-runtime:playwright-1.60.0
-```
-
-Se o Docker daemon nao responder ou a imagem runtime estiver ausente, responda
-`BLOQUEADO`, cite que o runtime Docker da skill nao esta pronto e nao gere
-arquivos. Quando a imagem estiver ausente, oriente:
+As validações mecânicas devem rodar via `docker/runtime/run`, que faz o
+preflight genérico de Docker daemon e imagem configurada antes de executar o
+comando na imagem runtime. Se o wrapper reportar que o Docker daemon nao
+responde ou que a imagem runtime esta ausente, responda `BLOQUEADO`, cite que o
+runtime Docker da skill nao esta pronto e nao declare que o pipeline passou.
+Quando a imagem padrao estiver ausente, oriente:
 
 ```text
 DOCKER_BUILDKIT=1 docker build --tag my-roadmap-roadmap-runtime:playwright-1.60.0 docker/runtime
@@ -153,8 +149,6 @@ Depois da rodada com Playwright aprovada, rode a validação mecânica final nes
 ordem:
 
 ```text
-docker version
-docker image inspect my-roadmap-roadmap-runtime:playwright-1.60.0
 docker/runtime/run python3 <skill-dir>/node-pages/scripts/check_html_shape.py --html <node-dir>/node.html
 docker/runtime/run node <skill-dir>/node-pages/scripts/check_visual_render.mjs --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>
 docker/runtime/run python3 <skill-dir>/node-pages/scripts/validate_node_artifacts.py --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>

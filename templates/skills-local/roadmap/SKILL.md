@@ -83,17 +83,12 @@ Saída visível obrigatória:
 .tmp/roadmaps/<slug>/roadmap.html
 ```
 
-Antes de criar, recriar ou atualizar `.tmp/roadmaps/<slug>/`, rode
-obrigatoriamente, a partir da raiz do repositório:
-
-```text
-docker version
-docker image inspect my-roadmap-roadmap-runtime:playwright-1.60.0
-```
-
-Se o Docker daemon não responder ou a imagem runtime estiver ausente, responda
-com `BLOQUEADO`, cite que o runtime Docker da skill não está pronto e não gere
-arquivos. Quando a imagem estiver ausente, oriente este build explícito:
+As validações mecânicas devem rodar via `docker/runtime/run`, que faz o
+preflight genérico de Docker daemon e imagem configurada antes de executar o
+comando na imagem runtime. Se o wrapper reportar que o Docker daemon não
+responde ou que a imagem runtime está ausente, responda com `BLOQUEADO`, cite
+que o runtime Docker da skill não está pronto e não declare que o pipeline
+passou. Quando a imagem padrão estiver ausente, oriente este build explícito:
 
 ```text
 DOCKER_BUILDKIT=1 docker build --tag my-roadmap-roadmap-runtime:playwright-1.60.0 docker/runtime
@@ -191,17 +186,12 @@ Saídas obrigatórias:
 .tmp/roadmaps/<roadmap-slug>/<next-node-level>/<next-node-slug>/node.html          # somente contexto de posição, se já existir
 ```
 
-Antes de criar, recriar ou atualizar a pasta do node atual, rode
-obrigatoriamente, a partir da raiz do repositório:
-
-```text
-docker version
-docker image inspect my-roadmap-roadmap-runtime:playwright-1.60.0
-```
-
-Se o Docker daemon não responder ou a imagem runtime estiver ausente, responda
-com `BLOQUEADO`, cite que o runtime Docker da skill não está pronto e não gere
-arquivos. Quando a imagem estiver ausente, oriente este build explícito:
+As validações mecânicas devem rodar via `docker/runtime/run`, que faz o
+preflight genérico de Docker daemon e imagem configurada antes de executar o
+comando na imagem runtime. Se o wrapper reportar que o Docker daemon não
+responde ou que a imagem runtime está ausente, responda com `BLOQUEADO`, cite
+que o runtime Docker da skill não está pronto e não declare que o pipeline
+passou. Quando a imagem padrão estiver ausente, oriente este build explícito:
 
 ```text
 DOCKER_BUILDKIT=1 docker build --tag my-roadmap-roadmap-runtime:playwright-1.60.0 docker/runtime
@@ -292,8 +282,6 @@ família `roadmap`; não dependa de Python, Node.js, Playwright, navegadores ou
 Para `roadmap-page`, se o modo gerou artefatos, rode obrigatoriamente:
 
 ```text
-docker version
-docker image inspect my-roadmap-roadmap-runtime:playwright-1.60.0
 docker/runtime/run python3 <skill-dir>/roadmap-page/scripts/check_roadmap_html_shape.py --html <roadmap-dir>/roadmap.html
 docker/runtime/run node <skill-dir>/roadmap-page/scripts/check_roadmap_visual_render.mjs --roadmap-dir <roadmap-dir>
 docker/runtime/run python3 <skill-dir>/roadmap-page/scripts/validate_roadmap_artifacts.py --roadmap-dir <roadmap-dir>
@@ -302,8 +290,6 @@ docker/runtime/run python3 <skill-dir>/roadmap-page/scripts/validate_roadmap_art
 Para `node-pages`, se o modo gerou artefatos, rode obrigatoriamente:
 
 ```text
-docker version
-docker image inspect my-roadmap-roadmap-runtime:playwright-1.60.0
 docker/runtime/run python3 <skill-dir>/node-pages/scripts/check_html_shape.py --html <node-dir>/node.html
 docker/runtime/run node <skill-dir>/node-pages/scripts/check_visual_render.mjs --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>
 docker/runtime/run python3 <skill-dir>/node-pages/scripts/validate_node_artifacts.py --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>
