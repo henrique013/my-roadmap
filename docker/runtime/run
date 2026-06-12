@@ -1,97 +1,253 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/usr/bin/env python3
+import os
+import shutil
+import signal
+import subprocess
+import sys
+from pathlib import Path
 
-SCRIPT_DIR="$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
-REPO_ROOT="$(CDPATH= cd -- "${SCRIPT_DIR}/../.." && pwd -P)"
 
-IMAGE="${ROADMAP_RUNTIME_IMAGE:-my-roadmap-roadmap-runtime:playwright-1.60.0}"
-BUILD_MODE="${ROADMAP_RUNTIME_BUILD:-missing}"
-NETWORK_MODE="${ROADMAP_RUNTIME_NETWORK:-none}"
-IPC_MODE="${ROADMAP_RUNTIME_IPC:-host}"
+SCRIPT_DIR = Path(__file__).resolve().parent
+REPO_ROOT = SCRIPT_DIR.parent.parent
 
-usage() {
-  cat <<'USAGE'
-Uso:
+IMAGE = os.environ.get("ROADMAP_RUNTIME_IMAGE", "my-roadmap-roadmap-runtime:playwright-1.60.0")
+BUILD_MODE = os.environ.get("ROADMAP_RUNTIME_BUILD", "never")
+NETWORK_MODE = os.environ.get("ROADMAP_RUNTIME_NETWORK", "none")
+IPC_MODE = os.environ.get("ROADMAP_RUNTIME_IPC", "host")
+DOCKER_TIMEOUT_RAW = os.environ.get("ROADMAP_RUNTIME_DOCKER_TIMEOUT", "15")
+BUILD_TIMEOUT_RAW = os.environ.get("ROADMAP_RUNTIME_BUILD_TIMEOUT", "900")
+
+USAGE = """Uso:
   docker/runtime/run --build
+  docker/runtime/run --preflight
   docker/runtime/run [--] <comando> [args...]
 
 Exemplos:
   docker/runtime/run python3 .codex/skills/roadmap/roadmap-page/scripts/check_roadmap_html_shape.py --html .tmp/roadmaps/exemplo/roadmap.html
-  docker/runtime/run node .codex/skills/roadmap/roadmap-page/scripts/check_roadmap_visual_render.mjs --html .tmp/roadmaps/exemplo/roadmap.html
+  docker/runtime/run node .codex/skills/roadmap/roadmap-page/scripts/check_roadmap_visual_render.mjs --roadmap-dir .tmp/roadmaps/exemplo
 
 Variaveis:
   ROADMAP_RUNTIME_IMAGE    Nome/tag da imagem. Padrao: my-roadmap-roadmap-runtime:playwright-1.60.0
-  ROADMAP_RUNTIME_BUILD    missing, always ou never. Padrao: missing
+  ROADMAP_RUNTIME_BUILD    always ou never. Padrao: never
   ROADMAP_RUNTIME_NETWORK  Modo de rede do docker run. Padrao: none
   ROADMAP_RUNTIME_IPC      Modo IPC do docker run. Padrao: host
-USAGE
-}
+  ROADMAP_RUNTIME_DOCKER_TIMEOUT  Timeout em segundos para daemon/inspect/run. Padrao: 15
+  ROADMAP_RUNTIME_BUILD_TIMEOUT   Timeout em segundos para build explicito. Padrao: 900
+"""
 
-build_image() {
-  DOCKER_BUILDKIT=1 docker build \
-    --tag "${IMAGE}" \
-    "${SCRIPT_DIR}"
-}
 
-ensure_image() {
-  case "${BUILD_MODE}" in
-    always)
-      build_image
-      ;;
-    missing)
-      if ! docker image inspect "${IMAGE}" >/dev/null 2>&1; then
-        build_image
-      fi
-      ;;
-    never)
-      ;;
-    *)
-      echo "ROADMAP_RUNTIME_BUILD deve ser missing, always ou never" >&2
-      exit 2
-      ;;
-  esac
-}
+def eprint(message: str) -> None:
+    print(message, file=sys.stderr)
 
-if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
-  usage
-  exit 0
-fi
 
-if [[ "${1:-}" == "--build" ]]; then
-  build_image
-  exit 0
-fi
+def first_lines(value: str, count: int = 3) -> str:
+    return "\n".join(value.splitlines()[:count])
 
-if [[ "${1:-}" == "--" ]]; then
-  shift
-fi
 
-if [[ "$#" -eq 0 ]]; then
-  usage >&2
-  exit 2
-fi
+def parse_timeout(value: str, name: str) -> float:
+    try:
+        timeout = float(value)
+    except ValueError:
+        eprint(f"{name} deve ser numero de segundos")
+        raise SystemExit(2)
 
-ensure_image
+    if timeout <= 0:
+        eprint(f"{name} deve ser maior que zero")
+        raise SystemExit(2)
 
-docker_run_args=(
-  --rm
-  --init
-  --workdir /workspace
-  --user "$(id -u):$(id -g)"
-  --env HOME=/tmp
-  --env XDG_CACHE_HOME=/tmp/.cache
-  --env npm_config_cache=/tmp/.npm
-  --env PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
-  --tmpfs /tmp:exec,mode=1777
-  --mount "type=bind,source=${REPO_ROOT},target=/workspace"
-)
+    return timeout
 
-if [[ -n "${NETWORK_MODE}" ]]; then
-  docker_run_args+=(--network "${NETWORK_MODE}")
-fi
 
-if [[ -n "${IPC_MODE}" ]]; then
-  docker_run_args+=(--ipc "${IPC_MODE}")
-fi
+DOCKER_TIMEOUT = parse_timeout(DOCKER_TIMEOUT_RAW, "ROADMAP_RUNTIME_DOCKER_TIMEOUT")
+BUILD_TIMEOUT = parse_timeout(BUILD_TIMEOUT_RAW, "ROADMAP_RUNTIME_BUILD_TIMEOUT")
 
-exec docker run "${docker_run_args[@]}" "${IMAGE}" "$@"
+
+def normalize_returncode(returncode: int) -> int:
+    if returncode < 0:
+        return 128 + abs(returncode)
+    return returncode
+
+
+def run_capture_stderr(args: list[str], timeout: float) -> tuple[int, str]:
+    try:
+        completed = subprocess.run(
+            args,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
+            text=True,
+            timeout=timeout,
+            check=False,
+        )
+    except subprocess.TimeoutExpired as exc:
+        stderr = exc.stderr or ""
+        if isinstance(stderr, bytes):
+            stderr = stderr.decode(errors="replace")
+        return 124, stderr
+    except FileNotFoundError:
+        return 127, ""
+    except KeyboardInterrupt:
+        return 130, ""
+
+    return normalize_returncode(completed.returncode), completed.stderr or ""
+
+
+def run_inherit(args: list[str], timeout: float, env: dict[str, str] | None = None) -> int:
+    try:
+        completed = subprocess.run(args, timeout=timeout, env=env, check=False)
+    except subprocess.TimeoutExpired:
+        return 124
+    except FileNotFoundError:
+        return 127
+    except KeyboardInterrupt:
+        return 130
+
+    return normalize_returncode(completed.returncode)
+
+
+def docker_preflight() -> int:
+    if shutil.which("docker") is None:
+        eprint("falha: Docker CLI nao encontrado no PATH")
+        return 127
+
+    status, stderr = run_capture_stderr(["docker", "version"], DOCKER_TIMEOUT)
+    if status == 0:
+        return 0
+
+    if status == 124:
+        eprint(f"falha: Docker daemon nao respondeu em {DOCKER_TIMEOUT_RAW}s")
+        eprint("verifique se o Docker esta iniciado e acessivel pelo contexto atual")
+        return 1
+
+    eprint("falha: Docker daemon inacessivel pelo contexto atual")
+    if stderr:
+        eprint(first_lines(stderr))
+    eprint("verifique DOCKER_CONTEXT, DOCKER_HOST e acesso ao Docker daemon")
+    return 1
+
+
+def require_image() -> int:
+    status, stderr = run_capture_stderr(["docker", "image", "inspect", IMAGE], DOCKER_TIMEOUT)
+    if status == 0:
+        return 0
+
+    if status == 124:
+        eprint(f"falha: docker image inspect nao respondeu em {DOCKER_TIMEOUT_RAW}s")
+        eprint("verifique se o Docker esta iniciado e acessivel pelo contexto atual")
+        return 1
+
+    if stderr and "no such image" not in stderr.lower():
+        eprint(f"falha: docker image inspect nao conseguiu verificar {IMAGE}")
+        eprint(first_lines(stderr))
+        return 1
+
+    eprint(f"falha: imagem runtime ausente: {IMAGE}")
+    eprint("rode: make setup")
+    return 1
+
+
+def preflight() -> int:
+    status = docker_preflight()
+    if status != 0:
+        return status
+
+    status = require_image()
+    if status != 0:
+        return status
+
+    print(f"passa: runtime Docker pronto ({IMAGE})")
+    return 0
+
+
+def build_image() -> int:
+    status = docker_preflight()
+    if status != 0:
+        return status
+
+    eprint(f"build: construindo imagem runtime {IMAGE}")
+    env = os.environ.copy()
+    env["DOCKER_BUILDKIT"] = "1"
+    return run_inherit(
+        ["docker", "build", "--tag", IMAGE, str(SCRIPT_DIR)],
+        BUILD_TIMEOUT,
+        env=env,
+    )
+
+
+def ensure_image() -> int:
+    if BUILD_MODE == "always":
+        return build_image()
+
+    if BUILD_MODE == "never":
+        status = docker_preflight()
+        if status != 0:
+            return status
+        return require_image()
+
+    eprint("ROADMAP_RUNTIME_BUILD deve ser always ou never")
+    return 2
+
+
+def docker_run(command: list[str]) -> int:
+    docker_run_args = [
+        "docker",
+        "run",
+        "--rm",
+        "--init",
+        "--workdir",
+        "/workspace",
+        "--user",
+        f"{os.getuid()}:{os.getgid()}",
+        "--env",
+        "HOME=/tmp",
+        "--env",
+        "XDG_CACHE_HOME=/tmp/.cache",
+        "--env",
+        "npm_config_cache=/tmp/.npm",
+        "--env",
+        "PLAYWRIGHT_BROWSERS_PATH=/ms-playwright",
+        "--tmpfs",
+        "/tmp:exec,mode=1777",
+        "--mount",
+        f"type=bind,source={REPO_ROOT},target=/workspace",
+    ]
+
+    if NETWORK_MODE:
+        docker_run_args.extend(["--network", NETWORK_MODE])
+
+    if IPC_MODE:
+        docker_run_args.extend(["--ipc", IPC_MODE])
+
+    docker_run_args.append(IMAGE)
+    docker_run_args.extend(command)
+    return run_inherit(docker_run_args, DOCKER_TIMEOUT)
+
+
+def main(argv: list[str]) -> int:
+    if argv and argv[0] in ("--help", "-h"):
+        print(USAGE, end="")
+        return 0
+
+    if argv and argv[0] == "--build":
+        return build_image()
+
+    if argv and argv[0] == "--preflight":
+        return preflight()
+
+    command = argv[1:] if argv and argv[0] == "--" else argv
+    if not command:
+        print(USAGE, end="", file=sys.stderr)
+        return 2
+
+    status = ensure_image()
+    if status != 0:
+        return status
+
+    return docker_run(command)
+
+
+if __name__ == "__main__":
+    try:
+        raise SystemExit(main(sys.argv[1:]))
+    except BrokenPipeError:
+        signal.signal(signal.SIGPIPE, signal.SIG_DFL)
+        raise SystemExit(1)

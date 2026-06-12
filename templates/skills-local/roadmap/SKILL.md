@@ -83,6 +83,18 @@ Saída visível obrigatória:
 .tmp/roadmaps/<slug>/roadmap.html
 ```
 
+Antes de criar, recriar ou atualizar `.tmp/roadmaps/<slug>/`, rode
+obrigatoriamente, a partir da raiz do repositório:
+
+```text
+docker/runtime/run --preflight
+```
+
+Se o preflight falhar, responda com `BLOQUEADO`, cite que o runtime Docker da
+skill não está pronto, oriente `make setup` quando a imagem estiver ausente e
+não gere arquivos. Não use Python, Node.js, npm, Playwright, navegadores ou
+`node_modules` do host como fallback.
+
 Se `.tmp/roadmaps/<slug>/` já existir, faça um checkpoint explícito antes de
 recriar a pasta: informe o caminho resolvido e peça confirmação para recriar
 somente esse diretório. Essa confirmação não autoriza tocar outros roadmaps.
@@ -172,6 +184,18 @@ Saídas obrigatórias:
 .tmp/roadmaps/<roadmap-slug>/<next-node-level>/<next-node-slug>/node.html          # somente contexto de posição, se já existir
 ```
 
+Antes de criar, recriar ou atualizar a pasta do node atual, rode
+obrigatoriamente, a partir da raiz do repositório:
+
+```text
+docker/runtime/run --preflight
+```
+
+Se o preflight falhar, responda com `BLOQUEADO`, cite que o runtime Docker da
+skill não está pronto, oriente `make setup` quando a imagem estiver ausente e
+não gere arquivos. Não use Python, Node.js, npm, Playwright, navegadores ou
+`node_modules` do host como fallback.
+
 O `roadmap.html` pai é atualizado somente depois que o `node.html` do node atual
 passar nos guardrails obrigatórios, adicionando o link relativo profundo do node
 validado. Não mencione esse arquivo na resposta final, salvo pedido explícito.
@@ -254,20 +278,24 @@ família `roadmap`; não dependa de Python, Node.js, Playwright, navegadores ou
 Para `roadmap-page`, se o modo gerou artefatos, rode obrigatoriamente:
 
 ```text
+docker/runtime/run --preflight
 docker/runtime/run python3 <skill-dir>/roadmap-page/scripts/check_roadmap_html_shape.py --html <roadmap-dir>/roadmap.html
+docker/runtime/run node <skill-dir>/roadmap-page/scripts/check_roadmap_visual_render.mjs --roadmap-dir <roadmap-dir>
 docker/runtime/run python3 <skill-dir>/roadmap-page/scripts/validate_roadmap_artifacts.py --roadmap-dir <roadmap-dir>
-docker/runtime/run node <skill-dir>/roadmap-page/scripts/check_roadmap_visual_render.mjs --html <roadmap-dir>/roadmap.html
 ```
 
 Para `node-pages`, se o modo gerou artefatos, rode obrigatoriamente:
 
 ```text
+docker/runtime/run --preflight
 docker/runtime/run python3 <skill-dir>/node-pages/scripts/check_html_shape.py --html <node-dir>/node.html
-docker/runtime/run python3 <skill-dir>/node-pages/scripts/validate_node_artifacts.py --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>
 docker/runtime/run node <skill-dir>/node-pages/scripts/check_visual_render.mjs --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>
+docker/runtime/run python3 <skill-dir>/node-pages/scripts/validate_node_artifacts.py --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>
 ```
 
 Se qualquer validação falhar por conteúdo gerado pela própria execução, corrija
 antes da resposta final. Se Docker, a imagem runtime ou script obrigatório não
 estiver disponível, bloqueie a entrega ou informe a limitação sem declarar que o
-pipeline passou. Não aceite layout legado de pipeline como compatível.
+pipeline passou. Não aceite fallback em Playwright, Node.js, npm, navegadores,
+Python ou `node_modules` locais. Não aceite layout legado de pipeline como
+compatível.

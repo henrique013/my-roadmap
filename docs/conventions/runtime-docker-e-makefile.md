@@ -50,7 +50,8 @@ Considere estes detalhes como o contrato operacional atual do `docker/runtime/ru
 | Aspecto | Comportamento |
 |---|---|
 | Imagem padrão | `my-roadmap-roadmap-runtime:playwright-1.60.0` |
-| Build | `ROADMAP_RUNTIME_BUILD=missing`, `always` ou `never`; padrão `missing` |
+| Build | `ROADMAP_RUNTIME_BUILD=always` ou `never`; padrão `never` |
+| Preflight | `docker/runtime/run --preflight` valida daemon Docker e imagem local |
 | Diretório no contêiner | `/workspace` |
 | Workspace | bind mount do repositório inteiro em `/workspace` |
 | Usuário | UID/GID do usuário do host |
@@ -58,8 +59,15 @@ Considere estes detalhes como o contrato operacional atual do `docker/runtime/ru
 | Rede | `ROADMAP_RUNTIME_NETWORK=none` por padrão |
 | IPC | `ROADMAP_RUNTIME_IPC=host` por padrão |
 | Entrada interativa | não configura `--interactive` nem `--tty`; prefira comandos não interativos |
+| Timeout Docker | `ROADMAP_RUNTIME_DOCKER_TIMEOUT`, padrão `15` segundos |
+| Timeout de build | `ROADMAP_RUNTIME_BUILD_TIMEOUT`, padrão `900` segundos |
 
 Como o repositório é montado com escrita, qualquer comando no wrapper pode criar, alterar ou remover arquivos do workspace. Antes de rodar comandos que gerem artefatos, caches, relatórios, screenshots ou arquivos versionáveis, aplique a política de confirmação vigente.
+
+Validações normais não constroem a imagem implicitamente. Se a imagem runtime
+estiver ausente, o wrapper deve falhar rápido e orientar a execução de
+`make setup`. Use `docker/runtime/run --build` ou `make setup` como etapa
+explícita para construir ou reconstruir o runtime.
 
 ## Imagem runtime ou imagem específica
 
@@ -84,11 +92,12 @@ Em ambos os casos, registre versões, lockfiles ou digests quando aplicável e p
 Quando um comando falhar no runtime:
 
 1. Leia a mensagem do comando chamado e identifique se a falha vem do script, do Docker ou da ausência da imagem.
-2. Use `docker/runtime/run --build` quando a imagem precisar ser criada ou reconstruída.
-3. Use `ROADMAP_RUNTIME_BUILD=always` para forçar rebuild quando a imagem local parecer defasada.
-4. Use `ROADMAP_RUNTIME_BUILD=never` apenas quando quiser confirmar que a imagem já existe e evitar build automático.
+2. Use `docker/runtime/run --preflight` para validar daemon Docker e imagem local antes de gerar artefatos.
+3. Use `docker/runtime/run --build` quando a imagem precisar ser criada ou reconstruída.
+4. Use `ROADMAP_RUNTIME_BUILD=always` para forçar rebuild quando a imagem local parecer defasada.
 5. Ajuste `ROADMAP_RUNTIME_IMAGE` somente para testar uma tag/imagem explicitamente preparada para o mesmo contrato.
-6. Ajuste `ROADMAP_RUNTIME_NETWORK` ou `ROADMAP_RUNTIME_IPC` apenas quando o comando justificar essa exceção.
+6. Ajuste `ROADMAP_RUNTIME_DOCKER_TIMEOUT` ou `ROADMAP_RUNTIME_BUILD_TIMEOUT` somente quando a lentidão do ambiente justificar a exceção.
+7. Ajuste `ROADMAP_RUNTIME_NETWORK` ou `ROADMAP_RUNTIME_IPC` apenas quando o comando justificar essa exceção.
 
 Não resolva falhas instalando dependências no host, montando credenciais do host, expondo o Docker socket, usando `--privileged` ou copiando comandos internos do wrapper sem necessidade explícita.
 
@@ -110,6 +119,7 @@ Targets operacionais devem:
 - validar variáveis obrigatórias antes de executar;
 - mostrar mensagem de uso curta quando faltar parâmetro;
 - chamar `docker/runtime/run` para comandos que pertencem ao runtime;
+- chamar `docker/runtime/run --preflight` em targets de verificação do runtime;
 - reutilizar variáveis do próprio `Makefile` quando isso reduzir duplicação real.
 
 Evite:

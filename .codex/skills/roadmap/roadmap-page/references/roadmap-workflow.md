@@ -95,6 +95,18 @@ Use sempre:
 .tmp/roadmaps/<slug>/
 ```
 
+Antes de criar, recriar ou atualizar essa pasta, rode a partir da raiz do
+repositorio:
+
+```text
+docker/runtime/run --preflight
+```
+
+Se o preflight falhar, responda `BLOQUEADO`, cite que o runtime Docker da skill
+nao esta pronto, oriente `make setup` quando a imagem estiver ausente e nao
+gere arquivos. Nao use Python, Node.js, npm, Playwright, navegadores ou
+`node_modules` do host como fallback.
+
 Se a pasta existir, faca um checkpoint explicito antes de apagar ou recriar:
 informe o caminho resolvido e peca confirmacao para recriar somente a pasta do
 slug. Antes de apagar, valide que o caminho resolvido esta dentro de
@@ -482,6 +494,24 @@ Nao escreva secoes chamadas `Laboratorio`, `Exercicio`, `Projeto final`,
 - [ ] Referencias consolidadas aparecem no final.
 
 ## 11. Validacao Final e Recuperacao
+
+Antes de qualquer validacao mecanica final, rode novamente:
+
+```text
+docker/runtime/run --preflight
+```
+
+Depois rode, nesta ordem:
+
+```text
+docker/runtime/run python3 <skill-dir>/roadmap-page/scripts/check_roadmap_html_shape.py --html <roadmap-dir>/roadmap.html
+docker/runtime/run node <skill-dir>/roadmap-page/scripts/check_roadmap_visual_render.mjs --roadmap-dir <roadmap-dir>
+docker/runtime/run python3 <skill-dir>/roadmap-page/scripts/validate_roadmap_artifacts.py --roadmap-dir <roadmap-dir>
+```
+
+O validador final de artefatos roda depois do Playwright porque confere tambem
+as evidencias renderizadas. Validacao normal nao pode construir imagem
+implicitamente; se a imagem estiver ausente, bloqueie e oriente `make setup`.
 
 Antes de responder, verifique:
 

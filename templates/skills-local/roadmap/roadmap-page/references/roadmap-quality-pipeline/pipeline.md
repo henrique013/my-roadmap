@@ -8,6 +8,8 @@ resposta final.
 Execute:
 
 ```text
+docker/runtime/run --preflight
+  |
 gerar roadmap.html
 gerar .roadmap/roadmap-contract.json
   |
@@ -49,15 +51,23 @@ local, fontes e anti-repetição global continua no validador Python.
 Use os scripts quando disponíveis:
 
 ```text
+docker/runtime/run --preflight
+
 docker/runtime/run python3 <skill-dir>/roadmap-page/scripts/check_roadmap_html_shape.py \
   --html <roadmap-dir>/roadmap.html
 
-docker/runtime/run python3 <skill-dir>/roadmap-page/scripts/validate_roadmap_artifacts.py \
+docker/runtime/run node <skill-dir>/roadmap-page/scripts/check_roadmap_visual_render.mjs \
   --roadmap-dir <roadmap-dir>
 
-docker/runtime/run node <skill-dir>/roadmap-page/scripts/check_roadmap_visual_render.mjs \
-  --html <roadmap-dir>/roadmap.html
+docker/runtime/run python3 <skill-dir>/roadmap-page/scripts/validate_roadmap_artifacts.py \
+  --roadmap-dir <roadmap-dir>
 ```
+
+O preflight deve acontecer antes de criar artefatos. A validação normal não
+constrói imagem implicitamente; se o runtime Docker ou a imagem local não
+estiverem prontos, bloqueie e oriente `make setup`. O validador final de
+artefatos roda depois do Playwright porque também confere as evidências
+renderizadas.
 
 Se qualquer guardrail reescrever HTML, JSON ou CSS, reinicie a rodada.
 

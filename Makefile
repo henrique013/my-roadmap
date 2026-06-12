@@ -1,10 +1,13 @@
-.PHONY: setup roadmap-runtime-build roadmap-roadmap-html-shape roadmap-roadmap-artifacts roadmap-roadmap-visual-check roadmap-node-html-shape roadmap-node-artifacts roadmap-node-visual-check roadmap-roadmap-visual-check-test
+.PHONY: setup roadmap-runtime-build roadmap-runtime-check roadmap-roadmap-html-shape roadmap-roadmap-artifacts roadmap-roadmap-visual-check roadmap-node-html-shape roadmap-node-artifacts roadmap-node-visual-check roadmap-roadmap-visual-check-test
 
 setup:
 	@docker/runtime/run --build
 
 roadmap-runtime-build:
 	@docker/runtime/run --build
+
+roadmap-runtime-check:
+	@docker/runtime/run --preflight
 
 roadmap-roadmap-html-shape:
 	@test -n "$(ROADMAP_DIR)" || { echo "Use: make $@ ROADMAP_DIR=.tmp/roadmaps/<slug>"; exit 2; }

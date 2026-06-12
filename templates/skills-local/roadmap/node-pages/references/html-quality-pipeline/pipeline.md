@@ -56,6 +56,17 @@ Não crie logs nem relatórios fora de `.editorial/`.
 
 ## Rodada Global
 
+Antes de criar ou atualizar artefatos do node, execute:
+
+```text
+docker/runtime/run --preflight
+```
+
+Se o preflight falhar, responda `BLOQUEADO`, cite que o runtime Docker da skill
+nao esta pronto, oriente `make setup` quando a imagem estiver ausente e nao
+gere arquivos. Nao use Playwright, Node.js, npm, navegadores, Python ou
+`node_modules` do host como fallback.
+
 Execute, nesta ordem:
 
 1. Atualizar `.editorial/pipeline/01-visible-text/visible-text.md` a partir de `node.html`, de
@@ -130,6 +141,20 @@ Execute, nesta ordem:
    `.editorial/pipeline/05-visual-render/visual-audit.md` devem registrar
    status `passa`, e os `revision-plan.md` dos pipes `02`, `03`, `04` e `05`
    devem registrar que não há reescrita obrigatória.
+
+Depois da rodada com Playwright aprovada, rode a validação mecânica final nesta
+ordem:
+
+```text
+docker/runtime/run --preflight
+docker/runtime/run python3 <skill-dir>/node-pages/scripts/check_html_shape.py --html <node-dir>/node.html
+docker/runtime/run node <skill-dir>/node-pages/scripts/check_visual_render.mjs --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>
+docker/runtime/run python3 <skill-dir>/node-pages/scripts/validate_node_artifacts.py --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>
+```
+
+O validador final de artefatos roda depois do Playwright porque também confere
+as evidências renderizadas. Validação normal não pode construir imagem
+implicitamente; se a imagem estiver ausente, bloqueie e oriente `make setup`.
 
 A saída de um guardrail é a entrada do próximo. Se qualquer guardrail alterar o
 HTML, reinicie a rodada global desde a extração de texto visível.

@@ -208,6 +208,18 @@ Crie ou recrie somente a pasta do node atual:
 .tmp/roadmaps/<roadmap-slug>/<level>/<node-slug>/
 ```
 
+Antes de criar, recriar ou atualizar essa pasta, rode a partir da raiz do
+repositorio:
+
+```text
+docker/runtime/run --preflight
+```
+
+Se o preflight falhar, responda `BLOQUEADO`, cite que o runtime Docker da skill
+nao esta pronto, oriente `make setup` quando a imagem estiver ausente e nao
+gere arquivos. Nao use Python, Node.js, npm, Playwright, navegadores ou
+`node_modules` do host como fallback.
+
 Antes de apagar uma pasta existente, faça um checkpoint explícito: informe o
 caminho resolvido e peça confirmação para recriar somente a pasta do node atual.
 Depois valide que o caminho resolvido está dentro da pasta do nível, que o nível
@@ -412,9 +424,21 @@ O pipeline atua sobre o `node.html` completo e sobre os artefatos internos de
 
 Use `scripts/check_html_shape.py`, `scripts/check_visual_render.mjs` e
 `scripts/validate_node_artifacts.py` para validações mecânicas finais quando
-disponíveis. Esses scripts não validam se a explicação é conceitualmente
-suficiente, se um exemplo é necessário ou excessivo, nem se a composição visual
-é boa em sentido amplo; essas decisões continuam sendo do agente.
+disponíveis, nesta ordem:
+
+```text
+docker/runtime/run --preflight
+docker/runtime/run python3 <skill-dir>/node-pages/scripts/check_html_shape.py --html <node-dir>/node.html
+docker/runtime/run node <skill-dir>/node-pages/scripts/check_visual_render.mjs --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>
+docker/runtime/run python3 <skill-dir>/node-pages/scripts/validate_node_artifacts.py --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>
+```
+
+O validador final de artefatos roda depois do Playwright porque confere tambem
+as evidencias renderizadas. Validacao normal nao pode construir imagem
+implicitamente; se a imagem estiver ausente, bloqueie e oriente `make setup`.
+Esses scripts não validam se a explicação é conceitualmente suficiente, se um
+exemplo é necessário ou excessivo, nem se a composição visual é boa em sentido
+amplo; essas decisões continuam sendo do agente.
 
 O pipeline deve operar até ponto fixo: se qualquer guardrail reescrever o HTML,
 volte ao primeiro guardrail e execute uma nova rodada global. A validação só
