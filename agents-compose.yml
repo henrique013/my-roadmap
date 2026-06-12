@@ -42,6 +42,8 @@ outputs:
             from: convencoes-para-skills.tpl.md
           - origin: local
             from: runtime-docker-e-makefile.tpl.md
+          - origin: local
+            from: transicao-temporaria-da-skill-roadmap.tpl.md
   skills:
     out_dir: .codex/skills
     local:
