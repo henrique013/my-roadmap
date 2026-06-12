@@ -42,8 +42,6 @@ outputs:
             from: convencoes-para-skills.tpl.md
           - origin: local
             from: runtime-docker-e-makefile.tpl.md
-          - origin: local
-            from: transicao-temporaria-da-skill-roadmap.tpl.md
   skills:
     out_dir: .codex/skills
     local:
@@ -51,11 +49,5 @@ outputs:
     remote:
       tpl_dir: templates/skills
     entries:
-      - origin: local
-        from: roadmap
-      - origin: local
-        from: roadmap-page
-      - origin: local
-        from: roadmap-node-page
       - origin: remote
         from: prompt-awesome
