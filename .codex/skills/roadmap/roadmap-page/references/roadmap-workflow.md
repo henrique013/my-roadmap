@@ -99,13 +99,20 @@ Antes de criar, recriar ou atualizar essa pasta, rode a partir da raiz do
 repositorio:
 
 ```text
-docker/runtime/run --preflight
+docker version
+docker image inspect my-roadmap-roadmap-runtime:playwright-1.60.0
 ```
 
-Se o preflight falhar, responda `BLOQUEADO`, cite que o runtime Docker da skill
-nao esta pronto, oriente `make setup` quando a imagem estiver ausente e nao
-gere arquivos. Nao use Python, Node.js, npm, Playwright, navegadores ou
-`node_modules` do host como fallback.
+Se o Docker daemon nao responder ou a imagem runtime estiver ausente, responda
+`BLOQUEADO`, cite que o runtime Docker da skill nao esta pronto e nao gere
+arquivos. Quando a imagem estiver ausente, oriente:
+
+```text
+DOCKER_BUILDKIT=1 docker build --tag my-roadmap-roadmap-runtime:playwright-1.60.0 docker/runtime
+```
+
+Nao use Python, Node.js, npm, Playwright, navegadores ou `node_modules` do host
+como fallback.
 
 Se a pasta existir, faca um checkpoint explicito antes de apagar ou recriar:
 informe o caminho resolvido e peca confirmacao para recriar somente a pasta do
@@ -498,7 +505,8 @@ Nao escreva secoes chamadas `Laboratorio`, `Exercicio`, `Projeto final`,
 Antes de qualquer validacao mecanica final, rode novamente:
 
 ```text
-docker/runtime/run --preflight
+docker version
+docker image inspect my-roadmap-roadmap-runtime:playwright-1.60.0
 ```
 
 Depois rode, nesta ordem:
@@ -510,8 +518,8 @@ docker/runtime/run python3 <skill-dir>/roadmap-page/scripts/validate_roadmap_art
 ```
 
 O validador final de artefatos roda depois do Playwright porque confere tambem
-as evidencias renderizadas. Validacao normal nao pode construir imagem
-implicitamente; se a imagem estiver ausente, bloqueie e oriente `make setup`.
+as evidencias renderizadas. O wrapper nao constroi imagem; se a imagem estiver
+ausente, bloqueie e oriente o build Docker explicito.
 
 Antes de responder, verifique:
 

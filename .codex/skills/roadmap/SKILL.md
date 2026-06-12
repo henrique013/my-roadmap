@@ -87,13 +87,20 @@ Antes de criar, recriar ou atualizar `.tmp/roadmaps/<slug>/`, rode
 obrigatoriamente, a partir da raiz do repositório:
 
 ```text
-docker/runtime/run --preflight
+docker version
+docker image inspect my-roadmap-roadmap-runtime:playwright-1.60.0
 ```
 
-Se o preflight falhar, responda com `BLOQUEADO`, cite que o runtime Docker da
-skill não está pronto, oriente `make setup` quando a imagem estiver ausente e
-não gere arquivos. Não use Python, Node.js, npm, Playwright, navegadores ou
-`node_modules` do host como fallback.
+Se o Docker daemon não responder ou a imagem runtime estiver ausente, responda
+com `BLOQUEADO`, cite que o runtime Docker da skill não está pronto e não gere
+arquivos. Quando a imagem estiver ausente, oriente este build explícito:
+
+```text
+DOCKER_BUILDKIT=1 docker build --tag my-roadmap-roadmap-runtime:playwright-1.60.0 docker/runtime
+```
+
+Não use Python, Node.js, npm, Playwright, navegadores ou `node_modules` do host
+como fallback.
 
 Se `.tmp/roadmaps/<slug>/` já existir, faça um checkpoint explícito antes de
 recriar a pasta: informe o caminho resolvido e peça confirmação para recriar
@@ -188,13 +195,20 @@ Antes de criar, recriar ou atualizar a pasta do node atual, rode
 obrigatoriamente, a partir da raiz do repositório:
 
 ```text
-docker/runtime/run --preflight
+docker version
+docker image inspect my-roadmap-roadmap-runtime:playwright-1.60.0
 ```
 
-Se o preflight falhar, responda com `BLOQUEADO`, cite que o runtime Docker da
-skill não está pronto, oriente `make setup` quando a imagem estiver ausente e
-não gere arquivos. Não use Python, Node.js, npm, Playwright, navegadores ou
-`node_modules` do host como fallback.
+Se o Docker daemon não responder ou a imagem runtime estiver ausente, responda
+com `BLOQUEADO`, cite que o runtime Docker da skill não está pronto e não gere
+arquivos. Quando a imagem estiver ausente, oriente este build explícito:
+
+```text
+DOCKER_BUILDKIT=1 docker build --tag my-roadmap-roadmap-runtime:playwright-1.60.0 docker/runtime
+```
+
+Não use Python, Node.js, npm, Playwright, navegadores ou `node_modules` do host
+como fallback.
 
 O `roadmap.html` pai é atualizado somente depois que o `node.html` do node atual
 passar nos guardrails obrigatórios, adicionando o link relativo profundo do node
@@ -278,7 +292,8 @@ família `roadmap`; não dependa de Python, Node.js, Playwright, navegadores ou
 Para `roadmap-page`, se o modo gerou artefatos, rode obrigatoriamente:
 
 ```text
-docker/runtime/run --preflight
+docker version
+docker image inspect my-roadmap-roadmap-runtime:playwright-1.60.0
 docker/runtime/run python3 <skill-dir>/roadmap-page/scripts/check_roadmap_html_shape.py --html <roadmap-dir>/roadmap.html
 docker/runtime/run node <skill-dir>/roadmap-page/scripts/check_roadmap_visual_render.mjs --roadmap-dir <roadmap-dir>
 docker/runtime/run python3 <skill-dir>/roadmap-page/scripts/validate_roadmap_artifacts.py --roadmap-dir <roadmap-dir>
@@ -287,7 +302,8 @@ docker/runtime/run python3 <skill-dir>/roadmap-page/scripts/validate_roadmap_art
 Para `node-pages`, se o modo gerou artefatos, rode obrigatoriamente:
 
 ```text
-docker/runtime/run --preflight
+docker version
+docker image inspect my-roadmap-roadmap-runtime:playwright-1.60.0
 docker/runtime/run python3 <skill-dir>/node-pages/scripts/check_html_shape.py --html <node-dir>/node.html
 docker/runtime/run node <skill-dir>/node-pages/scripts/check_visual_render.mjs --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>
 docker/runtime/run python3 <skill-dir>/node-pages/scripts/validate_node_artifacts.py --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>

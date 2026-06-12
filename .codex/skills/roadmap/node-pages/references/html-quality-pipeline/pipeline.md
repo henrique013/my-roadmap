@@ -59,13 +59,20 @@ Não crie logs nem relatórios fora de `.editorial/`.
 Antes de criar ou atualizar artefatos do node, execute:
 
 ```text
-docker/runtime/run --preflight
+docker version
+docker image inspect my-roadmap-roadmap-runtime:playwright-1.60.0
 ```
 
-Se o preflight falhar, responda `BLOQUEADO`, cite que o runtime Docker da skill
-nao esta pronto, oriente `make setup` quando a imagem estiver ausente e nao
-gere arquivos. Nao use Playwright, Node.js, npm, navegadores, Python ou
-`node_modules` do host como fallback.
+Se o Docker daemon nao responder ou a imagem runtime estiver ausente, responda
+`BLOQUEADO`, cite que o runtime Docker da skill nao esta pronto e nao gere
+arquivos. Quando a imagem estiver ausente, oriente:
+
+```text
+DOCKER_BUILDKIT=1 docker build --tag my-roadmap-roadmap-runtime:playwright-1.60.0 docker/runtime
+```
+
+Nao use Playwright, Node.js, npm, navegadores, Python ou `node_modules` do host
+como fallback.
 
 Execute, nesta ordem:
 
@@ -146,15 +153,16 @@ Depois da rodada com Playwright aprovada, rode a validação mecânica final nes
 ordem:
 
 ```text
-docker/runtime/run --preflight
+docker version
+docker image inspect my-roadmap-roadmap-runtime:playwright-1.60.0
 docker/runtime/run python3 <skill-dir>/node-pages/scripts/check_html_shape.py --html <node-dir>/node.html
 docker/runtime/run node <skill-dir>/node-pages/scripts/check_visual_render.mjs --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>
 docker/runtime/run python3 <skill-dir>/node-pages/scripts/validate_node_artifacts.py --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>
 ```
 
 O validador final de artefatos roda depois do Playwright porque também confere
-as evidências renderizadas. Validação normal não pode construir imagem
-implicitamente; se a imagem estiver ausente, bloqueie e oriente `make setup`.
+as evidências renderizadas. O wrapper não constrói imagem; se a imagem estiver
+ausente, bloqueie e oriente o build Docker explícito.
 
 A saída de um guardrail é a entrada do próximo. Se qualquer guardrail alterar o
 HTML, reinicie a rodada global desde a extração de texto visível.

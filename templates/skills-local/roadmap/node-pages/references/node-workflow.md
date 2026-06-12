@@ -212,13 +212,20 @@ Antes de criar, recriar ou atualizar essa pasta, rode a partir da raiz do
 repositorio:
 
 ```text
-docker/runtime/run --preflight
+docker version
+docker image inspect my-roadmap-roadmap-runtime:playwright-1.60.0
 ```
 
-Se o preflight falhar, responda `BLOQUEADO`, cite que o runtime Docker da skill
-nao esta pronto, oriente `make setup` quando a imagem estiver ausente e nao
-gere arquivos. Nao use Python, Node.js, npm, Playwright, navegadores ou
-`node_modules` do host como fallback.
+Se o Docker daemon nao responder ou a imagem runtime estiver ausente, responda
+`BLOQUEADO`, cite que o runtime Docker da skill nao esta pronto e nao gere
+arquivos. Quando a imagem estiver ausente, oriente:
+
+```text
+DOCKER_BUILDKIT=1 docker build --tag my-roadmap-roadmap-runtime:playwright-1.60.0 docker/runtime
+```
+
+Nao use Python, Node.js, npm, Playwright, navegadores ou `node_modules` do host
+como fallback.
 
 Antes de apagar uma pasta existente, faça um checkpoint explícito: informe o
 caminho resolvido e peça confirmação para recriar somente a pasta do node atual.
@@ -427,15 +434,16 @@ Use `scripts/check_html_shape.py`, `scripts/check_visual_render.mjs` e
 disponíveis, nesta ordem:
 
 ```text
-docker/runtime/run --preflight
+docker version
+docker image inspect my-roadmap-roadmap-runtime:playwright-1.60.0
 docker/runtime/run python3 <skill-dir>/node-pages/scripts/check_html_shape.py --html <node-dir>/node.html
 docker/runtime/run node <skill-dir>/node-pages/scripts/check_visual_render.mjs --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>
 docker/runtime/run python3 <skill-dir>/node-pages/scripts/validate_node_artifacts.py --roadmap-dir <roadmap-dir> --level <level> --node <node-slug>
 ```
 
 O validador final de artefatos roda depois do Playwright porque confere tambem
-as evidencias renderizadas. Validacao normal nao pode construir imagem
-implicitamente; se a imagem estiver ausente, bloqueie e oriente `make setup`.
+as evidencias renderizadas. O wrapper nao constroi imagem; se a imagem estiver
+ausente, bloqueie e oriente o build Docker explicito.
 Esses scripts não validam se a explicação é conceitualmente suficiente, se um
 exemplo é necessário ou excessivo, nem se a composição visual é boa em sentido
 amplo; essas decisões continuam sendo do agente.
